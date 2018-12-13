@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.FoldersShareFolderResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
@@ -293,19 +292,6 @@ public final class FoldersShareFolderRequest {
      * @param fid Folder ID
      */
     public final FoldersShareFolderResponse call(String fid) throws OnshapeException {
-      return onshape.call("post", "/folders/:fid/share", build(), onshape.buildMap("fid", fid), onshape.buildMap(), com.onshape.api.responses.FoldersShareFolderResponse.class);
-    }
-
-    /**
-     * Calls shareFolder method, Share folder with one or more entities, which may be users, companies, teams or applications.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param fid Folder ID
-     */
-    public final FoldersShareFolderResponse call(OnshapeDocument document, String fid) throws
-        OnshapeException {
       return onshape.call("post", "/folders/:fid/share", build(), onshape.buildMap("fid", fid), onshape.buildMap(), com.onshape.api.responses.FoldersShareFolderResponse.class);
     }
   }

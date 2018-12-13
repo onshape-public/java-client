@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.ReleaseManagementUpdateReleasePackageResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 import javax.validation.constraints.NotNull;
@@ -163,20 +162,6 @@ public final class ReleaseManagementUpdateReleasePackageRequest {
     public final ReleaseManagementUpdateReleasePackageResponse call(String rpid, String wfaction)
         throws OnshapeException {
       return onshape.call("post", "/releasepackages/:rpid", build(), onshape.buildMap("rpid", rpid), onshape.buildMap("wfaction", wfaction), com.onshape.api.responses.ReleaseManagementUpdateReleasePackageResponse.class);
-    }
-
-    /**
-     * Calls updateReleasePackage method, Update the release/obsoletion package properties and/or item properties and transition it to
-     *                 desired state
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param rpid ID of package to transition
-     */
-    public final ReleaseManagementUpdateReleasePackageResponse call(OnshapeDocument document,
-        String rpid) throws OnshapeException {
-      return onshape.call("post", "/releasepackages/:rpid", build(), onshape.buildMap("rpid", rpid), onshape.buildMap(), com.onshape.api.responses.ReleaseManagementUpdateReleasePackageResponse.class);
     }
   }
 }

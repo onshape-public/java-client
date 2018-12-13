@@ -30,7 +30,7 @@ import com.onshape.api.requests.CompaniesGetRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Companies {
-  Onshape onshape;
+  final Onshape onshape;
 
   Companies(Onshape onshape) {
     this.onshape = onshape;

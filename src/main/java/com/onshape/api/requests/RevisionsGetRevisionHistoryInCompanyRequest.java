@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.RevisionsGetRevisionHistoryInCompanyResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
@@ -73,22 +72,6 @@ public final class RevisionsGetRevisionHistoryInCompanyRequest {
     public final RevisionsGetRevisionHistoryInCompanyResponse call(String cid, String pnum,
         Number elementType) throws OnshapeException {
       return onshape.call("get", "/revisions/companies/:cid/partnumber/:pnum", build(), onshape.buildMap("cid", cid, "pnum", pnum), onshape.buildMap("elementType", elementType), com.onshape.api.responses.RevisionsGetRevisionHistoryInCompanyResponse.class);
-    }
-
-    /**
-     * Calls getRevisionHistoryInCompany method, Get a list of all revisions for a part number in a company, ordered newest first. Returns empty
-     *                 list if no revisions are found, 404 if company isn't found.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param cid Company Id
-     *
-     * @param pnum Part number
-     */
-    public final RevisionsGetRevisionHistoryInCompanyResponse call(OnshapeDocument document,
-        String cid, String pnum) throws OnshapeException {
-      return onshape.call("get", "/revisions/companies/:cid/partnumber/:pnum", build(), onshape.buildMap("cid", cid, "pnum", pnum), onshape.buildMap(), com.onshape.api.responses.RevisionsGetRevisionHistoryInCompanyResponse.class);
     }
   }
 }

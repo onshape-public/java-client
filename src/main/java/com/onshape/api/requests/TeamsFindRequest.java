@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.TeamsFindResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -64,16 +63,6 @@ public final class TeamsFindRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final TeamsFindResponse call() throws OnshapeException {
-      return onshape.call("get", "/teams", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.TeamsFindResponse.class);
-    }
-
-    /**
-     * Calls find method, Get list of teams for current user
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final TeamsFindResponse call(OnshapeDocument document) throws OnshapeException {
       return onshape.call("get", "/teams", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.TeamsFindResponse.class);
     }
   }

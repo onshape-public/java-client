@@ -22,6 +22,8 @@
 //
 package com.onshape.api;
 
+import com.onshape.api.requests.MetadataGetElementMetadataRequest;
+import com.onshape.api.requests.MetadataGetElementsMetadataRequest;
 import com.onshape.api.requests.MetadataGetMetadataPropertyRequest;
 import com.onshape.api.requests.MetadataGetMetadataRequest;
 import com.onshape.api.requests.MetadataGetMetadataSchemaByIDRequest;
@@ -30,7 +32,9 @@ import com.onshape.api.requests.MetadataGetMetadataSchemaRequest;
 import com.onshape.api.requests.MetadataGetPartListMetadataRequest;
 import com.onshape.api.requests.MetadataGetPartMetadataRequest;
 import com.onshape.api.requests.MetadataGetStandardContentMetadataRequest;
+import com.onshape.api.requests.MetadataUpdateElementMetadataRequest;
 import com.onshape.api.requests.MetadataUpdateMetadataRequest;
+import com.onshape.api.requests.MetadataUpdatePartMetadataRequest;
 import com.onshape.api.requests.MetadataUpdateStandardContentMetadataRequest;
 
 /**
@@ -38,10 +42,26 @@ import com.onshape.api.requests.MetadataUpdateStandardContentMetadataRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Metadata {
-  Onshape onshape;
+  final Onshape onshape;
 
   Metadata(Onshape onshape) {
     this.onshape = onshape;
+  }
+
+  /**
+   * Create request for getElementMetadata
+   *  @return Request builder object
+   */
+  public final MetadataGetElementMetadataRequest.Builder getElementMetadata() {
+    return MetadataGetElementMetadataRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getElementsMetadata
+   *  @return Request builder object
+   */
+  public final MetadataGetElementsMetadataRequest.Builder getElementsMetadata() {
+    return MetadataGetElementsMetadataRequest.builder(onshape);
   }
 
   /**
@@ -122,5 +142,21 @@ public final class Metadata {
    */
   public final MetadataUpdateStandardContentMetadataRequest.Builder updateStandardContentMetadata() {
     return MetadataUpdateStandardContentMetadataRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for updateElementMetadata
+   *  @return Request builder object
+   */
+  public final MetadataUpdateElementMetadataRequest.Builder updateElementMetadata() {
+    return MetadataUpdateElementMetadataRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for updatePartMetadata
+   *  @return Request builder object
+   */
+  public final MetadataUpdatePartMetadataRequest.Builder updatePartMetadata() {
+    return MetadataUpdatePartMetadataRequest.builder(onshape);
   }
 }

@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.FoldersGetAclResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -67,20 +66,6 @@ public final class FoldersGetAclRequest {
      * @param fid Folder ID
      */
     public final FoldersGetAclResponse call(String fid) throws OnshapeException {
-      return onshape.call("get", "/folders/:fid/acl", build(), onshape.buildMap("fid", fid), onshape.buildMap(), com.onshape.api.responses.FoldersGetAclResponse.class);
-    }
-
-    /**
-     * Calls getAcl method, Get list of entities with access to a folder and the permissions granted to them. The caller must
-     *                 have read access for the folder.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param fid Folder ID
-     */
-    public final FoldersGetAclResponse call(OnshapeDocument document, String fid) throws
-        OnshapeException {
       return onshape.call("get", "/folders/:fid/acl", build(), onshape.buildMap("fid", fid), onshape.buildMap(), com.onshape.api.responses.FoldersGetAclResponse.class);
     }
   }

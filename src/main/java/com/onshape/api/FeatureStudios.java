@@ -32,7 +32,7 @@ import com.onshape.api.requests.FeatureStudiosUpdateFeatureStudioContentsRequest
  * &copy; 2018 Onshape Inc.
  */
 public final class FeatureStudios {
-  Onshape onshape;
+  final Onshape onshape;
 
   FeatureStudios(Onshape onshape) {
     this.onshape = onshape;

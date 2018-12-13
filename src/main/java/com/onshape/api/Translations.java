@@ -33,7 +33,7 @@ import com.onshape.api.requests.TranslationsGetTranslatorFormatsRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Translations {
-  Onshape onshape;
+  final Onshape onshape;
 
   Translations(Onshape onshape) {
     this.onshape = onshape;

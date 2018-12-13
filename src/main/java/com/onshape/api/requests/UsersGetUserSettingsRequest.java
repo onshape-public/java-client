@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.UsersGetUserSettingsResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -72,25 +71,6 @@ public final class UsersGetUserSettingsRequest {
      * @param uid The user id
      */
     public final UsersGetUserSettingsResponse call(String uid) throws OnshapeException {
-      return onshape.call("get", "/users/:uid/settings", build(), onshape.buildMap("uid", uid), onshape.buildMap(), com.onshape.api.responses.UsersGetUserSettingsResponse.class);
-    }
-
-    /**
-     * Calls getUserSettings method, Get user settings. These are the default units that are used when the user
-     * creates a new document.
-     * Mouse button settings are contained in reverseScrollWheelZoomDirection and viewManipulationMouseKeyMapping.
-     * For each action in viewManipulationMouseKeyMapping, an array of modifier key/mouse button press combos is provided
-     * that performs that action.  Possible modifier keys include SHIFT and CTRL, and possible mouse buttons include MMB (middle), RMB (right),
-     * and SCROLLWHEEL.  The scroll wheel is used in zoom operations, where scrolling forward causes the view to zoom in unless
-     * reverseScrollWheelZoomDirection is set to true.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param uid The user id
-     */
-    public final UsersGetUserSettingsResponse call(OnshapeDocument document, String uid) throws
-        OnshapeException {
       return onshape.call("get", "/users/:uid/settings", build(), onshape.buildMap("uid", uid), onshape.buildMap(), com.onshape.api.responses.UsersGetUserSettingsResponse.class);
     }
   }

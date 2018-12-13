@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.BillingGetClientPlansResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -67,20 +66,6 @@ public final class BillingGetClientPlansRequest {
      * @param cid Client Id
      */
     public final BillingGetClientPlansResponse call(String cid) throws OnshapeException {
-      return onshape.call("get", "/billing/plans/client/:cid", build(), onshape.buildMap("cid", cid), onshape.buildMap(), com.onshape.api.responses.BillingGetClientPlansResponse.class);
-    }
-
-    /**
-     * Calls getClientPlans method, Returns billing plans for specified client (associated with application). This API is expected to be
-     *     used in a context of OAuth-enabled application.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param cid Client Id
-     */
-    public final BillingGetClientPlansResponse call(OnshapeDocument document, String cid) throws
-        OnshapeException {
       return onshape.call("get", "/billing/plans/client/:cid", build(), onshape.buildMap("cid", cid), onshape.buildMap(), com.onshape.api.responses.BillingGetClientPlansResponse.class);
     }
   }

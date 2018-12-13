@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.DocumentsGetDocumentsResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
@@ -340,17 +339,6 @@ public final class DocumentsGetDocumentsRequest {
      */
     public final DocumentsGetDocumentsResponse call() throws OnshapeException {
       return onshape.call("get", "/documents", build(), onshape.buildMap(), onshape.buildMap("q", q, "filter", filter, "owner", owner, "ownerType", ownerType, "sortColumn", sortColumn, "sortOrder", sortOrder, "offset", offset, "limit", limit), com.onshape.api.responses.DocumentsGetDocumentsResponse.class);
-    }
-
-    /**
-     * Calls getDocuments method, Search for documents
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final DocumentsGetDocumentsResponse call(OnshapeDocument document) throws
-        OnshapeException {
-      return onshape.call("get", "/documents", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.DocumentsGetDocumentsResponse.class);
     }
   }
 }

@@ -28,9 +28,7 @@ import com.onshape.api.requests.ThumbnailsGetDocumentThumbnailRequest;
 import com.onshape.api.requests.ThumbnailsGetDocumentThumbnailWithSizeRequest;
 import com.onshape.api.requests.ThumbnailsGetElementThumbnailRequest;
 import com.onshape.api.requests.ThumbnailsGetElementThumbnailWithSizeRequest;
-import com.onshape.api.requests.ThumbnailsGetThumbnailForDocumentAndVersionOldRequest;
 import com.onshape.api.requests.ThumbnailsGetThumbnailForDocumentAndVersionRequest;
-import com.onshape.api.requests.ThumbnailsGetThumbnailForDocumentOldRequest;
 import com.onshape.api.requests.ThumbnailsGetThumbnailForDocumentRequest;
 import com.onshape.api.requests.ThumbnailsSetApplicationElementThumbnailRequest;
 
@@ -39,7 +37,7 @@ import com.onshape.api.requests.ThumbnailsSetApplicationElementThumbnailRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Thumbnails {
-  Onshape onshape;
+  final Onshape onshape;
 
   Thumbnails(Onshape onshape) {
     this.onshape = onshape;
@@ -67,14 +65,6 @@ public final class Thumbnails {
    */
   public final ThumbnailsGetThumbnailForDocumentRequest.Builder getThumbnailForDocument() {
     return ThumbnailsGetThumbnailForDocumentRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getThumbnailForDocumentOld
-   *  @return Request builder object
-   */
-  public final ThumbnailsGetThumbnailForDocumentOldRequest.Builder getThumbnailForDocumentOld() {
-    return ThumbnailsGetThumbnailForDocumentOldRequest.builder(onshape);
   }
 
   /**
@@ -107,14 +97,6 @@ public final class Thumbnails {
    */
   public final ThumbnailsGetThumbnailForDocumentAndVersionRequest.Builder getThumbnailForDocumentAndVersion() {
     return ThumbnailsGetThumbnailForDocumentAndVersionRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getThumbnailForDocumentAndVersionOld
-   *  @return Request builder object
-   */
-  public final ThumbnailsGetThumbnailForDocumentAndVersionOldRequest.Builder getThumbnailForDocumentAndVersionOld() {
-    return ThumbnailsGetThumbnailForDocumentAndVersionOldRequest.builder(onshape);
   }
 
   /**

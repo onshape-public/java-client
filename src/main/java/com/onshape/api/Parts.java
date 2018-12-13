@@ -22,32 +22,24 @@
 //
 package com.onshape.api;
 
-import com.onshape.api.requests.PartsBatchUpdatePartMetadataRequest;
 import com.onshape.api.requests.PartsExportParasolidRequest;
 import com.onshape.api.requests.PartsExportStlRequest;
 import com.onshape.api.requests.PartsGetBendTableRequest;
 import com.onshape.api.requests.PartsGetBodyDetailsRequest;
 import com.onshape.api.requests.PartsGetBoundingBoxesRequest;
-import com.onshape.api.requests.PartsGetByVersionOldRequest;
 import com.onshape.api.requests.PartsGetEdgesRequest;
-import com.onshape.api.requests.PartsGetElementPartsOldRequest;
 import com.onshape.api.requests.PartsGetFacesRequest;
 import com.onshape.api.requests.PartsGetMassPropertiesRequest;
-import com.onshape.api.requests.PartsGetPartMetadataRequest;
 import com.onshape.api.requests.PartsGetPartsInPartstudioRequest;
 import com.onshape.api.requests.PartsGetPartsRequest;
 import com.onshape.api.requests.PartsGetShadedViewsRequest;
-import com.onshape.api.requests.PartsGetStandardContentPartMetadataRequest;
-import com.onshape.api.requests.PartsGetWorkspacePartsOldRequest;
-import com.onshape.api.requests.PartsUpdatePartMetadataRequest;
-import com.onshape.api.requests.PartsUpdateStandardContentPartMetadataRequest;
 
 /**
  * Parts: API endpoints for Parts group.
  * &copy; 2018 Onshape Inc.
  */
 public final class Parts {
-  Onshape onshape;
+  final Onshape onshape;
 
   Parts(Onshape onshape) {
     this.onshape = onshape;
@@ -86,35 +78,11 @@ public final class Parts {
   }
 
   /**
-   * Create request for getElementPartsOld
-   *  @return Request builder object
-   */
-  public final PartsGetElementPartsOldRequest.Builder getElementPartsOld() {
-    return PartsGetElementPartsOldRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getPartMetadata
-   *  @return Request builder object
-   */
-  public final PartsGetPartMetadataRequest.Builder getPartMetadata() {
-    return PartsGetPartMetadataRequest.builder(onshape);
-  }
-
-  /**
    * Create request for getParts
    *  @return Request builder object
    */
   public final PartsGetPartsRequest.Builder getParts() {
     return PartsGetPartsRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getByVersionOld
-   *  @return Request builder object
-   */
-  public final PartsGetByVersionOldRequest.Builder getByVersionOld() {
-    return PartsGetByVersionOldRequest.builder(onshape);
   }
 
   /**
@@ -131,22 +99,6 @@ public final class Parts {
    */
   public final PartsGetBendTableRequest.Builder getBendTable() {
     return PartsGetBendTableRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getStandardContentPartMetadata
-   *  @return Request builder object
-   */
-  public final PartsGetStandardContentPartMetadataRequest.Builder getStandardContentPartMetadata() {
-    return PartsGetStandardContentPartMetadataRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getWorkspacePartsOld
-   *  @return Request builder object
-   */
-  public final PartsGetWorkspacePartsOldRequest.Builder getWorkspacePartsOld() {
-    return PartsGetWorkspacePartsOldRequest.builder(onshape);
   }
 
   /**
@@ -179,29 +131,5 @@ public final class Parts {
    */
   public final PartsGetFacesRequest.Builder getFaces() {
     return PartsGetFacesRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for updatePartMetadata
-   *  @return Request builder object
-   */
-  public final PartsUpdatePartMetadataRequest.Builder updatePartMetadata() {
-    return PartsUpdatePartMetadataRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for batchUpdatePartMetadata
-   *  @return Request builder object
-   */
-  public final PartsBatchUpdatePartMetadataRequest.Builder batchUpdatePartMetadata() {
-    return PartsBatchUpdatePartMetadataRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for updateStandardContentPartMetadata
-   *  @return Request builder object
-   */
-  public final PartsUpdateStandardContentPartMetadataRequest.Builder updateStandardContentPartMetadata() {
-    return PartsUpdateStandardContentPartMetadataRequest.builder(onshape);
   }
 }

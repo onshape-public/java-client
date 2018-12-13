@@ -33,7 +33,7 @@ import com.onshape.api.requests.ReleaseManagementUpdateReleasePackageRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class ReleaseManagement {
-  Onshape onshape;
+  final Onshape onshape;
 
   ReleaseManagement(Onshape onshape) {
     this.onshape = onshape;
@@ -64,18 +64,18 @@ public final class ReleaseManagement {
   }
 
   /**
-   * Create request for updateReleasePackage
-   *  @return Request builder object
-   */
-  public final ReleaseManagementUpdateReleasePackageRequest.Builder updateReleasePackage() {
-    return ReleaseManagementUpdateReleasePackageRequest.builder(onshape);
-  }
-
-  /**
    * Create request for getCompanyReleaseWorkflow
    *  @return Request builder object
    */
   public final ReleaseManagementGetCompanyReleaseWorkflowRequest.Builder getCompanyReleaseWorkflow() {
     return ReleaseManagementGetCompanyReleaseWorkflowRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for updateReleasePackage
+   *  @return Request builder object
+   */
+  public final ReleaseManagementUpdateReleasePackageRequest.Builder updateReleasePackage() {
+    return ReleaseManagementUpdateReleasePackageRequest.builder(onshape);
   }
 }

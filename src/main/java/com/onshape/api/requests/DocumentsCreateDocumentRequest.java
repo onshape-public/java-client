@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.DocumentsCreateDocumentResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Boolean;
 import java.lang.Number;
 import java.lang.Override;
@@ -381,17 +380,6 @@ public final class DocumentsCreateDocumentRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final DocumentsCreateDocumentResponse call() throws OnshapeException {
-      return onshape.call("post", "/documents", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.DocumentsCreateDocumentResponse.class);
-    }
-
-    /**
-     * Calls createDocument method, Create document
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final DocumentsCreateDocumentResponse call(OnshapeDocument document) throws
-        OnshapeException {
       return onshape.call("post", "/documents", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.DocumentsCreateDocumentResponse.class);
     }
   }

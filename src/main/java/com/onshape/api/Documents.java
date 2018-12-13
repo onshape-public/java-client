@@ -24,46 +24,34 @@ package com.onshape.api;
 
 import com.onshape.api.requests.DocumentsCopyWorkspaceRequest;
 import com.onshape.api.requests.DocumentsCreateDocumentRequest;
-import com.onshape.api.requests.DocumentsCreateVersionOldRequest;
 import com.onshape.api.requests.DocumentsCreateVersionRequest;
-import com.onshape.api.requests.DocumentsCreateWorkspaceOldRequest;
 import com.onshape.api.requests.DocumentsCreateWorkspaceRequest;
 import com.onshape.api.requests.DocumentsDeleteDocumentRequest;
-import com.onshape.api.requests.DocumentsDeleteWorkspaceOldRequest;
 import com.onshape.api.requests.DocumentsDeleteWorkspaceRequest;
 import com.onshape.api.requests.DocumentsDownloadExternalDataRequest;
 import com.onshape.api.requests.DocumentsExportElementPostJsonRequest;
-import com.onshape.api.requests.DocumentsExportElementRequest;
-import com.onshape.api.requests.DocumentsExportOldRequest;
 import com.onshape.api.requests.DocumentsGetAclRequest;
 import com.onshape.api.requests.DocumentsGetCurrentMicroversionRequest;
 import com.onshape.api.requests.DocumentsGetDocumentPermissionSetRequest;
 import com.onshape.api.requests.DocumentsGetDocumentRequest;
 import com.onshape.api.requests.DocumentsGetDocumentsRequest;
 import com.onshape.api.requests.DocumentsGetElementListRequest;
-import com.onshape.api.requests.DocumentsGetElementsRequest;
 import com.onshape.api.requests.DocumentsGetInsertablesRequest;
-import com.onshape.api.requests.DocumentsGetVersionOldRequest;
 import com.onshape.api.requests.DocumentsGetVersionRequest;
-import com.onshape.api.requests.DocumentsGetVersionsOldRequest;
 import com.onshape.api.requests.DocumentsGetVersionsRequest;
-import com.onshape.api.requests.DocumentsGetWorkspaceOldRequest;
-import com.onshape.api.requests.DocumentsGetWorkspaceRequest;
-import com.onshape.api.requests.DocumentsGetWorkspacesOldRequest;
 import com.onshape.api.requests.DocumentsGetWorkspacesRequest;
 import com.onshape.api.requests.DocumentsMoveElementsToDocumentRequest;
 import com.onshape.api.requests.DocumentsShareDocumentRequest;
 import com.onshape.api.requests.DocumentsUnShareRequest;
 import com.onshape.api.requests.DocumentsUpdateDocumentAttributesRequest;
 import com.onshape.api.requests.DocumentsUpdateExternalReferencesToLatestDocumentsRequest;
-import com.onshape.api.requests.DocumentsUpdateVersionOldRequest;
 
 /**
  * Documents: API endpoints for Documents group.
  * &copy; 2018 Onshape Inc.
  */
 public final class Documents {
-  Onshape onshape;
+  final Onshape onshape;
 
   Documents(Onshape onshape) {
     this.onshape = onshape;
@@ -94,27 +82,11 @@ public final class Documents {
   }
 
   /**
-   * Create request for createVersionOld
-   *  @return Request builder object
-   */
-  public final DocumentsCreateVersionOldRequest.Builder createVersionOld() {
-    return DocumentsCreateVersionOldRequest.builder(onshape);
-  }
-
-  /**
    * Create request for createWorkspace
    *  @return Request builder object
    */
   public final DocumentsCreateWorkspaceRequest.Builder createWorkspace() {
     return DocumentsCreateWorkspaceRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for createWorkspaceOld
-   *  @return Request builder object
-   */
-  public final DocumentsCreateWorkspaceOldRequest.Builder createWorkspaceOld() {
-    return DocumentsCreateWorkspaceOldRequest.builder(onshape);
   }
 
   /**
@@ -134,14 +106,6 @@ public final class Documents {
   }
 
   /**
-   * Create request for deleteWorkspaceOld
-   *  @return Request builder object
-   */
-  public final DocumentsDeleteWorkspaceOldRequest.Builder deleteWorkspaceOld() {
-    return DocumentsDeleteWorkspaceOldRequest.builder(onshape);
-  }
-
-  /**
    * Create request for downloadExternalData
    *  @return Request builder object
    */
@@ -155,22 +119,6 @@ public final class Documents {
    */
   public final DocumentsGetElementListRequest.Builder getElementList() {
     return DocumentsGetElementListRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for exportOld
-   *  @return Request builder object
-   */
-  public final DocumentsExportOldRequest.Builder exportOld() {
-    return DocumentsExportOldRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for exportElement
-   *  @return Request builder object
-   */
-  public final DocumentsExportElementRequest.Builder exportElement() {
-    return DocumentsExportElementRequest.builder(onshape);
   }
 
   /**
@@ -222,27 +170,11 @@ public final class Documents {
   }
 
   /**
-   * Create request for getElements
-   *  @return Request builder object
-   */
-  public final DocumentsGetElementsRequest.Builder getElements() {
-    return DocumentsGetElementsRequest.builder(onshape);
-  }
-
-  /**
    * Create request for getVersion
    *  @return Request builder object
    */
   public final DocumentsGetVersionRequest.Builder getVersion() {
     return DocumentsGetVersionRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getVersionOld
-   *  @return Request builder object
-   */
-  public final DocumentsGetVersionOldRequest.Builder getVersionOld() {
-    return DocumentsGetVersionOldRequest.builder(onshape);
   }
 
   /**
@@ -254,43 +186,11 @@ public final class Documents {
   }
 
   /**
-   * Create request for getVersionsOld
-   *  @return Request builder object
-   */
-  public final DocumentsGetVersionsOldRequest.Builder getVersionsOld() {
-    return DocumentsGetVersionsOldRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getWorkspace
-   *  @return Request builder object
-   */
-  public final DocumentsGetWorkspaceRequest.Builder getWorkspace() {
-    return DocumentsGetWorkspaceRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getWorkspaceOld
-   *  @return Request builder object
-   */
-  public final DocumentsGetWorkspaceOldRequest.Builder getWorkspaceOld() {
-    return DocumentsGetWorkspaceOldRequest.builder(onshape);
-  }
-
-  /**
    * Create request for getWorkspaces
    *  @return Request builder object
    */
   public final DocumentsGetWorkspacesRequest.Builder getWorkspaces() {
     return DocumentsGetWorkspacesRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getWorkspacesOld
-   *  @return Request builder object
-   */
-  public final DocumentsGetWorkspacesOldRequest.Builder getWorkspacesOld() {
-    return DocumentsGetWorkspacesOldRequest.builder(onshape);
   }
 
   /**
@@ -339,13 +239,5 @@ public final class Documents {
    */
   public final DocumentsUpdateExternalReferencesToLatestDocumentsRequest.Builder updateExternalReferencesToLatestDocuments() {
     return DocumentsUpdateExternalReferencesToLatestDocumentsRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for updateVersionOld
-   *  @return Request builder object
-   */
-  public final DocumentsUpdateVersionOldRequest.Builder updateVersionOld() {
-    return DocumentsUpdateVersionOldRequest.builder(onshape);
   }
 }

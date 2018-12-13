@@ -33,7 +33,7 @@ import com.onshape.api.requests.AccountsGetPurchasesRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Accounts {
-  Onshape onshape;
+  final Onshape onshape;
 
   Accounts(Onshape onshape) {
     this.onshape = onshape;

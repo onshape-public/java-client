@@ -22,60 +22,14 @@
 //
 package com.onshape.api;
 
-import com.onshape.api.requests.ModelsGetAssemblyDefinitionRequest;
-import com.onshape.api.requests.ModelsGetBodyDetailsRequest;
-import com.onshape.api.requests.ModelsGetBoundingBoxRequest;
-import com.onshape.api.requests.ModelsGetEdgesRequest;
-import com.onshape.api.requests.ModelsGetFacesRequest;
-
 /**
  * Models: API endpoints for Models group.
  * &copy; 2018 Onshape Inc.
  */
 public final class Models {
-  Onshape onshape;
+  final Onshape onshape;
 
   Models(Onshape onshape) {
     this.onshape = onshape;
-  }
-
-  /**
-   * Create request for getAssemblyDefinition
-   *  @return Request builder object
-   */
-  public final ModelsGetAssemblyDefinitionRequest.Builder getAssemblyDefinition() {
-    return ModelsGetAssemblyDefinitionRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getBodyDetails
-   *  @return Request builder object
-   */
-  public final ModelsGetBodyDetailsRequest.Builder getBodyDetails() {
-    return ModelsGetBodyDetailsRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getBoundingBox
-   *  @return Request builder object
-   */
-  public final ModelsGetBoundingBoxRequest.Builder getBoundingBox() {
-    return ModelsGetBoundingBoxRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getEdges
-   *  @return Request builder object
-   */
-  public final ModelsGetEdgesRequest.Builder getEdges() {
-    return ModelsGetEdgesRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getFaces
-   *  @return Request builder object
-   */
-  public final ModelsGetFacesRequest.Builder getFaces() {
-    return ModelsGetFacesRequest.builder(onshape);
   }
 }

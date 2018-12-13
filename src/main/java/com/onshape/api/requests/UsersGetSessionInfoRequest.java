@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.UsersGetSessionInfoResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -64,17 +63,6 @@ public final class UsersGetSessionInfoRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final UsersGetSessionInfoResponse call() throws OnshapeException {
-      return onshape.call("get", "/users/sessioninfo", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.UsersGetSessionInfoResponse.class);
-    }
-
-    /**
-     * Calls getSessionInfo method, Check if current user is logged in; information returned depends on OAuth2ReadPII scope.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final UsersGetSessionInfoResponse call(OnshapeDocument document) throws
-        OnshapeException {
       return onshape.call("get", "/users/sessioninfo", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.UsersGetSessionInfoResponse.class);
     }
   }

@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.CompaniesFindResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -64,16 +63,6 @@ public final class CompaniesFindRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final CompaniesFindResponse call() throws OnshapeException {
-      return onshape.call("get", "/companies", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.CompaniesFindResponse.class);
-    }
-
-    /**
-     * Calls find method, List companies for current user
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final CompaniesFindResponse call(OnshapeDocument document) throws OnshapeException {
       return onshape.call("get", "/companies", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.CompaniesFindResponse.class);
     }
   }

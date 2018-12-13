@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.AccountsGetPlanPurchasesResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
@@ -140,22 +139,6 @@ public final class AccountsGetPlanPurchasesRequest {
      */
     public final AccountsGetPlanPurchasesResponse call(String planId) throws OnshapeException {
       return onshape.call("get", "/accounts/plans/:planId/purchases", build(), onshape.buildMap("planId", planId), onshape.buildMap("offset", offset, "limit", limit), com.onshape.api.responses.AccountsGetPlanPurchasesResponse.class);
-    }
-
-    /**
-     * Calls getPlanPurchases method, Return a list of purchases associated with a plan, along with user information for the
-     *                 subscribers involved. Information returned depends on whether the app associated with the plan
-     *                 has the OAuth2ReadPII scope. This API can only be called by an admin of the app associated with
-     *                 the plan.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param planId Plan Id
-     */
-    public final AccountsGetPlanPurchasesResponse call(OnshapeDocument document, String planId)
-        throws OnshapeException {
-      return onshape.call("get", "/accounts/plans/:planId/purchases", build(), onshape.buildMap("planId", planId), onshape.buildMap(), com.onshape.api.responses.AccountsGetPlanPurchasesResponse.class);
     }
   }
 }

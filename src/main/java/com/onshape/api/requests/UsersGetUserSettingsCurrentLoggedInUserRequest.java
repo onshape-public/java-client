@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.UsersGetUserSettingsCurrentLoggedInUserResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -70,23 +69,6 @@ public final class UsersGetUserSettingsCurrentLoggedInUserRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final UsersGetUserSettingsCurrentLoggedInUserResponse call() throws OnshapeException {
-      return onshape.call("get", "/users/settings", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.UsersGetUserSettingsCurrentLoggedInUserResponse.class);
-    }
-
-    /**
-     * Calls getUserSettingsCurrentLoggedInUser method, Get user settings for the currently logged in user if there is one. Else return the default
-     *                 settings. Mouse button settings are contained in reverseScrollWheelZoomDirection and
-     *                 viewManipulationMouseKeyMapping. For each action in viewManipulationMouseKeyMapping, an array of
-     *                 modifier key/mouse button press combos is provided that performs that action. Possible modifier
-     *                 keys include SHIFT and CTRL, and possible mouse buttons include MMB (middle), RMB (right), and
-     *                 SCROLLWHEEL. The scroll wheel is used in zoom operations, where scrolling forward causes the view
-     *                 to zoom in unless reverseScrollWheelZoomDirection is set to true.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final UsersGetUserSettingsCurrentLoggedInUserResponse call(OnshapeDocument document)
-        throws OnshapeException {
       return onshape.call("get", "/users/settings", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.UsersGetUserSettingsCurrentLoggedInUserResponse.class);
     }
   }

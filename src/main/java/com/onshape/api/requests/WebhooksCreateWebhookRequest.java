@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.WebhooksCreateWebhookResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Map;
@@ -292,17 +291,6 @@ public final class WebhooksCreateWebhookRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final WebhooksCreateWebhookResponse call() throws OnshapeException {
-      return onshape.call("post", "/webhooks", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.WebhooksCreateWebhookResponse.class);
-    }
-
-    /**
-     * Calls createWebhook method, Create a webhook, which functions like an event listener
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final WebhooksCreateWebhookResponse call(OnshapeDocument document) throws
-        OnshapeException {
       return onshape.call("post", "/webhooks", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.WebhooksCreateWebhookResponse.class);
     }
   }

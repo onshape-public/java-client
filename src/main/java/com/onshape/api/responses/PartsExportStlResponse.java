@@ -25,7 +25,7 @@ package com.onshape.api.responses;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
-import java.io.File;
+import com.onshape.api.types.Base64Encoded;
 import java.lang.Override;
 import java.lang.String;
 import javax.validation.constraints.NotNull;
@@ -43,7 +43,7 @@ public final class PartsExportStlResponse {
    */
   @JsonProperty("file")
   @NotNull
-  File file;
+  Base64Encoded file;
 
   /**
    * Get The exported document, as an attachment (could be text or binary depending on parameters)
@@ -51,7 +51,7 @@ public final class PartsExportStlResponse {
    * @return The exported document, as an attachment (could be text or binary depending on parameters)
    *
    */
-  public final File getFile() {
+  public final Base64Encoded getFile() {
     return this.file;
   }
 

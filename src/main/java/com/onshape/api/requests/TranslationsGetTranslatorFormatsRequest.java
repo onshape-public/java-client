@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.TranslationsGetTranslatorFormatsResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -65,18 +64,6 @@ public final class TranslationsGetTranslatorFormatsRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final TranslationsGetTranslatorFormatsResponse call() throws OnshapeException {
-      return onshape.call("get", "/translations/translationformats", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.TranslationsGetTranslatorFormatsResponse.class);
-    }
-
-    /**
-     * Calls getTranslatorFormats method, Get a list of all translator formats. Some are valid only as input formats and cannot be used as
-     *                 an output format.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final TranslationsGetTranslatorFormatsResponse call(OnshapeDocument document) throws
-        OnshapeException {
       return onshape.call("get", "/translations/translationformats", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.TranslationsGetTranslatorFormatsResponse.class);
     }
   }

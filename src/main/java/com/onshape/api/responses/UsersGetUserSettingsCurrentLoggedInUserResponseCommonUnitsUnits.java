@@ -28,7 +28,6 @@ import com.onshape.api.Onshape;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
 
 /**
  * Object used in calls to getUserSettingsCurrentLoggedInUser API endpoint.
@@ -66,7 +65,7 @@ public final class UsersGetUserSettingsCurrentLoggedInUserResponseCommonUnitsUni
    * Unit abbreviation
    */
   @JsonProperty("abbreviation")
-  public Map abbreviation;
+  public String abbreviation;
 
   /**
    * Get Unit identifier
@@ -114,7 +113,7 @@ public final class UsersGetUserSettingsCurrentLoggedInUserResponseCommonUnitsUni
    * @return Unit abbreviation
    *
    */
-  public final Map getAbbreviation() {
+  public final String getAbbreviation() {
     return this.abbreviation;
   }
 

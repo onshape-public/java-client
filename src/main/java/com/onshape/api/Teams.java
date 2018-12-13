@@ -30,7 +30,7 @@ import com.onshape.api.requests.TeamsGetRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Teams {
-  Onshape onshape;
+  final Onshape onshape;
 
   Teams(Onshape onshape) {
     this.onshape = onshape;

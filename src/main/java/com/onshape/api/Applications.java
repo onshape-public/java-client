@@ -31,7 +31,7 @@ import com.onshape.api.requests.ApplicationsUpdateAppSettingsRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Applications {
-  Onshape onshape;
+  final Onshape onshape;
 
   Applications(Onshape onshape) {
     this.onshape = onshape;

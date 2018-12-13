@@ -360,12 +360,14 @@ public class BaseClient {
             uriBuilder = UriBuilder.fromUri(baseURL + path
                     .replaceAll(":([^\\/:]+)", "{$1}")
                     .replace("[wvm]", "{wvmType}")
-                    .replace("[wv]", "{wvType}"));
+                    .replace("[wv]", "{wvType}")
+                    .replace("[cu]", "{cuType}"));
         } else {
             uriBuilder = UriBuilder.fromUri(path
                     .replaceAll(":([^\\/:]+)", "{$1}")
                     .replace("[wvm]", "{wvmType}")
-                    .replace("[wv]", "{wvType}"));
+                    .replace("[wv]", "{wvType}")
+                    .replace("[cu]", "{cuType}"));
         }
         queryParameters.entrySet().stream().filter((queryParameter) -> (queryParameter.getValue() != null))
                 .forEachOrdered((queryParameter) -> {

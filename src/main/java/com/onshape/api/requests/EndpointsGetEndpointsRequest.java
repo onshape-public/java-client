@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.EndpointsGetEndpointsResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -64,17 +63,6 @@ public final class EndpointsGetEndpointsRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final EndpointsGetEndpointsResponse call() throws OnshapeException {
-      return onshape.call("get", "/endpoints", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.EndpointsGetEndpointsResponse.class);
-    }
-
-    /**
-     * Calls getEndpoints method, returns the api documentation
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final EndpointsGetEndpointsResponse call(OnshapeDocument document) throws
-        OnshapeException {
       return onshape.call("get", "/endpoints", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.EndpointsGetEndpointsResponse.class);
     }
   }

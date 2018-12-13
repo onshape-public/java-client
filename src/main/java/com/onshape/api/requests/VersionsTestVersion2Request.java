@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.VersionsTestVersion2Response;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -64,17 +63,6 @@ public final class VersionsTestVersion2Request {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final VersionsTestVersion2Response call() throws OnshapeException {
-      return onshape.call("get", "/versions/test", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.VersionsTestVersion2Response.class);
-    }
-
-    /**
-     * Calls testVersion2 method, Returns an API version 2 structure; this is the default
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final VersionsTestVersion2Response call(OnshapeDocument document) throws
-        OnshapeException {
       return onshape.call("get", "/versions/test", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.VersionsTestVersion2Response.class);
     }
   }

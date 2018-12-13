@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.ReleaseManagementCreateObsoletionPackageResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -70,20 +69,6 @@ public final class ReleaseManagementCreateObsoletionPackageRequest {
     public final ReleaseManagementCreateObsoletionPackageResponse call(String wfid,
         String revisionId) throws OnshapeException {
       return onshape.call("post", "/releasepackages/obsoletion/:wfid", build(), onshape.buildMap("wfid", wfid), onshape.buildMap("revisionId", revisionId), com.onshape.api.responses.ReleaseManagementCreateObsoletionPackageResponse.class);
-    }
-
-    /**
-     * Calls createObsoletionPackage method, Create an obsoletion package to make an existing revision obsolete. Once a release package has
-     *                 been successfully created use the updateReleasePackage to transition it to desired state
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wfid ID of obsoletion workflow as returned by getCompanyReleaseWorkflow
-     */
-    public final ReleaseManagementCreateObsoletionPackageResponse call(OnshapeDocument document,
-        String wfid) throws OnshapeException {
-      return onshape.call("post", "/releasepackages/obsoletion/:wfid", build(), onshape.buildMap("wfid", wfid), onshape.buildMap(), com.onshape.api.responses.ReleaseManagementCreateObsoletionPackageResponse.class);
     }
   }
 }

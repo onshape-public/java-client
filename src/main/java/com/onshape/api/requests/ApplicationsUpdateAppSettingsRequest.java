@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.ApplicationsUpdateAppSettingsResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -70,22 +69,6 @@ public final class ApplicationsUpdateAppSettingsRequest {
      */
     public final ApplicationsUpdateAppSettingsResponse call(String cid, String uid) throws
         OnshapeException {
-      return onshape.call("post", "/applications/clients/:cid/settings/users/:uid", build(), onshape.buildMap("cid", cid, "uid", uid), onshape.buildMap(), com.onshape.api.responses.ApplicationsUpdateAppSettingsResponse.class);
-    }
-
-    /**
-     * Calls updateAppSettings method, Update a user's application settings.
-     *                 This API may only be used with an OAuth token and only by the current user or admin.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param cid Client ID
-     *
-     * @param uid User ID
-     */
-    public final ApplicationsUpdateAppSettingsResponse call(OnshapeDocument document, String cid,
-        String uid) throws OnshapeException {
       return onshape.call("post", "/applications/clients/:cid/settings/users/:uid", build(), onshape.buildMap("cid", cid, "uid", uid), onshape.buildMap(), com.onshape.api.responses.ApplicationsUpdateAppSettingsResponse.class);
     }
   }

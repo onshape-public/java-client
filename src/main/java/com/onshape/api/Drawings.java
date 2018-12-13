@@ -30,7 +30,7 @@ import com.onshape.api.requests.DrawingsGetTranslationFormatsRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Drawings {
-  Onshape onshape;
+  final Onshape onshape;
 
   Drawings(Onshape onshape) {
     this.onshape = onshape;

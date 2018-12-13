@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.MetadataGetMetadataSchemaResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
@@ -138,17 +137,6 @@ public final class MetadataGetMetadataSchemaRequest {
     public final MetadataGetMetadataSchemaResponse call(String ownerId, Number objectType) throws
         OnshapeException {
       return onshape.call("get", "/metadataschema", build(), onshape.buildMap(), onshape.buildMap("ownerId", ownerId, "ownerType", ownerType, "objectType", objectType, "documentId", documentId), com.onshape.api.responses.MetadataGetMetadataSchemaResponse.class);
-    }
-
-    /**
-     * Calls getMetadataSchema method, Get metadata schema, or Onshape schema if user/company has no schema for the given object type
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final MetadataGetMetadataSchemaResponse call(OnshapeDocument document) throws
-        OnshapeException {
-      return onshape.call("get", "/metadataschema", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.MetadataGetMetadataSchemaResponse.class);
     }
   }
 }

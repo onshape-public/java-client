@@ -30,7 +30,7 @@ import com.onshape.api.requests.VersionsTestVersion2Request;
  * &copy; 2018 Onshape Inc.
  */
 public final class Versions {
-  Onshape onshape;
+  final Onshape onshape;
 
   Versions(Onshape onshape) {
     this.onshape = onshape;

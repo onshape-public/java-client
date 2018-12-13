@@ -29,7 +29,7 @@ import com.onshape.api.requests.RevisionsGetRevisionHistoryInCompanyRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Revisions {
-  Onshape onshape;
+  final Onshape onshape;
 
   Revisions(Onshape onshape) {
     this.onshape = onshape;

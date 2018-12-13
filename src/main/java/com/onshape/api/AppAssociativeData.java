@@ -22,42 +22,14 @@
 //
 package com.onshape.api;
 
-import com.onshape.api.requests.AppAssociativeDataDeleteAssociativeDataRequest;
-import com.onshape.api.requests.AppAssociativeDataGetAssociativeDataRequest;
-import com.onshape.api.requests.AppAssociativeDataUpdateAssociativeDataRequest;
-
 /**
  * AppAssociativeData: API endpoints for AppAssociativeData group.
  * &copy; 2018 Onshape Inc.
  */
 public final class AppAssociativeData {
-  Onshape onshape;
+  final Onshape onshape;
 
   AppAssociativeData(Onshape onshape) {
     this.onshape = onshape;
-  }
-
-  /**
-   * Create request for deleteAssociativeData
-   *  @return Request builder object
-   */
-  public final AppAssociativeDataDeleteAssociativeDataRequest.Builder deleteAssociativeData() {
-    return AppAssociativeDataDeleteAssociativeDataRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getAssociativeData
-   *  @return Request builder object
-   */
-  public final AppAssociativeDataGetAssociativeDataRequest.Builder getAssociativeData() {
-    return AppAssociativeDataGetAssociativeDataRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for updateAssociativeData
-   *  @return Request builder object
-   */
-  public final AppAssociativeDataUpdateAssociativeDataRequest.Builder updateAssociativeData() {
-    return AppAssociativeDataUpdateAssociativeDataRequest.builder(onshape);
   }
 }

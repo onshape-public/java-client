@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.CompaniesGetResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -66,19 +65,6 @@ public final class CompaniesGetRequest {
      * @param cid Company ID
      */
     public final CompaniesGetResponse call(String cid) throws OnshapeException {
-      return onshape.call("get", "/companies/:cid", build(), onshape.buildMap("cid", cid), onshape.buildMap(), com.onshape.api.responses.CompaniesGetResponse.class);
-    }
-
-    /**
-     * Calls get method, Get company info. Caller must be admin, or member of the company.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param cid Company ID
-     */
-    public final CompaniesGetResponse call(OnshapeDocument document, String cid) throws
-        OnshapeException {
       return onshape.call("get", "/companies/:cid", build(), onshape.buildMap("cid", cid), onshape.buildMap(), com.onshape.api.responses.CompaniesGetResponse.class);
     }
   }

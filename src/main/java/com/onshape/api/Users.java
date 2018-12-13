@@ -23,7 +23,6 @@
 package com.onshape.api;
 
 import com.onshape.api.requests.UsersGetSessionInfoRequest;
-import com.onshape.api.requests.UsersGetSessionRequest;
 import com.onshape.api.requests.UsersGetUserSettingsCurrentLoggedInUserRequest;
 import com.onshape.api.requests.UsersGetUserSettingsRequest;
 
@@ -32,18 +31,10 @@ import com.onshape.api.requests.UsersGetUserSettingsRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Users {
-  Onshape onshape;
+  final Onshape onshape;
 
   Users(Onshape onshape) {
     this.onshape = onshape;
-  }
-
-  /**
-   * Create request for getSession
-   *  @return Request builder object
-   */
-  public final UsersGetSessionRequest.Builder getSession() {
-    return UsersGetSessionRequest.builder(onshape);
   }
 
   /**

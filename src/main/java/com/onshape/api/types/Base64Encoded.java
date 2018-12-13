@@ -34,7 +34,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.onshape.api.types.Base64Encoded.Base64EncodedDeserializer;
 import com.onshape.api.types.Base64Encoded.Base64EncodedSerializer;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Base64;
 import java.util.Objects;
 
@@ -47,24 +50,32 @@ import java.util.Objects;
 @JsonSerialize(using = Base64EncodedSerializer.class)
 @JsonDeserialize(using = Base64EncodedDeserializer.class)
 public class Base64Encoded {
-
+    
     private final String base64String;
-
+    
+    public Base64Encoded(File file) throws IOException {
+        this(file.toPath());
+    }
+    
+    public Base64Encoded(Path path) throws IOException {
+        this(Files.readAllBytes(path));
+    }
+    
     public Base64Encoded(byte[] data) {
         this.base64String = Base64.getEncoder().encodeToString(data);
     }
-
+    
     public Base64Encoded(String base64String) {
         this.base64String = base64String;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 79 * hash + Objects.hashCode(this.base64String);
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -79,35 +90,43 @@ public class Base64Encoded {
         final Base64Encoded other = (Base64Encoded) obj;
         return Objects.equals(this.base64String, other.base64String);
     }
-
+    
     @Override
     public String toString() {
         return base64String;
     }
-
+    
     public String getBase64String() {
         return base64String;
     }
-
+    
     public byte[] getData() {
         return Base64.getDecoder().decode(base64String);
     }
-
+    
+    public void toFile(File f) throws IOException {
+        toFile(f.toPath());
+    }
+    
+    public void toFile(Path p) throws IOException {
+        Files.write(p, getData());
+    }
+    
     static class Base64EncodedSerializer extends JsonSerializer<Base64Encoded> {
-
+        
         @Override
         public void serialize(Base64Encoded t, JsonGenerator jg, SerializerProvider sp) throws IOException, JsonProcessingException {
             jg.writeString(t.getBase64String());
         }
-
+        
     }
-
+    
     static class Base64EncodedDeserializer extends JsonDeserializer<Base64Encoded> {
-
+        
         @Override
         public Base64Encoded deserialize(JsonParser jp, DeserializationContext dc) throws IOException, JsonProcessingException {
             return new Base64Encoded(jp.getText());
         }
-
+        
     }
 }

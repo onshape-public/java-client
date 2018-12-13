@@ -29,7 +29,7 @@ import com.onshape.api.requests.BillingGetClientPlansRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Billing {
-  Onshape onshape;
+  final Onshape onshape;
 
   Billing(Onshape onshape) {
     this.onshape = onshape;

@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.TranslationsGetTranslationResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -66,19 +65,6 @@ public final class TranslationsGetTranslationRequest {
      * @param tid Translation ID
      */
     public final TranslationsGetTranslationResponse call(String tid) throws OnshapeException {
-      return onshape.call("get", "/translations/:tid", build(), onshape.buildMap("tid", tid), onshape.buildMap(), com.onshape.api.responses.TranslationsGetTranslationResponse.class);
-    }
-
-    /**
-     * Calls getTranslation method, Get element translation status
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param tid Translation ID
-     */
-    public final TranslationsGetTranslationResponse call(OnshapeDocument document, String tid)
-        throws OnshapeException {
       return onshape.call("get", "/translations/:tid", build(), onshape.buildMap("tid", tid), onshape.buildMap(), com.onshape.api.responses.TranslationsGetTranslationResponse.class);
     }
   }

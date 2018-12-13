@@ -39,7 +39,6 @@ import com.onshape.api.requests.PartStudiosGetFacesRequest;
 import com.onshape.api.requests.PartStudiosGetFeatureSpecsRequest;
 import com.onshape.api.requests.PartStudiosGetFeaturesRequest;
 import com.onshape.api.requests.PartStudiosGetMassPropertiesRequest;
-import com.onshape.api.requests.PartStudiosGetMetadataRequest;
 import com.onshape.api.requests.PartStudiosGetNamedViewsRequest;
 import com.onshape.api.requests.PartStudiosGetShadedViewsRequest;
 import com.onshape.api.requests.PartStudiosGetSketchInfoRequest;
@@ -56,7 +55,7 @@ import com.onshape.api.requests.PartStudiosUpdateRollbackRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class PartStudios {
-  Onshape onshape;
+  final Onshape onshape;
 
   PartStudios(Onshape onshape) {
     this.onshape = onshape;
@@ -196,14 +195,6 @@ public final class PartStudios {
    */
   public final PartStudiosGetMassPropertiesRequest.Builder getMassProperties() {
     return PartStudiosGetMassPropertiesRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getMetadata
-   *  @return Request builder object
-   */
-  public final PartStudiosGetMetadataRequest.Builder getMetadata() {
-    return PartStudiosGetMetadataRequest.builder(onshape);
   }
 
   /**

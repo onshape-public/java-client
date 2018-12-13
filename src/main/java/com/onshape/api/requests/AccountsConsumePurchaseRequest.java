@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.AccountsConsumePurchaseResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -67,20 +66,6 @@ public final class AccountsConsumePurchaseRequest {
      * @param pid Purchase id
      */
     public final AccountsConsumePurchaseResponse call(String pid) throws OnshapeException {
-      return onshape.call("post", "/accounts/purchases/:pid/consume", build(), onshape.buildMap("pid", pid), onshape.buildMap(), com.onshape.api.responses.AccountsConsumePurchaseResponse.class);
-    }
-
-    /**
-     * Calls consumePurchase method, Mark a purchase as consumed for the specified user. This API is expected to be used in a context
-     *                 of OAuth-enabled application. Preliminary version, expected to be changed soon.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param pid Purchase id
-     */
-    public final AccountsConsumePurchaseResponse call(OnshapeDocument document, String pid) throws
-        OnshapeException {
       return onshape.call("post", "/accounts/purchases/:pid/consume", build(), onshape.buildMap("pid", pid), onshape.buildMap(), com.onshape.api.responses.AccountsConsumePurchaseResponse.class);
     }
   }

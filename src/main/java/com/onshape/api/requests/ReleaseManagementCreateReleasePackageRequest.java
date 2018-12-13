@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.ReleaseManagementCreateReleasePackageResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 import javax.validation.constraints.NotNull;
@@ -117,22 +116,6 @@ public final class ReleaseManagementCreateReleasePackageRequest {
      */
     public final ReleaseManagementCreateReleasePackageResponse call(String wfid) throws
         OnshapeException {
-      return onshape.call("post", "/releasepackages/release/:wfid", build(), onshape.buildMap("wfid", wfid), onshape.buildMap(), com.onshape.api.responses.ReleaseManagementCreateReleasePackageResponse.class);
-    }
-
-    /**
-     * Calls createReleasePackage method, Create a new release package to release one or more items. All revisionable items must be from
-     *                 the same document. Once a release package has been successfully created use the
-     *                 updateReleasePackage to update all desired item/package properties and transition it to desired
-     *                 state.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wfid ID of release workflow as returned by getCompanyReleaseWorkflow
-     */
-    public final ReleaseManagementCreateReleasePackageResponse call(OnshapeDocument document,
-        String wfid) throws OnshapeException {
       return onshape.call("post", "/releasepackages/release/:wfid", build(), onshape.buildMap("wfid", wfid), onshape.buildMap(), com.onshape.api.responses.ReleaseManagementCreateReleasePackageResponse.class);
     }
   }

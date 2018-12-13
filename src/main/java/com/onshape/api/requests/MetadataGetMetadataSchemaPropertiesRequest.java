@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.MetadataGetMetadataSchemaPropertiesResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Boolean;
 import java.lang.Number;
 import java.lang.Override;
@@ -376,17 +375,6 @@ public final class MetadataGetMetadataSchemaPropertiesRequest {
      */
     public final MetadataGetMetadataSchemaPropertiesResponse call() throws OnshapeException {
       return onshape.call("get", "/metadataschema/properties", build(), onshape.buildMap(), onshape.buildMap("schemaId", schemaId, "ownerId", ownerId, "ownerType", ownerType, "objectType", objectType, "strict", strict, "activeOnly", activeOnly, "documentId", documentId, "offset", offset, "limit", limit), com.onshape.api.responses.MetadataGetMetadataSchemaPropertiesResponse.class);
-    }
-
-    /**
-     * Calls getMetadataSchemaProperties method, Get metadata properties
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final MetadataGetMetadataSchemaPropertiesResponse call(OnshapeDocument document) throws
-        OnshapeException {
-      return onshape.call("get", "/metadataschema/properties", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.MetadataGetMetadataSchemaPropertiesResponse.class);
     }
   }
 }

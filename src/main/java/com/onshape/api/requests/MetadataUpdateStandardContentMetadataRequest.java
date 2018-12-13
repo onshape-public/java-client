@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.MetadataUpdateStandardContentMetadataResponse;
+import com.onshape.api.types.CU;
 import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
@@ -155,11 +156,13 @@ public final class MetadataUpdateStandardContentMetadataRequest {
      *
      * @param eid Element ID
      *
+     * @param cuType Type of Company or User
+     *
      * @param oid Company (c) or User (u) ID of metadata owner
      */
     public final MetadataUpdateStandardContentMetadataResponse call(String pid, String did,
-        String vid, String eid, String oid) throws OnshapeException {
-      return onshape.call("post", "/metadata/standardcontent/d/:did/v/:vid/e/:eid/[cu]/:oid/p/:pid", build(), onshape.buildMap("pid", pid, "did", did, "vid", vid, "eid", eid, "oid", oid), onshape.buildMap("linkDocumentId", linkDocumentId), com.onshape.api.responses.MetadataUpdateStandardContentMetadataResponse.class);
+        String vid, String eid, CU cuType, String oid) throws OnshapeException {
+      return onshape.call("post", "/metadata/standardcontent/d/:did/v/:vid/e/:eid/[cu]/:oid/p/:pid", build(), onshape.buildMap("pid", pid, "did", did, "vid", vid, "eid", eid, "cuType", cuType, "oid", oid), onshape.buildMap("linkDocumentId", linkDocumentId), com.onshape.api.responses.MetadataUpdateStandardContentMetadataResponse.class);
     }
 
     /**
@@ -178,7 +181,7 @@ public final class MetadataUpdateStandardContentMetadataRequest {
      */
     public final MetadataUpdateStandardContentMetadataResponse call(OnshapeDocument document,
         String pid, String vid, String oid) throws OnshapeException {
-      return onshape.call("post", "/metadata/standardcontent/d/:did/v/:vid/e/:eid/[cu]/:oid/p/:pid", build(), onshape.buildMap("pid", pid, "did", document.getDocumentId(), "vid", vid, "eid", document.getElementId(), "oid", oid), onshape.buildMap(), com.onshape.api.responses.MetadataUpdateStandardContentMetadataResponse.class);
+      return onshape.call("post", "/metadata/standardcontent/d/:did/v/:vid/e/:eid/[cu]/:oid/p/:pid", build(), onshape.buildMap("pid", pid, "did", document.getDocumentId(), "vid", vid, "eid", document.getElementId(), "cuType", CU.Company, "oid", oid), onshape.buildMap(), com.onshape.api.responses.MetadataUpdateStandardContentMetadataResponse.class);
     }
   }
 }

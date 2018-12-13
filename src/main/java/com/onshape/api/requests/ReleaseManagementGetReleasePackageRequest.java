@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.ReleaseManagementGetReleasePackageResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
@@ -104,19 +103,6 @@ public final class ReleaseManagementGetReleasePackageRequest {
     public final ReleaseManagementGetReleasePackageResponse call(String rpid) throws
         OnshapeException {
       return onshape.call("get", "/releasepackages/:rpid", build(), onshape.buildMap("rpid", rpid), onshape.buildMap("detailed", detailed), com.onshape.api.responses.ReleaseManagementGetReleasePackageResponse.class);
-    }
-
-    /**
-     * Calls getReleasePackage method, Returns detailed information about a release package with specified id
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param rpid ID of package to get detailed information for
-     */
-    public final ReleaseManagementGetReleasePackageResponse call(OnshapeDocument document,
-        String rpid) throws OnshapeException {
-      return onshape.call("get", "/releasepackages/:rpid", build(), onshape.buildMap("rpid", rpid), onshape.buildMap(), com.onshape.api.responses.ReleaseManagementGetReleasePackageResponse.class);
     }
   }
 }

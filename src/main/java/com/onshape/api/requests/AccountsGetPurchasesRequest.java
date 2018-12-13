@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.AccountsGetPurchasesResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -65,18 +64,6 @@ public final class AccountsGetPurchasesRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final AccountsGetPurchasesResponse call() throws OnshapeException {
-      return onshape.call("get", "/accounts/purchases", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.AccountsGetPurchasesResponse.class);
-    }
-
-    /**
-     * Calls getPurchases method, Returns list of application purchases for the current user. This API is expected to be used in a
-     *                 context of OAuth-enabled application.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final AccountsGetPurchasesResponse call(OnshapeDocument document) throws
-        OnshapeException {
       return onshape.call("get", "/accounts/purchases", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.AccountsGetPurchasesResponse.class);
     }
   }

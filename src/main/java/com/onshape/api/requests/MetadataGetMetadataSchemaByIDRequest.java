@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.MetadataGetMetadataSchemaByIDResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -102,19 +101,6 @@ public final class MetadataGetMetadataSchemaByIDRequest {
      */
     public final MetadataGetMetadataSchemaByIDResponse call(String sid) throws OnshapeException {
       return onshape.call("get", "/metadataschema/:sid", build(), onshape.buildMap("sid", sid), onshape.buildMap("documentId", documentId), com.onshape.api.responses.MetadataGetMetadataSchemaByIDResponse.class);
-    }
-
-    /**
-     * Calls getMetadataSchemaByID method, Get metadata schema by ID
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param sid Metadata schema ID
-     */
-    public final MetadataGetMetadataSchemaByIDResponse call(OnshapeDocument document, String sid)
-        throws OnshapeException {
-      return onshape.call("get", "/metadataschema/:sid", build(), onshape.buildMap("sid", sid), onshape.buildMap(), com.onshape.api.responses.MetadataGetMetadataSchemaByIDResponse.class);
     }
   }
 }

@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.WebhooksGetWebhookResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -66,19 +65,6 @@ public final class WebhooksGetWebhookRequest {
      * @param webhookid Webhook ID
      */
     public final WebhooksGetWebhookResponse call(String webhookid) throws OnshapeException {
-      return onshape.call("get", "/webhooks/:webhookid", build(), onshape.buildMap("webhookid", webhookid), onshape.buildMap(), com.onshape.api.responses.WebhooksGetWebhookResponse.class);
-    }
-
-    /**
-     * Calls getWebhook method, Get webhook info
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param webhookid Webhook ID
-     */
-    public final WebhooksGetWebhookResponse call(OnshapeDocument document, String webhookid) throws
-        OnshapeException {
       return onshape.call("get", "/webhooks/:webhookid", build(), onshape.buildMap("webhookid", webhookid), onshape.buildMap(), com.onshape.api.responses.WebhooksGetWebhookResponse.class);
     }
   }

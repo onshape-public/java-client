@@ -40,7 +40,7 @@ import com.onshape.api.requests.AppElementsUpdateReferenceRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class AppElements {
-  Onshape onshape;
+  final Onshape onshape;
 
   AppElements(Onshape onshape) {
     this.onshape = onshape;

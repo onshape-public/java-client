@@ -31,7 +31,7 @@ import com.onshape.api.requests.FoldersUnShareRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Folders {
-  Onshape onshape;
+  final Onshape onshape;
 
   Folders(Onshape onshape) {
     this.onshape = onshape;

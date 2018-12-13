@@ -46,7 +46,7 @@ import com.onshape.api.requests.AssembliesUpdateFeatureRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Assemblies {
-  Onshape onshape;
+  final Onshape onshape;
 
   Assemblies(Onshape onshape) {
     this.onshape = onshape;

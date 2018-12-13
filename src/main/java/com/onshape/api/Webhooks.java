@@ -33,7 +33,7 @@ import com.onshape.api.requests.WebhooksUpdateWebhookRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Webhooks {
-  Onshape onshape;
+  final Onshape onshape;
 
   Webhooks(Onshape onshape) {
     this.onshape = onshape;

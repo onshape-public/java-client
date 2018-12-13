@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.AccountsCancelPurchaseResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -67,20 +66,6 @@ public final class AccountsCancelPurchaseRequest {
      * @param pid Purchase id
      */
     public final AccountsCancelPurchaseResponse call(String pid) throws OnshapeException {
-      return onshape.call("delete", "/accounts/purchases/:pid", build(), onshape.buildMap("pid", pid), onshape.buildMap(), com.onshape.api.responses.AccountsCancelPurchaseResponse.class);
-    }
-
-    /**
-     * Calls cancelPurchase method, Cancel a recurring subscription. This API is expected to be used in a context of OAuth-enabled
-     *                 application.
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param pid Purchase id
-     */
-    public final AccountsCancelPurchaseResponse call(OnshapeDocument document, String pid) throws
-        OnshapeException {
       return onshape.call("delete", "/accounts/purchases/:pid", build(), onshape.buildMap("pid", pid), onshape.buildMap(), com.onshape.api.responses.AccountsCancelPurchaseResponse.class);
     }
   }

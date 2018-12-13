@@ -26,8 +26,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.TranslationsCreateTranslationResponse;
+import com.onshape.api.types.Base64Encoded;
 import com.onshape.api.types.OnshapeDocument;
-import java.io.File;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
@@ -43,7 +43,7 @@ public final class TranslationsCreateTranslationRequest {
    */
   @JsonProperty("file")
   @NotNull
-  File file;
+  Base64Encoded file;
 
   /**
    * Name of format into which this element should be translated. ONSHAPE indicates that the model file should be translated into a Part Studio or Assembly.
@@ -97,7 +97,7 @@ public final class TranslationsCreateTranslationRequest {
   @NotNull
   Boolean storeInDocument;
 
-  TranslationsCreateTranslationRequest(File file, String formatName, String versionString,
+  TranslationsCreateTranslationRequest(Base64Encoded file, String formatName, String versionString,
       Boolean notifyUser, Boolean flattenAssemblies, Boolean yAxisIsUp, Boolean importInBackground,
       Boolean allowFaultyParts, Boolean storeInDocument) {
     this.file = file;
@@ -117,7 +117,7 @@ public final class TranslationsCreateTranslationRequest {
    * @return File to upload
    *
    */
-  public final File getFile() {
+  public final Base64Encoded getFile() {
     return this.file;
   }
 
@@ -216,7 +216,7 @@ public final class TranslationsCreateTranslationRequest {
     /**
      * File to upload
      */
-    private File file;
+    private Base64Encoded file;
 
     /**
      * Name of format into which this element should be translated. ONSHAPE indicates that the model file should be translated into a Part Studio or Assembly.
@@ -269,7 +269,7 @@ public final class TranslationsCreateTranslationRequest {
      * @return File to upload
      *
      */
-    public final File file() {
+    public final Base64Encoded file() {
       return this.file;
     }
 
@@ -280,7 +280,7 @@ public final class TranslationsCreateTranslationRequest {
      *
      * @return the Builder object.
      */
-    public final Builder file(File value) {
+    public final Builder file(Base64Encoded value) {
       this.file = value;
       return this;
     }

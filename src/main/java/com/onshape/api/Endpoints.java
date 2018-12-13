@@ -29,7 +29,7 @@ import com.onshape.api.requests.EndpointsGetEndpointsRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class Endpoints {
-  Onshape onshape;
+  final Onshape onshape;
 
   Endpoints(Onshape onshape) {
     this.onshape = onshape;

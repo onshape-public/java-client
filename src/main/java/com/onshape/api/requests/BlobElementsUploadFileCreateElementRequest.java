@@ -26,8 +26,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.BlobElementsUploadFileCreateElementResponse;
+import com.onshape.api.types.Base64Encoded;
 import com.onshape.api.types.OnshapeDocument;
-import java.io.File;
 import java.lang.Boolean;
 import java.lang.Number;
 import java.lang.Override;
@@ -50,7 +50,7 @@ public final class BlobElementsUploadFileCreateElementRequest {
    */
   @JsonProperty("file")
   @NotNull
-  File file;
+  Base64Encoded file;
 
   /**
    * Filename override interpreted as a URL-encoded string. If specified, this overrides the filename from a Content-Disposition in the file field.
@@ -115,7 +115,7 @@ public final class BlobElementsUploadFileCreateElementRequest {
   @JsonProperty("locationPosition")
   Number locationPosition;
 
-  BlobElementsUploadFileCreateElementRequest(Boolean createDrawingIfPossible, File file,
+  BlobElementsUploadFileCreateElementRequest(Boolean createDrawingIfPossible, Base64Encoded file,
       String encodedFilename, Number fileContentLength, Boolean translate,
       Boolean flattenAssemblies, Boolean yAxisIsUp, Boolean importInBackground,
       Boolean allowFaultyParts, String locationGroupId, String locationElementId,
@@ -150,7 +150,7 @@ public final class BlobElementsUploadFileCreateElementRequest {
    * @return File data to upload. This field should normally have a Content-Disposition header field with a &quot;filename&quot; attribute, naming the uploaded file.
    *
    */
-  public final File getFile() {
+  public final Base64Encoded getFile() {
     return this.file;
   }
 
@@ -274,7 +274,7 @@ public final class BlobElementsUploadFileCreateElementRequest {
     /**
      * File data to upload. This field should normally have a Content-Disposition header field with a &quot;filename&quot; attribute, naming the uploaded file.
      */
-    private File file;
+    private Base64Encoded file;
 
     /**
      * Filename override interpreted as a URL-encoded string. If specified, this overrides the filename from a Content-Disposition in the file field.
@@ -359,7 +359,7 @@ public final class BlobElementsUploadFileCreateElementRequest {
      * @return File data to upload. This field should normally have a Content-Disposition header field with a &quot;filename&quot; attribute, naming the uploaded file.
      *
      */
-    public final File file() {
+    public final Base64Encoded file() {
       return this.file;
     }
 
@@ -370,7 +370,7 @@ public final class BlobElementsUploadFileCreateElementRequest {
      *
      * @return the Builder object.
      */
-    public final Builder file(File value) {
+    public final Builder file(Base64Encoded value) {
       this.file = value;
       return this;
     }

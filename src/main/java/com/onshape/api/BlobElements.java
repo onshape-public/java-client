@@ -33,7 +33,7 @@ import com.onshape.api.requests.BlobElementsUploadFileUpdateElementRequest;
  * &copy; 2018 Onshape Inc.
  */
 public final class BlobElements {
-  Onshape onshape;
+  final Onshape onshape;
 
   BlobElements(Onshape onshape) {
     this.onshape = onshape;

@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.ReleaseManagementGetCompanyReleaseWorkflowResponse;
-import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -67,17 +66,6 @@ public final class ReleaseManagementGetCompanyReleaseWorkflowRequest {
     public final ReleaseManagementGetCompanyReleaseWorkflowResponse call(String documentId) throws
         OnshapeException {
       return onshape.call("get", "/releasepackages/companyreleaseworkflow", build(), onshape.buildMap(), onshape.buildMap("documentId", documentId), com.onshape.api.responses.ReleaseManagementGetCompanyReleaseWorkflowResponse.class);
-    }
-
-    /**
-     * Calls getCompanyReleaseWorkflow method, Information about the release/obsoletion workflow in use by a company owned document
-     * @param document Document object from Onshape URL.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final ReleaseManagementGetCompanyReleaseWorkflowResponse call(OnshapeDocument document)
-        throws OnshapeException {
-      return onshape.call("get", "/releasepackages/companyreleaseworkflow", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.ReleaseManagementGetCompanyReleaseWorkflowResponse.class);
     }
   }
 }
