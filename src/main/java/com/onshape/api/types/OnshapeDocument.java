@@ -50,7 +50,7 @@ public class OnshapeDocument {
      */
     public OnshapeDocument(String url) throws OnshapeException {
         Matcher matcher = PATTERN.matcher(url.trim());
-        if (matcher.find()) {
+        if (!matcher.matches()) {
             throw new OnshapeException("URL is not a valid Onshape document URL: " + url);
         }
         this.documentId = matcher.group(1);
