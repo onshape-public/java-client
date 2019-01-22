@@ -91,9 +91,22 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
   @JsonProperty("isAssembly")
   public Boolean isAssembly;
 
+  /**
+   * The revision containing the released part or assembly to be inserted.
+   */
+  @JsonProperty("revision")
+  public String revision;
+
+  /**
+   * The part number identifying the part or assembly in the release that is to be inserted.
+   */
+  @JsonProperty("partNumber")
+  public String partNumber;
+
   AssembliesInsertTransformedInstancesRequestTransformGroupsInstances(String documentId,
       String elementId, String partId, String featureId, String microversionId, String versionId,
-      String configuration, Boolean isWholePartStudio, Boolean isAssembly) {
+      String configuration, Boolean isWholePartStudio, Boolean isAssembly, String revision,
+      String partNumber) {
     this.documentId = documentId;
     this.elementId = elementId;
     this.partId = partId;
@@ -103,6 +116,8 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
     this.configuration = configuration;
     this.isWholePartStudio = isWholePartStudio;
     this.isAssembly = isAssembly;
+    this.revision = revision;
+    this.partNumber = partNumber;
   }
 
   /**
@@ -195,6 +210,26 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
     return this.isAssembly;
   }
 
+  /**
+   * Get The revision containing the released part or assembly to be inserted.
+   *
+   * @return The revision containing the released part or assembly to be inserted.
+   *
+   */
+  public final String getRevision() {
+    return this.revision;
+  }
+
+  /**
+   * Get The part number identifying the part or assembly in the release that is to be inserted.
+   *
+   * @return The part number identifying the part or assembly in the release that is to be inserted.
+   *
+   */
+  public final String getPartNumber() {
+    return this.partNumber;
+  }
+
   public static final Builder builder() {
     Builder builder = new Builder();
     return builder;
@@ -250,6 +285,16 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
      * Whether the instance is the assembly specified by the element ID.
      */
     private Boolean isAssembly;
+
+    /**
+     * The revision containing the released part or assembly to be inserted.
+     */
+    private String revision;
+
+    /**
+     * The part number identifying the part or assembly in the release that is to be inserted.
+     */
+    private String partNumber;
 
     Builder() {
     }
@@ -452,8 +497,52 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
       return this;
     }
 
+    /**
+     * Get The revision containing the released part or assembly to be inserted.
+     *
+     * @return The revision containing the released part or assembly to be inserted.
+     *
+     */
+    public final String revision() {
+      return this.revision;
+    }
+
+    /**
+     * Set The revision containing the released part or assembly to be inserted.
+     *
+     * @param value The revision containing the released part or assembly to be inserted.
+     *
+     * @return the Builder object.
+     */
+    public final Builder revision(String value) {
+      this.revision = value;
+      return this;
+    }
+
+    /**
+     * Get The part number identifying the part or assembly in the release that is to be inserted.
+     *
+     * @return The part number identifying the part or assembly in the release that is to be inserted.
+     *
+     */
+    public final String partNumber() {
+      return this.partNumber;
+    }
+
+    /**
+     * Set The part number identifying the part or assembly in the release that is to be inserted.
+     *
+     * @param value The part number identifying the part or assembly in the release that is to be inserted.
+     *
+     * @return the Builder object.
+     */
+    public final Builder partNumber(String value) {
+      this.partNumber = value;
+      return this;
+    }
+
     public final AssembliesInsertTransformedInstancesRequestTransformGroupsInstances build() {
-      return new com.onshape.api.requests.AssembliesInsertTransformedInstancesRequestTransformGroupsInstances(documentId,elementId,partId,featureId,microversionId,versionId,configuration,isWholePartStudio,isAssembly);
+      return new com.onshape.api.requests.AssembliesInsertTransformedInstancesRequestTransformGroupsInstances(documentId,elementId,partId,featureId,microversionId,versionId,configuration,isWholePartStudio,isAssembly,revision,partNumber);
     }
   }
 }

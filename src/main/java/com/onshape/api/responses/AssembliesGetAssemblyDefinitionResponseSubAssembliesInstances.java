@@ -36,7 +36,7 @@ import java.lang.String;
 @JsonIgnoreProperties(
     ignoreUnknown = true
 )
-public final class AssembliesGetAssemblyDefinitionResponseRootAssemblyInstances {
+public final class AssembliesGetAssemblyDefinitionResponseSubAssembliesInstances {
   /**
    * Instance ID
    */
@@ -102,18 +102,6 @@ public final class AssembliesGetAssemblyDefinitionResponseRootAssemblyInstances 
    */
   @JsonProperty("configuration")
   public String configuration;
-
-  /**
-   * The revision this instance was inserted from, if any
-   */
-  @JsonProperty("revision")
-  public String revision;
-
-  /**
-   * The identifying part number of the instance, if inserted from a revision
-   */
-  @JsonProperty("partNumber")
-  public String partNumber;
 
   /**
    * Get Instance ID
@@ -223,26 +211,6 @@ public final class AssembliesGetAssemblyDefinitionResponseRootAssemblyInstances 
    */
   public final String getConfiguration() {
     return this.configuration;
-  }
-
-  /**
-   * Get The revision this instance was inserted from, if any
-   *
-   * @return The revision this instance was inserted from, if any
-   *
-   */
-  public final String getRevision() {
-    return this.revision;
-  }
-
-  /**
-   * Get The identifying part number of the instance, if inserted from a revision
-   *
-   * @return The identifying part number of the instance, if inserted from a revision
-   *
-   */
-  public final String getPartNumber() {
-    return this.partNumber;
   }
 
   @Override

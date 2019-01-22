@@ -99,9 +99,21 @@ public final class AssembliesCreateInstanceRequest {
   @JsonProperty("configuration")
   String configuration;
 
+  /**
+   * The revision containing the released part or assembly to be inserted.
+   */
+  @JsonProperty("revision")
+  String revision;
+
+  /**
+   * The part number identifying the part or assembly in the release that is to be inserted.
+   */
+  @JsonProperty("partNumber")
+  String partNumber;
+
   AssembliesCreateInstanceRequest(String documentId, String elementId, String versionId,
       String microversionId, Boolean isAssembly, Boolean isWholePartStudio, String partId,
-      String featureId, String configuration) {
+      String featureId, String configuration, String revision, String partNumber) {
     this.documentId = documentId;
     this.elementId = elementId;
     this.versionId = versionId;
@@ -111,6 +123,8 @@ public final class AssembliesCreateInstanceRequest {
     this.partId = partId;
     this.featureId = featureId;
     this.configuration = configuration;
+    this.revision = revision;
+    this.partNumber = partNumber;
   }
 
   /**
@@ -203,6 +217,26 @@ public final class AssembliesCreateInstanceRequest {
     return this.configuration;
   }
 
+  /**
+   * Get The revision containing the released part or assembly to be inserted.
+   *
+   * @return The revision containing the released part or assembly to be inserted.
+   *
+   */
+  public final String getRevision() {
+    return this.revision;
+  }
+
+  /**
+   * Get The part number identifying the part or assembly in the release that is to be inserted.
+   *
+   * @return The part number identifying the part or assembly in the release that is to be inserted.
+   *
+   */
+  public final String getPartNumber() {
+    return this.partNumber;
+  }
+
   @Override
   public String toString() {
     return Onshape.toString(this);
@@ -259,6 +293,16 @@ public final class AssembliesCreateInstanceRequest {
      * Configuration of the source element, valid only if the referenced element is a Part Studio.
      */
     private String configuration;
+
+    /**
+     * The revision containing the released part or assembly to be inserted.
+     */
+    private String revision;
+
+    /**
+     * The part number identifying the part or assembly in the release that is to be inserted.
+     */
+    private String partNumber;
 
     Onshape onshape;
 
@@ -463,8 +507,52 @@ public final class AssembliesCreateInstanceRequest {
       return this;
     }
 
+    /**
+     * Get The revision containing the released part or assembly to be inserted.
+     *
+     * @return The revision containing the released part or assembly to be inserted.
+     *
+     */
+    public final String revision() {
+      return this.revision;
+    }
+
+    /**
+     * Set The revision containing the released part or assembly to be inserted.
+     *
+     * @param value The revision containing the released part or assembly to be inserted.
+     *
+     * @return the Builder object.
+     */
+    public final Builder revision(String value) {
+      this.revision = value;
+      return this;
+    }
+
+    /**
+     * Get The part number identifying the part or assembly in the release that is to be inserted.
+     *
+     * @return The part number identifying the part or assembly in the release that is to be inserted.
+     *
+     */
+    public final String partNumber() {
+      return this.partNumber;
+    }
+
+    /**
+     * Set The part number identifying the part or assembly in the release that is to be inserted.
+     *
+     * @param value The part number identifying the part or assembly in the release that is to be inserted.
+     *
+     * @return the Builder object.
+     */
+    public final Builder partNumber(String value) {
+      this.partNumber = value;
+      return this;
+    }
+
     private AssembliesCreateInstanceRequest build() {
-      return new com.onshape.api.requests.AssembliesCreateInstanceRequest(documentId,elementId,versionId,microversionId,isAssembly,isWholePartStudio,partId,featureId,configuration);
+      return new com.onshape.api.requests.AssembliesCreateInstanceRequest(documentId,elementId,versionId,microversionId,isAssembly,isWholePartStudio,partId,featureId,configuration,revision,partNumber);
     }
 
     /**

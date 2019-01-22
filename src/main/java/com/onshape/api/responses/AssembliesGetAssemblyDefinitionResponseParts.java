@@ -87,6 +87,18 @@ public final class AssembliesGetAssemblyDefinitionResponseParts {
   public Boolean isStandardContent;
 
   /**
+   * The revision this part was inserted from, if any
+   */
+  @JsonProperty("revision")
+  public String revision;
+
+  /**
+   * The part number, if from a revision
+   */
+  @JsonProperty("partNumber")
+  public String partNumber;
+
+  /**
    * Array of part mate connectors
    */
   @JsonProperty("mateConnectors")
@@ -170,6 +182,26 @@ public final class AssembliesGetAssemblyDefinitionResponseParts {
    */
   public final Boolean getIsStandardContent() {
     return this.isStandardContent;
+  }
+
+  /**
+   * Get The revision this part was inserted from, if any
+   *
+   * @return The revision this part was inserted from, if any
+   *
+   */
+  public final String getRevision() {
+    return this.revision;
+  }
+
+  /**
+   * Get The part number, if from a revision
+   *
+   * @return The part number, if from a revision
+   *
+   */
+  public final String getPartNumber() {
+    return this.partNumber;
   }
 
   /**

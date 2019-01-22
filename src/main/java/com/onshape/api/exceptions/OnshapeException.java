@@ -30,23 +30,46 @@ package com.onshape.api.exceptions;
  */
 public class OnshapeException extends Exception {
 
-    public OnshapeException() {
+    private final int statusCode;
+
+    public OnshapeException(int statusCode, String message) {
+        super(message);
+        this.statusCode = statusCode;
     }
 
     public OnshapeException(String message) {
         super(message);
+        this.statusCode = 0;
     }
 
     public OnshapeException(String message, Throwable cause) {
         super(message, cause);
+        this.statusCode = 0;
     }
 
-    public OnshapeException(Throwable cause) {
-        super(cause);
+    /**
+     * Returns true if this, or the initial exception thrown that caused this,
+     * is due to an HTTP error and therefore has an HTTP status code.
+     *
+     * @return true if caused by HTTP error
+     */
+    public boolean isHTTPError() {
+        return statusCode != 0
+                || (getCause() instanceof OnshapeException)
+                && ((OnshapeException) getCause()).isHTTPError();
     }
 
-    public OnshapeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
+    /**
+     * Returns the status code of the HTTP error that caused this exception, or
+     * 0 if it is not caused by an HTTP error.
+     *
+     * @return HTTP status code or 0
+     */
+    @SuppressWarnings("ThrowableResultIgnored")
+    public int getStatusCode() {
+        return ((getCause() instanceof OnshapeException)
+                && ((OnshapeException) getCause()).isHTTPError())
+                ? ((OnshapeException) getCause()).getStatusCode()
+                : statusCode;
     }
-
 }

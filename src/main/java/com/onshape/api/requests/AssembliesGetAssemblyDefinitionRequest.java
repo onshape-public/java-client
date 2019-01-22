@@ -56,16 +56,23 @@ public final class AssembliesGetAssemblyDefinitionRequest {
   Boolean includeMateConnectors;
 
   /**
+   * Configuration string
+   */
+  @JsonProperty("configuration")
+  String configuration;
+
+  /**
    * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
    */
   @JsonProperty("linkDocumentId")
   String linkDocumentId;
 
   AssembliesGetAssemblyDefinitionRequest(Boolean includeMateFeatures, Boolean includeNonSolids,
-      Boolean includeMateConnectors, String linkDocumentId) {
+      Boolean includeMateConnectors, String configuration, String linkDocumentId) {
     this.includeMateFeatures = includeMateFeatures;
     this.includeNonSolids = includeNonSolids;
     this.includeMateConnectors = includeMateConnectors;
+    this.configuration = configuration;
     this.linkDocumentId = linkDocumentId;
   }
 
@@ -95,6 +102,11 @@ public final class AssembliesGetAssemblyDefinitionRequest {
      * Whether or not to include mate connectors of assembly and parts when includeMateFeatures is also true (adds a &quot;mateConnectors&quot; array in each part and includes mate connectors in assembly &quot;features&quot; array).
      */
     private Boolean includeMateConnectors;
+
+    /**
+     * Configuration string
+     */
+    private String configuration;
 
     /**
      * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
@@ -173,6 +185,28 @@ public final class AssembliesGetAssemblyDefinitionRequest {
     }
 
     /**
+     * Get Configuration string
+     *
+     * @return Configuration string
+     *
+     */
+    public final String configuration() {
+      return this.configuration;
+    }
+
+    /**
+     * Set Configuration string
+     *
+     * @param value Configuration string
+     *
+     * @return the Builder object.
+     */
+    public final Builder configuration(String value) {
+      this.configuration = value;
+      return this;
+    }
+
+    /**
      * Get Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
      *
      * @return Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
@@ -195,7 +229,7 @@ public final class AssembliesGetAssemblyDefinitionRequest {
     }
 
     private AssembliesGetAssemblyDefinitionRequest build() {
-      return new com.onshape.api.requests.AssembliesGetAssemblyDefinitionRequest(includeMateFeatures,includeNonSolids,includeMateConnectors,linkDocumentId);
+      return new com.onshape.api.requests.AssembliesGetAssemblyDefinitionRequest(includeMateFeatures,includeNonSolids,includeMateConnectors,configuration,linkDocumentId);
     }
 
     /**
@@ -214,7 +248,7 @@ public final class AssembliesGetAssemblyDefinitionRequest {
      */
     public final AssembliesGetAssemblyDefinitionResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
-      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("includeMateFeatures", includeMateFeatures, "includeNonSolids", includeNonSolids, "includeMateConnectors", includeMateConnectors, "linkDocumentId", linkDocumentId), com.onshape.api.responses.AssembliesGetAssemblyDefinitionResponse.class);
+      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("includeMateFeatures", includeMateFeatures, "includeNonSolids", includeNonSolids, "includeMateConnectors", includeMateConnectors, "configuration", configuration, "linkDocumentId", linkDocumentId), com.onshape.api.responses.AssembliesGetAssemblyDefinitionResponse.class);
     }
 
     /**

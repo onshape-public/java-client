@@ -25,6 +25,7 @@ package com.onshape.api;
 import com.onshape.api.requests.ElementsDecodeConfigurationStringRequest;
 import com.onshape.api.requests.ElementsDeleteElementRequest;
 import com.onshape.api.requests.ElementsEncodeConfigurationRequest;
+import com.onshape.api.requests.ElementsUpdateReferencesRequest;
 
 /**
  * Elements: API endpoints for Elements group.
@@ -59,5 +60,13 @@ public final class Elements {
    */
   public final ElementsEncodeConfigurationRequest.Builder encodeConfiguration() {
     return ElementsEncodeConfigurationRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for updateReferences
+   *  @return Request builder object
+   */
+  public final ElementsUpdateReferencesRequest.Builder updateReferences() {
+    return ElementsUpdateReferencesRequest.builder(onshape);
   }
 }

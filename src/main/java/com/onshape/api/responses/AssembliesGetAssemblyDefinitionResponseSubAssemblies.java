@@ -27,7 +27,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
 
 /**
  * Object used in calls to getAssemblyDefinition API endpoint.
@@ -62,10 +61,22 @@ public final class AssembliesGetAssemblyDefinitionResponseSubAssemblies {
   public String elementId;
 
   /**
+   * The revision this assembly was inserted from, if any
+   */
+  @JsonProperty("revision")
+  public String revision;
+
+  /**
+   * The part number of the assembly, if from a revision
+   */
+  @JsonProperty("partNumber")
+  public String partNumber;
+
+  /**
    * Instances within the sub-assembly
    */
   @JsonProperty("instances")
-  public Map[] instances;
+  public AssembliesGetAssemblyDefinitionResponseSubAssembliesInstances[] instances;
 
   /**
    * Get Document ID for the document containing the sub-assembly
@@ -108,12 +119,32 @@ public final class AssembliesGetAssemblyDefinitionResponseSubAssemblies {
   }
 
   /**
+   * Get The revision this assembly was inserted from, if any
+   *
+   * @return The revision this assembly was inserted from, if any
+   *
+   */
+  public final String getRevision() {
+    return this.revision;
+  }
+
+  /**
+   * Get The part number of the assembly, if from a revision
+   *
+   * @return The part number of the assembly, if from a revision
+   *
+   */
+  public final String getPartNumber() {
+    return this.partNumber;
+  }
+
+  /**
    * Get Instances within the sub-assembly
    *
    * @return Instances within the sub-assembly
    *
    */
-  public final Map[] getInstances() {
+  public final AssembliesGetAssemblyDefinitionResponseSubAssembliesInstances[] getInstances() {
     return this.instances;
   }
 

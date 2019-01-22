@@ -164,7 +164,8 @@ public final class AssembliesGetBoundingBoxesRequest {
     }
 
     /**
-     * Calls getBoundingBoxes method, Get the bounding box of an Assembly, or an empty object if the Assembly is empty.  All coordinates are in meters.
+     * Calls getBoundingBoxes method, Get the bounding box of an Assembly, or an empty object if the Assembly is empty. All coordinates
+     *                 are in meters.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
@@ -182,7 +183,8 @@ public final class AssembliesGetBoundingBoxesRequest {
     }
 
     /**
-     * Calls getBoundingBoxes method, Get the bounding box of an Assembly, or an empty object if the Assembly is empty.  All coordinates are in meters.
+     * Calls getBoundingBoxes method, Get the bounding box of an Assembly, or an empty object if the Assembly is empty. All coordinates
+     *                 are in meters.
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error

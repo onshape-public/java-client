@@ -23,38 +23,18 @@
 package com.onshape.api.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
-import java.io.File;
 import java.lang.Override;
 import java.lang.String;
-import javax.validation.constraints.NotNull;
 
 /**
- * Response object for exportParasolid API endpoint.
+ * Response object for updateReferences API endpoint.
  * &copy; 2018 Onshape Inc.
  */
 @JsonIgnoreProperties(
     ignoreUnknown = true
 )
-public final class PartStudiosExportParasolidResponse {
-  /**
-   * The exported document, as an attachment
-   */
-  @JsonProperty("file")
-  @NotNull
-  File file;
-
-  /**
-   * Get The exported document, as an attachment
-   *
-   * @return The exported document, as an attachment
-   *
-   */
-  public final File getFile() {
-    return this.file;
-  }
-
+public final class ElementsUpdateReferencesResponse {
   @Override
   public String toString() {
     return Onshape.toString(this);

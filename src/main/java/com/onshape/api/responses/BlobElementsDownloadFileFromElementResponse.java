@@ -25,7 +25,7 @@ package com.onshape.api.responses;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
-import com.onshape.api.types.Base64Encoded;
+import java.io.File;
 import java.lang.Override;
 import java.lang.String;
 import javax.validation.constraints.NotNull;
@@ -43,7 +43,7 @@ public final class BlobElementsDownloadFileFromElementResponse {
    */
   @JsonProperty("file")
   @NotNull
-  Base64Encoded file;
+  File file;
 
   /**
    * Get Requested file
@@ -51,7 +51,7 @@ public final class BlobElementsDownloadFileFromElementResponse {
    * @return Requested file
    *
    */
-  public final Base64Encoded getFile() {
+  public final File getFile() {
     return this.file;
   }
 

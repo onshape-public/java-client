@@ -24,13 +24,13 @@ package com.onshape.api;
 
 import com.onshape.api.requests.MetadataGetElementMetadataRequest;
 import com.onshape.api.requests.MetadataGetElementsMetadataRequest;
-import com.onshape.api.requests.MetadataGetMetadataPropertyRequest;
 import com.onshape.api.requests.MetadataGetMetadataRequest;
 import com.onshape.api.requests.MetadataGetMetadataSchemaByIDRequest;
 import com.onshape.api.requests.MetadataGetMetadataSchemaPropertiesRequest;
 import com.onshape.api.requests.MetadataGetMetadataSchemaRequest;
 import com.onshape.api.requests.MetadataGetPartListMetadataRequest;
 import com.onshape.api.requests.MetadataGetPartMetadataRequest;
+import com.onshape.api.requests.MetadataGetPropertyInfoRequest;
 import com.onshape.api.requests.MetadataGetStandardContentMetadataRequest;
 import com.onshape.api.requests.MetadataUpdateElementMetadataRequest;
 import com.onshape.api.requests.MetadataUpdateMetadataRequest;
@@ -105,11 +105,11 @@ public final class Metadata {
   }
 
   /**
-   * Create request for getMetadataProperty
+   * Create request for getPropertyInfo
    *  @return Request builder object
    */
-  public final MetadataGetMetadataPropertyRequest.Builder getMetadataProperty() {
-    return MetadataGetMetadataPropertyRequest.builder(onshape);
+  public final MetadataGetPropertyInfoRequest.Builder getPropertyInfo() {
+    return MetadataGetPropertyInfoRequest.builder(onshape);
   }
 
   /**

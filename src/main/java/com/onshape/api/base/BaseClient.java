@@ -336,7 +336,7 @@ public class BaseClient {
             case REDIRECTION:
                 return call(method, response.getHeaderString("Location"), payload, urlParameters, queryParameters);
             default:
-                throw new OnshapeException(response.getStatusInfo().getReasonPhrase());
+                throw new OnshapeException(response.getStatusInfo().getStatusCode(), response.getStatusInfo().getReasonPhrase());
         }
     }
 
@@ -354,7 +354,7 @@ public class BaseClient {
         return out;
     }
 
-    URI buildURI(String path, Map<String, Object> urlParameters, Map<String, Object> queryParameters) {
+    URI buildURI(String path, Map<String, Object> urlParameters, Map<String, Object> queryParameters) throws OnshapeException {
         UriBuilder uriBuilder;
         if (path.startsWith("/")) {
             uriBuilder = UriBuilder.fromUri(baseURL + path
@@ -372,8 +372,12 @@ public class BaseClient {
         queryParameters.entrySet().stream().filter((queryParameter) -> (queryParameter.getValue() != null))
                 .forEachOrdered((queryParameter) -> {
                     uriBuilder.replaceQueryParam(queryParameter.getKey(), queryParameter.getValue());
-                });
-        return uriBuilder.buildFromMap(urlParameters);
+                });        
+        try {
+            return uriBuilder.buildFromMap(urlParameters);
+        } catch (IllegalArgumentException iae) {
+            throw new OnshapeException("Path parameters missing in call to " + path, iae);
+        }
     }
 
     private long count = 0L;
