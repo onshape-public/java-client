@@ -27,6 +27,7 @@ import com.onshape.api.requests.ThumbnailsGetConfiguredElementThumbnailWithSizeR
 import com.onshape.api.requests.ThumbnailsGetDocumentThumbnailRequest;
 import com.onshape.api.requests.ThumbnailsGetDocumentThumbnailWithSizeRequest;
 import com.onshape.api.requests.ThumbnailsGetElementThumbnailRequest;
+import com.onshape.api.requests.ThumbnailsGetElementThumbnailWithApiConfigurationRequest;
 import com.onshape.api.requests.ThumbnailsGetElementThumbnailWithSizeRequest;
 import com.onshape.api.requests.ThumbnailsGetThumbnailForDocumentAndVersionRequest;
 import com.onshape.api.requests.ThumbnailsGetThumbnailForDocumentRequest;
@@ -89,6 +90,14 @@ public final class Thumbnails {
    */
   public final ThumbnailsGetElementThumbnailWithSizeRequest.Builder getElementThumbnailWithSize() {
     return ThumbnailsGetElementThumbnailWithSizeRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getElementThumbnailWithApiConfiguration
+   *  @return Request builder object
+   */
+  public final ThumbnailsGetElementThumbnailWithApiConfigurationRequest.Builder getElementThumbnailWithApiConfiguration() {
+    return ThumbnailsGetElementThumbnailWithApiConfigurationRequest.builder(onshape);
   }
 
   /**

@@ -61,12 +61,19 @@ public final class PartStudiosGetTessellatedEntitiesRequest {
   @JsonProperty("linkDocumentId")
   String linkDocumentId;
 
+  /**
+   * Configuration string
+   */
+  @JsonProperty("configuration")
+  String configuration;
+
   PartStudiosGetTessellatedEntitiesRequest(String entityId, Number angleTolerance,
-      Number chordTolerance, String linkDocumentId) {
+      Number chordTolerance, String linkDocumentId, String configuration) {
     this.entityId = entityId;
     this.angleTolerance = angleTolerance;
     this.chordTolerance = chordTolerance;
     this.linkDocumentId = linkDocumentId;
+    this.configuration = configuration;
   }
 
   @Override
@@ -100,6 +107,11 @@ public final class PartStudiosGetTessellatedEntitiesRequest {
      * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
      */
     private String linkDocumentId;
+
+    /**
+     * Configuration string
+     */
+    private String configuration;
 
     Onshape onshape;
 
@@ -194,8 +206,30 @@ public final class PartStudiosGetTessellatedEntitiesRequest {
       return this;
     }
 
+    /**
+     * Get Configuration string
+     *
+     * @return Configuration string
+     *
+     */
+    public final String configuration() {
+      return this.configuration;
+    }
+
+    /**
+     * Set Configuration string
+     *
+     * @param value Configuration string
+     *
+     * @return the Builder object.
+     */
+    public final Builder configuration(String value) {
+      this.configuration = value;
+      return this;
+    }
+
     private PartStudiosGetTessellatedEntitiesRequest build() {
-      return new com.onshape.api.requests.PartStudiosGetTessellatedEntitiesRequest(entityId,angleTolerance,chordTolerance,linkDocumentId);
+      return new com.onshape.api.requests.PartStudiosGetTessellatedEntitiesRequest(entityId,angleTolerance,chordTolerance,linkDocumentId,configuration);
     }
 
     /**
@@ -219,7 +253,7 @@ public final class PartStudiosGetTessellatedEntitiesRequest {
      */
     public final PartStudiosGetTessellatedEntitiesResponse call(String did, WVM wvmType, String wvm,
         String eid, String sid) throws OnshapeException {
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/sketches/:sid/tessellatedentities", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "sid", sid), onshape.buildMap("entityId", entityId, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "linkDocumentId", linkDocumentId), com.onshape.api.responses.PartStudiosGetTessellatedEntitiesResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/sketches/:sid/tessellatedentities", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "sid", sid), onshape.buildMap("entityId", entityId, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosGetTessellatedEntitiesResponse.class);
     }
 
     /**

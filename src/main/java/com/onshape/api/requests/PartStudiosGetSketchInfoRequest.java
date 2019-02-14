@@ -67,13 +67,20 @@ public final class PartStudiosGetSketchInfoRequest {
   @JsonProperty("linkDocumentId")
   String linkDocumentId;
 
+  /**
+   * Configuration string
+   */
+  @JsonProperty("configuration")
+  String configuration;
+
   PartStudiosGetSketchInfoRequest(String sketchId, Boolean output3D, Boolean curvePoints,
-      Boolean includeGeometry, String linkDocumentId) {
+      Boolean includeGeometry, String linkDocumentId, String configuration) {
     this.sketchId = sketchId;
     this.output3D = output3D;
     this.curvePoints = curvePoints;
     this.includeGeometry = includeGeometry;
     this.linkDocumentId = linkDocumentId;
+    this.configuration = configuration;
   }
 
   @Override
@@ -112,6 +119,11 @@ public final class PartStudiosGetSketchInfoRequest {
      * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
      */
     private String linkDocumentId;
+
+    /**
+     * Configuration string
+     */
+    private String configuration;
 
     Onshape onshape;
 
@@ -228,8 +240,30 @@ public final class PartStudiosGetSketchInfoRequest {
       return this;
     }
 
+    /**
+     * Get Configuration string
+     *
+     * @return Configuration string
+     *
+     */
+    public final String configuration() {
+      return this.configuration;
+    }
+
+    /**
+     * Set Configuration string
+     *
+     * @param value Configuration string
+     *
+     * @return the Builder object.
+     */
+    public final Builder configuration(String value) {
+      this.configuration = value;
+      return this;
+    }
+
     private PartStudiosGetSketchInfoRequest build() {
-      return new com.onshape.api.requests.PartStudiosGetSketchInfoRequest(sketchId,output3D,curvePoints,includeGeometry,linkDocumentId);
+      return new com.onshape.api.requests.PartStudiosGetSketchInfoRequest(sketchId,output3D,curvePoints,includeGeometry,linkDocumentId,configuration);
     }
 
     /**
@@ -247,7 +281,7 @@ public final class PartStudiosGetSketchInfoRequest {
      */
     public final PartStudiosGetSketchInfoResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/sketches", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("sketchId", sketchId, "output3D", output3D, "curvePoints", curvePoints, "includeGeometry", includeGeometry, "linkDocumentId", linkDocumentId), com.onshape.api.responses.PartStudiosGetSketchInfoResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/sketches", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("sketchId", sketchId, "output3D", output3D, "curvePoints", curvePoints, "includeGeometry", includeGeometry, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosGetSketchInfoResponse.class);
     }
 
     /**

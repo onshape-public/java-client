@@ -92,6 +92,12 @@ public final class DocumentsGetElementListResponseElements {
   public Map thumbnails;
 
   /**
+   * The element microversionId
+   */
+  @JsonProperty("microversionId")
+  public String microversionId;
+
+  /**
    * Get Element name
    *
    * @return Element name
@@ -179,6 +185,16 @@ public final class DocumentsGetElementListResponseElements {
    */
   public final Map getThumbnails() {
     return this.thumbnails;
+  }
+
+  /**
+   * Get The element microversionId
+   *
+   * @return The element microversionId
+   *
+   */
+  public final String getMicroversionId() {
+    return this.microversionId;
   }
 
   @Override

@@ -24,16 +24,16 @@ package com.onshape.api.requests;
 
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
-import com.onshape.api.responses.ReleaseManagementCreateObsoletionPackageResponse;
+import com.onshape.api.responses.WorkflowGetActiveWorkflowsResponse;
 import java.lang.Override;
 import java.lang.String;
 
 /**
- * Request object for createObsoletionPackage API endpoint.
+ * Request object for getActiveWorkflows API endpoint.
  * &copy; 2018 Onshape Inc.
  */
-public final class ReleaseManagementCreateObsoletionPackageRequest {
-  ReleaseManagementCreateObsoletionPackageRequest() {
+public final class WorkflowGetActiveWorkflowsRequest {
+  WorkflowGetActiveWorkflowsRequest() {
   }
 
   @Override
@@ -53,22 +53,19 @@ public final class ReleaseManagementCreateObsoletionPackageRequest {
     Builder() {
     }
 
-    private ReleaseManagementCreateObsoletionPackageRequest build() {
-      return new com.onshape.api.requests.ReleaseManagementCreateObsoletionPackageRequest();
+    private WorkflowGetActiveWorkflowsRequest build() {
+      return new com.onshape.api.requests.WorkflowGetActiveWorkflowsRequest();
     }
 
     /**
-     * Calls createObsoletionPackage method, Create an obsoletion package to make an existing revision obsolete. Once a release package has
-     *                 been successfully created use the updateReleasePackage to transition it to desired state
+     * Calls getActiveWorkflows method, Get active workflows for the logged-in user's company, optionally specific to a document
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param wfid ID of obsoletion workflow as returned by getActiveWorkflows
-     *
-     * @param revisionId ID of revision to be obsoleted as returned by getRevisionHistoryInCompany (Default: null) */
-    public final ReleaseManagementCreateObsoletionPackageResponse call(String wfid,
-        String revisionId) throws OnshapeException {
-      return onshape.call("post", "/releasepackages/obsoletion/:wfid", build(), onshape.buildMap("wfid", wfid), onshape.buildMap("revisionId", revisionId), com.onshape.api.responses.ReleaseManagementCreateObsoletionPackageResponse.class);
+     * @param documentId Document ID that is owned by company for which workflow info is requested. (Default: null) */
+    public final WorkflowGetActiveWorkflowsResponse call(String documentId) throws
+        OnshapeException {
+      return onshape.call("get", "/workflow/active", build(), onshape.buildMap(), onshape.buildMap("documentId", documentId), com.onshape.api.responses.WorkflowGetActiveWorkflowsResponse.class);
     }
   }
 }

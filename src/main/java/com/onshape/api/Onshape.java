@@ -30,7 +30,7 @@ import com.onshape.api.types.OnshapeVersion;
  * &copy; 2018 Onshape Inc.
  */
 public final class Onshape extends BaseClient {
-  private final OnshapeVersion buildVersion = new OnshapeVersion("1.0", "9efde4764715a8ef994807232db3bb15083e2c22", "1.91.22745.9efde4764715");
+  private final OnshapeVersion buildVersion = new OnshapeVersion("1.0", "aac06fa159844a74abe208328cd4a749e033459f", "1.92.22906.aac06fa15984");
 
   /**
    * Access API methods for category Accounts
@@ -246,6 +246,14 @@ public final class Onshape extends BaseClient {
    */
   public final Webhooks webhooks() {
     return new Webhooks(this);
+  }
+
+  /**
+   * Access API methods for category Workflow
+   *  @return API group object
+   */
+  public final Workflow workflow() {
+    return new Workflow(this);
   }
 
   /**

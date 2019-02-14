@@ -56,16 +56,30 @@ public final class PartStudiosComparePartStudioRequest {
   Number microversionId;
 
   /**
+   * The configuration of the source being compared.
+   */
+  @JsonProperty("sourceConfiguration")
+  String sourceConfiguration;
+
+  /**
+   * The configuration of the target being compared.
+   */
+  @JsonProperty("targetConfiguration")
+  String targetConfiguration;
+
+  /**
    * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
    */
   @JsonProperty("linkDocumentId")
   String linkDocumentId;
 
   PartStudiosComparePartStudioRequest(String workspaceId, String versionId, Number microversionId,
-      String linkDocumentId) {
+      String sourceConfiguration, String targetConfiguration, String linkDocumentId) {
     this.workspaceId = workspaceId;
     this.versionId = versionId;
     this.microversionId = microversionId;
+    this.sourceConfiguration = sourceConfiguration;
+    this.targetConfiguration = targetConfiguration;
     this.linkDocumentId = linkDocumentId;
   }
 
@@ -95,6 +109,16 @@ public final class PartStudiosComparePartStudioRequest {
      * Id of a document microversion to compare the Part Studio with
      */
     private Number microversionId;
+
+    /**
+     * The configuration of the source being compared.
+     */
+    private String sourceConfiguration;
+
+    /**
+     * The configuration of the target being compared.
+     */
+    private String targetConfiguration;
 
     /**
      * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
@@ -173,6 +197,50 @@ public final class PartStudiosComparePartStudioRequest {
     }
 
     /**
+     * Get The configuration of the source being compared.
+     *
+     * @return The configuration of the source being compared.
+     *
+     */
+    public final String sourceConfiguration() {
+      return this.sourceConfiguration;
+    }
+
+    /**
+     * Set The configuration of the source being compared.
+     *
+     * @param value The configuration of the source being compared.
+     *
+     * @return the Builder object.
+     */
+    public final Builder sourceConfiguration(String value) {
+      this.sourceConfiguration = value;
+      return this;
+    }
+
+    /**
+     * Get The configuration of the target being compared.
+     *
+     * @return The configuration of the target being compared.
+     *
+     */
+    public final String targetConfiguration() {
+      return this.targetConfiguration;
+    }
+
+    /**
+     * Set The configuration of the target being compared.
+     *
+     * @param value The configuration of the target being compared.
+     *
+     * @return the Builder object.
+     */
+    public final Builder targetConfiguration(String value) {
+      this.targetConfiguration = value;
+      return this;
+    }
+
+    /**
      * Get Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
      *
      * @return Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
@@ -195,7 +263,7 @@ public final class PartStudiosComparePartStudioRequest {
     }
 
     private PartStudiosComparePartStudioRequest build() {
-      return new com.onshape.api.requests.PartStudiosComparePartStudioRequest(workspaceId,versionId,microversionId,linkDocumentId);
+      return new com.onshape.api.requests.PartStudiosComparePartStudioRequest(workspaceId,versionId,microversionId,sourceConfiguration,targetConfiguration,linkDocumentId);
     }
 
     /**
@@ -220,7 +288,7 @@ public final class PartStudiosComparePartStudioRequest {
      */
     public final PartStudiosComparePartStudioResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/compare", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("workspaceId", workspaceId, "versionId", versionId, "microversionId", microversionId, "linkDocumentId", linkDocumentId), com.onshape.api.responses.PartStudiosComparePartStudioResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/compare", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("workspaceId", workspaceId, "versionId", versionId, "microversionId", microversionId, "sourceConfiguration", sourceConfiguration, "targetConfiguration", targetConfiguration, "linkDocumentId", linkDocumentId), com.onshape.api.responses.PartStudiosComparePartStudioResponse.class);
     }
 
     /**

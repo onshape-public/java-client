@@ -37,12 +37,19 @@ import java.lang.String;
  */
 public final class PartStudiosGetBoundingBoxesForSketchRequest {
   /**
+   * Configuration string
+   */
+  @JsonProperty("configuration")
+  String configuration;
+
+  /**
    * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
    */
   @JsonProperty("linkDocumentId")
   String linkDocumentId;
 
-  PartStudiosGetBoundingBoxesForSketchRequest(String linkDocumentId) {
+  PartStudiosGetBoundingBoxesForSketchRequest(String configuration, String linkDocumentId) {
+    this.configuration = configuration;
     this.linkDocumentId = linkDocumentId;
   }
 
@@ -59,6 +66,11 @@ public final class PartStudiosGetBoundingBoxesForSketchRequest {
 
   public static final class Builder {
     /**
+     * Configuration string
+     */
+    private String configuration;
+
+    /**
      * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
      */
     private String linkDocumentId;
@@ -66,6 +78,28 @@ public final class PartStudiosGetBoundingBoxesForSketchRequest {
     Onshape onshape;
 
     Builder() {
+    }
+
+    /**
+     * Get Configuration string
+     *
+     * @return Configuration string
+     *
+     */
+    public final String configuration() {
+      return this.configuration;
+    }
+
+    /**
+     * Set Configuration string
+     *
+     * @param value Configuration string
+     *
+     * @return the Builder object.
+     */
+    public final Builder configuration(String value) {
+      this.configuration = value;
+      return this;
     }
 
     /**
@@ -91,7 +125,7 @@ public final class PartStudiosGetBoundingBoxesForSketchRequest {
     }
 
     private PartStudiosGetBoundingBoxesForSketchRequest build() {
-      return new com.onshape.api.requests.PartStudiosGetBoundingBoxesForSketchRequest(linkDocumentId);
+      return new com.onshape.api.requests.PartStudiosGetBoundingBoxesForSketchRequest(configuration,linkDocumentId);
     }
 
     /**
@@ -111,7 +145,7 @@ public final class PartStudiosGetBoundingBoxesForSketchRequest {
      */
     public final PartStudiosGetBoundingBoxesForSketchResponse call(String did, WVM wvmType,
         String wvm, String eid, String sid) throws OnshapeException {
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/sketches/:sid/boundingboxes", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "sid", sid), onshape.buildMap("linkDocumentId", linkDocumentId), com.onshape.api.responses.PartStudiosGetBoundingBoxesForSketchResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/sketches/:sid/boundingboxes", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "sid", sid), onshape.buildMap("configuration", configuration, "linkDocumentId", linkDocumentId), com.onshape.api.responses.PartStudiosGetBoundingBoxesForSketchResponse.class);
     }
 
     /**

@@ -91,9 +91,15 @@ public final class BlobElementsUploadFileUpdateElementRequest {
   @JsonProperty("allowFaultyParts")
   Boolean allowFaultyParts;
 
+  /**
+   * The element microversion of the blob element that will be updated. If the requested mv doesn&#39;t match the workspace mv, this call will result in a 400. The element microversionId can be retrieved from documents:getElementList.
+   */
+  @JsonProperty("parentChangeId")
+  String parentChangeId;
+
   BlobElementsUploadFileUpdateElementRequest(Base64Encoded file, String encodedFilename,
       Number fileContentLength, Boolean translate, Boolean flattenAssemblies, Boolean yAxisIsUp,
-      Boolean importInBackground, Boolean allowFaultyParts) {
+      Boolean importInBackground, Boolean allowFaultyParts, String parentChangeId) {
     this.file = file;
     this.encodedFilename = encodedFilename;
     this.fileContentLength = fileContentLength;
@@ -102,6 +108,7 @@ public final class BlobElementsUploadFileUpdateElementRequest {
     this.yAxisIsUp = yAxisIsUp;
     this.importInBackground = importInBackground;
     this.allowFaultyParts = allowFaultyParts;
+    this.parentChangeId = parentChangeId;
   }
 
   /**
@@ -235,6 +242,11 @@ public final class BlobElementsUploadFileUpdateElementRequest {
      * If not specified or if specified as false, bodies to be imported are examined for validity and any found to be faulty are removed from the import. If all bodies are found to be faulty, the import fails. If the value is specified as true, we attempt to import the bodies that appear to have faults.
      */
     private Boolean allowFaultyParts;
+
+    /**
+     * The element microversion of the blob element that will be updated. If the requested mv doesn&#39;t match the workspace mv, this call will result in a 400. The element microversionId can be retrieved from documents:getElementList.
+     */
+    private String parentChangeId;
 
     Onshape onshape;
 
@@ -417,8 +429,30 @@ public final class BlobElementsUploadFileUpdateElementRequest {
       return this;
     }
 
+    /**
+     * Get The element microversion of the blob element that will be updated. If the requested mv doesn&#39;t match the workspace mv, this call will result in a 400. The element microversionId can be retrieved from documents:getElementList.
+     *
+     * @return The element microversion of the blob element that will be updated. If the requested mv doesn&#39;t match the workspace mv, this call will result in a 400. The element microversionId can be retrieved from documents:getElementList.
+     *
+     */
+    public final String parentChangeId() {
+      return this.parentChangeId;
+    }
+
+    /**
+     * Set The element microversion of the blob element that will be updated. If the requested mv doesn&#39;t match the workspace mv, this call will result in a 400. The element microversionId can be retrieved from documents:getElementList.
+     *
+     * @param value The element microversion of the blob element that will be updated. If the requested mv doesn&#39;t match the workspace mv, this call will result in a 400. The element microversionId can be retrieved from documents:getElementList.
+     *
+     * @return the Builder object.
+     */
+    public final Builder parentChangeId(String value) {
+      this.parentChangeId = value;
+      return this;
+    }
+
     private BlobElementsUploadFileUpdateElementRequest build() {
-      return new com.onshape.api.requests.BlobElementsUploadFileUpdateElementRequest(file,encodedFilename,fileContentLength,translate,flattenAssemblies,yAxisIsUp,importInBackground,allowFaultyParts);
+      return new com.onshape.api.requests.BlobElementsUploadFileUpdateElementRequest(file,encodedFilename,fileContentLength,translate,flattenAssemblies,yAxisIsUp,importInBackground,allowFaultyParts,parentChangeId);
     }
 
     /**
@@ -435,7 +469,7 @@ public final class BlobElementsUploadFileUpdateElementRequest {
      */
     public final BlobElementsUploadFileUpdateElementResponse call(String did, String wid,
         String eid) throws OnshapeException {
-      return onshape.call("post", "/blobelements/d/:did/w/:wid/e/:eid", build(), onshape.buildMap("did", did, "wid", wid, "eid", eid), onshape.buildMap(), com.onshape.api.responses.BlobElementsUploadFileUpdateElementResponse.class);
+      return onshape.call("post", "/blobelements/d/:did/w/:wid/e/:eid", build(), onshape.buildMap("did", did, "wid", wid, "eid", eid), onshape.buildMap("parentChangeId", parentChangeId), com.onshape.api.responses.BlobElementsUploadFileUpdateElementResponse.class);
     }
 
     /**

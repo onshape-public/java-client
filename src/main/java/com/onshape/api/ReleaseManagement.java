@@ -24,7 +24,6 @@ package com.onshape.api;
 
 import com.onshape.api.requests.ReleaseManagementCreateObsoletionPackageRequest;
 import com.onshape.api.requests.ReleaseManagementCreateReleasePackageRequest;
-import com.onshape.api.requests.ReleaseManagementGetCompanyReleaseWorkflowRequest;
 import com.onshape.api.requests.ReleaseManagementGetReleasePackageRequest;
 import com.onshape.api.requests.ReleaseManagementUpdateReleasePackageRequest;
 
@@ -61,14 +60,6 @@ public final class ReleaseManagement {
    */
   public final ReleaseManagementGetReleasePackageRequest.Builder getReleasePackage() {
     return ReleaseManagementGetReleasePackageRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getCompanyReleaseWorkflow
-   *  @return Request builder object
-   */
-  public final ReleaseManagementGetCompanyReleaseWorkflowRequest.Builder getCompanyReleaseWorkflow() {
-    return ReleaseManagementGetCompanyReleaseWorkflowRequest.builder(onshape);
   }
 
   /**

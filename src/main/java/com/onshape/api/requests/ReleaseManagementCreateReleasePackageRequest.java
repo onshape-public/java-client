@@ -112,7 +112,7 @@ public final class ReleaseManagementCreateReleasePackageRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param wfid ID of release workflow as returned by getCompanyReleaseWorkflow
+     * @param wfid ID of release workflow as returned by getActiveWorkflows
      */
     public final ReleaseManagementCreateReleasePackageResponse call(String wfid) throws
         OnshapeException {

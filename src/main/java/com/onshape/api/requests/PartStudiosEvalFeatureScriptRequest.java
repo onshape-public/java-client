@@ -72,14 +72,21 @@ public final class PartStudiosEvalFeatureScriptRequest {
   @JsonProperty("rejectMicroversionSkew")
   Boolean rejectMicroversionSkew;
 
+  /**
+   * Configuration string
+   */
+  @JsonProperty("configuration")
+  String configuration;
+
   PartStudiosEvalFeatureScriptRequest(String script,
       PartStudiosEvalFeatureScriptRequestQueries[] queries, String serializationVersion,
-      String sourceMicroversion, Boolean rejectMicroversionSkew) {
+      String sourceMicroversion, Boolean rejectMicroversionSkew, String configuration) {
     this.script = script;
     this.queries = queries;
     this.serializationVersion = serializationVersion;
     this.sourceMicroversion = sourceMicroversion;
     this.rejectMicroversionSkew = rejectMicroversionSkew;
+    this.configuration = configuration;
   }
 
   /**
@@ -168,6 +175,11 @@ public final class PartStudiosEvalFeatureScriptRequest {
      * If set to true and the element has changed since sourceMicroversion, return an HTTP Conflict status.
      */
     private Boolean rejectMicroversionSkew;
+
+    /**
+     * Configuration string
+     */
+    private String configuration;
 
     Onshape onshape;
 
@@ -284,8 +296,30 @@ public final class PartStudiosEvalFeatureScriptRequest {
       return this;
     }
 
+    /**
+     * Get Configuration string
+     *
+     * @return Configuration string
+     *
+     */
+    public final String configuration() {
+      return this.configuration;
+    }
+
+    /**
+     * Set Configuration string
+     *
+     * @param value Configuration string
+     *
+     * @return the Builder object.
+     */
+    public final Builder configuration(String value) {
+      this.configuration = value;
+      return this;
+    }
+
     private PartStudiosEvalFeatureScriptRequest build() {
-      return new com.onshape.api.requests.PartStudiosEvalFeatureScriptRequest(script,queries,serializationVersion,sourceMicroversion,rejectMicroversionSkew);
+      return new com.onshape.api.requests.PartStudiosEvalFeatureScriptRequest(script,queries,serializationVersion,sourceMicroversion,rejectMicroversionSkew,configuration);
     }
 
     /**
@@ -304,7 +338,7 @@ public final class PartStudiosEvalFeatureScriptRequest {
      */
     public final PartStudiosEvalFeatureScriptResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
-      return onshape.call("post", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/featurescript", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap(), com.onshape.api.responses.PartStudiosEvalFeatureScriptResponse.class);
+      return onshape.call("post", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/featurescript", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("configuration", configuration), com.onshape.api.responses.PartStudiosEvalFeatureScriptResponse.class);
     }
 
     /**
