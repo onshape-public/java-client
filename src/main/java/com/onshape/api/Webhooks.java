@@ -23,6 +23,7 @@
 package com.onshape.api;
 
 import com.onshape.api.requests.WebhooksCreateWebhookRequest;
+import com.onshape.api.requests.WebhooksGetRequest;
 import com.onshape.api.requests.WebhooksGetWebhookRequest;
 import com.onshape.api.requests.WebhooksPingWebhookRequest;
 import com.onshape.api.requests.WebhooksUnregisterWebhookRequest;
@@ -53,6 +54,14 @@ public final class Webhooks {
    */
   public final WebhooksGetWebhookRequest.Builder getWebhook() {
     return WebhooksGetWebhookRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for get
+   *  @return Request builder object
+   */
+  public final WebhooksGetRequest.Builder get() {
+    return WebhooksGetRequest.builder(onshape);
   }
 
   /**

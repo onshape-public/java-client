@@ -23,12 +23,14 @@
  */
 package com.onshape.api.base;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.onshape.api.exceptions.OnshapeException;
+import com.onshape.api.types.Blob;
 import com.onshape.api.types.OAuthTokenResponse;
 import com.onshape.api.types.OnshapeVersion;
 import java.io.File;
@@ -64,6 +66,8 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.hashids.Hashids;
 
 /**
@@ -96,7 +100,9 @@ public class BaseClient {
         objectMapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
         JacksonJaxbJsonProvider jacksonProvider = new JacksonJaxbJsonProvider();
         jacksonProvider.setMapper(objectMapper);
-        client = ClientBuilder.newClient(new ClientConfig(jacksonProvider));
+        ClientConfig clientConfig = new ClientConfig(jacksonProvider);
+        clientConfig.register(MultiPartFeature.class);
+        client = ClientBuilder.newClient(clientConfig);
         workingDir = new File(System.getProperty("java.io.tmpdir"));
     }
 
@@ -180,7 +186,6 @@ public class BaseClient {
             default:
                 throw new OnshapeException(response.getStatusInfo().getReasonPhrase());
         }
-
     }
 
     void refreshOAuthToken() throws OnshapeException {
@@ -233,7 +238,20 @@ public class BaseClient {
      * serialization error.
      */
     public final <T> T call(String method, String url, Object payload, Map<String, Object> urlParameters, Map<String, Object> queryParameters, Class<T> type) throws OnshapeException {
-        Response response = call(method, url, payload, urlParameters, queryParameters);
+        // Determine if the response type should be binary or JSON
+        boolean jsonResponse = true;
+        if (File.class.equals(type) || Blob.class.equals(type)) {
+            jsonResponse = false;
+        } else {
+            for (Field field : type.getDeclaredFields()) {
+                if (File.class.equals(field.getType()) || Blob.class.equals(field.getType())) {
+                    jsonResponse = false;
+                }
+            }
+        }
+        // Call the HTTP method
+        Response response = call(method, url, payload, urlParameters, queryParameters, jsonResponse);
+        // Deserialize the response
         if (response.getMediaType().toString().startsWith(MediaType.APPLICATION_JSON)) {
             String stringEntity = response.readEntity(String.class);
             // Special case: If it is an array, and the response type has a single array field, then read that
@@ -250,9 +268,8 @@ public class BaseClient {
         } else {
             String ext = response.getMediaType().getSubtype();
             if (File.class.equals(type)) {
-                try {
+                try (InputStream input = (InputStream) response.getEntity()) {
                     File f = File.createTempFile("onshape", "." + ext, workingDir);
-                    InputStream input = (InputStream) response.getEntity();
                     try (FileOutputStream fos = new FileOutputStream(f)) {
                         int n;
                         byte[] buffer = new byte[1024];
@@ -265,29 +282,45 @@ public class BaseClient {
                 } catch (IOException ex) {
                     throw new OnshapeException("Error while copying to local file", ex);
                 }
-            } else if (type.getDeclaredFields().length == 1 && "file".equals(type.getDeclaredFields()[0].getName()) && File.class.equals(type.getDeclaredFields()[0].getType())) {
-                try {
-                    File f = File.createTempFile("onshape", "." + ext, workingDir);
-                    InputStream input = (InputStream) response.getEntity();
-                    try (FileOutputStream fos = new FileOutputStream(f)) {
-                        int n;
-                        byte[] buffer = new byte[1024];
-                        while ((n = input.read(buffer)) > -1) {
-                            fos.write(buffer, 0, n);
+            } else if (type.getDeclaredFields().length == 1) {
+                if (File.class.equals(type.getDeclaredFields()[0].getType())) {
+                    try (InputStream input = (InputStream) response.getEntity()) {
+                        File f = File.createTempFile("onshape", "." + ext, workingDir);
+                        try (FileOutputStream fos = new FileOutputStream(f)) {
+                            int n;
+                            byte[] buffer = new byte[1024];
+                            while ((n = input.read(buffer)) > -1) {
+                                fos.write(buffer, 0, n);
+                            }
+                            fos.flush();
                         }
-                        fos.flush();
+                        Constructor<T> constructor = type.getDeclaredConstructor();
+                        constructor.setAccessible(true);
+                        T out = constructor.newInstance();
+                        Field field = type.getDeclaredFields()[0];
+                        field.setAccessible(true);
+                        field.set(out, f);
+                        return out;
+                    } catch (IOException | IllegalArgumentException | IllegalAccessException
+                            | InstantiationException | InvocationTargetException
+                            | NoSuchMethodException | SecurityException ex) {
+                        throw new OnshapeException("Error while copying to local file", ex);
                     }
-                    Constructor<T> constructor = type.getDeclaredConstructor();
-                    constructor.setAccessible(true);
-                    T out = constructor.newInstance();
-                    Field field = type.getDeclaredFields()[0];
-                    field.setAccessible(true);
-                    field.set(out, f);
-                    return out;
-                } catch (IOException | IllegalArgumentException | IllegalAccessException
-                        | InstantiationException | InvocationTargetException
-                        | NoSuchMethodException | SecurityException ex) {
-                    throw new OnshapeException("Error while copying to local file", ex);
+                } else if (Blob.class.equals(type.getDeclaredFields()[0].getType())) {
+                    try {
+                        Blob blob = new Blob((InputStream) response.getEntity());
+                        Constructor<T> constructor = type.getDeclaredConstructor();
+                        constructor.setAccessible(true);
+                        T out = constructor.newInstance();
+                        Field field = type.getDeclaredFields()[0];
+                        field.setAccessible(true);
+                        field.set(out, blob);
+                        return out;
+                    } catch (IOException | IllegalArgumentException | IllegalAccessException
+                            | InstantiationException | InvocationTargetException
+                            | NoSuchMethodException | SecurityException ex) {
+                        throw new OnshapeException("Error while creating blob", ex);
+                    }
                 }
             }
         }
@@ -307,15 +340,14 @@ public class BaseClient {
         return call("get", url, null, buildMap(), buildMap(), type);
     }
 
-    Response call(String method, String url, Object payload, Map<String, Object> urlParameters, Map<String, Object> queryParameters) throws OnshapeException {
+    Response call(String method, String url, Object payload, Map<String, Object> urlParameters, Map<String, Object> queryParameters, boolean jsonResponse) throws OnshapeException {
         // Construct the URI from the parameters
         URI uri = buildURI(url, urlParameters, queryParameters);
         // Create a WebTarget for the URI
         WebTarget target = client.target(uri);
         Response response;
-        Invocation.Builder invocationBuilder = target.request(MediaType.APPLICATION_JSON_TYPE)
-                .header("Accept", "application/vnd.onshape.v1+json")
-                .header("Content-Type", "application/json");
+        Invocation.Builder invocationBuilder = target.request(jsonResponse ? MediaType.APPLICATION_JSON_TYPE : MediaType.APPLICATION_OCTET_STREAM_TYPE)
+                .header("Accept", jsonResponse ? "application/vnd.onshape.v1+json" : "application/vnd.onshape.v1+octet-stream");
         if (token != null) {
             if ((new Date().getTime() - tokenReceived.getTime()) / 1000 > token.getExpiresIn() * 0.9) {
                 try {
@@ -328,16 +360,108 @@ public class BaseClient {
         } else if (accessKey != null && secretKey != null) {
             invocationBuilder = signature(invocationBuilder, uri, method);
         }
-        response = invocationBuilder.method(method.toUpperCase(),
-                Entity.entity("GET".equals(method.toUpperCase()) ? null : payload, MediaType.APPLICATION_JSON_TYPE));
+        switch (method.toUpperCase()) {
+            case "GET":
+            case "HEAD":
+            case "DELETE":
+                invocationBuilder.header("Content-Type", "application/json");
+                response = invocationBuilder.method(method.toUpperCase());
+                break;
+            default:
+                Entity entity = createEntity(payload, invocationBuilder);
+                response = invocationBuilder.method(method.toUpperCase(), entity);
+        }
         switch (response.getStatusInfo().getFamily()) {
             case SUCCESSFUL:
                 return response;
             case REDIRECTION:
-                return call(method, response.getHeaderString("Location"), payload, urlParameters, queryParameters);
+                return call(method, response.getHeaderString("Location"), payload, urlParameters, queryParameters, jsonResponse);
             default:
                 throw new OnshapeException(response.getStatusInfo().getStatusCode(), response.getStatusInfo().getReasonPhrase());
         }
+    }
+
+    /**
+     * Convert payload object to an entity: either JSON or Multipart Form
+     *
+     * @param payload Payload (request) object
+     * @param headers Map of headers
+     * @return An Entity
+     * @throws OnshapeException If fail to serialize successfully
+     */
+    Entity createEntity(Object payload, Invocation.Builder invocationBuilder) throws OnshapeException {
+        Field fileField = null;
+        for (Field field : payload.getClass().getDeclaredFields()) {
+            if (File.class.equals(field.getType())) {
+                fileField = field;
+            }
+        }
+        // If no File, then return JSON entity
+        if (fileField == null) {
+            invocationBuilder.header("Content-Type", "application/json");
+            return Entity.entity(payload, MediaType.APPLICATION_JSON_TYPE);
+        }
+        // Else create multipart entity
+        invocationBuilder.header("Content-Type", "multipart/form-data");
+        FormDataMultiPart multipart = new FormDataMultiPart();
+        try {
+            for (Field field : payload.getClass().getDeclaredFields()) {
+                field.setAccessible(true);
+                if (!fileField.equals(field) && field.get(payload) != null) {
+                    multipart.field(field.getName(), field.get(payload).toString());
+                }
+            }
+            fileField.setAccessible(true);
+            multipart.bodyPart(fileField.get(payload), MediaType.WILDCARD_TYPE);
+        } catch (IllegalArgumentException | IllegalAccessException ex) {
+            throw new OnshapeException("Failed to convert payload to multipart form", ex);
+        }
+        // Add an XSRF header: Not currently required by Onshape APIs
+        //addXSRFHeader(invocationBuilder);
+        return Entity.entity(multipart, MediaType.MULTIPART_FORM_DATA_TYPE);
+    }
+
+    /**
+     * Add XSRF header to the request headers
+     *
+     * @param headers The request headers
+     * @throws OnshapeException If an error occurs calling the method
+     */
+    void addXSRFHeader(Invocation.Builder invocationBuilder) throws OnshapeException {
+        // Fetch the /api/clientinfo/xsrf method
+        Response xsrfResponse = call("get", "/clientinfo/xsrf", null, buildMap(), buildMap(), true);
+        XSRFResponse xsrfValues = xsrfResponse.readEntity(XSRFResponse.class);
+        // Find the Set-Cookie header containing the token value
+        String xsrfToken = null;
+        for (Object setCookieHeader : xsrfResponse.getHeaders().get("Set-Cookie")) {
+            if (setCookieHeader.toString().trim().startsWith(xsrfValues.getXsrfTokenName())) {
+                xsrfToken = setCookieHeader.toString().trim().split(";")[0].replace(xsrfValues.getXsrfTokenName() + "=", "");
+            }
+        }
+        // Add the XSRF header
+        if (xsrfToken != null) {
+            invocationBuilder.header(xsrfValues.getXsrfHeaderName(), xsrfToken);
+        }
+    }
+
+    /**
+     * Represents response from /api/clientinfo/xsrf method
+     */
+    static class XSRFResponse {
+
+        @JsonProperty
+        private String xsrfTokenName;
+        @JsonProperty
+        private String xsrfHeaderName;
+
+        public String getXsrfTokenName() {
+            return xsrfTokenName;
+        }
+
+        public String getXsrfHeaderName() {
+            return xsrfHeaderName;
+        }
+
     }
 
     /**
@@ -372,7 +496,7 @@ public class BaseClient {
         queryParameters.entrySet().stream().filter((queryParameter) -> (queryParameter.getValue() != null))
                 .forEachOrdered((queryParameter) -> {
                     uriBuilder.replaceQueryParam(queryParameter.getKey(), queryParameter.getValue());
-                });        
+                });
         try {
             return uriBuilder.buildFromMap(urlParameters);
         } catch (IllegalArgumentException iae) {

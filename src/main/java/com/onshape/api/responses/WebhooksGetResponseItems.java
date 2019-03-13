@@ -25,34 +25,82 @@ package com.onshape.api.responses;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
-import com.onshape.api.types.Blob;
+import java.lang.Boolean;
+import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
-import javax.validation.constraints.NotNull;
+import java.util.Map;
 
 /**
- * Response object for downloadExternalData API endpoint.
+ * Object used in calls to get API endpoint.
  * &copy; 2018 Onshape Inc.
  */
 @JsonIgnoreProperties(
     ignoreUnknown = true
 )
-public final class DocumentsDownloadExternalDataResponse {
+public final class WebhooksGetResponseItems {
   /**
-   * Requested data
+   * Webhook id
    */
-  @JsonProperty("data")
-  @NotNull
-  Blob data;
+  @JsonProperty("id")
+  public Boolean id;
 
   /**
-   * Get Requested data
+   * Call back URL
+   */
+  @JsonProperty("url")
+  public Map url;
+
+  /**
+   * Events this hook is registered for
+   */
+  @JsonProperty("events")
+  public Number events;
+
+  /**
+   * company for this webhook
+   */
+  @JsonProperty("companyId")
+  public String companyId;
+
+  /**
+   * Get Webhook id
    *
-   * @return Requested data
+   * @return Webhook id
    *
    */
-  public final Blob getData() {
-    return this.data;
+  public final Boolean getId() {
+    return this.id;
+  }
+
+  /**
+   * Get Call back URL
+   *
+   * @return Call back URL
+   *
+   */
+  public final Map getUrl() {
+    return this.url;
+  }
+
+  /**
+   * Get Events this hook is registered for
+   *
+   * @return Events this hook is registered for
+   *
+   */
+  public final Number getEvents() {
+    return this.events;
+  }
+
+  /**
+   * Get company for this webhook
+   *
+   * @return company for this webhook
+   *
+   */
+  public final String getCompanyId() {
+    return this.companyId;
   }
 
   @Override

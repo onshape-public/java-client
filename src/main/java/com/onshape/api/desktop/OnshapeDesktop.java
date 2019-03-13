@@ -146,12 +146,14 @@ public class OnshapeDesktop {
 
         public Map<String, String> splitQuery(String query) {
             Map<String, String> query_pairs = new LinkedHashMap<>();
-            String[] pairs = query.split("&");
-            for (String pair : pairs) {
-                int idx = pair.indexOf("=");
-                try {
-                    query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
-                } catch (UnsupportedEncodingException ex) {
+            if (query != null && !query.isEmpty()) {
+                String[] pairs = query.split("&");
+                for (String pair : pairs) {
+                    int idx = pair.indexOf("=");
+                    try {
+                        query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
+                    } catch (UnsupportedEncodingException ex) {
+                    }
                 }
             }
             return query_pairs;

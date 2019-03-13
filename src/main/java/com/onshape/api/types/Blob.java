@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2018 Onshape Inc.
+ * Copyright 2019 Onshape Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,60 +32,55 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.onshape.api.types.Base64Encoded.Base64EncodedDeserializer;
-import com.onshape.api.types.Base64Encoded.Base64EncodedSerializer;
+import com.onshape.api.types.Blob.BlobDeserializer;
+import com.onshape.api.types.Blob.BlobSerializer;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
-import java.util.Base64;
-import java.util.Objects;
+import java.util.Arrays;
 
 /**
- * Represents binary data encoded as Base64. This is serialized as a String in
- * JSON.
+ * Represents binary data as byte array.
  *
  * @author Peter Harman peter.harman@cae.tech
  */
-@JsonSerialize(using = Base64EncodedSerializer.class)
-@JsonDeserialize(using = Base64EncodedDeserializer.class)
-public class Base64Encoded extends AbstractBlob {
+@JsonSerialize(using = BlobSerializer.class)
+@JsonDeserialize(using = BlobDeserializer.class)
+public final class Blob extends AbstractBlob {
 
-    private final String base64String;
+    private final byte[] data;
 
-    public Base64Encoded(File file) throws IOException {
+    public Blob(File file) throws IOException {
         this(fromFile(file));
     }
 
-    public Base64Encoded(Path path) throws IOException {
+    public Blob(Path path) throws IOException {
         this(fromPath(path));
     }
 
-    public Base64Encoded(byte[] data) {
-        this.base64String = Base64.getEncoder().encodeToString(data);
+    public Blob(InputStream is) throws IOException {
+        this(fromInputStream(is));
     }
 
-    public Base64Encoded(String base64String) {
-        this.base64String = base64String;
-    }
-
-    public String getBase64String() {
-        return base64String;
+    public Blob(byte[] data) {
+        this.data = data;
     }
 
     @Override
     public byte[] getData() {
-        return Base64.getDecoder().decode(base64String);
+        return data;
     }
 
     @Override
     public String toString() {
-        return base64String;
+        return "byte[" + Integer.toString(data.length) + "]";
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.base64String);
+        int hash = 5;
+        hash = 79 * hash + Arrays.hashCode(this.data);
         return hash;
     }
 
@@ -100,24 +95,24 @@ public class Base64Encoded extends AbstractBlob {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Base64Encoded other = (Base64Encoded) obj;
-        return Objects.equals(this.base64String, other.base64String);
+        final Blob other = (Blob) obj;
+        return Arrays.equals(this.data, other.data);
     }
 
-    static class Base64EncodedSerializer extends JsonSerializer<Base64Encoded> {
+    static class BlobSerializer extends JsonSerializer<Blob> {
 
         @Override
-        public void serialize(Base64Encoded t, JsonGenerator jg, SerializerProvider sp) throws IOException, JsonProcessingException {
-            jg.writeString(t.getBase64String());
+        public void serialize(Blob t, JsonGenerator jg, SerializerProvider sp) throws IOException, JsonProcessingException {
+            jg.writeBinary(t.getData());
         }
 
     }
 
-    static class Base64EncodedDeserializer extends JsonDeserializer<Base64Encoded> {
+    static class BlobDeserializer extends JsonDeserializer<Blob> {
 
         @Override
-        public Base64Encoded deserialize(JsonParser jp, DeserializationContext dc) throws IOException, JsonProcessingException {
-            return new Base64Encoded(jp.getText());
+        public Blob deserialize(JsonParser jp, DeserializationContext dc) throws IOException, JsonProcessingException {
+            return new Blob(jp.getBinaryValue());
         }
 
     }

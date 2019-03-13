@@ -29,7 +29,6 @@ import java.lang.Boolean;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
 
 /**
  * Object used in calls to getMetadataSchemaProperties API endpoint.
@@ -97,7 +96,7 @@ public final class MetadataGetMetadataSchemaPropertiesResponseItems {
    * Additional information about property.
    */
   @JsonProperty("propertyConfigSummaryInfoList")
-  public Map[] propertyConfigSummaryInfoList;
+  public MetadataGetMetadataSchemaPropertiesResponseItemsPropertyConfigSummaryInfoList[] propertyConfigSummaryInfoList;
 
   /**
    * Get Property ID
@@ -195,7 +194,7 @@ public final class MetadataGetMetadataSchemaPropertiesResponseItems {
    * @return Additional information about property.
    *
    */
-  public final Map[] getPropertyConfigSummaryInfoList() {
+  public final MetadataGetMetadataSchemaPropertiesResponseItemsPropertyConfigSummaryInfoList[] getPropertyConfigSummaryInfoList() {
     return this.propertyConfigSummaryInfoList;
   }
 

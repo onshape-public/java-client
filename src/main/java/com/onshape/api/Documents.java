@@ -30,6 +30,7 @@ import com.onshape.api.requests.DocumentsDeleteDocumentRequest;
 import com.onshape.api.requests.DocumentsDeleteWorkspaceRequest;
 import com.onshape.api.requests.DocumentsDownloadExternalDataRequest;
 import com.onshape.api.requests.DocumentsExportElementPostJsonRequest;
+import com.onshape.api.requests.DocumentsExportElementRequest;
 import com.onshape.api.requests.DocumentsGetAclRequest;
 import com.onshape.api.requests.DocumentsGetCurrentMicroversionRequest;
 import com.onshape.api.requests.DocumentsGetDocumentPermissionSetRequest;
@@ -119,6 +120,14 @@ public final class Documents {
    */
   public final DocumentsGetElementListRequest.Builder getElementList() {
     return DocumentsGetElementListRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for exportElement
+   *  @return Request builder object
+   */
+  public final DocumentsExportElementRequest.Builder exportElement() {
+    return DocumentsExportElementRequest.builder(onshape);
   }
 
   /**

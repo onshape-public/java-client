@@ -25,31 +25,30 @@ package com.onshape.api.requests;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
-import com.onshape.api.responses.WorkflowGetActiveWorkflowsResponse;
-import java.lang.Boolean;
+import com.onshape.api.responses.WebhooksGetResponse;
 import java.lang.Override;
 import java.lang.String;
 
 /**
- * Request object for getActiveWorkflows API endpoint.
+ * Request object for get API endpoint.
  * &copy; 2018 Onshape Inc.
  */
-public final class WorkflowGetActiveWorkflowsRequest {
+public final class WebhooksGetRequest {
   /**
-   * Document ID that is owned by company for which workflow info is requested.
+   * Id of the company to get list of hooks by a company.
    */
-  @JsonProperty("documentId")
-  String documentId;
+  @JsonProperty("company")
+  String company;
 
   /**
-   * Whether to include the full workflow json
+   * Id of the user to get list of hooks by by user.
    */
-  @JsonProperty("full")
-  Boolean full;
+  @JsonProperty("user")
+  String user;
 
-  WorkflowGetActiveWorkflowsRequest(String documentId, Boolean full) {
-    this.documentId = documentId;
-    this.full = full;
+  WebhooksGetRequest(String company, String user) {
+    this.company = company;
+    this.user = user;
   }
 
   @Override
@@ -65,14 +64,14 @@ public final class WorkflowGetActiveWorkflowsRequest {
 
   public static final class Builder {
     /**
-     * Document ID that is owned by company for which workflow info is requested.
+     * Id of the company to get list of hooks by a company.
      */
-    private String documentId;
+    private String company;
 
     /**
-     * Whether to include the full workflow json
+     * Id of the user to get list of hooks by by user.
      */
-    private Boolean full;
+    private String user;
 
     Onshape onshape;
 
@@ -80,60 +79,60 @@ public final class WorkflowGetActiveWorkflowsRequest {
     }
 
     /**
-     * Get Document ID that is owned by company for which workflow info is requested.
+     * Get Id of the company to get list of hooks by a company.
      *
-     * @return Document ID that is owned by company for which workflow info is requested.
+     * @return Id of the company to get list of hooks by a company.
      *
      */
-    public final String documentId() {
-      return this.documentId;
+    public final String company() {
+      return this.company;
     }
 
     /**
-     * Set Document ID that is owned by company for which workflow info is requested.
+     * Set Id of the company to get list of hooks by a company.
      *
-     * @param value Document ID that is owned by company for which workflow info is requested.
+     * @param value Id of the company to get list of hooks by a company.
      *
      * @return the Builder object.
      */
-    public final Builder documentId(String value) {
-      this.documentId = value;
+    public final Builder company(String value) {
+      this.company = value;
       return this;
     }
 
     /**
-     * Get Whether to include the full workflow json
+     * Get Id of the user to get list of hooks by by user.
      *
-     * @return Whether to include the full workflow json
+     * @return Id of the user to get list of hooks by by user.
      *
      */
-    public final Boolean full() {
-      return this.full;
+    public final String user() {
+      return this.user;
     }
 
     /**
-     * Set Whether to include the full workflow json
+     * Set Id of the user to get list of hooks by by user.
      *
-     * @param value Whether to include the full workflow json
+     * @param value Id of the user to get list of hooks by by user.
      *
      * @return the Builder object.
      */
-    public final Builder full(Boolean value) {
-      this.full = value;
+    public final Builder user(String value) {
+      this.user = value;
       return this;
     }
 
-    private WorkflowGetActiveWorkflowsRequest build() {
-      return new com.onshape.api.requests.WorkflowGetActiveWorkflowsRequest(documentId,full);
+    private WebhooksGetRequest build() {
+      return new com.onshape.api.requests.WebhooksGetRequest(company,user);
     }
 
     /**
-     * Calls getActiveWorkflows method, Get active workflows for the logged-in user's company, optionally specific to a document
+     * Calls get method, Get list of webhooks registered for a company or user
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      */
-    public final WorkflowGetActiveWorkflowsResponse call() throws OnshapeException {
-      return onshape.call("get", "/workflow/active", build(), onshape.buildMap(), onshape.buildMap("documentId", documentId, "full", full), com.onshape.api.responses.WorkflowGetActiveWorkflowsResponse.class);
+    public final WebhooksGetResponse call() throws OnshapeException {
+      return onshape.call("get", "/webhooks", build(), onshape.buildMap(), onshape.buildMap("company", company, "user", user), com.onshape.api.responses.WebhooksGetResponse.class);
     }
   }
 }

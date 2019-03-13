@@ -33,7 +33,6 @@ import com.onshape.api.requests.PartStudiosExportStlRequest;
 import com.onshape.api.requests.PartStudiosGetBodyDetailsRequest;
 import com.onshape.api.requests.PartStudiosGetBoundingBoxesForSketchRequest;
 import com.onshape.api.requests.PartStudiosGetBoundingBoxesRequest;
-import com.onshape.api.requests.PartStudiosGetConfigurationRequest;
 import com.onshape.api.requests.PartStudiosGetEdgesRequest;
 import com.onshape.api.requests.PartStudiosGetFacesRequest;
 import com.onshape.api.requests.PartStudiosGetFeatureSpecsRequest;
@@ -45,7 +44,6 @@ import com.onshape.api.requests.PartStudiosGetSketchInfoRequest;
 import com.onshape.api.requests.PartStudiosGetTessellatedEntitiesRequest;
 import com.onshape.api.requests.PartStudiosGetTranslationFormatsRequest;
 import com.onshape.api.requests.PartStudiosIdTranslationsRequest;
-import com.onshape.api.requests.PartStudiosUpdateConfigurationRequest;
 import com.onshape.api.requests.PartStudiosUpdateFeatureRequest;
 import com.onshape.api.requests.PartStudiosUpdateFeaturesRequest;
 import com.onshape.api.requests.PartStudiosUpdateRollbackRequest;
@@ -142,14 +140,6 @@ public final class PartStudios {
   }
 
   /**
-   * Create request for getConfiguration
-   *  @return Request builder object
-   */
-  public final PartStudiosGetConfigurationRequest.Builder getConfiguration() {
-    return PartStudiosGetConfigurationRequest.builder(onshape);
-  }
-
-  /**
    * Create request for getFeatures
    *  @return Request builder object
    */
@@ -243,14 +233,6 @@ public final class PartStudios {
    */
   public final PartStudiosGetTessellatedEntitiesRequest.Builder getTessellatedEntities() {
     return PartStudiosGetTessellatedEntitiesRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for updateConfiguration
-   *  @return Request builder object
-   */
-  public final PartStudiosUpdateConfigurationRequest.Builder updateConfiguration() {
-    return PartStudiosUpdateConfigurationRequest.builder(onshape);
   }
 
   /**

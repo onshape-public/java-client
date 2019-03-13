@@ -25,34 +25,68 @@ package com.onshape.api.responses;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
-import com.onshape.api.types.Blob;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
- * Response object for downloadExternalData API endpoint.
+ * Response object for getConfiguration API endpoint.
  * &copy; 2018 Onshape Inc.
  */
 @JsonIgnoreProperties(
     ignoreUnknown = true
 )
-public final class DocumentsDownloadExternalDataResponse {
+public final class ElementsGetConfigurationResponse {
   /**
-   * Requested data
+   * List of configuration parameters, which define the configurability of the Part Studio or Assembly.
    */
-  @JsonProperty("data")
+  @JsonProperty("configurationParameters")
   @NotNull
-  Blob data;
+  Map[] configurationParameters;
 
   /**
-   * Get Requested data
+   * The version of the serialization protocol for the response
+   */
+  @JsonProperty("serializationVersion")
+  @NotNull
+  String serializationVersion;
+
+  /**
+   * The document microversion from which the feature was extracted
+   */
+  @JsonProperty("sourceMicroversion")
+  @NotNull
+  String sourceMicroversion;
+
+  /**
+   * Get List of configuration parameters, which define the configurability of the Part Studio or Assembly.
    *
-   * @return Requested data
+   * @return List of configuration parameters, which define the configurability of the Part Studio or Assembly.
    *
    */
-  public final Blob getData() {
-    return this.data;
+  public final Map[] getConfigurationParameters() {
+    return this.configurationParameters;
+  }
+
+  /**
+   * Get The version of the serialization protocol for the response
+   *
+   * @return The version of the serialization protocol for the response
+   *
+   */
+  public final String getSerializationVersion() {
+    return this.serializationVersion;
+  }
+
+  /**
+   * Get The document microversion from which the feature was extracted
+   *
+   * @return The document microversion from which the feature was extracted
+   *
+   */
+  public final String getSourceMicroversion() {
+    return this.sourceMicroversion;
   }
 
   @Override

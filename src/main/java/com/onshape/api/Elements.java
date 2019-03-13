@@ -25,6 +25,8 @@ package com.onshape.api;
 import com.onshape.api.requests.ElementsDecodeConfigurationStringRequest;
 import com.onshape.api.requests.ElementsDeleteElementRequest;
 import com.onshape.api.requests.ElementsEncodeConfigurationRequest;
+import com.onshape.api.requests.ElementsGetConfigurationRequest;
+import com.onshape.api.requests.ElementsUpdateConfigurationRequest;
 import com.onshape.api.requests.ElementsUpdateReferencesRequest;
 
 /**
@@ -60,6 +62,22 @@ public final class Elements {
    */
   public final ElementsEncodeConfigurationRequest.Builder encodeConfiguration() {
     return ElementsEncodeConfigurationRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getConfiguration
+   *  @return Request builder object
+   */
+  public final ElementsGetConfigurationRequest.Builder getConfiguration() {
+    return ElementsGetConfigurationRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for updateConfiguration
+   *  @return Request builder object
+   */
+  public final ElementsUpdateConfigurationRequest.Builder updateConfiguration() {
+    return ElementsUpdateConfigurationRequest.builder(onshape);
   }
 
   /**
