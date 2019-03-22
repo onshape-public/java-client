@@ -68,6 +68,7 @@ import javax.ws.rs.core.UriBuilder;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
 import org.hashids.Hashids;
 
 /**
@@ -412,7 +413,7 @@ public class BaseClient {
                 }
             }
             fileField.setAccessible(true);
-            multipart.bodyPart(fileField.get(payload), MediaType.WILDCARD_TYPE);
+            multipart.bodyPart(new FileDataBodyPart("file", (File)fileField.get(payload), MediaType.WILDCARD_TYPE));
         } catch (IllegalArgumentException | IllegalAccessException ex) {
             throw new OnshapeException("Failed to convert payload to multipart form", ex);
         }

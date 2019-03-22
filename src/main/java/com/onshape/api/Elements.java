@@ -22,6 +22,7 @@
 //
 package com.onshape.api;
 
+import com.onshape.api.requests.ElementsCopyElementFromSourceDocumentRequest;
 import com.onshape.api.requests.ElementsDecodeConfigurationStringRequest;
 import com.onshape.api.requests.ElementsDeleteElementRequest;
 import com.onshape.api.requests.ElementsEncodeConfigurationRequest;
@@ -38,6 +39,14 @@ public final class Elements {
 
   Elements(Onshape onshape) {
     this.onshape = onshape;
+  }
+
+  /**
+   * Create request for copyElementFromSourceDocument
+   *  @return Request builder object
+   */
+  public final ElementsCopyElementFromSourceDocumentRequest.Builder copyElementFromSourceDocument() {
+    return ElementsCopyElementFromSourceDocumentRequest.builder(onshape);
   }
 
   /**

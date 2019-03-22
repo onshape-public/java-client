@@ -41,7 +41,9 @@ import com.onshape.api.requests.DocumentsGetInsertablesRequest;
 import com.onshape.api.requests.DocumentsGetVersionRequest;
 import com.onshape.api.requests.DocumentsGetVersionsRequest;
 import com.onshape.api.requests.DocumentsGetWorkspacesRequest;
+import com.onshape.api.requests.DocumentsMergeIntoWorkspaceRequest;
 import com.onshape.api.requests.DocumentsMoveElementsToDocumentRequest;
+import com.onshape.api.requests.DocumentsRestoreMicroversionRequest;
 import com.onshape.api.requests.DocumentsShareDocumentRequest;
 import com.onshape.api.requests.DocumentsUnShareRequest;
 import com.onshape.api.requests.DocumentsUpdateDocumentAttributesRequest;
@@ -211,11 +213,27 @@ public final class Documents {
   }
 
   /**
+   * Create request for mergeIntoWorkspace
+   *  @return Request builder object
+   */
+  public final DocumentsMergeIntoWorkspaceRequest.Builder mergeIntoWorkspace() {
+    return DocumentsMergeIntoWorkspaceRequest.builder(onshape);
+  }
+
+  /**
    * Create request for moveElementsToDocument
    *  @return Request builder object
    */
   public final DocumentsMoveElementsToDocumentRequest.Builder moveElementsToDocument() {
     return DocumentsMoveElementsToDocumentRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for restoreMicroversion
+   *  @return Request builder object
+   */
+  public final DocumentsRestoreMicroversionRequest.Builder restoreMicroversion() {
+    return DocumentsRestoreMicroversionRequest.builder(onshape);
   }
 
   /**
