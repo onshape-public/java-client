@@ -70,6 +70,7 @@ public final class ApplicationsDeleteAppSettingsRequest {
      * @param key Repeatable key for deletion. If no keys are specified, all keys are deleted. (Default: null) */
     public final ApplicationsDeleteAppSettingsResponse call(String cid, String uid, String key)
         throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("delete", "/applications/clients/:cid/settings/users/:uid", build(), onshape.buildMap("cid", cid, "uid", uid), onshape.buildMap("key", key), com.onshape.api.responses.ApplicationsDeleteAppSettingsResponse.class);
     }
   }

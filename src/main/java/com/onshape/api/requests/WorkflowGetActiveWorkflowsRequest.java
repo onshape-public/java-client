@@ -133,6 +133,7 @@ public final class WorkflowGetActiveWorkflowsRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final WorkflowGetActiveWorkflowsResponse call() throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/workflow/active", build(), onshape.buildMap(), onshape.buildMap("documentId", documentId, "full", full), com.onshape.api.responses.WorkflowGetActiveWorkflowsResponse.class);
     }
   }

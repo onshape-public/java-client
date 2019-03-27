@@ -118,6 +118,7 @@ public final class AppElementsCommitTransactionRequest {
      */
     public final AppElementsCommitTransactionResponse call(String tid, String did, String wid,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/appelements/d/:did/w/:wid/e/:eid/transactions/:tid", build(), onshape.buildMap("tid", tid, "did", did, "wid", wid, "eid", eid), onshape.buildMap(), com.onshape.api.responses.AppElementsCommitTransactionResponse.class);
     }
 
@@ -128,12 +129,11 @@ public final class AppElementsCommitTransactionRequest {
      * @throws OnshapeException On HTTP or serialization error
      *
      * @param tid Id of the transaction to commit
-     *
-     * @param wid Workspace ID
      */
-    public final AppElementsCommitTransactionResponse call(OnshapeDocument document, String tid,
-        String wid) throws OnshapeException {
-      return onshape.call("post", "/appelements/d/:did/w/:wid/e/:eid/transactions/:tid", build(), onshape.buildMap("tid", tid, "did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AppElementsCommitTransactionResponse.class);
+    public final AppElementsCommitTransactionResponse call(OnshapeDocument document, String tid)
+        throws OnshapeException {
+      onshape.validate(build());
+      return onshape.call("post", "/appelements/d/:did/w/:wid/e/:eid/transactions/:tid", build(), onshape.buildMap("tid", tid, "did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AppElementsCommitTransactionResponse.class);
     }
   }
 }

@@ -71,6 +71,7 @@ public final class ThumbnailsGetDocumentThumbnailWithSizeRequest {
      */
     public final ThumbnailsGetDocumentThumbnailWithSizeResponse call(String sz, String did,
         String wid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/thumbnails/d/:did/w/:wid/s/:sz", build(), onshape.buildMap("sz", sz, "did", did, "wid", wid), onshape.buildMap(), com.onshape.api.responses.ThumbnailsGetDocumentThumbnailWithSizeResponse.class);
     }
 
@@ -81,12 +82,11 @@ public final class ThumbnailsGetDocumentThumbnailWithSizeRequest {
      * @throws OnshapeException On HTTP or serialization error
      *
      * @param sz Requested thumbnail size, such as 300x300
-     *
-     * @param wid Workspace ID
      */
     public final ThumbnailsGetDocumentThumbnailWithSizeResponse call(OnshapeDocument document,
-        String sz, String wid) throws OnshapeException {
-      return onshape.call("get", "/thumbnails/d/:did/w/:wid/s/:sz", build(), onshape.buildMap("sz", sz, "did", document.getDocumentId(), "wid", wid), onshape.buildMap(), com.onshape.api.responses.ThumbnailsGetDocumentThumbnailWithSizeResponse.class);
+        String sz) throws OnshapeException {
+      onshape.validate(build());
+      return onshape.call("get", "/thumbnails/d/:did/w/:wid/s/:sz", build(), onshape.buildMap("sz", sz, "did", document.getDocumentId(), "wid", document.getWorkspaceId()), onshape.buildMap(), com.onshape.api.responses.ThumbnailsGetDocumentThumbnailWithSizeResponse.class);
     }
   }
 }

@@ -248,6 +248,7 @@ public final class PartStudiosExportParasolidRequest {
      */
     public final PartStudiosExportParasolidResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/parasolid", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("partIds", partIds, "version", version, "includeExportIds", includeExportIds, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosExportParasolidResponse.class);
     }
 
@@ -259,7 +260,8 @@ public final class PartStudiosExportParasolidRequest {
      */
     public final PartStudiosExportParasolidResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/parasolid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosExportParasolidResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/parasolid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosExportParasolidResponse.class);
     }
   }
 }

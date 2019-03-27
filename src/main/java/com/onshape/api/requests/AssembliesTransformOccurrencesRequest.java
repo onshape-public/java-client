@@ -211,6 +211,7 @@ public final class AssembliesTransformOccurrencesRequest {
      */
     public final AssembliesTransformOccurrencesResponse call(String did, String wid, String eid)
         throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/assemblies/d/:did/w/:wid/e/:eid/occurrencetransforms", build(), onshape.buildMap("did", did, "wid", wid, "eid", eid), onshape.buildMap(), com.onshape.api.responses.AssembliesTransformOccurrencesResponse.class);
     }
 
@@ -219,12 +220,11 @@ public final class AssembliesTransformOccurrencesRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final AssembliesTransformOccurrencesResponse call(OnshapeDocument document, String wid)
-        throws OnshapeException {
-      return onshape.call("post", "/assemblies/d/:did/w/:wid/e/:eid/occurrencetransforms", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesTransformOccurrencesResponse.class);
+    public final AssembliesTransformOccurrencesResponse call(OnshapeDocument document) throws
+        OnshapeException {
+      onshape.validate(build());
+      return onshape.call("post", "/assemblies/d/:did/w/:wid/e/:eid/occurrencetransforms", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesTransformOccurrencesResponse.class);
     }
   }
 }

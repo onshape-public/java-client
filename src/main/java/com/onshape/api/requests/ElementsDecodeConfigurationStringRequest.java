@@ -181,6 +181,7 @@ public final class ElementsDecodeConfigurationStringRequest {
      */
     public final ElementsDecodeConfigurationStringResponse call(String cid, String did, WVM wvmType,
         String wvm, String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/elements/d/:did/[wvm]/:wvm/e/:eid/configurationencodings/:cid", build(), onshape.buildMap("cid", cid, "did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("includeDisplay", includeDisplay, "configurationIsId", configurationIsId, "linkDocumentId", linkDocumentId), com.onshape.api.responses.ElementsDecodeConfigurationStringResponse.class);
     }
 
@@ -194,7 +195,8 @@ public final class ElementsDecodeConfigurationStringRequest {
      */
     public final ElementsDecodeConfigurationStringResponse call(OnshapeDocument document,
         String cid) throws OnshapeException {
-      return onshape.call("get", "/elements/d/:did/[wvm]/:wvm/e/:eid/configurationencodings/:cid", build(), onshape.buildMap("cid", cid, "did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.ElementsDecodeConfigurationStringResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/elements/d/:did/[wvm]/:wvm/e/:eid/configurationencodings/:cid", build(), onshape.buildMap("cid", cid, "did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.ElementsDecodeConfigurationStringResponse.class);
     }
   }
 }

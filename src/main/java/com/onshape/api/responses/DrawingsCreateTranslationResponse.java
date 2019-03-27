@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
+import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 import javax.validation.constraints.NotNull;
@@ -130,6 +131,14 @@ public final class DrawingsCreateTranslationResponse {
    */
   public final DrawingsCreateTranslationResponse refresh(Onshape onshape) throws OnshapeException {
     return onshape.get(href, DrawingsCreateTranslationResponse.class);
+  }
+
+  /**
+   * Returns an OnshapeDocument object that can be used in subsequent calls to the related document
+   * @return The OnshapeDocument object.
+   */
+  public final OnshapeDocument getDocument() {
+    return new OnshapeDocument(documentId, workspaceId, null, null, null);
   }
 
   /**

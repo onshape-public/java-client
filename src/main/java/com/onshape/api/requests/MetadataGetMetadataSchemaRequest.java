@@ -136,6 +136,7 @@ public final class MetadataGetMetadataSchemaRequest {
      * @param objectType Metadata object type, which can be: 0:GLOBAL, 1:DOCUMENT, 2:PART, 3:ASSEMBLY, 4:DRAWING, 5:PART_STUDIO, 6: BLOB_ELEMENT, 7:APP_ELEMENT, 8:VERSION, 9:WORKSPACE (Default: null) */
     public final MetadataGetMetadataSchemaResponse call(String ownerId, Number objectType) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/metadataschema", build(), onshape.buildMap(), onshape.buildMap("ownerId", ownerId, "ownerType", ownerType, "objectType", objectType, "documentId", documentId), com.onshape.api.responses.MetadataGetMetadataSchemaResponse.class);
     }
   }

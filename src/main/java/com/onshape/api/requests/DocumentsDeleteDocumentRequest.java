@@ -66,6 +66,7 @@ public final class DocumentsDeleteDocumentRequest {
      * @param did Document ID
      */
     public final DocumentsDeleteDocumentResponse call(String did) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("delete", "/documents/:did", build(), onshape.buildMap("did", did), onshape.buildMap(), com.onshape.api.responses.DocumentsDeleteDocumentResponse.class);
     }
 
@@ -77,6 +78,7 @@ public final class DocumentsDeleteDocumentRequest {
      */
     public final DocumentsDeleteDocumentResponse call(OnshapeDocument document) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("delete", "/documents/:did", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.DocumentsDeleteDocumentResponse.class);
     }
   }

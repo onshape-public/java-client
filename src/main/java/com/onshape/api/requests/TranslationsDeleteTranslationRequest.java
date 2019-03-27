@@ -65,6 +65,7 @@ public final class TranslationsDeleteTranslationRequest {
      * @param tid Translation ID
      */
     public final TranslationsDeleteTranslationResponse call(String tid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("delete", "/translations/:tid", build(), onshape.buildMap("tid", tid), onshape.buildMap(), com.onshape.api.responses.TranslationsDeleteTranslationResponse.class);
     }
   }

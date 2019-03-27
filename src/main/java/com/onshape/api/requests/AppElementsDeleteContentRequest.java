@@ -179,6 +179,7 @@ public final class AppElementsDeleteContentRequest {
      */
     public final AppElementsDeleteContentResponse call(String sid, String did, WVM wvmType,
         String wvm, String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("delete", "/appelements/d/:did/[wvm]/:wvm/e/:eid/content/subelements/:sid", build(), onshape.buildMap("sid", sid, "did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("parentChangeId", parentChangeId, "transactionId", transactionId, "description", description), com.onshape.api.responses.AppElementsDeleteContentResponse.class);
     }
 
@@ -192,7 +193,8 @@ public final class AppElementsDeleteContentRequest {
      */
     public final AppElementsDeleteContentResponse call(OnshapeDocument document, String sid) throws
         OnshapeException {
-      return onshape.call("delete", "/appelements/d/:did/[wvm]/:wvm/e/:eid/content/subelements/:sid", build(), onshape.buildMap("sid", sid, "did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AppElementsDeleteContentResponse.class);
+      onshape.validate(build());
+      return onshape.call("delete", "/appelements/d/:did/[wvm]/:wvm/e/:eid/content/subelements/:sid", build(), onshape.buildMap("sid", sid, "did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AppElementsDeleteContentResponse.class);
     }
   }
 }

@@ -71,6 +71,7 @@ public final class UsersGetUserSettingsRequest {
      * @param uid The user id
      */
     public final UsersGetUserSettingsResponse call(String uid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/users/:uid/settings", build(), onshape.buildMap("uid", uid), onshape.buildMap(), com.onshape.api.responses.UsersGetUserSettingsResponse.class);
     }
   }

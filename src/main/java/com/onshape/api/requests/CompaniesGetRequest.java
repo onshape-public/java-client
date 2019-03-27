@@ -65,6 +65,7 @@ public final class CompaniesGetRequest {
      * @param cid Company ID
      */
     public final CompaniesGetResponse call(String cid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/companies/:cid", build(), onshape.buildMap("cid", cid), onshape.buildMap(), com.onshape.api.responses.CompaniesGetResponse.class);
     }
   }

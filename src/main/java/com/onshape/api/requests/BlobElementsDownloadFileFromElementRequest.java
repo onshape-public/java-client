@@ -143,6 +143,7 @@ public final class BlobElementsDownloadFileFromElementRequest {
      */
     public final BlobElementsDownloadFileFromElementResponse call(String did, WVM wvmType,
         String wvm, String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/blobelements/d/:did/[wvm]/:wvm/e/:eid", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("contentDisposition", contentDisposition, "linkDocumentId", linkDocumentId), com.onshape.api.responses.BlobElementsDownloadFileFromElementResponse.class);
     }
 
@@ -154,7 +155,8 @@ public final class BlobElementsDownloadFileFromElementRequest {
      */
     public final BlobElementsDownloadFileFromElementResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("get", "/blobelements/d/:did/[wvm]/:wvm/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.BlobElementsDownloadFileFromElementResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/blobelements/d/:did/[wvm]/:wvm/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.BlobElementsDownloadFileFromElementResponse.class);
     }
   }
 }

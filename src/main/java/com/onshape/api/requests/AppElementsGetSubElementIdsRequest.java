@@ -143,6 +143,7 @@ public final class AppElementsGetSubElementIdsRequest {
      */
     public final AppElementsGetSubElementIdsResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/appelements/d/:did/[wvm]/:wvm/e/:eid/content/ids/", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("transactionId", transactionId, "changeId", changeId), com.onshape.api.responses.AppElementsGetSubElementIdsResponse.class);
     }
 
@@ -154,7 +155,8 @@ public final class AppElementsGetSubElementIdsRequest {
      */
     public final AppElementsGetSubElementIdsResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("get", "/appelements/d/:did/[wvm]/:wvm/e/:eid/content/ids/", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AppElementsGetSubElementIdsResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/appelements/d/:did/[wvm]/:wvm/e/:eid/content/ids/", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AppElementsGetSubElementIdsResponse.class);
     }
   }
 }

@@ -116,6 +116,7 @@ public final class AssembliesCreateAssemblyRequest {
      */
     public final AssembliesCreateAssemblyResponse call(String did, String wid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/assemblies/d/:did/w/:wid", build(), onshape.buildMap("did", did, "wid", wid), onshape.buildMap(), com.onshape.api.responses.AssembliesCreateAssemblyResponse.class);
     }
 
@@ -124,12 +125,11 @@ public final class AssembliesCreateAssemblyRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final AssembliesCreateAssemblyResponse call(OnshapeDocument document, String wid) throws
+    public final AssembliesCreateAssemblyResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("post", "/assemblies/d/:did/w/:wid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid), onshape.buildMap(), com.onshape.api.responses.AssembliesCreateAssemblyResponse.class);
+      onshape.validate(build());
+      return onshape.call("post", "/assemblies/d/:did/w/:wid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId()), onshape.buildMap(), com.onshape.api.responses.AssembliesCreateAssemblyResponse.class);
     }
   }
 }

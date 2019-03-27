@@ -74,6 +74,7 @@ public final class AssembliesGetFeatureSpecsRequest {
      */
     public final AssembliesGetFeatureSpecsResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/featurespecs", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap(), com.onshape.api.responses.AssembliesGetFeatureSpecsResponse.class);
     }
 
@@ -85,7 +86,8 @@ public final class AssembliesGetFeatureSpecsRequest {
      */
     public final AssembliesGetFeatureSpecsResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/featurespecs", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesGetFeatureSpecsResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/featurespecs", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesGetFeatureSpecsResponse.class);
     }
   }
 }

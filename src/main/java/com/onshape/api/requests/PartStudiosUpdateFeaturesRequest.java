@@ -306,6 +306,7 @@ public final class PartStudiosUpdateFeaturesRequest {
      */
     public final PartStudiosUpdateFeaturesResponse call(String did, String wid, String eid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/partstudios/d/:did/w/:wid/e/:eid/features/updates", build(), onshape.buildMap("did", did, "wid", wid, "eid", eid), onshape.buildMap(), com.onshape.api.responses.PartStudiosUpdateFeaturesResponse.class);
     }
 
@@ -320,12 +321,11 @@ public final class PartStudiosUpdateFeaturesRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final PartStudiosUpdateFeaturesResponse call(OnshapeDocument document, String wid) throws
+    public final PartStudiosUpdateFeaturesResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("post", "/partstudios/d/:did/w/:wid/e/:eid/features/updates", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosUpdateFeaturesResponse.class);
+      onshape.validate(build());
+      return onshape.call("post", "/partstudios/d/:did/w/:wid/e/:eid/features/updates", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosUpdateFeaturesResponse.class);
     }
   }
 }

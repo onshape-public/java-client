@@ -63,6 +63,7 @@ public final class UsersGetSessionInfoRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final UsersGetSessionInfoResponse call() throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/users/sessioninfo", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.UsersGetSessionInfoResponse.class);
     }
   }

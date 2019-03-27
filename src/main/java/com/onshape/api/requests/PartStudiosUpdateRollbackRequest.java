@@ -256,6 +256,7 @@ public final class PartStudiosUpdateRollbackRequest {
      */
     public final PartStudiosUpdateRollbackResponse call(String did, String wid, String eid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/partstudios/d/:did/w/:wid/e/:eid/features/rollback", build(), onshape.buildMap("did", did, "wid", wid, "eid", eid), onshape.buildMap(), com.onshape.api.responses.PartStudiosUpdateRollbackResponse.class);
     }
 
@@ -265,12 +266,11 @@ public final class PartStudiosUpdateRollbackRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final PartStudiosUpdateRollbackResponse call(OnshapeDocument document, String wid) throws
+    public final PartStudiosUpdateRollbackResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("post", "/partstudios/d/:did/w/:wid/e/:eid/features/rollback", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosUpdateRollbackResponse.class);
+      onshape.validate(build());
+      return onshape.call("post", "/partstudios/d/:did/w/:wid/e/:eid/features/rollback", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosUpdateRollbackResponse.class);
     }
   }
 }

@@ -621,6 +621,7 @@ public final class DocumentsGetInsertablesRequest {
      */
     public final DocumentsGetInsertablesResponse call(String did, String vid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/d/:did/v/:vid/insertables", build(), onshape.buildMap("did", did, "vid", vid), onshape.buildMap("betaCapabilityIds", betaCapabilityIds, "includeParts", includeParts, "includeSurfaces", includeSurfaces, "includeWires", includeWires, "includeSketches", includeSketches, "includeReferenceFeatures", includeReferenceFeatures, "includeAssemblies", includeAssemblies, "includeFeatureStudios", includeFeatureStudios, "includeFeatures", includeFeatures, "includeBlobs", includeBlobs, "includeMeshes", includeMeshes, "includeFlattenedBodies", includeFlattenedBodies, "includeApplications", includeApplications, "allowedBlobMimeTypes", allowedBlobMimeTypes, "allowedApplicationMimeTypes", allowedApplicationMimeTypes, "maxFeatureScriptVersion", maxFeatureScriptVersion), com.onshape.api.responses.DocumentsGetInsertablesResponse.class);
     }
 
@@ -634,6 +635,7 @@ public final class DocumentsGetInsertablesRequest {
      */
     public final DocumentsGetInsertablesResponse call(OnshapeDocument document, String vid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/d/:did/v/:vid/insertables", build(), onshape.buildMap("did", document.getDocumentId(), "vid", vid), onshape.buildMap(), com.onshape.api.responses.DocumentsGetInsertablesResponse.class);
     }
   }

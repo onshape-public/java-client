@@ -52,9 +52,14 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -66,6 +71,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.media.multipart.Boundary;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
@@ -77,7 +83,7 @@ import org.hashids.Hashids;
  */
 public class BaseClient {
 
-    private final String baseURL = "https://cad.onshape.com/api";
+    private String baseURL = "https://cad.onshape.com";
     private final Client client;
     private final Hashids hashids = new Hashids("cloudCADIsGreat", 25, "abcdefghijklmnopqrstuvwxyz01234567890");
     private final ObjectMapper objectMapper;
@@ -105,6 +111,24 @@ public class BaseClient {
         clientConfig.register(MultiPartFeature.class);
         client = ClientBuilder.newClient(clientConfig);
         workingDir = new File(System.getProperty("java.io.tmpdir"));
+    }
+
+    /**
+     * Get the base URL this client is currently pointed at
+     *
+     * @return base URL
+     */
+    public String getBaseURL() {
+        return baseURL;
+    }
+
+    /**
+     * Set the base URL this client should point at
+     *
+     * @param baseURL base URL
+     */
+    public void setBaseURL(String baseURL) {
+        this.baseURL = baseURL;
     }
 
     /**
@@ -253,6 +277,17 @@ public class BaseClient {
         // Call the HTTP method
         Response response = call(method, url, payload, urlParameters, queryParameters, jsonResponse);
         // Deserialize the response
+        if (response.getMediaType() == null) {
+            if (type.getDeclaredFields().length == 0) {
+                try {
+                    // Response type is just an empty object, create one
+                    return type.newInstance();
+                } catch (IllegalAccessException | InstantiationException ex) {
+                    throw new OnshapeException("Failed to create response object");
+                }
+            }
+            throw new OnshapeException("No entity in response");
+        }
         if (response.getMediaType().toString().startsWith(MediaType.APPLICATION_JSON)) {
             String stringEntity = response.readEntity(String.class);
             // Special case: If it is an array, and the response type has a single array field, then read that
@@ -346,9 +381,21 @@ public class BaseClient {
         URI uri = buildURI(url, urlParameters, queryParameters);
         // Create a WebTarget for the URI
         WebTarget target = client.target(uri);
-        Response response;
         Invocation.Builder invocationBuilder = target.request(jsonResponse ? MediaType.APPLICATION_JSON_TYPE : MediaType.APPLICATION_OCTET_STREAM_TYPE)
                 .header("Accept", jsonResponse ? "application/vnd.onshape.v1+json" : "application/vnd.onshape.v1+octet-stream");
+        // Set the content-type and build the entity
+        Entity entity;
+        switch (method.toUpperCase()) {
+            case "GET":
+            case "HEAD":
+            case "DELETE":
+                invocationBuilder.header("Content-Type", MediaType.APPLICATION_JSON_TYPE.toString());
+                entity = null;
+                break;
+            default:
+                entity = createEntity(payload, invocationBuilder);
+        }
+        // Add authentication headers, via either OAuth or API keys
         if (token != null) {
             if ((new Date().getTime() - tokenReceived.getTime()) / 1000 > token.getExpiresIn() * 0.9) {
                 try {
@@ -359,19 +406,11 @@ public class BaseClient {
             }
             invocationBuilder = invocationBuilder.header("Authorization", "Bearer " + token.getAccessToken());
         } else if (accessKey != null && secretKey != null) {
-            invocationBuilder = signature(invocationBuilder, uri, method);
+            invocationBuilder = signature(invocationBuilder, uri, method, entity == null ? MediaType.APPLICATION_JSON_TYPE : entity.getMediaType());
         }
-        switch (method.toUpperCase()) {
-            case "GET":
-            case "HEAD":
-            case "DELETE":
-                invocationBuilder.header("Content-Type", "application/json");
-                response = invocationBuilder.method(method.toUpperCase());
-                break;
-            default:
-                Entity entity = createEntity(payload, invocationBuilder);
-                response = invocationBuilder.method(method.toUpperCase(), entity);
-        }
+        // Perform the method call
+        Response response = entity == null ? invocationBuilder.method(method.toUpperCase()) : invocationBuilder.method(method.toUpperCase(), entity);
+        // Handle the response
         switch (response.getStatusInfo().getFamily()) {
             case SUCCESSFUL:
                 return response;
@@ -391,6 +430,7 @@ public class BaseClient {
      * @throws OnshapeException If fail to serialize successfully
      */
     Entity createEntity(Object payload, Invocation.Builder invocationBuilder) throws OnshapeException {
+        MediaType mediaType;
         Field fileField = null;
         for (Field field : payload.getClass().getDeclaredFields()) {
             if (File.class.equals(field.getType())) {
@@ -399,11 +439,11 @@ public class BaseClient {
         }
         // If no File, then return JSON entity
         if (fileField == null) {
-            invocationBuilder.header("Content-Type", "application/json");
-            return Entity.entity(payload, MediaType.APPLICATION_JSON_TYPE);
+            mediaType = MediaType.APPLICATION_JSON_TYPE;
+            invocationBuilder.header("Content-Type", mediaType.toString());
+            return Entity.entity(payload, mediaType);
         }
-        // Else create multipart entity
-        invocationBuilder.header("Content-Type", "multipart/form-data");
+        // Else create multipart entity        
         FormDataMultiPart multipart = new FormDataMultiPart();
         try {
             for (Field field : payload.getClass().getDeclaredFields()) {
@@ -413,13 +453,16 @@ public class BaseClient {
                 }
             }
             fileField.setAccessible(true);
-            multipart.bodyPart(new FileDataBodyPart("file", (File)fileField.get(payload), MediaType.WILDCARD_TYPE));
+            multipart.bodyPart(new FileDataBodyPart("file", (File) fileField.get(payload), MediaType.WILDCARD_TYPE));
         } catch (IllegalArgumentException | IllegalAccessException ex) {
             throw new OnshapeException("Failed to convert payload to multipart form", ex);
         }
         // Add an XSRF header: Not currently required by Onshape APIs
         //addXSRFHeader(invocationBuilder);
-        return Entity.entity(multipart, MediaType.MULTIPART_FORM_DATA_TYPE);
+        // Add a boundary subtype to the media-type, this will be used in the entity and signature (if using API keys)
+        mediaType = Boundary.addBoundary(MediaType.MULTIPART_FORM_DATA_TYPE);
+        invocationBuilder.header("Content-Type", mediaType.toString());
+        return Entity.entity(multipart, mediaType);
     }
 
     /**
@@ -482,7 +525,7 @@ public class BaseClient {
     URI buildURI(String path, Map<String, Object> urlParameters, Map<String, Object> queryParameters) throws OnshapeException {
         UriBuilder uriBuilder;
         if (path.startsWith("/")) {
-            uriBuilder = UriBuilder.fromUri(baseURL + path
+            uriBuilder = UriBuilder.fromUri(baseURL + "/api" + path
                     .replaceAll(":([^\\/:]+)", "{$1}")
                     .replace("[wvm]", "{wvmType}")
                     .replace("[wv]", "{wvType}")
@@ -507,12 +550,12 @@ public class BaseClient {
 
     private long count = 0L;
 
-    Invocation.Builder signature(Invocation.Builder builder, URI uri, String method) throws OnshapeException {
+    Invocation.Builder signature(Invocation.Builder builder, URI uri, String method, MediaType mediaType) throws OnshapeException {
         String date = getDateString();
         String onNonce = hashids.encode(new Date().getTime(), count++);
         String path = uri.getPath();
         String query = uri.getQuery() == null ? "" : uri.getQuery();
-        String str = (method + '\n' + onNonce + '\n' + date + '\n' + "application/json" + '\n'
+        String str = (method + '\n' + onNonce + '\n' + date + '\n' + mediaType.toString() + '\n'
                 + path + '\n' + query + '\n').toLowerCase();
         String auth = "On " + accessKey + ":HmacSHA256:" + encodeSignature(str);
         builder.header("Date", date);
@@ -553,6 +596,25 @@ public class BaseClient {
             return TOSTRINGMAPPER.writeValueAsString(obj);
         } catch (JsonProcessingException ex) {
             throw new RuntimeException(ex);
+        }
+    }
+
+    /**
+     * Use javax.validation framework to validate request object before sending
+     * to server.
+     *
+     * @param <T> Request object type
+     * @param obj Request object
+     * @throws OnshapeException If required fields are missing
+     */
+    public <T> void validate(T obj) throws OnshapeException {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<T>> violations = validator.validate(obj);
+        if (!violations.isEmpty()) {
+            StringBuilder message = new StringBuilder("Validation of request object failed");
+            violations.forEach((violation) -> message.append(", ").append(violation.getMessage()));
+            throw new OnshapeException(message.toString());
         }
     }
 }

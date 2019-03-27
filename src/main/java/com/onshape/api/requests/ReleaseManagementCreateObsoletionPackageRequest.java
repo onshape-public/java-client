@@ -68,6 +68,7 @@ public final class ReleaseManagementCreateObsoletionPackageRequest {
      * @param revisionId ID of revision to be obsoleted as returned by getRevisionHistoryInCompany (Default: null) */
     public final ReleaseManagementCreateObsoletionPackageResponse call(String wfid,
         String revisionId) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/releasepackages/obsoletion/:wfid", build(), onshape.buildMap("wfid", wfid), onshape.buildMap("revisionId", revisionId), com.onshape.api.responses.ReleaseManagementCreateObsoletionPackageResponse.class);
     }
   }

@@ -66,6 +66,7 @@ public final class AccountsConsumePurchaseRequest {
      * @param pid Purchase id
      */
     public final AccountsConsumePurchaseResponse call(String pid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/accounts/purchases/:pid/consume", build(), onshape.buildMap("pid", pid), onshape.buildMap(), com.onshape.api.responses.AccountsConsumePurchaseResponse.class);
     }
   }

@@ -291,6 +291,7 @@ public final class WebhooksCreateWebhookRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final WebhooksCreateWebhookResponse call() throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/webhooks", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.WebhooksCreateWebhookResponse.class);
     }
   }

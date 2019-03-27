@@ -339,6 +339,7 @@ public final class DocumentsCreateVersionRequest {
      * @param did Document ID
      */
     public final DocumentsCreateVersionResponse call(String did) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/documents/d/:did/versions", build(), onshape.buildMap("did", did), onshape.buildMap(), com.onshape.api.responses.DocumentsCreateVersionResponse.class);
     }
 
@@ -353,6 +354,7 @@ public final class DocumentsCreateVersionRequest {
      */
     public final DocumentsCreateVersionResponse call(OnshapeDocument document) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/documents/d/:did/versions", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.DocumentsCreateVersionResponse.class);
     }
   }

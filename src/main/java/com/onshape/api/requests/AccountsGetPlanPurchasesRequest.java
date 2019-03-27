@@ -138,6 +138,7 @@ public final class AccountsGetPlanPurchasesRequest {
      * @param planId Plan Id
      */
     public final AccountsGetPlanPurchasesResponse call(String planId) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/accounts/plans/:planId/purchases", build(), onshape.buildMap("planId", planId), onshape.buildMap("offset", offset, "limit", limit), com.onshape.api.responses.AccountsGetPlanPurchasesResponse.class);
     }
   }

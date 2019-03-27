@@ -338,6 +338,7 @@ public final class WebhooksUpdateWebhookRequest {
      * @param webhookid ID of webhook to update
      */
     public final WebhooksUpdateWebhookResponse call(String webhookid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/webhooks/:webhookid", build(), onshape.buildMap("webhookid", webhookid), onshape.buildMap(), com.onshape.api.responses.WebhooksUpdateWebhookResponse.class);
     }
   }

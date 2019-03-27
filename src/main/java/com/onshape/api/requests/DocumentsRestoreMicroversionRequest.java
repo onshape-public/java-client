@@ -208,6 +208,7 @@ public final class DocumentsRestoreMicroversionRequest {
      */
     public final DocumentsRestoreMicroversionResponse call(String did, String wid, String mvid)
         throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/documents/:did/workspaces/:wid/restore/:mvid", build(), onshape.buildMap("did", did, "wid", wid, "mvid", mvid), onshape.buildMap(), com.onshape.api.responses.DocumentsRestoreMicroversionResponse.class);
     }
 
@@ -217,13 +218,12 @@ public final class DocumentsRestoreMicroversionRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param wid Workspace ID
-     *
      * @param mvid Microversion ID
      */
-    public final DocumentsRestoreMicroversionResponse call(OnshapeDocument document, String wid,
-        String mvid) throws OnshapeException {
-      return onshape.call("post", "/documents/:did/workspaces/:wid/restore/:mvid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid, "mvid", mvid), onshape.buildMap(), com.onshape.api.responses.DocumentsRestoreMicroversionResponse.class);
+    public final DocumentsRestoreMicroversionResponse call(OnshapeDocument document, String mvid)
+        throws OnshapeException {
+      onshape.validate(build());
+      return onshape.call("post", "/documents/:did/workspaces/:wid/restore/:mvid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "mvid", mvid), onshape.buildMap(), com.onshape.api.responses.DocumentsRestoreMicroversionResponse.class);
     }
   }
 }

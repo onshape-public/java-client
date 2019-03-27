@@ -78,6 +78,7 @@ public final class ThumbnailsGetElementThumbnailWithApiConfigurationRequest {
     public final ThumbnailsGetElementThumbnailWithApiConfigurationResponse call(String cid,
         String sz, String did, String wid, String eid, Boolean rejectEmpty) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/thumbnails/d/:did/w/:wid/e/:eid/ac/:cid/s/:sz", build(), onshape.buildMap("cid", cid, "sz", sz, "did", did, "wid", wid, "eid", eid), onshape.buildMap("rejectEmpty", rejectEmpty), com.onshape.api.responses.ThumbnailsGetElementThumbnailWithApiConfigurationResponse.class);
     }
 
@@ -90,12 +91,11 @@ public final class ThumbnailsGetElementThumbnailWithApiConfigurationRequest {
      * @param cid The api key for the given configuration
      *
      * @param sz Requested thumbnail size, such as 300x300
-     *
-     * @param wid Workspace ID
      */
     public final ThumbnailsGetElementThumbnailWithApiConfigurationResponse call(OnshapeDocument document,
-        String cid, String sz, String wid) throws OnshapeException {
-      return onshape.call("get", "/thumbnails/d/:did/w/:wid/e/:eid/ac/:cid/s/:sz", build(), onshape.buildMap("cid", cid, "sz", sz, "did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.ThumbnailsGetElementThumbnailWithApiConfigurationResponse.class);
+        String cid, String sz) throws OnshapeException {
+      onshape.validate(build());
+      return onshape.call("get", "/thumbnails/d/:did/w/:wid/e/:eid/ac/:cid/s/:sz", build(), onshape.buildMap("cid", cid, "sz", sz, "did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.ThumbnailsGetElementThumbnailWithApiConfigurationResponse.class);
     }
   }
 }

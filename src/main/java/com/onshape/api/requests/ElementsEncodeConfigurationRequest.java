@@ -185,6 +185,7 @@ public final class ElementsEncodeConfigurationRequest {
      */
     public final ElementsEncodeConfigurationResponse call(String did, String eid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/elements/d/:did/e/:eid/configurationencodings", build(), onshape.buildMap("did", did, "eid", eid), onshape.buildMap("versionId", versionId, "linkDocumentId", linkDocumentId), com.onshape.api.responses.ElementsEncodeConfigurationResponse.class);
     }
 
@@ -196,6 +197,7 @@ public final class ElementsEncodeConfigurationRequest {
      */
     public final ElementsEncodeConfigurationResponse call(OnshapeDocument document) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/elements/d/:did/e/:eid/configurationencodings", build(), onshape.buildMap("did", document.getDocumentId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.ElementsEncodeConfigurationResponse.class);
     }
   }

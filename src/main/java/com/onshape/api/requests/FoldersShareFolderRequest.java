@@ -292,6 +292,7 @@ public final class FoldersShareFolderRequest {
      * @param fid Folder ID
      */
     public final FoldersShareFolderResponse call(String fid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/folders/:fid/share", build(), onshape.buildMap("fid", fid), onshape.buildMap(), com.onshape.api.responses.FoldersShareFolderResponse.class);
     }
   }

@@ -374,6 +374,7 @@ public final class MetadataGetMetadataSchemaPropertiesRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final MetadataGetMetadataSchemaPropertiesResponse call() throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/metadataschema/properties", build(), onshape.buildMap(), onshape.buildMap("schemaId", schemaId, "ownerId", ownerId, "ownerType", ownerType, "objectType", objectType, "strict", strict, "activeOnly", activeOnly, "documentId", documentId, "offset", offset, "limit", limit), com.onshape.api.responses.MetadataGetMetadataSchemaPropertiesResponse.class);
     }
   }

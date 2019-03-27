@@ -65,6 +65,7 @@ public final class WebhooksGetWebhookRequest {
      * @param webhookid Webhook ID
      */
     public final WebhooksGetWebhookResponse call(String webhookid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/webhooks/:webhookid", build(), onshape.buildMap("webhookid", webhookid), onshape.buildMap(), com.onshape.api.responses.WebhooksGetWebhookResponse.class);
     }
   }

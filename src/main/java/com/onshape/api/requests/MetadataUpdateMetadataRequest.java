@@ -121,6 +121,7 @@ public final class MetadataUpdateMetadataRequest {
      */
     public final MetadataUpdateMetadataResponse call(String did, WV wvType, String wv) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/metadata/d/:did/[wv]/:wv", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv), onshape.buildMap(), com.onshape.api.responses.MetadataUpdateMetadataResponse.class);
     }
 
@@ -134,7 +135,8 @@ public final class MetadataUpdateMetadataRequest {
      */
     public final MetadataUpdateMetadataResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("post", "/metadata/d/:did/[wv]/:wv", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", WV.Workspace, "wv", document.getWorkspaceId()), onshape.buildMap(), com.onshape.api.responses.MetadataUpdateMetadataResponse.class);
+      onshape.validate(build());
+      return onshape.call("post", "/metadata/d/:did/[wv]/:wv", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId()), onshape.buildMap(), com.onshape.api.responses.MetadataUpdateMetadataResponse.class);
     }
   }
 }

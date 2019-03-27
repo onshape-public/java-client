@@ -607,6 +607,7 @@ public final class DocumentsMoveElementsToDocumentRequest {
      */
     public final DocumentsMoveElementsToDocumentResponse call(String did, String wid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/documents/d/:did/w/:wid/moveelement", build(), onshape.buildMap("did", did, "wid", wid), onshape.buildMap(), com.onshape.api.responses.DocumentsMoveElementsToDocumentResponse.class);
     }
 
@@ -615,12 +616,11 @@ public final class DocumentsMoveElementsToDocumentRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final DocumentsMoveElementsToDocumentResponse call(OnshapeDocument document, String wid)
-        throws OnshapeException {
-      return onshape.call("post", "/documents/d/:did/w/:wid/moveelement", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid), onshape.buildMap(), com.onshape.api.responses.DocumentsMoveElementsToDocumentResponse.class);
+    public final DocumentsMoveElementsToDocumentResponse call(OnshapeDocument document) throws
+        OnshapeException {
+      onshape.validate(build());
+      return onshape.call("post", "/documents/d/:did/w/:wid/moveelement", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId()), onshape.buildMap(), com.onshape.api.responses.DocumentsMoveElementsToDocumentResponse.class);
     }
   }
 }

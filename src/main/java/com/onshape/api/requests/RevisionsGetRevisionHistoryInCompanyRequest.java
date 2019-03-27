@@ -71,6 +71,7 @@ public final class RevisionsGetRevisionHistoryInCompanyRequest {
      * @param elementType Type of element, which can be 0: Part Studio, 1: Assembly, 2: Drawing. 4: Blob (Default: null) */
     public final RevisionsGetRevisionHistoryInCompanyResponse call(String cid, String pnum,
         Number elementType) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/revisions/companies/:cid/partnumber/:pnum", build(), onshape.buildMap("cid", cid, "pnum", pnum), onshape.buildMap("elementType", elementType), com.onshape.api.responses.RevisionsGetRevisionHistoryInCompanyResponse.class);
     }
   }

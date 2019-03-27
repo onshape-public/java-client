@@ -63,6 +63,7 @@ public final class VersionsTestVersion1Request {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final VersionsTestVersion1Response call() throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/versions/test", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.VersionsTestVersion1Response.class);
     }
   }

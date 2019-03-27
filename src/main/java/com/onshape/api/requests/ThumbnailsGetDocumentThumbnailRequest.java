@@ -69,6 +69,7 @@ public final class ThumbnailsGetDocumentThumbnailRequest {
      */
     public final ThumbnailsGetDocumentThumbnailResponse call(String did, String wid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/thumbnails/d/:did/w/:wid", build(), onshape.buildMap("did", did, "wid", wid), onshape.buildMap(), com.onshape.api.responses.ThumbnailsGetDocumentThumbnailResponse.class);
     }
 
@@ -77,12 +78,11 @@ public final class ThumbnailsGetDocumentThumbnailRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final ThumbnailsGetDocumentThumbnailResponse call(OnshapeDocument document, String wid)
-        throws OnshapeException {
-      return onshape.call("get", "/thumbnails/d/:did/w/:wid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid), onshape.buildMap(), com.onshape.api.responses.ThumbnailsGetDocumentThumbnailResponse.class);
+    public final ThumbnailsGetDocumentThumbnailResponse call(OnshapeDocument document) throws
+        OnshapeException {
+      onshape.validate(build());
+      return onshape.call("get", "/thumbnails/d/:did/w/:wid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId()), onshape.buildMap(), com.onshape.api.responses.ThumbnailsGetDocumentThumbnailResponse.class);
     }
   }
 }

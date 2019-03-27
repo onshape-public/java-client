@@ -38,5 +38,5 @@ public enum WVM {
     public String toString() {
         return name().substring(0, 1).toLowerCase();
     }
-
+    
 }

@@ -525,6 +525,7 @@ public final class DocumentsExportElementRequest {
      * @param mode Type of file: text, binary (STL) (Default: null) */
     public final DocumentsExportElementResponse call(String did, WV wvType, String wv, String eid,
         String format, Number scale, String mode) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/d/:did/[wv]/:wv/e/:eid/export", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv, "eid", eid), onshape.buildMap("format", format, "storeInDocument", storeInDocument, "linkDocumentWorkspaceId", linkDocumentWorkspaceId, "partIds", partIds, "microversion", microversion, "grouping", grouping, "zipSingleFileOutput", zipSingleFileOutput, "scale", scale, "units", units, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "minFacetWidth", minFacetWidth, "mode", mode, "version", version, "linkDocumentId", linkDocumentId), com.onshape.api.responses.DocumentsExportElementResponse.class);
     }
 
@@ -536,7 +537,8 @@ public final class DocumentsExportElementRequest {
      */
     public final DocumentsExportElementResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("get", "/documents/d/:did/[wv]/:wv/e/:eid/export", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", WV.Workspace, "wv", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.DocumentsExportElementResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/documents/d/:did/[wv]/:wv/e/:eid/export", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.DocumentsExportElementResponse.class);
     }
   }
 }

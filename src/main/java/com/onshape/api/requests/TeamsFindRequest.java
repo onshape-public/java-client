@@ -63,6 +63,7 @@ public final class TeamsFindRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final TeamsFindResponse call() throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/teams", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.TeamsFindResponse.class);
     }
   }

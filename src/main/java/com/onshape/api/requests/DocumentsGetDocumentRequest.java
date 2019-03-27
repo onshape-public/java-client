@@ -66,6 +66,7 @@ public final class DocumentsGetDocumentRequest {
      * @param did Document ID
      */
     public final DocumentsGetDocumentResponse call(String did) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/:did", build(), onshape.buildMap("did", did), onshape.buildMap(), com.onshape.api.responses.DocumentsGetDocumentResponse.class);
     }
 
@@ -77,6 +78,7 @@ public final class DocumentsGetDocumentRequest {
      */
     public final DocumentsGetDocumentResponse call(OnshapeDocument document) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/:did", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.DocumentsGetDocumentResponse.class);
     }
   }

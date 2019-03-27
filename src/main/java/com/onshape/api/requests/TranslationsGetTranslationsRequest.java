@@ -70,6 +70,7 @@ public final class TranslationsGetTranslationsRequest {
      * @param limit Maximum number to retrieve (Must be &lt;= 20) (Default: 20) */
     public final TranslationsGetTranslationsResponse call(String did, Number offset, Number limit)
         throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/translations/d/:did", build(), onshape.buildMap("did", did), onshape.buildMap("offset", offset, "limit", limit), com.onshape.api.responses.TranslationsGetTranslationsResponse.class);
     }
 
@@ -81,6 +82,7 @@ public final class TranslationsGetTranslationsRequest {
      */
     public final TranslationsGetTranslationsResponse call(OnshapeDocument document) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/translations/d/:did", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.TranslationsGetTranslationsResponse.class);
     }
   }

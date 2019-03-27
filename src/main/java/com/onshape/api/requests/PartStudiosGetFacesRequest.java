@@ -491,6 +491,7 @@ public final class PartStudiosGetFacesRequest {
      */
     public final PartStudiosGetFacesResponse call(String did, WVM wvmType, String wvm, String eid)
         throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "outputVertexNormals", outputVertexNormals, "outputFacetNormals", outputFacetNormals, "outputTextureCoordinates", outputTextureCoordinates, "outputIndexTable", outputIndexTable, "faceId", faceId, "partId", partId, "outputErrorFaces", outputErrorFaces, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosGetFacesResponse.class);
     }
 
@@ -505,7 +506,8 @@ public final class PartStudiosGetFacesRequest {
      */
     public final PartStudiosGetFacesResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosGetFacesResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosGetFacesResponse.class);
     }
   }
 }

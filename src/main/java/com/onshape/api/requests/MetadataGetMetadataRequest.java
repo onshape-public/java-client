@@ -383,6 +383,7 @@ public final class MetadataGetMetadataRequest {
      */
     public final MetadataGetMetadataResponse call(String did, WV wvType, String wv) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/metadata/d/:did/[wv]/:wv", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "e-offset", e_offset, "e-limit", e_limit, "linkDocumentId", linkDocumentId, "configuration", configuration, "inferMetadataOwner", inferMetadataOwner), com.onshape.api.responses.MetadataGetMetadataResponse.class);
     }
 
@@ -394,7 +395,8 @@ public final class MetadataGetMetadataRequest {
      */
     public final MetadataGetMetadataResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("get", "/metadata/d/:did/[wv]/:wv", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", WV.Workspace, "wv", document.getWorkspaceId()), onshape.buildMap(), com.onshape.api.responses.MetadataGetMetadataResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/metadata/d/:did/[wv]/:wv", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId()), onshape.buildMap(), com.onshape.api.responses.MetadataGetMetadataResponse.class);
     }
   }
 }

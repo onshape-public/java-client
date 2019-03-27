@@ -176,6 +176,7 @@ public final class DocumentsGetElementListRequest {
      */
     public final DocumentsGetElementListResponse call(String did, WVM wvmType, String wvm) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/d/:did/[wvm]/:wvm/elements", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm), onshape.buildMap("elementType", elementType, "elementId", elementId, "withThumbnails", withThumbnails), com.onshape.api.responses.DocumentsGetElementListResponse.class);
     }
 
@@ -187,7 +188,8 @@ public final class DocumentsGetElementListRequest {
      */
     public final DocumentsGetElementListResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("get", "/documents/d/:did/[wvm]/:wvm/elements", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId()), onshape.buildMap(), com.onshape.api.responses.DocumentsGetElementListResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/documents/d/:did/[wvm]/:wvm/elements", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId()), onshape.buildMap(), com.onshape.api.responses.DocumentsGetElementListResponse.class);
     }
   }
 }

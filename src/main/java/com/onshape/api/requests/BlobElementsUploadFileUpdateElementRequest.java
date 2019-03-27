@@ -469,6 +469,7 @@ public final class BlobElementsUploadFileUpdateElementRequest {
      */
     public final BlobElementsUploadFileUpdateElementResponse call(String did, String wid,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/blobelements/d/:did/w/:wid/e/:eid", build(), onshape.buildMap("did", did, "wid", wid, "eid", eid), onshape.buildMap("parentChangeId", parentChangeId), com.onshape.api.responses.BlobElementsUploadFileUpdateElementResponse.class);
     }
 
@@ -478,12 +479,11 @@ public final class BlobElementsUploadFileUpdateElementRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final BlobElementsUploadFileUpdateElementResponse call(OnshapeDocument document,
-        String wid) throws OnshapeException {
-      return onshape.call("post", "/blobelements/d/:did/w/:wid/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.BlobElementsUploadFileUpdateElementResponse.class);
+    public final BlobElementsUploadFileUpdateElementResponse call(OnshapeDocument document) throws
+        OnshapeException {
+      onshape.validate(build());
+      return onshape.call("post", "/blobelements/d/:did/w/:wid/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.BlobElementsUploadFileUpdateElementResponse.class);
     }
   }
 }

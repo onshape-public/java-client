@@ -71,6 +71,7 @@ public final class DrawingsGetTranslationFormatsRequest {
      */
     public final DrawingsGetTranslationFormatsResponse call(String did, String wid, String eid)
         throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/drawings/d/:did/w/:wid/e/:eid/translationformats", build(), onshape.buildMap("did", did, "wid", wid, "eid", eid), onshape.buildMap(), com.onshape.api.responses.DrawingsGetTranslationFormatsResponse.class);
     }
 
@@ -79,12 +80,11 @@ public final class DrawingsGetTranslationFormatsRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final DrawingsGetTranslationFormatsResponse call(OnshapeDocument document, String wid)
-        throws OnshapeException {
-      return onshape.call("get", "/drawings/d/:did/w/:wid/e/:eid/translationformats", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.DrawingsGetTranslationFormatsResponse.class);
+    public final DrawingsGetTranslationFormatsResponse call(OnshapeDocument document) throws
+        OnshapeException {
+      onshape.validate(build());
+      return onshape.call("get", "/drawings/d/:did/w/:wid/e/:eid/translationformats", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.DrawingsGetTranslationFormatsResponse.class);
     }
   }
 }

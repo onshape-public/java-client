@@ -105,6 +105,7 @@ public final class PartStudiosGetNamedViewsRequest {
      */
     public final PartStudiosGetNamedViewsResponse call(String did, String eid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/partstudios/d/:did/e/:eid/namedViews", build(), onshape.buildMap("did", did, "eid", eid), onshape.buildMap("skipPerspective", skipPerspective), com.onshape.api.responses.PartStudiosGetNamedViewsResponse.class);
     }
 
@@ -116,6 +117,7 @@ public final class PartStudiosGetNamedViewsRequest {
      */
     public final PartStudiosGetNamedViewsResponse call(OnshapeDocument document) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/partstudios/d/:did/e/:eid/namedViews", build(), onshape.buildMap("did", document.getDocumentId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosGetNamedViewsResponse.class);
     }
   }

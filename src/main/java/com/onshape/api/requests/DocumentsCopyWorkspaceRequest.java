@@ -295,6 +295,7 @@ public final class DocumentsCopyWorkspaceRequest {
      */
     public final DocumentsCopyWorkspaceResponse call(String did, String wid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/documents/:did/workspaces/:wid/copy", build(), onshape.buildMap("did", did, "wid", wid), onshape.buildMap(), com.onshape.api.responses.DocumentsCopyWorkspaceResponse.class);
     }
 
@@ -303,12 +304,11 @@ public final class DocumentsCopyWorkspaceRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final DocumentsCopyWorkspaceResponse call(OnshapeDocument document, String wid) throws
+    public final DocumentsCopyWorkspaceResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("post", "/documents/:did/workspaces/:wid/copy", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid), onshape.buildMap(), com.onshape.api.responses.DocumentsCopyWorkspaceResponse.class);
+      onshape.validate(build());
+      return onshape.call("post", "/documents/:did/workspaces/:wid/copy", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId()), onshape.buildMap(), com.onshape.api.responses.DocumentsCopyWorkspaceResponse.class);
     }
   }
 }

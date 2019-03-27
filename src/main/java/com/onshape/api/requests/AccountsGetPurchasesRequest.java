@@ -64,6 +64,7 @@ public final class AccountsGetPurchasesRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final AccountsGetPurchasesResponse call() throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/accounts/purchases", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.AccountsGetPurchasesResponse.class);
     }
   }

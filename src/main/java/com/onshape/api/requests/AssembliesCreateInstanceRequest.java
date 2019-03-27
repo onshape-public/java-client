@@ -571,6 +571,7 @@ public final class AssembliesCreateInstanceRequest {
      */
     public final AssembliesCreateInstanceResponse call(String did, String wid, String eid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/assemblies/d/:did/w/:wid/e/:eid/instances", build(), onshape.buildMap("did", did, "wid", wid, "eid", eid), onshape.buildMap(), com.onshape.api.responses.AssembliesCreateInstanceResponse.class);
     }
 
@@ -582,12 +583,11 @@ public final class AssembliesCreateInstanceRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final AssembliesCreateInstanceResponse call(OnshapeDocument document, String wid) throws
+    public final AssembliesCreateInstanceResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("post", "/assemblies/d/:did/w/:wid/e/:eid/instances", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesCreateInstanceResponse.class);
+      onshape.validate(build());
+      return onshape.call("post", "/assemblies/d/:did/w/:wid/e/:eid/instances", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesCreateInstanceResponse.class);
     }
   }
 }

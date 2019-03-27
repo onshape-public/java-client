@@ -100,6 +100,7 @@ public final class MetadataGetMetadataSchemaByIDRequest {
      * @param sid Metadata schema ID
      */
     public final MetadataGetMetadataSchemaByIDResponse call(String sid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/metadataschema/:sid", build(), onshape.buildMap("sid", sid), onshape.buildMap("documentId", documentId), com.onshape.api.responses.MetadataGetMetadataSchemaByIDResponse.class);
     }
   }

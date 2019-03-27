@@ -69,6 +69,7 @@ public final class AccountsCancelPurchaseNewRequest {
      */
     public final AccountsCancelPurchaseNewResponse call(String pid, String aid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("delete", "/accounts/:aid/purchases/:pid", build(), onshape.buildMap("pid", pid, "aid", aid), onshape.buildMap(), com.onshape.api.responses.AccountsCancelPurchaseNewResponse.class);
     }
   }

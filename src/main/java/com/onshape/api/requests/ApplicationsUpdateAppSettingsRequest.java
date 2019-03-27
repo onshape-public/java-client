@@ -69,6 +69,7 @@ public final class ApplicationsUpdateAppSettingsRequest {
      */
     public final ApplicationsUpdateAppSettingsResponse call(String cid, String uid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/applications/clients/:cid/settings/users/:uid", build(), onshape.buildMap("cid", cid, "uid", uid), onshape.buildMap(), com.onshape.api.responses.ApplicationsUpdateAppSettingsResponse.class);
     }
   }

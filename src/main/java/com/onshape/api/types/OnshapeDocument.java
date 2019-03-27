@@ -36,9 +36,12 @@ import java.util.regex.Pattern;
  */
 public class OnshapeDocument {
 
-    private static final Pattern PATTERN = Pattern.compile("^https:\\/\\/cad\\.onshape\\.com\\/documents\\/([0-9a-z]+)\\/w\\/([0-9a-z]+)\\/e\\/([0-9a-z]+)$");
+    private static final Pattern PATTERN = Pattern.compile("^https:\\/\\/cad\\.onshape\\.com\\/documents\\/([0-9a-z]+)\\/([wvm])\\/([0-9a-z]+)\\/e\\/([0-9a-z]+)$");
     private final String documentId;
+    private final WVM wvm;
     private final String workspaceId;
+    private final String versionId;
+    private final String microversionId;
     private final String elementId;
 
     /**
@@ -54,8 +57,26 @@ public class OnshapeDocument {
             throw new OnshapeException("URL is not a valid Onshape document URL: " + url);
         }
         this.documentId = matcher.group(1);
-        this.workspaceId = matcher.group(2);
-        this.elementId = matcher.group(3);
+        switch (matcher.group(2)) {
+            case "v":
+                this.wvm = WVM.Version;
+                this.workspaceId = null;
+                this.versionId = matcher.group(3);
+                this.microversionId = null;
+                break;
+            case "m":
+                this.wvm = WVM.Microversion;
+                this.workspaceId = null;
+                this.versionId = null;
+                this.microversionId = matcher.group(3);
+                break;
+            default:
+                this.wvm = WVM.Workspace;
+                this.workspaceId = matcher.group(3);
+                this.versionId = null;
+                this.microversionId = null;
+        }
+        this.elementId = matcher.group(4);
     }
 
     /**
@@ -67,7 +88,29 @@ public class OnshapeDocument {
      */
     public OnshapeDocument(String documentId, String workspaceId, String elementId) {
         this.documentId = documentId;
+        this.wvm = WVM.Workspace;
         this.workspaceId = workspaceId;
+        this.versionId = null;
+        this.microversionId = null;
+        this.elementId = elementId;
+    }
+
+    /**
+     * Create a new instance using all possible options, used internally by
+     * response objects.
+     *
+     * @param documentId Document id.
+     * @param workspaceId Workspace id.
+     * @param versionId Version id.
+     * @param microversionId Microversion id.
+     * @param elementId Element id.
+     */
+    public OnshapeDocument(String documentId, String workspaceId, String versionId, String microversionId, String elementId) {
+        this.documentId = documentId;
+        this.wvm = workspaceId != null ? WVM.Workspace : (versionId != null ? WVM.Version : (microversionId != null ? WVM.Microversion : null));
+        this.workspaceId = workspaceId;
+        this.versionId = versionId;
+        this.microversionId = microversionId;
         this.elementId = elementId;
     }
 
@@ -90,6 +133,86 @@ public class OnshapeDocument {
     }
 
     /**
+     * Gets the choice of WVM (Workspace, Version, Microversion)
+     *
+     * @return wvm or null if no workspace, version, or microversion
+     */
+    public WVM getWVM() {
+        return wvm;
+    }
+
+    /**
+     * Gets the choice of WV (Workspace, Version)
+     *
+     * @return wv or null if no workspace or version
+     */
+    public WV getWV() {
+        if (wvm == null || wvm == WVM.Microversion) {
+            return null;
+        }
+        switch (wvm) {
+            case Workspace:
+                return WV.Workspace;
+            default:
+                return WV.Version;
+        }
+    }
+
+    /**
+     * Gets either Workspace, Version or Microversion, depending on WVM variable
+     *
+     * @return An id, or null if none available
+     */
+    public String getWVMId() {
+        if (wvm == null) {
+            return null;
+        }
+        switch (wvm) {
+            case Workspace:
+                return workspaceId;
+            case Version:
+                return versionId;
+            default:
+                return microversionId;
+        }
+    }
+
+    /**
+     * Gets either Workspace or Version, depending on WV variable
+     *
+     * @return An id, or null if none available
+     */
+    public String getWVId() {
+        if (wvm == null || wvm == WVM.Microversion) {
+            return null;
+        }
+        switch (wvm) {
+            case Workspace:
+                return workspaceId;
+            default:
+                return versionId;
+        }
+    }
+
+    /**
+     * Get the version id.
+     *
+     * @return Version id.
+     */
+    public String getVersionId() {
+        return versionId;
+    }
+
+    /**
+     * Get the microversion id.
+     *
+     * @return Microversion id.
+     */
+    public String getMicroversionId() {
+        return microversionId;
+    }
+
+    /**
      * Get the element id.
      *
      * @return Element id.
@@ -100,10 +223,13 @@ public class OnshapeDocument {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.documentId);
-        hash = 37 * hash + Objects.hashCode(this.workspaceId);
-        hash = 37 * hash + Objects.hashCode(this.elementId);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.documentId);
+        hash = 59 * hash + Objects.hashCode(this.wvm);
+        hash = 59 * hash + Objects.hashCode(this.workspaceId);
+        hash = 59 * hash + Objects.hashCode(this.versionId);
+        hash = 59 * hash + Objects.hashCode(this.microversionId);
+        hash = 59 * hash + Objects.hashCode(this.elementId);
         return hash;
     }
 
@@ -125,12 +251,41 @@ public class OnshapeDocument {
         if (!Objects.equals(this.workspaceId, other.workspaceId)) {
             return false;
         }
-        return Objects.equals(this.elementId, other.elementId);
+        if (!Objects.equals(this.versionId, other.versionId)) {
+            return false;
+        }
+        if (!Objects.equals(this.microversionId, other.microversionId)) {
+            return false;
+        }
+        if (!Objects.equals(this.elementId, other.elementId)) {
+            return false;
+        }
+        if (this.wvm != other.wvm) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "https://cad.onshape.com/documents/" + documentId + "/w/" + workspaceId + "/e/" + elementId;
+        StringBuilder out = new StringBuilder("https://cad.onshape.com/documents/");
+        out.append(documentId);
+        if (wvm != null) {
+            switch (wvm) {
+                case Version:
+                    out.append("/v/").append(versionId);
+                    break;
+                case Microversion:
+                    out.append("/m/").append(microversionId);
+                    break;
+                default:
+                    out.append("/w/").append(workspaceId);
+            }
+        }
+        if (elementId != null) {
+            out.append("/e/").append(elementId);
+        }
+        return out.toString();
     }
 
 }

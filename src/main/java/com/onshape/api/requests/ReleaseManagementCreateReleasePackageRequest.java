@@ -116,6 +116,7 @@ public final class ReleaseManagementCreateReleasePackageRequest {
      */
     public final ReleaseManagementCreateReleasePackageResponse call(String wfid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/releasepackages/release/:wfid", build(), onshape.buildMap("wfid", wfid), onshape.buildMap(), com.onshape.api.responses.ReleaseManagementCreateReleasePackageResponse.class);
     }
   }

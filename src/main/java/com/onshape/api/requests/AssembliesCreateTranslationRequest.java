@@ -261,6 +261,7 @@ public final class AssembliesCreateTranslationRequest {
      */
     public final AssembliesCreateTranslationResponse call(String did, WV wvType, String wv,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/assemblies/d/:did/[wv]/:wv/e/:eid/translations", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv, "eid", eid), onshape.buildMap(), com.onshape.api.responses.AssembliesCreateTranslationResponse.class);
     }
 
@@ -275,7 +276,8 @@ public final class AssembliesCreateTranslationRequest {
      */
     public final AssembliesCreateTranslationResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("post", "/assemblies/d/:did/[wv]/:wv/e/:eid/translations", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", WV.Workspace, "wv", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesCreateTranslationResponse.class);
+      onshape.validate(build());
+      return onshape.call("post", "/assemblies/d/:did/[wv]/:wv/e/:eid/translations", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesCreateTranslationResponse.class);
     }
   }
 }

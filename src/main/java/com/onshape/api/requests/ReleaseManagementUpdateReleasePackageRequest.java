@@ -161,6 +161,7 @@ public final class ReleaseManagementUpdateReleasePackageRequest {
      * @param wfaction Workflow action to perform on the package. Allowed values are SUBMIT, CREATE_AND_RELEASE, RELEASE, REJECT, OBSOLETE, DISCARD or CREATE_AND_OBSOLETE. DISCARD can only be performed by the creator of the package and is the only transition that can be performed even if items have errors. CREATE_AND_RELEASE and CREATE_AND_OBSOLETE can only be performed by creator if the Release management settings for the company allow release without approvers. If Release management settings restrict the approver list to a subset of company users, Only those users can perform transitions. (Default: null) */
     public final ReleaseManagementUpdateReleasePackageResponse call(String rpid, String wfaction)
         throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/releasepackages/:rpid", build(), onshape.buildMap("rpid", rpid), onshape.buildMap("wfaction", wfaction), com.onshape.api.responses.ReleaseManagementUpdateReleasePackageResponse.class);
     }
   }

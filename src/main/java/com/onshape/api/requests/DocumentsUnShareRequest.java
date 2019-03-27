@@ -104,6 +104,7 @@ public final class DocumentsUnShareRequest {
      * @param did Document ID
      */
     public final DocumentsUnShareResponse call(String eid, String did) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("delete", "/documents/:did/share/:eid", build(), onshape.buildMap("eid", eid, "did", did), onshape.buildMap("entryType", entryType), com.onshape.api.responses.DocumentsUnShareResponse.class);
     }
 
@@ -114,6 +115,7 @@ public final class DocumentsUnShareRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final DocumentsUnShareResponse call(OnshapeDocument document) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("delete", "/documents/:did/share/:eid", build(), onshape.buildMap("eid", document.getElementId(), "did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.DocumentsUnShareResponse.class);
     }
   }

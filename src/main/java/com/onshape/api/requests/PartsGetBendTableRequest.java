@@ -111,6 +111,7 @@ public final class PartsGetBendTableRequest {
      */
     public final PartsGetBendTableResponse call(String did, WVM wvmType, String wvm, String eid,
         String partid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/sheetmetal/bendtable", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "partid", partid), onshape.buildMap("linkDocumentId", linkDocumentId), com.onshape.api.responses.PartsGetBendTableResponse.class);
     }
 
@@ -124,7 +125,8 @@ public final class PartsGetBendTableRequest {
      */
     public final PartsGetBendTableResponse call(OnshapeDocument document, String partid) throws
         OnshapeException {
-      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/sheetmetal/bendtable", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap(), com.onshape.api.responses.PartsGetBendTableResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/sheetmetal/bendtable", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap(), com.onshape.api.responses.PartsGetBendTableResponse.class);
     }
   }
 }

@@ -479,6 +479,7 @@ public final class TranslationsCreateTranslationRequest {
      */
     public final TranslationsCreateTranslationResponse call(String did, String wid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/translations/d/:did/w/:wid", build(), onshape.buildMap("did", did, "wid", wid), onshape.buildMap(), com.onshape.api.responses.TranslationsCreateTranslationResponse.class);
     }
 
@@ -490,12 +491,11 @@ public final class TranslationsCreateTranslationRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final TranslationsCreateTranslationResponse call(OnshapeDocument document, String wid)
-        throws OnshapeException {
-      return onshape.call("post", "/translations/d/:did/w/:wid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid), onshape.buildMap(), com.onshape.api.responses.TranslationsCreateTranslationResponse.class);
+    public final TranslationsCreateTranslationResponse call(OnshapeDocument document) throws
+        OnshapeException {
+      onshape.validate(build());
+      return onshape.call("post", "/translations/d/:did/w/:wid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId()), onshape.buildMap(), com.onshape.api.responses.TranslationsCreateTranslationResponse.class);
     }
   }
 }

@@ -73,6 +73,7 @@ public final class AssembliesDeleteInstanceRequest {
      */
     public final AssembliesDeleteInstanceResponse call(String nid, String did, String wid,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("delete", "/assemblies/d/:did/w/:wid/e/:eid/instance/nodeid/:nid", build(), onshape.buildMap("nid", nid, "did", did, "wid", wid, "eid", eid), onshape.buildMap(), com.onshape.api.responses.AssembliesDeleteInstanceResponse.class);
     }
 
@@ -83,12 +84,11 @@ public final class AssembliesDeleteInstanceRequest {
      * @throws OnshapeException On HTTP or serialization error
      *
      * @param nid The node id of the instance to be deleted
-     *
-     * @param wid Workspace ID
      */
-    public final AssembliesDeleteInstanceResponse call(OnshapeDocument document, String nid,
-        String wid) throws OnshapeException {
-      return onshape.call("delete", "/assemblies/d/:did/w/:wid/e/:eid/instance/nodeid/:nid", build(), onshape.buildMap("nid", nid, "did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesDeleteInstanceResponse.class);
+    public final AssembliesDeleteInstanceResponse call(OnshapeDocument document, String nid) throws
+        OnshapeException {
+      onshape.validate(build());
+      return onshape.call("delete", "/assemblies/d/:did/w/:wid/e/:eid/instance/nodeid/:nid", build(), onshape.buildMap("nid", nid, "did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesDeleteInstanceResponse.class);
     }
   }
 }

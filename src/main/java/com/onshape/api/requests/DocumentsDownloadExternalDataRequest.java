@@ -69,6 +69,7 @@ public final class DocumentsDownloadExternalDataRequest {
      */
     public final DocumentsDownloadExternalDataResponse call(String fid, String did) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/d/:did/externaldata/:fid", build(), onshape.buildMap("fid", fid, "did", did), onshape.buildMap(), com.onshape.api.responses.DocumentsDownloadExternalDataResponse.class);
     }
 
@@ -82,6 +83,7 @@ public final class DocumentsDownloadExternalDataRequest {
      */
     public final DocumentsDownloadExternalDataResponse call(OnshapeDocument document, String fid)
         throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/d/:did/externaldata/:fid", build(), onshape.buildMap("fid", fid, "did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.DocumentsDownloadExternalDataResponse.class);
     }
   }

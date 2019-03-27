@@ -297,6 +297,7 @@ public final class AppElementsCreateElementRequest {
      */
     public final AppElementsCreateElementResponse call(String did, String wid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/appelements/d/:did/w/:wid", build(), onshape.buildMap("did", did, "wid", wid), onshape.buildMap(), com.onshape.api.responses.AppElementsCreateElementResponse.class);
     }
 
@@ -305,12 +306,11 @@ public final class AppElementsCreateElementRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final AppElementsCreateElementResponse call(OnshapeDocument document, String wid) throws
+    public final AppElementsCreateElementResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("post", "/appelements/d/:did/w/:wid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid), onshape.buildMap(), com.onshape.api.responses.AppElementsCreateElementResponse.class);
+      onshape.validate(build());
+      return onshape.call("post", "/appelements/d/:did/w/:wid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId()), onshape.buildMap(), com.onshape.api.responses.AppElementsCreateElementResponse.class);
     }
   }
 }

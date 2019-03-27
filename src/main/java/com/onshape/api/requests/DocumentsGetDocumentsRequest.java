@@ -338,6 +338,7 @@ public final class DocumentsGetDocumentsRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final DocumentsGetDocumentsResponse call() throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents", build(), onshape.buildMap(), onshape.buildMap("q", q, "filter", filter, "owner", owner, "ownerType", ownerType, "sortColumn", sortColumn, "sortOrder", sortOrder, "offset", offset, "limit", limit), com.onshape.api.responses.DocumentsGetDocumentsResponse.class);
     }
   }

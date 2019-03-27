@@ -256,6 +256,7 @@ public final class AssembliesUpdateFeatureRequest {
      */
     public final AssembliesUpdateFeatureResponse call(String fid, String did, String wid,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/assemblies/d/:did/w/:wid/e/:eid/features/featureid/:fid", build(), onshape.buildMap("fid", fid, "did", did, "wid", wid, "eid", eid), onshape.buildMap(), com.onshape.api.responses.AssembliesUpdateFeatureResponse.class);
     }
 
@@ -266,12 +267,11 @@ public final class AssembliesUpdateFeatureRequest {
      * @throws OnshapeException On HTTP or serialization error
      *
      * @param fid The id of the feature being updated. This id should be URL encoded and must match the featureId found in the serialized structure
-     *
-     * @param wid Workspace ID
      */
-    public final AssembliesUpdateFeatureResponse call(OnshapeDocument document, String fid,
-        String wid) throws OnshapeException {
-      return onshape.call("post", "/assemblies/d/:did/w/:wid/e/:eid/features/featureid/:fid", build(), onshape.buildMap("fid", fid, "did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesUpdateFeatureResponse.class);
+    public final AssembliesUpdateFeatureResponse call(OnshapeDocument document, String fid) throws
+        OnshapeException {
+      onshape.validate(build());
+      return onshape.call("post", "/assemblies/d/:did/w/:wid/e/:eid/features/featureid/:fid", build(), onshape.buildMap("fid", fid, "did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesUpdateFeatureResponse.class);
     }
   }
 }

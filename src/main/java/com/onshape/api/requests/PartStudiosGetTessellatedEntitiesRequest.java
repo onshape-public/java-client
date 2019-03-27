@@ -253,6 +253,7 @@ public final class PartStudiosGetTessellatedEntitiesRequest {
      */
     public final PartStudiosGetTessellatedEntitiesResponse call(String did, WVM wvmType, String wvm,
         String eid, String sid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/sketches/:sid/tessellatedentities", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "sid", sid), onshape.buildMap("entityId", entityId, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosGetTessellatedEntitiesResponse.class);
     }
 
@@ -270,7 +271,8 @@ public final class PartStudiosGetTessellatedEntitiesRequest {
      */
     public final PartStudiosGetTessellatedEntitiesResponse call(OnshapeDocument document,
         String sid) throws OnshapeException {
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/sketches/:sid/tessellatedentities", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId(), "sid", sid), onshape.buildMap(), com.onshape.api.responses.PartStudiosGetTessellatedEntitiesResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/sketches/:sid/tessellatedentities", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "sid", sid), onshape.buildMap(), com.onshape.api.responses.PartStudiosGetTessellatedEntitiesResponse.class);
     }
   }
 }

@@ -123,6 +123,7 @@ public final class MetadataUpdatePartMetadataRequest {
      */
     public final MetadataUpdatePartMetadataResponse call(String pid, String did, WV wvType,
         String wv, String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p/:pid", build(), onshape.buildMap("pid", pid, "did", did, "wvType", wvType, "wv", wv, "eid", eid), onshape.buildMap(), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
     }
 
@@ -136,7 +137,8 @@ public final class MetadataUpdatePartMetadataRequest {
      */
     public final MetadataUpdatePartMetadataResponse call(OnshapeDocument document, String pid)
         throws OnshapeException {
-      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p/:pid", build(), onshape.buildMap("pid", pid, "did", document.getDocumentId(), "wvType", WV.Workspace, "wv", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
+      onshape.validate(build());
+      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p/:pid", build(), onshape.buildMap("pid", pid, "did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
     }
   }
 }

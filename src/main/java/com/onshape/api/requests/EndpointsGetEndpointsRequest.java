@@ -63,6 +63,7 @@ public final class EndpointsGetEndpointsRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final EndpointsGetEndpointsResponse call() throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/endpoints", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.EndpointsGetEndpointsResponse.class);
     }
   }

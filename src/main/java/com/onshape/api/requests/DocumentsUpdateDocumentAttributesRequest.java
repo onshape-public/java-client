@@ -202,6 +202,7 @@ public final class DocumentsUpdateDocumentAttributesRequest {
      */
     public final DocumentsUpdateDocumentAttributesResponse call(String did) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/documents/:did", build(), onshape.buildMap("did", did), onshape.buildMap(), com.onshape.api.responses.DocumentsUpdateDocumentAttributesResponse.class);
     }
 
@@ -213,6 +214,7 @@ public final class DocumentsUpdateDocumentAttributesRequest {
      */
     public final DocumentsUpdateDocumentAttributesResponse call(OnshapeDocument document) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/documents/:did", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.DocumentsUpdateDocumentAttributesResponse.class);
     }
   }

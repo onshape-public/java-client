@@ -338,6 +338,7 @@ public final class PartStudiosEvalFeatureScriptRequest {
      */
     public final PartStudiosEvalFeatureScriptResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/featurescript", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("configuration", configuration), com.onshape.api.responses.PartStudiosEvalFeatureScriptResponse.class);
     }
 
@@ -350,7 +351,8 @@ public final class PartStudiosEvalFeatureScriptRequest {
      */
     public final PartStudiosEvalFeatureScriptResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("post", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/featurescript", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosEvalFeatureScriptResponse.class);
+      onshape.validate(build());
+      return onshape.call("post", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/featurescript", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosEvalFeatureScriptResponse.class);
     }
   }
 }

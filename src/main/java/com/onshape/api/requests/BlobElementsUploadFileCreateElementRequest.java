@@ -611,6 +611,7 @@ public final class BlobElementsUploadFileCreateElementRequest {
      */
     public final BlobElementsUploadFileCreateElementResponse call(String did, String wid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/blobelements/d/:did/w/:wid", build(), onshape.buildMap("did", did, "wid", wid), onshape.buildMap(), com.onshape.api.responses.BlobElementsUploadFileCreateElementResponse.class);
     }
 
@@ -620,12 +621,11 @@ public final class BlobElementsUploadFileCreateElementRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final BlobElementsUploadFileCreateElementResponse call(OnshapeDocument document,
-        String wid) throws OnshapeException {
-      return onshape.call("post", "/blobelements/d/:did/w/:wid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid), onshape.buildMap(), com.onshape.api.responses.BlobElementsUploadFileCreateElementResponse.class);
+    public final BlobElementsUploadFileCreateElementResponse call(OnshapeDocument document) throws
+        OnshapeException {
+      onshape.validate(build());
+      return onshape.call("post", "/blobelements/d/:did/w/:wid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId()), onshape.buildMap(), com.onshape.api.responses.BlobElementsUploadFileCreateElementResponse.class);
     }
   }
 }

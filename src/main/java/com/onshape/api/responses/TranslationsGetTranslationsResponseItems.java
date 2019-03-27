@@ -25,6 +25,7 @@ package com.onshape.api.responses;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
 
@@ -178,6 +179,14 @@ public final class TranslationsGetTranslationsResponseItems {
    */
   public final String getFailureReason() {
     return this.failureReason;
+  }
+
+  /**
+   * Returns an OnshapeDocument object that can be used in subsequent calls to the related document
+   * @return The OnshapeDocument object.
+   */
+  public final OnshapeDocument getDocument() {
+    return new OnshapeDocument(documentId, workspaceId, null, null, null);
   }
 
   @Override

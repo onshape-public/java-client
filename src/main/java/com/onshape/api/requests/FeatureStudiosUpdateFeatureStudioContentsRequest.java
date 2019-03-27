@@ -255,6 +255,7 @@ public final class FeatureStudiosUpdateFeatureStudioContentsRequest {
      */
     public final FeatureStudiosUpdateFeatureStudioContentsResponse call(String did, String wid,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/featurestudios/d/:did/w/:wid/e/:eid", build(), onshape.buildMap("did", did, "wid", wid, "eid", eid), onshape.buildMap(), com.onshape.api.responses.FeatureStudiosUpdateFeatureStudioContentsResponse.class);
     }
 
@@ -263,12 +264,11 @@ public final class FeatureStudiosUpdateFeatureStudioContentsRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final FeatureStudiosUpdateFeatureStudioContentsResponse call(OnshapeDocument document,
-        String wid) throws OnshapeException {
-      return onshape.call("post", "/featurestudios/d/:did/w/:wid/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.FeatureStudiosUpdateFeatureStudioContentsResponse.class);
+    public final FeatureStudiosUpdateFeatureStudioContentsResponse call(OnshapeDocument document)
+        throws OnshapeException {
+      onshape.validate(build());
+      return onshape.call("post", "/featurestudios/d/:did/w/:wid/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.FeatureStudiosUpdateFeatureStudioContentsResponse.class);
     }
   }
 }

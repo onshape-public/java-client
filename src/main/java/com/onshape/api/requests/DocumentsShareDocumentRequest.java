@@ -382,6 +382,7 @@ public final class DocumentsShareDocumentRequest {
      * @param did Document ID
      */
     public final DocumentsShareDocumentResponse call(String did) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/documents/:did/share", build(), onshape.buildMap("did", did), onshape.buildMap(), com.onshape.api.responses.DocumentsShareDocumentResponse.class);
     }
 
@@ -393,6 +394,7 @@ public final class DocumentsShareDocumentRequest {
      */
     public final DocumentsShareDocumentResponse call(OnshapeDocument document) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/documents/:did/share", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.DocumentsShareDocumentResponse.class);
     }
   }

@@ -65,6 +65,7 @@ public final class WebhooksUnregisterWebhookRequest {
      * @param webhookid ID of webhook to unregister
      */
     public final WebhooksUnregisterWebhookResponse call(String webhookid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("delete", "/webhooks/:webhookid", build(), onshape.buildMap("webhookid", webhookid), onshape.buildMap(), com.onshape.api.responses.WebhooksUnregisterWebhookResponse.class);
     }
   }

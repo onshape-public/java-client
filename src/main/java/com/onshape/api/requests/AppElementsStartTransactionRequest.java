@@ -163,6 +163,7 @@ public final class AppElementsStartTransactionRequest {
      */
     public final AppElementsStartTransactionResponse call(String did, String wid, String eid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/appelements/d/:did/w/:wid/e/:eid/transactions/", build(), onshape.buildMap("did", did, "wid", wid, "eid", eid), onshape.buildMap(), com.onshape.api.responses.AppElementsStartTransactionResponse.class);
     }
 
@@ -171,12 +172,11 @@ public final class AppElementsStartTransactionRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final AppElementsStartTransactionResponse call(OnshapeDocument document, String wid)
-        throws OnshapeException {
-      return onshape.call("post", "/appelements/d/:did/w/:wid/e/:eid/transactions/", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AppElementsStartTransactionResponse.class);
+    public final AppElementsStartTransactionResponse call(OnshapeDocument document) throws
+        OnshapeException {
+      onshape.validate(build());
+      return onshape.call("post", "/appelements/d/:did/w/:wid/e/:eid/transactions/", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AppElementsStartTransactionResponse.class);
     }
   }
 }

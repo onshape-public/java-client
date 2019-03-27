@@ -67,6 +67,7 @@ public final class DocumentsGetDocumentPermissionSetRequest {
      */
     public final DocumentsGetDocumentPermissionSetResponse call(String did) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/:did/permissionset", build(), onshape.buildMap("did", did), onshape.buildMap(), com.onshape.api.responses.DocumentsGetDocumentPermissionSetResponse.class);
     }
 
@@ -78,6 +79,7 @@ public final class DocumentsGetDocumentPermissionSetRequest {
      */
     public final DocumentsGetDocumentPermissionSetResponse call(OnshapeDocument document) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/:did/permissionset", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.DocumentsGetDocumentPermissionSetResponse.class);
     }
   }

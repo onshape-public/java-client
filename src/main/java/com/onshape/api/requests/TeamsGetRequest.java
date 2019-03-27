@@ -66,6 +66,7 @@ public final class TeamsGetRequest {
      * @param tid Team ID
      */
     public final TeamsGetResponse call(String tid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/teams/:tid", build(), onshape.buildMap("tid", tid), onshape.buildMap(), com.onshape.api.responses.TeamsGetResponse.class);
     }
   }

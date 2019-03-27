@@ -248,6 +248,7 @@ public final class MetadataGetPartListMetadataRequest {
      */
     public final MetadataGetPartListMetadataResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid/p", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "linkDocumentId", linkDocumentId), com.onshape.api.responses.MetadataGetPartListMetadataResponse.class);
     }
 
@@ -259,7 +260,8 @@ public final class MetadataGetPartListMetadataRequest {
      */
     public final MetadataGetPartListMetadataResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid/p", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.MetadataGetPartListMetadataResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid/p", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.MetadataGetPartListMetadataResponse.class);
     }
   }
 }

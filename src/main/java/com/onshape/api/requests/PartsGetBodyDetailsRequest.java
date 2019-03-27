@@ -145,6 +145,7 @@ public final class PartsGetBodyDetailsRequest {
      */
     public final PartsGetBodyDetailsResponse call(String did, WVM wvmType, String wvm, String eid,
         String partid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/bodydetails", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "partid", partid), onshape.buildMap("linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartsGetBodyDetailsResponse.class);
     }
 
@@ -158,7 +159,8 @@ public final class PartsGetBodyDetailsRequest {
      */
     public final PartsGetBodyDetailsResponse call(OnshapeDocument document, String partid) throws
         OnshapeException {
-      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/bodydetails", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap(), com.onshape.api.responses.PartsGetBodyDetailsResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/bodydetails", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap(), com.onshape.api.responses.PartsGetBodyDetailsResponse.class);
     }
   }
 }

@@ -118,6 +118,7 @@ public final class ElementsUpdateReferencesRequest {
      */
     public final ElementsUpdateReferencesResponse call(String did, String wid, String eid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/elements/d/:did/w/:wid/e/:eid/updatereferences", build(), onshape.buildMap("did", did, "wid", wid, "eid", eid), onshape.buildMap(), com.onshape.api.responses.ElementsUpdateReferencesResponse.class);
     }
 
@@ -126,12 +127,11 @@ public final class ElementsUpdateReferencesRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final ElementsUpdateReferencesResponse call(OnshapeDocument document, String wid) throws
+    public final ElementsUpdateReferencesResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("post", "/elements/d/:did/w/:wid/e/:eid/updatereferences", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.ElementsUpdateReferencesResponse.class);
+      onshape.validate(build());
+      return onshape.call("post", "/elements/d/:did/w/:wid/e/:eid/updatereferences", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.ElementsUpdateReferencesResponse.class);
     }
   }
 }

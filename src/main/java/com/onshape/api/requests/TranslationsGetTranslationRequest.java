@@ -65,6 +65,7 @@ public final class TranslationsGetTranslationRequest {
      * @param tid Translation ID
      */
     public final TranslationsGetTranslationResponse call(String tid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/translations/:tid", build(), onshape.buildMap("tid", tid), onshape.buildMap(), com.onshape.api.responses.TranslationsGetTranslationResponse.class);
     }
   }

@@ -215,6 +215,7 @@ public final class PartStudiosGetMassPropertiesRequest {
      */
     public final PartStudiosGetMassPropertiesResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/massproperties", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("partId", partId, "massAsGroup", massAsGroup, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosGetMassPropertiesResponse.class);
     }
 
@@ -228,7 +229,8 @@ public final class PartStudiosGetMassPropertiesRequest {
      */
     public final PartStudiosGetMassPropertiesResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/massproperties", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosGetMassPropertiesResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/massproperties", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosGetMassPropertiesResponse.class);
     }
   }
 }

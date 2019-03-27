@@ -67,6 +67,7 @@ public final class DocumentsGetAclRequest {
      * @param did Document ID
      */
     public final DocumentsGetAclResponse call(String did) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/:did/acl", build(), onshape.buildMap("did", did), onshape.buildMap(), com.onshape.api.responses.DocumentsGetAclResponse.class);
     }
 
@@ -78,6 +79,7 @@ public final class DocumentsGetAclRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final DocumentsGetAclResponse call(OnshapeDocument document) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/:did/acl", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.DocumentsGetAclResponse.class);
     }
   }

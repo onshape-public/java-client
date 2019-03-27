@@ -102,6 +102,7 @@ public final class ReleaseManagementGetReleasePackageRequest {
      */
     public final ReleaseManagementGetReleasePackageResponse call(String rpid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/releasepackages/:rpid", build(), onshape.buildMap("rpid", rpid), onshape.buildMap("detailed", detailed), com.onshape.api.responses.ReleaseManagementGetReleasePackageResponse.class);
     }
   }

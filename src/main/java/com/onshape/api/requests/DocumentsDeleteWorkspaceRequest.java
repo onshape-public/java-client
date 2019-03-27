@@ -69,6 +69,7 @@ public final class DocumentsDeleteWorkspaceRequest {
      */
     public final DocumentsDeleteWorkspaceResponse call(String did, String wid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("delete", "/documents/d/:did/workspaces/:wid", build(), onshape.buildMap("did", did, "wid", wid), onshape.buildMap(), com.onshape.api.responses.DocumentsDeleteWorkspaceResponse.class);
     }
 
@@ -77,12 +78,11 @@ public final class DocumentsDeleteWorkspaceRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wid Workspace ID
      */
-    public final DocumentsDeleteWorkspaceResponse call(OnshapeDocument document, String wid) throws
+    public final DocumentsDeleteWorkspaceResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("delete", "/documents/d/:did/workspaces/:wid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", wid), onshape.buildMap(), com.onshape.api.responses.DocumentsDeleteWorkspaceResponse.class);
+      onshape.validate(build());
+      return onshape.call("delete", "/documents/d/:did/workspaces/:wid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId()), onshape.buildMap(), com.onshape.api.responses.DocumentsDeleteWorkspaceResponse.class);
     }
   }
 }

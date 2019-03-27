@@ -102,6 +102,7 @@ public final class MetadataGetPropertyInfoRequest {
      * @param schemaId Metadata schema ID (Default: null) */
     public final MetadataGetPropertyInfoResponse call(String pid, String schemaId) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/metadataschema/propertyinfo/:pid", build(), onshape.buildMap("pid", pid), onshape.buildMap("schemaId", schemaId, "documentId", documentId), com.onshape.api.responses.MetadataGetPropertyInfoResponse.class);
     }
   }

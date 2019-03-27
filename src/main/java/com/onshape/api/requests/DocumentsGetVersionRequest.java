@@ -103,6 +103,7 @@ public final class DocumentsGetVersionRequest {
      * @param vid Version ID
      */
     public final DocumentsGetVersionResponse call(String did, String vid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/d/:did/versions/:vid", build(), onshape.buildMap("did", did, "vid", vid), onshape.buildMap("linkDocumentId", linkDocumentId), com.onshape.api.responses.DocumentsGetVersionResponse.class);
     }
 
@@ -116,6 +117,7 @@ public final class DocumentsGetVersionRequest {
      */
     public final DocumentsGetVersionResponse call(OnshapeDocument document, String vid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/d/:did/versions/:vid", build(), onshape.buildMap("did", document.getDocumentId(), "vid", vid), onshape.buildMap(), com.onshape.api.responses.DocumentsGetVersionResponse.class);
     }
   }

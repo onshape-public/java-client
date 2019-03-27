@@ -385,6 +385,7 @@ public final class AssembliesGetShadedViewsRequest {
      */
     public final AssembliesGetShadedViewsResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/shadedviews", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("outputHeight", outputHeight, "outputWidth", outputWidth, "pixelSize", pixelSize, "edges", edges, "showAllParts", showAllParts, "includeSurfaces", includeSurfaces, "useAntiAliasing", useAntiAliasing, "viewMatrix", viewMatrix, "linkDocumentId", linkDocumentId), com.onshape.api.responses.AssembliesGetShadedViewsResponse.class);
     }
 
@@ -396,7 +397,8 @@ public final class AssembliesGetShadedViewsRequest {
      */
     public final AssembliesGetShadedViewsResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/shadedviews", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesGetShadedViewsResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/shadedviews", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesGetShadedViewsResponse.class);
     }
   }
 }

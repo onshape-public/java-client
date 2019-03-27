@@ -72,6 +72,7 @@ public final class DocumentsGetCurrentMicroversionRequest {
      */
     public final DocumentsGetCurrentMicroversionResponse call(String did, WV wvType, String wv)
         throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/documents/d/:did/[wv]/:wv/currentmicroversion", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv), onshape.buildMap(), com.onshape.api.responses.DocumentsGetCurrentMicroversionResponse.class);
     }
 
@@ -83,7 +84,8 @@ public final class DocumentsGetCurrentMicroversionRequest {
      */
     public final DocumentsGetCurrentMicroversionResponse call(OnshapeDocument document) throws
         OnshapeException {
-      return onshape.call("get", "/documents/d/:did/[wv]/:wv/currentmicroversion", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", WV.Workspace, "wv", document.getWorkspaceId()), onshape.buildMap(), com.onshape.api.responses.DocumentsGetCurrentMicroversionResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/documents/d/:did/[wv]/:wv/currentmicroversion", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId()), onshape.buildMap(), com.onshape.api.responses.DocumentsGetCurrentMicroversionResponse.class);
     }
   }
 }

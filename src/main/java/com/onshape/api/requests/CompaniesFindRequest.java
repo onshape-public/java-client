@@ -63,6 +63,7 @@ public final class CompaniesFindRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final CompaniesFindResponse call() throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/companies", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.CompaniesFindResponse.class);
     }
   }

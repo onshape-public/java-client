@@ -66,6 +66,7 @@ public final class BillingGetClientPlansRequest {
      * @param cid Client Id
      */
     public final BillingGetClientPlansResponse call(String cid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/billing/plans/client/:cid", build(), onshape.buildMap("cid", cid), onshape.buildMap(), com.onshape.api.responses.BillingGetClientPlansResponse.class);
     }
   }

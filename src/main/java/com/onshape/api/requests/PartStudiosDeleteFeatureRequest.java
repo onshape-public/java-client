@@ -74,6 +74,7 @@ public final class PartStudiosDeleteFeatureRequest {
      */
     public final PartStudiosDeleteFeatureResponse call(String fid, String did, String wid,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("delete", "/partstudios/d/:did/w/:wid/e/:eid/features/featureid/:fid", build(), onshape.buildMap("fid", fid, "did", did, "wid", wid, "eid", eid), onshape.buildMap(), com.onshape.api.responses.PartStudiosDeleteFeatureResponse.class);
     }
 
@@ -85,12 +86,11 @@ public final class PartStudiosDeleteFeatureRequest {
      * @throws OnshapeException On HTTP or serialization error
      *
      * @param fid The id of the feature being updated. This id should be URL encoded
-     *
-     * @param wid Workspace ID
      */
-    public final PartStudiosDeleteFeatureResponse call(OnshapeDocument document, String fid,
-        String wid) throws OnshapeException {
-      return onshape.call("delete", "/partstudios/d/:did/w/:wid/e/:eid/features/featureid/:fid", build(), onshape.buildMap("fid", fid, "did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosDeleteFeatureResponse.class);
+    public final PartStudiosDeleteFeatureResponse call(OnshapeDocument document, String fid) throws
+        OnshapeException {
+      onshape.validate(build());
+      return onshape.call("delete", "/partstudios/d/:did/w/:wid/e/:eid/features/featureid/:fid", build(), onshape.buildMap("fid", fid, "did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosDeleteFeatureResponse.class);
     }
   }
 }

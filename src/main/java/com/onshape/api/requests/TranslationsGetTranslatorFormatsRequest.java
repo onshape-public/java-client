@@ -64,6 +64,7 @@ public final class TranslationsGetTranslatorFormatsRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final TranslationsGetTranslatorFormatsResponse call() throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/translations/translationformats", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.TranslationsGetTranslatorFormatsResponse.class);
     }
   }

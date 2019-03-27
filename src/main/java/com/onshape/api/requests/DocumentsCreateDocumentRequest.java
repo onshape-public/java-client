@@ -380,6 +380,7 @@ public final class DocumentsCreateDocumentRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final DocumentsCreateDocumentResponse call() throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/documents", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.DocumentsCreateDocumentResponse.class);
     }
   }

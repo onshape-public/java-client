@@ -69,6 +69,7 @@ public final class UsersGetUserSettingsCurrentLoggedInUserRequest {
      * @throws OnshapeException On HTTP or serialization error
      */
     public final UsersGetUserSettingsCurrentLoggedInUserResponse call() throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/users/settings", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.UsersGetUserSettingsCurrentLoggedInUserResponse.class);
     }
   }

@@ -180,6 +180,7 @@ public final class PartsExportParasolidRequest {
      */
     public final PartsExportParasolidResponse call(String did, WVM wvmType, String wvm, String eid,
         String partid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/parasolid", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "partid", partid), onshape.buildMap("version", version, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartsExportParasolidResponse.class);
     }
 
@@ -193,7 +194,8 @@ public final class PartsExportParasolidRequest {
      */
     public final PartsExportParasolidResponse call(OnshapeDocument document, String partid) throws
         OnshapeException {
-      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/parasolid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap(), com.onshape.api.responses.PartsExportParasolidResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/parasolid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap(), com.onshape.api.responses.PartsExportParasolidResponse.class);
     }
   }
 }

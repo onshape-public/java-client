@@ -387,6 +387,7 @@ public final class DocumentsCreateWorkspaceRequest {
      * @param did Document ID
      */
     public final DocumentsCreateWorkspaceResponse call(String did) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/documents/d/:did/workspaces", build(), onshape.buildMap("did", did), onshape.buildMap(), com.onshape.api.responses.DocumentsCreateWorkspaceResponse.class);
     }
 
@@ -405,6 +406,7 @@ public final class DocumentsCreateWorkspaceRequest {
      */
     public final DocumentsCreateWorkspaceResponse call(OnshapeDocument document) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/documents/d/:did/workspaces", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.DocumentsCreateWorkspaceResponse.class);
     }
   }

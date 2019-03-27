@@ -66,6 +66,7 @@ public final class FoldersGetAclRequest {
      * @param fid Folder ID
      */
     public final FoldersGetAclResponse call(String fid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/folders/:fid/acl", build(), onshape.buildMap("fid", fid), onshape.buildMap(), com.onshape.api.responses.FoldersGetAclResponse.class);
     }
   }

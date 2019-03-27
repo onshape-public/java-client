@@ -67,6 +67,7 @@ public final class ThumbnailsGetThumbnailForDocumentRequest {
      */
     public final ThumbnailsGetThumbnailForDocumentResponse call(String did) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/thumbnails/d/:did", build(), onshape.buildMap("did", did), onshape.buildMap(), com.onshape.api.responses.ThumbnailsGetThumbnailForDocumentResponse.class);
     }
 
@@ -78,6 +79,7 @@ public final class ThumbnailsGetThumbnailForDocumentRequest {
      */
     public final ThumbnailsGetThumbnailForDocumentResponse call(OnshapeDocument document) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/thumbnails/d/:did", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.ThumbnailsGetThumbnailForDocumentResponse.class);
     }
   }

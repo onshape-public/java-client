@@ -104,6 +104,7 @@ public final class FoldersUnShareRequest {
      * @param fid Folder ID
      */
     public final FoldersUnShareResponse call(String eid, String fid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("delete", "/folders/:fid/share/:eid", build(), onshape.buildMap("eid", eid, "fid", fid), onshape.buildMap("entryType", entryType), com.onshape.api.responses.FoldersUnShareResponse.class);
     }
 
@@ -117,6 +118,7 @@ public final class FoldersUnShareRequest {
      */
     public final FoldersUnShareResponse call(OnshapeDocument document, String fid) throws
         OnshapeException {
+      onshape.validate(build());
       return onshape.call("delete", "/folders/:fid/share/:eid", build(), onshape.buildMap("eid", document.getElementId(), "fid", fid), onshape.buildMap(), com.onshape.api.responses.FoldersUnShareResponse.class);
     }
   }

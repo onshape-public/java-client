@@ -252,6 +252,7 @@ public final class PartsGetEdgesRequest {
      */
     public final PartsGetEdgesResponse call(String did, WVM wvmType, String wvm, String eid,
         String partid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/tessellatededges", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "partid", partid), onshape.buildMap("angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "edgeId", edgeId, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartsGetEdgesResponse.class);
     }
 
@@ -268,7 +269,8 @@ public final class PartsGetEdgesRequest {
      */
     public final PartsGetEdgesResponse call(OnshapeDocument document, String partid) throws
         OnshapeException {
-      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/tessellatededges", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", WVM.Workspace, "wvm", document.getWorkspaceId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap(), com.onshape.api.responses.PartsGetEdgesResponse.class);
+      onshape.validate(build());
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/tessellatededges", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap(), com.onshape.api.responses.PartsGetEdgesResponse.class);
     }
   }
 }

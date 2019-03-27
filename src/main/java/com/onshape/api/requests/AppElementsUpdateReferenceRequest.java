@@ -430,6 +430,7 @@ public final class AppElementsUpdateReferenceRequest {
      */
     public final AppElementsUpdateReferenceResponse call(String rid, String did, String wid,
         String eid) throws OnshapeException {
+      onshape.validate(build());
       return onshape.call("post", "/appelements/d/:did/w/:wid/e/:eid/references/:rid", build(), onshape.buildMap("rid", rid, "did", did, "wid", wid, "eid", eid), onshape.buildMap(), com.onshape.api.responses.AppElementsUpdateReferenceResponse.class);
     }
 
@@ -440,12 +441,11 @@ public final class AppElementsUpdateReferenceRequest {
      * @throws OnshapeException On HTTP or serialization error
      *
      * @param rid The id of a reference to update
-     *
-     * @param wid Workspace ID
      */
-    public final AppElementsUpdateReferenceResponse call(OnshapeDocument document, String rid,
-        String wid) throws OnshapeException {
-      return onshape.call("post", "/appelements/d/:did/w/:wid/e/:eid/references/:rid", build(), onshape.buildMap("rid", rid, "did", document.getDocumentId(), "wid", wid, "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AppElementsUpdateReferenceResponse.class);
+    public final AppElementsUpdateReferenceResponse call(OnshapeDocument document, String rid)
+        throws OnshapeException {
+      onshape.validate(build());
+      return onshape.call("post", "/appelements/d/:did/w/:wid/e/:eid/references/:rid", build(), onshape.buildMap("rid", rid, "did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AppElementsUpdateReferenceResponse.class);
     }
   }
 }
