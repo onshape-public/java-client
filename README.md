@@ -27,7 +27,7 @@ and
 	<dependency>
 	    <groupId>com.github.onshape-public</groupId>
 	    <artifactId>java-client</artifactId>
-	    <version>v1.94.23180.58da61c447be</version>
+	    <version>v1.95.23334.0a9a85650f15</version>
 	</dependency>
 ```
 
@@ -48,7 +48,7 @@ and
 
 ```
 	dependencies {
-	        implementation 'com.github.onshape-public:java-client:v1.94.23180.58da61c447be'
+	        implementation 'com.github.onshape-public:java-client:v1.95.23334.0a9a85650f15'
 	}
 ```
 

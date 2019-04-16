@@ -30,7 +30,7 @@ import com.onshape.api.types.OnshapeVersion;
  * &copy; 2018 Onshape Inc.
  */
 public final class Onshape extends BaseClient {
-  private final OnshapeVersion buildVersion = new OnshapeVersion("1.0", "58da61c447be1faa0b6acb016864bacb0be9829c", "1.94.23180.58da61c447be");
+  private final OnshapeVersion buildVersion = new OnshapeVersion("1.0", "0a9a85650f15bd8c1fd123b6ff07ceba73f43662", "1.95.23334.0a9a85650f15");
 
   /**
    * Access API methods for category Accounts
@@ -206,6 +206,14 @@ public final class Onshape extends BaseClient {
    */
   public final Teams teams() {
     return new Teams(this);
+  }
+
+  /**
+   * Access API methods for category TestCustomWorkflows
+   *  @return API group object
+   */
+  public final TestCustomWorkflows testCustomWorkflows() {
+    return new TestCustomWorkflows(this);
   }
 
   /**
