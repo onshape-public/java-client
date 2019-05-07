@@ -31,6 +31,7 @@ import com.onshape.api.requests.AppElementsGetHistoryByWorkspaceRequest;
 import com.onshape.api.requests.AppElementsGetSubElementContentRequest;
 import com.onshape.api.requests.AppElementsGetSubElementIdsRequest;
 import com.onshape.api.requests.AppElementsResolveReferenceRequest;
+import com.onshape.api.requests.AppElementsResolveReferencesRequest;
 import com.onshape.api.requests.AppElementsStartTransactionRequest;
 import com.onshape.api.requests.AppElementsUpdateElementRequest;
 import com.onshape.api.requests.AppElementsUpdateReferenceRequest;
@@ -116,6 +117,14 @@ public final class AppElements {
    */
   public final AppElementsResolveReferenceRequest.Builder resolveReference() {
     return AppElementsResolveReferenceRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for resolveReferences
+   *  @return Request builder object
+   */
+  public final AppElementsResolveReferencesRequest.Builder resolveReferences() {
+    return AppElementsResolveReferencesRequest.builder(onshape);
   }
 
   /**

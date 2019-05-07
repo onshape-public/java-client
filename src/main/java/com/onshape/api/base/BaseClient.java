@@ -76,6 +76,7 @@ import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
 import org.hashids.Hashids;
+import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
 
 /**
  *
@@ -94,6 +95,8 @@ public class BaseClient {
     private String clientId;
     private String clientSecret;
     private File workingDir;
+    private PollingHandler pollingHandler;
+    private boolean usingValidation;
     private static final ObjectMapper TOSTRINGMAPPER;
 
     static {
@@ -111,6 +114,7 @@ public class BaseClient {
         clientConfig.register(MultiPartFeature.class);
         client = ClientBuilder.newClient(clientConfig);
         workingDir = new File(System.getProperty("java.io.tmpdir"));
+        usingValidation = true;
     }
 
     /**
@@ -129,6 +133,26 @@ public class BaseClient {
      */
     public void setBaseURL(String baseURL) {
         this.baseURL = baseURL;
+    }
+
+    /**
+     * Check whether the client is using validation of required fields before
+     * HTTP methods are called
+     *
+     * @return true if validation is enabled
+     */
+    public boolean isUsingValidation() {
+        return usingValidation;
+    }
+
+    /**
+     * Set whether the client is using validation of required fields before HTTP
+     * methods are called
+     *
+     * @param usingValidation true if validation is desired
+     */
+    public void setUsingValidation(boolean usingValidation) {
+        this.usingValidation = usingValidation;
     }
 
     /**
@@ -608,13 +632,29 @@ public class BaseClient {
      * @throws OnshapeException If required fields are missing
      */
     public <T> void validate(T obj) throws OnshapeException {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-        Set<ConstraintViolation<T>> violations = validator.validate(obj);
-        if (!violations.isEmpty()) {
-            StringBuilder message = new StringBuilder("Validation of request object failed");
-            violations.forEach((violation) -> message.append(", ").append(violation.getMessage()));
-            throw new OnshapeException(message.toString());
+        if (usingValidation) {
+            ValidatorFactory factory = Validation.byDefaultProvider()
+                    .configure().messageInterpolator(new ParameterMessageInterpolator())
+                    .buildValidatorFactory();
+            Validator validator = factory.getValidator();
+            Set<ConstraintViolation<T>> violations = validator.validate(obj);
+            if (!violations.isEmpty()) {
+                StringBuilder message = new StringBuilder("Validation of request object failed");
+                violations.forEach((violation) -> message.append(", ").append(violation.getMessage()));
+                throw new OnshapeException(message.toString());
+            }
         }
+    }
+
+    /**
+     * Fetches utility object for polling GET requests via this client.
+     * 
+     * @return PollingHandler instance
+     */
+    public PollingHandler getPollingHandler() {
+        if (pollingHandler == null) {
+            pollingHandler = new PollingHandler(this);
+        }
+        return pollingHandler;
     }
 }

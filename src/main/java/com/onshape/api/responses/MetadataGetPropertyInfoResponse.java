@@ -67,7 +67,7 @@ public final class MetadataGetPropertyInfoResponse {
   String ownerId;
 
   /**
-   * Property owner type, which can be: 0: user, 1: company
+   * Property owner type, which can be: 1: company 2:onshape
    */
   @JsonProperty("ownerType")
   @NotNull
@@ -179,9 +179,9 @@ public final class MetadataGetPropertyInfoResponse {
   }
 
   /**
-   * Get Property owner type, which can be: 0: user, 1: company
+   * Get Property owner type, which can be: 1: company 2:onshape
    *
-   * @return Property owner type, which can be: 0: user, 1: company
+   * @return Property owner type, which can be: 1: company 2:onshape
    *
    */
   public final Number getOwnerType() {

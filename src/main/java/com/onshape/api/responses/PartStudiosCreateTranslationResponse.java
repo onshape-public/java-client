@@ -29,6 +29,7 @@ import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
+import java.util.concurrent.CompletableFuture;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -132,6 +133,20 @@ public final class PartStudiosCreateTranslationResponse {
   public final PartStudiosCreateTranslationResponse refresh(Onshape onshape) throws
       OnshapeException {
     return onshape.get(href, PartStudiosCreateTranslationResponse.class);
+  }
+
+  /**
+   * Returns a CompletableFuture that will be complete when this process is no longer in an "ACTIVE" state
+   * @param onshape The Onshape client object.
+   * @return Future for this response.
+   */
+  public final CompletableFuture<PartStudiosCreateTranslationResponse> asFuture(Onshape onshape) {
+    if (!"ACTIVE".equals(getRequestState())) {
+      CompletableFuture<PartStudiosCreateTranslationResponse> completableFuture = new CompletableFuture<>();
+      completableFuture.complete(this);
+      return completableFuture;
+    }
+    return onshape.getPollingHandler().poll(href, PartStudiosCreateTranslationResponse.class, (response) -> !"ACTIVE".equals(response.getRequestState()));
   }
 
   /**

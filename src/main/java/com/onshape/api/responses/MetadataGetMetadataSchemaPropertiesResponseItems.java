@@ -63,7 +63,7 @@ public final class MetadataGetMetadataSchemaPropertiesResponseItems {
   public String ownerId;
 
   /**
-   * Property owner type, which can be: 0: user, 1: company, 2: onshape
+   * Property owner type, which can be: 1: company, 2: onshape
    */
   @JsonProperty("ownerType")
   public Number ownerType;
@@ -139,9 +139,9 @@ public final class MetadataGetMetadataSchemaPropertiesResponseItems {
   }
 
   /**
-   * Get Property owner type, which can be: 0: user, 1: company, 2: onshape
+   * Get Property owner type, which can be: 1: company, 2: onshape
    *
-   * @return Property owner type, which can be: 0: user, 1: company, 2: onshape
+   * @return Property owner type, which can be: 1: company, 2: onshape
    *
    */
   public final Number getOwnerType() {

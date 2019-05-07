@@ -49,7 +49,7 @@ public final class MetadataGetMetadataSchemaPropertiesRequest {
   String ownerId;
 
   /**
-   * Schema owner type, which can be: 0: user, 1: company (default: 1). Should only be specified if ownerId is specified.
+   * Schema owner type must be 1 company. Should only be specified if ownerId is specified.
    */
   @JsonProperty("ownerType")
   Number ownerType;
@@ -127,7 +127,7 @@ public final class MetadataGetMetadataSchemaPropertiesRequest {
     private String ownerId;
 
     /**
-     * Schema owner type, which can be: 0: user, 1: company (default: 1). Should only be specified if ownerId is specified.
+     * Schema owner type must be 1 company. Should only be specified if ownerId is specified.
      */
     private Number ownerType;
 
@@ -211,9 +211,9 @@ public final class MetadataGetMetadataSchemaPropertiesRequest {
     }
 
     /**
-     * Get Schema owner type, which can be: 0: user, 1: company (default: 1). Should only be specified if ownerId is specified.
+     * Get Schema owner type must be 1 company. Should only be specified if ownerId is specified.
      *
-     * @return Schema owner type, which can be: 0: user, 1: company (default: 1). Should only be specified if ownerId is specified.
+     * @return Schema owner type must be 1 company. Should only be specified if ownerId is specified.
      *
      */
     public final Number ownerType() {
@@ -221,9 +221,9 @@ public final class MetadataGetMetadataSchemaPropertiesRequest {
     }
 
     /**
-     * Set Schema owner type, which can be: 0: user, 1: company (default: 1). Should only be specified if ownerId is specified.
+     * Set Schema owner type must be 1 company. Should only be specified if ownerId is specified.
      *
-     * @param value Schema owner type, which can be: 0: user, 1: company (default: 1). Should only be specified if ownerId is specified.
+     * @param value Schema owner type must be 1 company. Should only be specified if ownerId is specified.
      *
      * @return the Builder object.
      */

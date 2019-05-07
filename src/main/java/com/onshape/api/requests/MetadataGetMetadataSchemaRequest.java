@@ -36,7 +36,7 @@ import java.lang.String;
  */
 public final class MetadataGetMetadataSchemaRequest {
   /**
-   * Schema owner type, which can be: 0: user, 1: company (default: 1)
+   * Schema owner type, which can be: 1:company 2:onshape (default: 1)
    */
   @JsonProperty("ownerType")
   Number ownerType;
@@ -65,7 +65,7 @@ public final class MetadataGetMetadataSchemaRequest {
 
   public static final class Builder {
     /**
-     * Schema owner type, which can be: 0: user, 1: company (default: 1)
+     * Schema owner type, which can be: 1:company 2:onshape (default: 1)
      */
     private Number ownerType;
 
@@ -80,9 +80,9 @@ public final class MetadataGetMetadataSchemaRequest {
     }
 
     /**
-     * Get Schema owner type, which can be: 0: user, 1: company (default: 1)
+     * Get Schema owner type, which can be: 1:company 2:onshape (default: 1)
      *
-     * @return Schema owner type, which can be: 0: user, 1: company (default: 1)
+     * @return Schema owner type, which can be: 1:company 2:onshape (default: 1)
      *
      */
     public final Number ownerType() {
@@ -90,9 +90,9 @@ public final class MetadataGetMetadataSchemaRequest {
     }
 
     /**
-     * Set Schema owner type, which can be: 0: user, 1: company (default: 1)
+     * Set Schema owner type, which can be: 1:company 2:onshape (default: 1)
      *
-     * @param value Schema owner type, which can be: 0: user, 1: company (default: 1)
+     * @param value Schema owner type, which can be: 1:company 2:onshape (default: 1)
      *
      * @return the Builder object.
      */
