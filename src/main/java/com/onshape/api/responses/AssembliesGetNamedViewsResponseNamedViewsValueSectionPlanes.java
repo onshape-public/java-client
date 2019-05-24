@@ -25,51 +25,64 @@ package com.onshape.api.responses;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
-import javax.validation.constraints.NotNull;
 
 /**
- * Response object for getMassProperties API endpoint.
+ * Object used in calls to getNamedViews API endpoint.
  * &copy; 2018 Onshape Inc.
  */
 @JsonIgnoreProperties(
     ignoreUnknown = true
 )
-public final class PartsGetMassPropertiesResponse {
+public final class AssembliesGetNamedViewsResponseNamedViewsValueSectionPlanes {
   /**
-   * Current microversion
+   * A 3-element array storing the center vector of a section plane
    */
-  @JsonProperty("microversionId")
-  @NotNull
-  String microversionId;
+  @JsonProperty("center")
+  public Number center;
 
   /**
-   * Object containing parts with mass properties, with the keys being the part ID or &quot;-all-&quot; for a set of parts considered together
+   * A 3-element array storing the tangent vector of a section plane
    */
-  @JsonProperty("bodies")
-  @NotNull
-  Map<String, PartsGetMassPropertiesResponseBodiesValue> bodies;
+  @JsonProperty("tangent")
+  public Number tangent;
 
   /**
-   * Get Current microversion
+   * A 3-element array storing the normal vector of a section plane
+   */
+  @JsonProperty("normal")
+  public Number normal;
+
+  /**
+   * Get A 3-element array storing the center vector of a section plane
    *
-   * @return Current microversion
+   * @return A 3-element array storing the center vector of a section plane
    *
    */
-  public final String getMicroversionId() {
-    return this.microversionId;
+  public final Number getCenter() {
+    return this.center;
   }
 
   /**
-   * Get Object containing parts with mass properties, with the keys being the part ID or &quot;-all-&quot; for a set of parts considered together
+   * Get A 3-element array storing the tangent vector of a section plane
    *
-   * @return Object containing parts with mass properties, with the keys being the part ID or &quot;-all-&quot; for a set of parts considered together
+   * @return A 3-element array storing the tangent vector of a section plane
    *
    */
-  public final Map<String, PartsGetMassPropertiesResponseBodiesValue> getBodies() {
-    return this.bodies;
+  public final Number getTangent() {
+    return this.tangent;
+  }
+
+  /**
+   * Get A 3-element array storing the normal vector of a section plane
+   *
+   * @return A 3-element array storing the normal vector of a section plane
+   *
+   */
+  public final Number getNormal() {
+    return this.normal;
   }
 
   @Override

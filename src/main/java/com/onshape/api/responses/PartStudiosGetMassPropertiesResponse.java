@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -49,7 +50,7 @@ public final class PartStudiosGetMassPropertiesResponse {
    */
   @JsonProperty("bodies")
   @NotNull
-  PartStudiosGetMassPropertiesResponseBodies bodies;
+  Map<String, PartStudiosGetMassPropertiesResponseBodiesValue> bodies;
 
   /**
    * Get Current microversion
@@ -67,7 +68,7 @@ public final class PartStudiosGetMassPropertiesResponse {
    * @return Object containing parts with mass properties, with the keys being the part ID or &quot;-all-&quot; for a set of parts considered together
    *
    */
-  public final PartStudiosGetMassPropertiesResponseBodies getBodies() {
+  public final Map<String, PartStudiosGetMassPropertiesResponseBodiesValue> getBodies() {
     return this.bodies;
   }
 

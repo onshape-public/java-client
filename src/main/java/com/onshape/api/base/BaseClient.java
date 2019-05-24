@@ -112,6 +112,7 @@ public class BaseClient {
         jacksonProvider.setMapper(objectMapper);
         ClientConfig clientConfig = new ClientConfig(jacksonProvider);
         clientConfig.register(MultiPartFeature.class);
+        clientConfig.register(new CompressionReaderInterceptor());
         client = ClientBuilder.newClient(clientConfig);
         workingDir = new File(System.getProperty("java.io.tmpdir"));
         usingValidation = true;
@@ -407,6 +408,8 @@ public class BaseClient {
         WebTarget target = client.target(uri);
         Invocation.Builder invocationBuilder = target.request(jsonResponse ? MediaType.APPLICATION_JSON_TYPE : MediaType.APPLICATION_OCTET_STREAM_TYPE)
                 .header("Accept", jsonResponse ? "application/vnd.onshape.v1+json" : "application/vnd.onshape.v1+octet-stream");
+        // Accept gzip compressed responses
+        invocationBuilder.header("Accept-Encoding", "gzip");
         // Set the content-type and build the entity
         Entity entity;
         switch (method.toUpperCase()) {
@@ -648,7 +651,7 @@ public class BaseClient {
 
     /**
      * Fetches utility object for polling GET requests via this client.
-     * 
+     *
      * @return PollingHandler instance
      */
     public PollingHandler getPollingHandler() {

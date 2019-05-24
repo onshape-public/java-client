@@ -25,51 +25,64 @@ package com.onshape.api.responses;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
-import javax.validation.constraints.NotNull;
 
 /**
- * Response object for getMassProperties API endpoint.
+ * Object used in calls to getMassProperties API endpoint.
  * &copy; 2018 Onshape Inc.
  */
 @JsonIgnoreProperties(
     ignoreUnknown = true
 )
-public final class PartsGetMassPropertiesResponse {
+public final class PartsGetMassPropertiesResponseBodiesValuePrincipalAxes {
   /**
-   * Current microversion
+   * x coordinate of principal axis
    */
-  @JsonProperty("microversionId")
-  @NotNull
-  String microversionId;
+  @JsonProperty("x")
+  public Number x;
 
   /**
-   * Object containing parts with mass properties, with the keys being the part ID or &quot;-all-&quot; for a set of parts considered together
+   * y coordinate of principal axis
    */
-  @JsonProperty("bodies")
-  @NotNull
-  Map<String, PartsGetMassPropertiesResponseBodiesValue> bodies;
+  @JsonProperty("y")
+  public Number y;
 
   /**
-   * Get Current microversion
+   * z coordinate of principal axis
+   */
+  @JsonProperty("z")
+  public Number z;
+
+  /**
+   * Get x coordinate of principal axis
    *
-   * @return Current microversion
+   * @return x coordinate of principal axis
    *
    */
-  public final String getMicroversionId() {
-    return this.microversionId;
+  public final Number getX() {
+    return this.x;
   }
 
   /**
-   * Get Object containing parts with mass properties, with the keys being the part ID or &quot;-all-&quot; for a set of parts considered together
+   * Get y coordinate of principal axis
    *
-   * @return Object containing parts with mass properties, with the keys being the part ID or &quot;-all-&quot; for a set of parts considered together
+   * @return y coordinate of principal axis
    *
    */
-  public final Map<String, PartsGetMassPropertiesResponseBodiesValue> getBodies() {
-    return this.bodies;
+  public final Number getY() {
+    return this.y;
+  }
+
+  /**
+   * Get z coordinate of principal axis
+   *
+   * @return z coordinate of principal axis
+   *
+   */
+  public final Number getZ() {
+    return this.z;
   }
 
   @Override

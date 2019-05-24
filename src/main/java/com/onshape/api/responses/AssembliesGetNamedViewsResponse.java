@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -42,7 +43,7 @@ public final class AssembliesGetNamedViewsResponse {
    */
   @JsonProperty("namedViews")
   @NotNull
-  AssembliesGetNamedViewsResponseNamedViews namedViews;
+  Map<String, AssembliesGetNamedViewsResponseNamedViewsValue> namedViews;
 
   /**
    * Get Object containing a field for each named view. The key of each field is the name of the view
@@ -50,7 +51,7 @@ public final class AssembliesGetNamedViewsResponse {
    * @return Object containing a field for each named view. The key of each field is the name of the view
    *
    */
-  public final AssembliesGetNamedViewsResponseNamedViews getNamedViews() {
+  public final Map<String, AssembliesGetNamedViewsResponseNamedViewsValue> getNamedViews() {
     return this.namedViews;
   }
 

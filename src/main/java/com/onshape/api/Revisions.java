@@ -22,6 +22,7 @@
 //
 package com.onshape.api;
 
+import com.onshape.api.requests.RevisionsGetLatestInDocumentOrCompanyRequest;
 import com.onshape.api.requests.RevisionsGetRevisionHistoryInCompanyRequest;
 
 /**
@@ -33,6 +34,14 @@ public final class Revisions {
 
   Revisions(Onshape onshape) {
     this.onshape = onshape;
+  }
+
+  /**
+   * Create request for getLatestInDocumentOrCompany
+   *  @return Request builder object
+   */
+  public final RevisionsGetLatestInDocumentOrCompanyRequest.Builder getLatestInDocumentOrCompany() {
+    return RevisionsGetLatestInDocumentOrCompanyRequest.builder(onshape);
   }
 
   /**
