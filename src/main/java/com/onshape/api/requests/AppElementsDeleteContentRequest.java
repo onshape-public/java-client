@@ -194,7 +194,7 @@ public final class AppElementsDeleteContentRequest {
     public final AppElementsDeleteContentResponse call(OnshapeDocument document, String sid) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("delete", "/appelements/d/:did/[wvm]/:wvm/e/:eid/content/subelements/:sid", build(), onshape.buildMap("sid", sid, "did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AppElementsDeleteContentResponse.class);
+      return onshape.call("delete", "/appelements/d/:did/[wvm]/:wvm/e/:eid/content/subelements/:sid", build(), onshape.buildMap("sid", sid, "did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("parentChangeId", parentChangeId, "transactionId", transactionId, "description", description), com.onshape.api.responses.AppElementsDeleteContentResponse.class);
     }
   }
 }

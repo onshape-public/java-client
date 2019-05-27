@@ -352,7 +352,7 @@ public final class PartStudiosEvalFeatureScriptRequest {
     public final PartStudiosEvalFeatureScriptResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/featurescript", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosEvalFeatureScriptResponse.class);
+      return onshape.call("post", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/featurescript", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("configuration", configuration), com.onshape.api.responses.PartStudiosEvalFeatureScriptResponse.class);
     }
   }
 }

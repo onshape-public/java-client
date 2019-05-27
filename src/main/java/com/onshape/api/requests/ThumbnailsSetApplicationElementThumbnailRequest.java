@@ -170,7 +170,7 @@ public final class ThumbnailsSetApplicationElementThumbnailRequest {
     public final ThumbnailsSetApplicationElementThumbnailResponse call(OnshapeDocument document)
         throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/thumbnails/d/:did/[wv]/:wv/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.ThumbnailsSetApplicationElementThumbnailResponse.class);
+      return onshape.call("post", "/thumbnails/d/:did/[wv]/:wv/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap("overwrite", overwrite), com.onshape.api.responses.ThumbnailsSetApplicationElementThumbnailResponse.class);
     }
   }
 }

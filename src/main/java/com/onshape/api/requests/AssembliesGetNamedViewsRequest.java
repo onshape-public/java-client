@@ -118,7 +118,7 @@ public final class AssembliesGetNamedViewsRequest {
     public final AssembliesGetNamedViewsResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/assemblies/d/:did/e/:eid/namedViews", build(), onshape.buildMap("did", document.getDocumentId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesGetNamedViewsResponse.class);
+      return onshape.call("get", "/assemblies/d/:did/e/:eid/namedViews", build(), onshape.buildMap("did", document.getDocumentId(), "eid", document.getElementId()), onshape.buildMap("skipPerspective", skipPerspective), com.onshape.api.responses.AssembliesGetNamedViewsResponse.class);
     }
   }
 }

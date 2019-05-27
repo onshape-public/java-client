@@ -432,7 +432,7 @@ public final class PartStudiosGetShadedViewsRequest {
     public final PartStudiosGetShadedViewsResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/shadedviews", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosGetShadedViewsResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/shadedviews", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("outputHeight", outputHeight, "outputWidth", outputWidth, "pixelSize", pixelSize, "edges", edges, "showAllParts", showAllParts, "includeSurfaces", includeSurfaces, "useAntiAliasing", useAntiAliasing, "viewMatrix", viewMatrix, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosGetShadedViewsResponse.class);
     }
   }
 }

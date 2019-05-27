@@ -259,7 +259,7 @@ public final class AppElementsGetSubElementContentRequest {
     public final AppElementsGetSubElementContentResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/appelements/d/:did/[wvm]/:wvm/e/:eid/content", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AppElementsGetSubElementContentResponse.class);
+      return onshape.call("get", "/appelements/d/:did/[wvm]/:wvm/e/:eid/content", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("transactionId", transactionId, "changeId", changeId, "baseChangeId", baseChangeId, "subelementId", subelementId, "linkDocumentId", linkDocumentId), com.onshape.api.responses.AppElementsGetSubElementContentResponse.class);
     }
   }
 }

@@ -149,7 +149,7 @@ public final class DocumentsGetVersionsRequest {
     public final DocumentsGetVersionsResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/documents/d/:did/versions", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.DocumentsGetVersionsResponse.class);
+      return onshape.call("get", "/documents/d/:did/versions", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap("offset", offset, "limit", limit), com.onshape.api.responses.DocumentsGetVersionsResponse.class);
     }
   }
 }

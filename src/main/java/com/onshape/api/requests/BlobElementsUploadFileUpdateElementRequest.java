@@ -483,7 +483,7 @@ public final class BlobElementsUploadFileUpdateElementRequest {
     public final BlobElementsUploadFileUpdateElementResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/blobelements/d/:did/w/:wid/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.BlobElementsUploadFileUpdateElementResponse.class);
+      return onshape.call("post", "/blobelements/d/:did/w/:wid/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap("parentChangeId", parentChangeId), com.onshape.api.responses.BlobElementsUploadFileUpdateElementResponse.class);
     }
   }
 }

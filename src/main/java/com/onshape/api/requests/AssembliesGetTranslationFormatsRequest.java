@@ -120,7 +120,7 @@ public final class AssembliesGetTranslationFormatsRequest {
     public final AssembliesGetTranslationFormatsResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/assemblies/d/:did/w/:wid/e/:eid/translationformats", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesGetTranslationFormatsResponse.class);
+      return onshape.call("get", "/assemblies/d/:did/w/:wid/e/:eid/translationformats", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap("checkContent", checkContent), com.onshape.api.responses.AssembliesGetTranslationFormatsResponse.class);
     }
   }
 }

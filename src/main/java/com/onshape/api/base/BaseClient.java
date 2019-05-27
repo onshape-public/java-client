@@ -315,6 +315,10 @@ public class BaseClient {
         }
         if (response.getMediaType().toString().startsWith(MediaType.APPLICATION_JSON)) {
             String stringEntity = response.readEntity(String.class);
+            // Special case: Return a String
+            if(String.class.equals(type)) {
+                return type.cast(stringEntity);
+            }
             // Special case: If it is an array, and the response type has a single array field, then read that
             try {
                 if (stringEntity.startsWith("[") && type.getDeclaredFields().length == 1 && type.getDeclaredFields()[0].getType().isArray()) {

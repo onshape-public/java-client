@@ -183,7 +183,7 @@ public final class MetadataUpdateStandardContentMetadataRequest {
     public final MetadataUpdateStandardContentMetadataResponse call(OnshapeDocument document,
         String pid, String vid, String oid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/metadata/standardcontent/d/:did/v/:vid/e/:eid/[cu]/:oid/p/:pid", build(), onshape.buildMap("pid", pid, "did", document.getDocumentId(), "vid", vid, "eid", document.getElementId(), "cuType", CU.Company, "oid", oid), onshape.buildMap(), com.onshape.api.responses.MetadataUpdateStandardContentMetadataResponse.class);
+      return onshape.call("post", "/metadata/standardcontent/d/:did/v/:vid/e/:eid/[cu]/:oid/p/:pid", build(), onshape.buildMap("pid", pid, "did", document.getDocumentId(), "vid", vid, "eid", document.getElementId(), "cuType", CU.Company, "oid", oid), onshape.buildMap("linkDocumentId", linkDocumentId), com.onshape.api.responses.MetadataUpdateStandardContentMetadataResponse.class);
     }
   }
 }

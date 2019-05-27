@@ -794,7 +794,7 @@ public final class DocumentsExportElementPostJsonRequest {
     public final DocumentsExportElementPostJsonResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/documents/d/:did/[wv]/:wv/e/:eid/export", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.DocumentsExportElementPostJsonResponse.class);
+      return onshape.call("post", "/documents/d/:did/[wv]/:wv/e/:eid/export", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap("linkDocumentId", linkDocumentId), com.onshape.api.responses.DocumentsExportElementPostJsonResponse.class);
     }
   }
 }

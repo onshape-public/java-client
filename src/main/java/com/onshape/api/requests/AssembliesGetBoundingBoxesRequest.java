@@ -193,7 +193,7 @@ public final class AssembliesGetBoundingBoxesRequest {
     public final AssembliesGetBoundingBoxesResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/boundingboxes", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesGetBoundingBoxesResponse.class);
+      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/boundingboxes", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("elementMicroversionId", elementMicroversionId, "includeHidden", includeHidden, "linkDocumentId", linkDocumentId), com.onshape.api.responses.AssembliesGetBoundingBoxesResponse.class);
     }
   }
 }

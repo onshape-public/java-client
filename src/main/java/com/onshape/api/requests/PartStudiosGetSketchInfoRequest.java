@@ -294,7 +294,7 @@ public final class PartStudiosGetSketchInfoRequest {
     public final PartStudiosGetSketchInfoResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/sketches", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosGetSketchInfoResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/sketches", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("sketchId", sketchId, "output3D", output3D, "curvePoints", curvePoints, "includeGeometry", includeGeometry, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosGetSketchInfoResponse.class);
     }
   }
 }

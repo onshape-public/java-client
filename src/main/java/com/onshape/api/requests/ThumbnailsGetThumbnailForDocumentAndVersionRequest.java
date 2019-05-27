@@ -119,7 +119,7 @@ public final class ThumbnailsGetThumbnailForDocumentAndVersionRequest {
     public final ThumbnailsGetThumbnailForDocumentAndVersionResponse call(OnshapeDocument document,
         String vid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/thumbnails/d/:did/v/:vid", build(), onshape.buildMap("did", document.getDocumentId(), "vid", vid), onshape.buildMap(), com.onshape.api.responses.ThumbnailsGetThumbnailForDocumentAndVersionResponse.class);
+      return onshape.call("get", "/thumbnails/d/:did/v/:vid", build(), onshape.buildMap("did", document.getDocumentId(), "vid", vid), onshape.buildMap("linkDocumentId", linkDocumentId), com.onshape.api.responses.ThumbnailsGetThumbnailForDocumentAndVersionResponse.class);
     }
   }
 }

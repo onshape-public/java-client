@@ -193,7 +193,7 @@ public final class PartStudiosGetFeaturesRequest {
     public final PartStudiosGetFeaturesResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/features", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosGetFeaturesResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/features", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("featureId", featureId, "noSketchGeometry", noSketchGeometry, "linkDocumentId", linkDocumentId), com.onshape.api.responses.PartStudiosGetFeaturesResponse.class);
     }
   }
 }

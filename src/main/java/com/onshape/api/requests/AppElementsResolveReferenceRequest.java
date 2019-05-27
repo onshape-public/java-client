@@ -197,7 +197,7 @@ public final class AppElementsResolveReferenceRequest {
     public final AppElementsResolveReferenceResponse call(OnshapeDocument document, String rid)
         throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/appelements/d/:did/[wvm]/:wvm/e/:eid/references/:rid", build(), onshape.buildMap("rid", rid, "did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AppElementsResolveReferenceResponse.class);
+      return onshape.call("get", "/appelements/d/:did/[wvm]/:wvm/e/:eid/references/:rid", build(), onshape.buildMap("rid", rid, "did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("transactionId", transactionId, "parentChangeId", parentChangeId, "linkDocumentId", linkDocumentId), com.onshape.api.responses.AppElementsResolveReferenceResponse.class);
     }
   }
 }

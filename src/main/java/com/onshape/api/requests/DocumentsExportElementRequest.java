@@ -534,11 +534,14 @@ public final class DocumentsExportElementRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     */
-    public final DocumentsExportElementResponse call(OnshapeDocument document) throws
-        OnshapeException {
+     *
+     * @param format Export format: STL, PS (Default: null)
+     * @param scale Scale for measurements (STL) (Default: null)
+     * @param mode Type of file: text, binary (STL) (Default: null) */
+    public final DocumentsExportElementResponse call(OnshapeDocument document, String format,
+        Number scale, String mode) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/documents/d/:did/[wv]/:wv/e/:eid/export", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.DocumentsExportElementResponse.class);
+      return onshape.call("get", "/documents/d/:did/[wv]/:wv/e/:eid/export", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap("format", format, "storeInDocument", storeInDocument, "linkDocumentWorkspaceId", linkDocumentWorkspaceId, "partIds", partIds, "microversion", microversion, "grouping", grouping, "zipSingleFileOutput", zipSingleFileOutput, "scale", scale, "units", units, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "minFacetWidth", minFacetWidth, "mode", mode, "version", version, "linkDocumentId", linkDocumentId), com.onshape.api.responses.DocumentsExportElementResponse.class);
     }
   }
 }

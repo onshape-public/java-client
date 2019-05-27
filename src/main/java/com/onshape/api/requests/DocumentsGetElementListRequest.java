@@ -189,7 +189,7 @@ public final class DocumentsGetElementListRequest {
     public final DocumentsGetElementListResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/documents/d/:did/[wvm]/:wvm/elements", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId()), onshape.buildMap(), com.onshape.api.responses.DocumentsGetElementListResponse.class);
+      return onshape.call("get", "/documents/d/:did/[wvm]/:wvm/elements", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId()), onshape.buildMap("elementType", elementType, "elementId", elementId, "withThumbnails", withThumbnails), com.onshape.api.responses.DocumentsGetElementListResponse.class);
     }
   }
 }

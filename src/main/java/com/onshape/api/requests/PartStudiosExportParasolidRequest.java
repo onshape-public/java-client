@@ -261,7 +261,7 @@ public final class PartStudiosExportParasolidRequest {
     public final PartStudiosExportParasolidResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/parasolid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosExportParasolidResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/parasolid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("partIds", partIds, "version", version, "includeExportIds", includeExportIds, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosExportParasolidResponse.class);
     }
   }
 }

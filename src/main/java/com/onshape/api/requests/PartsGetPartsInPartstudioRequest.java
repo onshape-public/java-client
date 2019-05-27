@@ -196,7 +196,7 @@ public final class PartsGetPartsInPartstudioRequest {
     public final PartsGetPartsInPartstudioResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartsGetPartsInPartstudioResponse.class);
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("withThumbnails", withThumbnails, "linkDocumentId", linkDocumentId, "includePropertyDefaults", includePropertyDefaults), com.onshape.api.responses.PartsGetPartsInPartstudioResponse.class);
     }
   }
 }

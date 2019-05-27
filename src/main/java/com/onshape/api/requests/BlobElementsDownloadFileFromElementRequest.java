@@ -156,7 +156,7 @@ public final class BlobElementsDownloadFileFromElementRequest {
     public final BlobElementsDownloadFileFromElementResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/blobelements/d/:did/[wvm]/:wvm/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.BlobElementsDownloadFileFromElementResponse.class);
+      return onshape.call("get", "/blobelements/d/:did/[wvm]/:wvm/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("contentDisposition", contentDisposition, "linkDocumentId", linkDocumentId), com.onshape.api.responses.BlobElementsDownloadFileFromElementResponse.class);
     }
   }
 }

@@ -116,7 +116,7 @@ public final class DocumentsUnShareRequest {
      */
     public final DocumentsUnShareResponse call(OnshapeDocument document) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("delete", "/documents/:did/share/:eid", build(), onshape.buildMap("eid", document.getElementId(), "did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.DocumentsUnShareResponse.class);
+      return onshape.call("delete", "/documents/:did/share/:eid", build(), onshape.buildMap("eid", document.getElementId(), "did", document.getDocumentId()), onshape.buildMap("entryType", entryType), com.onshape.api.responses.DocumentsUnShareResponse.class);
     }
   }
 }

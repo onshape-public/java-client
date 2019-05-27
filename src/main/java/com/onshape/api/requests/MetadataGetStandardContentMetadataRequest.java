@@ -305,7 +305,7 @@ public final class MetadataGetStandardContentMetadataRequest {
     public final MetadataGetStandardContentMetadataResponse call(OnshapeDocument document,
         String pid, String vid, String oid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/metadata/standardcontent/d/:did/v/:vid/e/:eid/[cu]/:oid/p/:pid", build(), onshape.buildMap("pid", pid, "did", document.getDocumentId(), "vid", vid, "eid", document.getElementId(), "cuType", CU.Company, "oid", oid), onshape.buildMap(), com.onshape.api.responses.MetadataGetStandardContentMetadataResponse.class);
+      return onshape.call("get", "/metadata/standardcontent/d/:did/v/:vid/e/:eid/[cu]/:oid/p/:pid", build(), onshape.buildMap("pid", pid, "did", document.getDocumentId(), "vid", vid, "eid", document.getElementId(), "cuType", CU.Company, "oid", oid), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.MetadataGetStandardContentMetadataResponse.class);
     }
   }
 }

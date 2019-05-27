@@ -192,7 +192,7 @@ public final class AppElementsDeleteReferenceRequest {
     public final AppElementsDeleteReferenceResponse call(OnshapeDocument document, String rid)
         throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("delete", "/appelements/d/:did/w/:wid/e/:eid/references/:rid", build(), onshape.buildMap("rid", rid, "did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AppElementsDeleteReferenceResponse.class);
+      return onshape.call("delete", "/appelements/d/:did/w/:wid/e/:eid/references/:rid", build(), onshape.buildMap("rid", rid, "did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap("parentChangeId", parentChangeId, "transactionId", transactionId, "description", description), com.onshape.api.responses.AppElementsDeleteReferenceResponse.class);
     }
   }
 }

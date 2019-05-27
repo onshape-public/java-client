@@ -200,7 +200,7 @@ public final class PartsGetMassPropertiesRequest {
     public final PartsGetMassPropertiesResponse call(OnshapeDocument document, String partid) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/massproperties", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap(), com.onshape.api.responses.PartsGetMassPropertiesResponse.class);
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/massproperties", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap("inferMetadataOwner", inferMetadataOwner, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartsGetMassPropertiesResponse.class);
     }
   }
 }

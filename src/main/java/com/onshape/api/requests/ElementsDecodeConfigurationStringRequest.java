@@ -196,7 +196,7 @@ public final class ElementsDecodeConfigurationStringRequest {
     public final ElementsDecodeConfigurationStringResponse call(OnshapeDocument document,
         String cid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/elements/d/:did/[wvm]/:wvm/e/:eid/configurationencodings/:cid", build(), onshape.buildMap("cid", cid, "did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.ElementsDecodeConfigurationStringResponse.class);
+      return onshape.call("get", "/elements/d/:did/[wvm]/:wvm/e/:eid/configurationencodings/:cid", build(), onshape.buildMap("cid", cid, "did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("includeDisplay", includeDisplay, "configurationIsId", configurationIsId, "linkDocumentId", linkDocumentId), com.onshape.api.responses.ElementsDecodeConfigurationStringResponse.class);
     }
   }
 }

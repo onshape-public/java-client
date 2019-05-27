@@ -262,7 +262,7 @@ public final class AssembliesGetBillOfMaterialsRequest {
     public final AssembliesGetBillOfMaterialsResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/bom", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesGetBillOfMaterialsResponse.class);
+      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/bom", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("metadataWorkspaceId", metadataWorkspaceId, "bomColumnIds", bomColumnIds, "indented", indented, "multiLevel", multiLevel, "generateIfAbsent", generateIfAbsent), com.onshape.api.responses.AssembliesGetBillOfMaterialsResponse.class);
     }
   }
 }

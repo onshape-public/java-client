@@ -156,7 +156,7 @@ public final class PartStudiosGetBodyDetailsRequest {
     public final PartStudiosGetBodyDetailsResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.PartStudiosGetBodyDetailsResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosGetBodyDetailsResponse.class);
     }
   }
 }

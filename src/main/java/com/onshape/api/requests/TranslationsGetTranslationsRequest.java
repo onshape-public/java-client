@@ -79,11 +79,13 @@ public final class TranslationsGetTranslationsRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     */
-    public final TranslationsGetTranslationsResponse call(OnshapeDocument document) throws
-        OnshapeException {
+     *
+     * @param offset Offset into list of items (Default: 0)
+     * @param limit Maximum number to retrieve (Must be &lt;= 20) (Default: 20) */
+    public final TranslationsGetTranslationsResponse call(OnshapeDocument document, Number offset,
+        Number limit) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/translations/d/:did", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.TranslationsGetTranslationsResponse.class);
+      return onshape.call("get", "/translations/d/:did", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap("offset", offset, "limit", limit), com.onshape.api.responses.TranslationsGetTranslationsResponse.class);
     }
   }
 }

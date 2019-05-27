@@ -398,7 +398,7 @@ public final class AssembliesGetShadedViewsRequest {
     public final AssembliesGetShadedViewsResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/shadedviews", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.AssembliesGetShadedViewsResponse.class);
+      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/shadedviews", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("outputHeight", outputHeight, "outputWidth", outputWidth, "pixelSize", pixelSize, "edges", edges, "showAllParts", showAllParts, "includeSurfaces", includeSurfaces, "useAntiAliasing", useAntiAliasing, "viewMatrix", viewMatrix, "linkDocumentId", linkDocumentId), com.onshape.api.responses.AssembliesGetShadedViewsResponse.class);
     }
   }
 }

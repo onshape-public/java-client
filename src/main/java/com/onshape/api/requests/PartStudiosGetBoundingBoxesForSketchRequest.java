@@ -160,7 +160,7 @@ public final class PartStudiosGetBoundingBoxesForSketchRequest {
     public final PartStudiosGetBoundingBoxesForSketchResponse call(OnshapeDocument document,
         String sid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/sketches/:sid/boundingboxes", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "sid", sid), onshape.buildMap(), com.onshape.api.responses.PartStudiosGetBoundingBoxesForSketchResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/sketches/:sid/boundingboxes", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "sid", sid), onshape.buildMap("configuration", configuration, "linkDocumentId", linkDocumentId), com.onshape.api.responses.PartStudiosGetBoundingBoxesForSketchResponse.class);
     }
   }
 }

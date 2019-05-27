@@ -114,7 +114,7 @@ public final class DocumentsGetWorkspacesRequest {
     public final DocumentsGetWorkspacesResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/documents/d/:did/workspaces", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.DocumentsGetWorkspacesResponse.class);
+      return onshape.call("get", "/documents/d/:did/workspaces", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap("noreadonly", noreadonly), com.onshape.api.responses.DocumentsGetWorkspacesResponse.class);
     }
   }
 }

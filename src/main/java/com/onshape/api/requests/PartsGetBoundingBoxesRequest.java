@@ -195,7 +195,7 @@ public final class PartsGetBoundingBoxesRequest {
     public final PartsGetBoundingBoxesResponse call(OnshapeDocument document, String partid) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/boundingboxes", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap(), com.onshape.api.responses.PartsGetBoundingBoxesResponse.class);
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/boundingboxes", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap("includeHidden", includeHidden, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartsGetBoundingBoxesResponse.class);
     }
   }
 }

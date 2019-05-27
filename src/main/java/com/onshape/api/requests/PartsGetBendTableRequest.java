@@ -126,7 +126,7 @@ public final class PartsGetBendTableRequest {
     public final PartsGetBendTableResponse call(OnshapeDocument document, String partid) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/sheetmetal/bendtable", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap(), com.onshape.api.responses.PartsGetBendTableResponse.class);
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/sheetmetal/bendtable", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap("linkDocumentId", linkDocumentId), com.onshape.api.responses.PartsGetBendTableResponse.class);
     }
   }
 }

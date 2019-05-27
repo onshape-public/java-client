@@ -265,7 +265,7 @@ public final class MetadataGetPartMetadataRequest {
     public final MetadataGetPartMetadataResponse call(OnshapeDocument document, String pid) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid/p/:pid", build(), onshape.buildMap("pid", pid, "did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.MetadataGetPartMetadataResponse.class);
+      return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid/p/:pid", build(), onshape.buildMap("pid", pid, "did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "linkDocumentId", linkDocumentId), com.onshape.api.responses.MetadataGetPartMetadataResponse.class);
     }
   }
 }
