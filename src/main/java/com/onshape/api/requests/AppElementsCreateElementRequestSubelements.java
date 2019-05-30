@@ -25,7 +25,6 @@ package com.onshape.api.requests;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
-import com.onshape.api.types.Base64Encoded;
 import java.lang.Override;
 import java.lang.String;
 
@@ -47,16 +46,16 @@ public final class AppElementsCreateElementRequestSubelements {
    * The initial content for a subelement (Base-64 encoded)
    */
   @JsonProperty("baseContent")
-  public Base64Encoded baseContent;
+  public String baseContent;
 
   /**
    * A delta for a sub-element (Base-64 encoded)
    */
   @JsonProperty("delta")
-  public Base64Encoded delta;
+  public String delta;
 
-  AppElementsCreateElementRequestSubelements(String subelementId, Base64Encoded baseContent,
-      Base64Encoded delta) {
+  AppElementsCreateElementRequestSubelements(String subelementId, String baseContent,
+      String delta) {
     this.subelementId = subelementId;
     this.baseContent = baseContent;
     this.delta = delta;
@@ -78,7 +77,7 @@ public final class AppElementsCreateElementRequestSubelements {
    * @return The initial content for a subelement (Base-64 encoded)
    *
    */
-  public final Base64Encoded getBaseContent() {
+  public final String getBaseContent() {
     return this.baseContent;
   }
 
@@ -88,7 +87,7 @@ public final class AppElementsCreateElementRequestSubelements {
    * @return A delta for a sub-element (Base-64 encoded)
    *
    */
-  public final Base64Encoded getDelta() {
+  public final String getDelta() {
     return this.delta;
   }
 
@@ -111,12 +110,12 @@ public final class AppElementsCreateElementRequestSubelements {
     /**
      * The initial content for a subelement (Base-64 encoded)
      */
-    private Base64Encoded baseContent;
+    private String baseContent;
 
     /**
      * A delta for a sub-element (Base-64 encoded)
      */
-    private Base64Encoded delta;
+    private String delta;
 
     Builder() {
     }
@@ -149,7 +148,7 @@ public final class AppElementsCreateElementRequestSubelements {
      * @return The initial content for a subelement (Base-64 encoded)
      *
      */
-    public final Base64Encoded baseContent() {
+    public final String baseContent() {
       return this.baseContent;
     }
 
@@ -160,7 +159,7 @@ public final class AppElementsCreateElementRequestSubelements {
      *
      * @return the Builder object.
      */
-    public final Builder baseContent(Base64Encoded value) {
+    public final Builder baseContent(String value) {
       this.baseContent = value;
       return this;
     }
@@ -171,7 +170,7 @@ public final class AppElementsCreateElementRequestSubelements {
      * @return A delta for a sub-element (Base-64 encoded)
      *
      */
-    public final Base64Encoded delta() {
+    public final String delta() {
       return this.delta;
     }
 
@@ -182,7 +181,7 @@ public final class AppElementsCreateElementRequestSubelements {
      *
      * @return the Builder object.
      */
-    public final Builder delta(Base64Encoded value) {
+    public final Builder delta(String value) {
       this.delta = value;
       return this;
     }

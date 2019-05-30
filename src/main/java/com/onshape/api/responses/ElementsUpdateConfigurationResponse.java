@@ -47,6 +47,13 @@ public final class ElementsUpdateConfigurationResponse {
   Map[] configurationParameters;
 
   /**
+   * Set to true if the part studio element had changed since the sourceMicroversion specified on input. Applicable only if rejectMicroversionSkew was not set to true
+   */
+  @JsonProperty("microversionSkew")
+  @NotNull
+  Boolean microversionSkew;
+
+  /**
    * The version of the serialization protocol for the response
    */
   @JsonProperty("serializationVersion")
@@ -61,13 +68,6 @@ public final class ElementsUpdateConfigurationResponse {
   String sourceMicroversion;
 
   /**
-   * Set to true if the part studio element had changed since the sourceMicroversion specified on input. Applicable only if rejectMicroversionSkew was not set to true
-   */
-  @JsonProperty("microversionSkew")
-  @NotNull
-  Boolean microversionSkew;
-
-  /**
    * Get List of configuration parameters, which define the configurability of the Part Studio or Assembly.
    *
    * @return List of configuration parameters, which define the configurability of the Part Studio or Assembly.
@@ -75,6 +75,16 @@ public final class ElementsUpdateConfigurationResponse {
    */
   public final Map[] getConfigurationParameters() {
     return this.configurationParameters;
+  }
+
+  /**
+   * Get Set to true if the part studio element had changed since the sourceMicroversion specified on input. Applicable only if rejectMicroversionSkew was not set to true
+   *
+   * @return Set to true if the part studio element had changed since the sourceMicroversion specified on input. Applicable only if rejectMicroversionSkew was not set to true
+   *
+   */
+  public final Boolean getMicroversionSkew() {
+    return this.microversionSkew;
   }
 
   /**
@@ -95,16 +105,6 @@ public final class ElementsUpdateConfigurationResponse {
    */
   public final String getSourceMicroversion() {
     return this.sourceMicroversion;
-  }
-
-  /**
-   * Get Set to true if the part studio element had changed since the sourceMicroversion specified on input. Applicable only if rejectMicroversionSkew was not set to true
-   *
-   * @return Set to true if the part studio element had changed since the sourceMicroversion specified on input. Applicable only if rejectMicroversionSkew was not set to true
-   *
-   */
-  public final Boolean getMicroversionSkew() {
-    return this.microversionSkew;
   }
 
   @Override
