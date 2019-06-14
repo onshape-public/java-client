@@ -25,7 +25,7 @@ package com.onshape.api.responses;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
-import java.io.File;
+import com.onshape.api.types.Blob;
 import java.lang.Override;
 import java.lang.String;
 import javax.validation.constraints.NotNull;
@@ -43,7 +43,7 @@ public final class PartStudiosExportParasolidResponse {
    */
   @JsonProperty("file")
   @NotNull
-  File file;
+  Blob file;
 
   /**
    * Get The exported document, as an attachment
@@ -51,7 +51,7 @@ public final class PartStudiosExportParasolidResponse {
    * @return The exported document, as an attachment
    *
    */
-  public final File getFile() {
+  public final Blob getFile() {
     return this.file;
   }
 

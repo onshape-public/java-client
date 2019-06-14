@@ -49,11 +49,15 @@ import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
+import java.util.stream.Collectors;
+import java.util.zip.GZIPInputStream;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import javax.validation.ConstraintViolation;
@@ -71,6 +75,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.media.multipart.Boundary;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
@@ -97,6 +102,7 @@ public class BaseClient {
     private File workingDir;
     private PollingHandler pollingHandler;
     private boolean usingValidation;
+    private final Set<RequestListener> requestListeners;
     private static final ObjectMapper TOSTRINGMAPPER;
 
     static {
@@ -108,6 +114,7 @@ public class BaseClient {
         objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
+        objectMapper.configure(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS, true);
         JacksonJaxbJsonProvider jacksonProvider = new JacksonJaxbJsonProvider();
         jacksonProvider.setMapper(objectMapper);
         ClientConfig clientConfig = new ClientConfig(jacksonProvider);
@@ -116,6 +123,7 @@ public class BaseClient {
         client = ClientBuilder.newClient(clientConfig);
         workingDir = new File(System.getProperty("java.io.tmpdir"));
         usingValidation = true;
+        requestListeners = new HashSet<>();
     }
 
     /**
@@ -316,7 +324,7 @@ public class BaseClient {
         if (response.getMediaType().toString().startsWith(MediaType.APPLICATION_JSON)) {
             String stringEntity = response.readEntity(String.class);
             // Special case: Return a String
-            if(String.class.equals(type)) {
+            if (String.class.equals(type)) {
                 return type.cast(stringEntity);
             }
             // Special case: If it is an array, and the response type has a single array field, then read that
@@ -332,24 +340,11 @@ public class BaseClient {
             }
         } else {
             String ext = response.getMediaType().getSubtype();
-            if (File.class.equals(type)) {
-                try (InputStream input = (InputStream) response.getEntity()) {
-                    File f = File.createTempFile("onshape", "." + ext, workingDir);
-                    try (FileOutputStream fos = new FileOutputStream(f)) {
-                        int n;
-                        byte[] buffer = new byte[1024];
-                        while ((n = input.read(buffer)) > -1) {
-                            fos.write(buffer, 0, n);
-                        }
-                        fos.flush();
-                    }
-                    return type.cast(f);
-                } catch (IOException ex) {
-                    throw new OnshapeException("Error while copying to local file", ex);
-                }
-            } else if (type.getDeclaredFields().length == 1) {
-                if (File.class.equals(type.getDeclaredFields()[0].getType())) {
-                    try (InputStream input = (InputStream) response.getEntity()) {
+            try (InputStream input = response.getHeaderString("Content-Encoding").equals("gzip")
+                    ? new GZIPInputStream((InputStream) response.getEntity())
+                    : (InputStream) response.getEntity()) {
+                if (File.class.equals(type)) {
+                    try {
                         File f = File.createTempFile("onshape", "." + ext, workingDir);
                         try (FileOutputStream fos = new FileOutputStream(f)) {
                             int n;
@@ -359,34 +354,53 @@ public class BaseClient {
                             }
                             fos.flush();
                         }
-                        Constructor<T> constructor = type.getDeclaredConstructor();
-                        constructor.setAccessible(true);
-                        T out = constructor.newInstance();
-                        Field field = type.getDeclaredFields()[0];
-                        field.setAccessible(true);
-                        field.set(out, f);
-                        return out;
-                    } catch (IOException | IllegalArgumentException | IllegalAccessException
-                            | InstantiationException | InvocationTargetException
-                            | NoSuchMethodException | SecurityException ex) {
+                        return type.cast(f);
+                    } catch (IOException ex) {
                         throw new OnshapeException("Error while copying to local file", ex);
                     }
-                } else if (Blob.class.equals(type.getDeclaredFields()[0].getType())) {
-                    try {
-                        Blob blob = new Blob((InputStream) response.getEntity());
-                        Constructor<T> constructor = type.getDeclaredConstructor();
-                        constructor.setAccessible(true);
-                        T out = constructor.newInstance();
-                        Field field = type.getDeclaredFields()[0];
-                        field.setAccessible(true);
-                        field.set(out, blob);
-                        return out;
-                    } catch (IOException | IllegalArgumentException | IllegalAccessException
-                            | InstantiationException | InvocationTargetException
-                            | NoSuchMethodException | SecurityException ex) {
-                        throw new OnshapeException("Error while creating blob", ex);
+                } else if (type.getDeclaredFields().length == 1) {
+                    if (File.class.equals(type.getDeclaredFields()[0].getType())) {
+                        try {
+                            File f = File.createTempFile("onshape", "." + ext, workingDir);
+                            try (FileOutputStream fos = new FileOutputStream(f)) {
+                                int n;
+                                byte[] buffer = new byte[1024];
+                                while ((n = input.read(buffer)) > -1) {
+                                    fos.write(buffer, 0, n);
+                                }
+                                fos.flush();
+                            }
+                            Constructor<T> constructor = type.getDeclaredConstructor();
+                            constructor.setAccessible(true);
+                            T out = constructor.newInstance();
+                            Field field = type.getDeclaredFields()[0];
+                            field.setAccessible(true);
+                            field.set(out, f);
+                            return out;
+                        } catch (IOException | IllegalArgumentException | IllegalAccessException
+                                | InstantiationException | InvocationTargetException
+                                | NoSuchMethodException | SecurityException ex) {
+                            throw new OnshapeException("Error while copying to local file", ex);
+                        }
+                    } else if (Blob.class.equals(type.getDeclaredFields()[0].getType())) {
+                        try {
+                            Blob blob = new Blob(input);
+                            Constructor<T> constructor = type.getDeclaredConstructor();
+                            constructor.setAccessible(true);
+                            T out = constructor.newInstance();
+                            Field field = type.getDeclaredFields()[0];
+                            field.setAccessible(true);
+                            field.set(out, blob);
+                            return out;
+                        } catch (IOException | IllegalArgumentException | IllegalAccessException
+                                | InstantiationException | InvocationTargetException
+                                | NoSuchMethodException | SecurityException ex) {
+                            throw new OnshapeException("Error while creating blob", ex);
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                throw new OnshapeException("Error while decompressing gzip stream", ex);
             }
         }
         throw new OnshapeException("Unable to convert media-type " + response.getMediaType() + " to type " + type);
@@ -409,7 +423,7 @@ public class BaseClient {
         // Construct the URI from the parameters
         URI uri = buildURI(url, urlParameters, queryParameters);
         // Create a WebTarget for the URI
-        WebTarget target = client.target(uri);
+        WebTarget target = client.target(uri).property(ClientProperties.FOLLOW_REDIRECTS, Boolean.FALSE);
         Invocation.Builder invocationBuilder = target.request(jsonResponse ? MediaType.APPLICATION_JSON_TYPE : MediaType.APPLICATION_OCTET_STREAM_TYPE)
                 .header("Accept", jsonResponse ? "application/vnd.onshape.v1+json" : "application/vnd.onshape.v1+octet-stream");
         // Accept gzip compressed responses
@@ -439,14 +453,17 @@ public class BaseClient {
         } else if (accessKey != null && secretKey != null) {
             invocationBuilder = signature(invocationBuilder, uri, method, entity == null ? MediaType.APPLICATION_JSON_TYPE : entity.getMediaType());
         }
+        // Notify listeners
+        List<ResponseListener> responseListeners = requestListeners.stream().map((rl) -> rl.request(method, uri, entity)).collect(Collectors.toList());
         // Perform the method call
         Response response = entity == null ? invocationBuilder.method(method.toUpperCase()) : invocationBuilder.method(method.toUpperCase(), entity);
         // Handle the response
+        responseListeners.forEach((rl) -> rl.response(response));
         switch (response.getStatusInfo().getFamily()) {
             case SUCCESSFUL:
                 return response;
             case REDIRECTION:
-                return call(method, response.getHeaderString("Location"), payload, urlParameters, queryParameters, jsonResponse);
+                return call(method, response.getHeaderString("Location"), payload, buildMap(), buildMap(), jsonResponse);
             default:
                 throw new OnshapeException(response.getStatusInfo().getStatusCode(), response.getStatusInfo().getReasonPhrase());
         }
@@ -557,13 +574,13 @@ public class BaseClient {
         UriBuilder uriBuilder;
         if (path.startsWith("/")) {
             uriBuilder = UriBuilder.fromUri(baseURL + "/api" + path
-                    .replaceAll(":([^\\/:]+)", "{$1}")
+                    .replaceAll(":([a-zA-Z][a-zA-Z0-9]*)", "{$1}")
                     .replace("[wvm]", "{wvmType}")
                     .replace("[wv]", "{wvType}")
                     .replace("[cu]", "{cuType}"));
         } else {
             uriBuilder = UriBuilder.fromUri(path
-                    .replaceAll(":([^\\/:]+)", "{$1}")
+                    .replaceAll(":([a-zA-Z][a-zA-Z0-9]*)", "{$1}")
                     .replace("[wvm]", "{wvmType}")
                     .replace("[wv]", "{wvType}")
                     .replace("[cu]", "{cuType}"));
@@ -584,8 +601,8 @@ public class BaseClient {
     Invocation.Builder signature(Invocation.Builder builder, URI uri, String method, MediaType mediaType) throws OnshapeException {
         String date = getDateString();
         String onNonce = hashids.encode(new Date().getTime(), count++);
-        String path = uri.getPath();
-        String query = uri.getQuery() == null ? "" : uri.getQuery();
+        String path = uri.getRawPath();
+        String query = uri.getRawQuery() == null ? "" : uri.getRawQuery();
         String str = (method + '\n' + onNonce + '\n' + date + '\n' + mediaType.toString() + '\n'
                 + path + '\n' + query + '\n').toLowerCase();
         String auth = "On " + accessKey + ":HmacSHA256:" + encodeSignature(str);
@@ -663,5 +680,54 @@ public class BaseClient {
             pollingHandler = new PollingHandler(this);
         }
         return pollingHandler;
+    }
+
+    /**
+     * Add a listener to capture request and response for each HTTP call
+     *
+     * @param listener The RequestListener implementation
+     */
+    public void addRequestListener(RequestListener listener) {
+        requestListeners.add(listener);
+    }
+
+    /**
+     * Remove a listener
+     *
+     * @param listener The RequestListener implementation
+     */
+    public void removeRequestListener(RequestListener listener) {
+        requestListeners.remove(listener);
+    }
+
+    /**
+     * Listener interface for HTTP requests and their responses. The
+     * RequestListener returns a new ResponseListener for each call, to ensure
+     * that requests and responses are associated even from different threads.
+     */
+    public static interface RequestListener {
+
+        /**
+         *
+         * @param method HTTP method
+         * @param uri The URI called, including path and query parameters
+         * @param entity The Entity object used or null
+         * @return A ResponseListener object to capture the response to this
+         * HTTP call
+         */
+        public ResponseListener request(String method, URI uri, Entity entity);
+    }
+
+    /**
+     * Listener for response objects, returned from a RequestListener
+     */
+    public static interface ResponseListener {
+
+        /**
+         * Called for each HTTP response (successful or not)
+         *
+         * @param response The HTTP response
+         */
+        public void response(Response response);
     }
 }
