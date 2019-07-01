@@ -340,7 +340,7 @@ public class BaseClient {
             }
         } else {
             String ext = response.getMediaType().getSubtype();
-            try (InputStream input = response.getHeaderString("Content-Encoding").equals("gzip")
+            try (InputStream input = "gzip".equals(response.getHeaderString("Content-Encoding"))
                     ? new GZIPInputStream((InputStream) response.getEntity())
                     : (InputStream) response.getEntity()) {
                 if (File.class.equals(type)) {
@@ -664,7 +664,9 @@ public class BaseClient {
             Set<ConstraintViolation<T>> violations = validator.validate(obj);
             if (!violations.isEmpty()) {
                 StringBuilder message = new StringBuilder("Validation of request object failed");
-                violations.forEach((violation) -> message.append(", ").append(violation.getMessage()));
+                violations.forEach((violation) -> message.append(", ")
+                        .append(violation.getPropertyPath().toString())
+                        .append(" ").append(violation.getMessage()));
                 throw new OnshapeException(message.toString());
             }
         }

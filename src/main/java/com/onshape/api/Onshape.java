@@ -30,7 +30,7 @@ import com.onshape.api.types.OnshapeVersion;
  * &copy; 2018 Onshape Inc.
  */
 public final class Onshape extends BaseClient {
-  private final OnshapeVersion buildVersion = new OnshapeVersion("1.0", "93263c5aa6918af3163d4d28192d4a67434f1a25", "1.97.23627.93263c5aa691");
+  private final OnshapeVersion buildVersion = new OnshapeVersion("1.0", "6f3bba4f3c77d7b94904f8f7b57b5085ec5d996e", "1.98.23765.6f3bba4f3c77");
 
   /**
    * Access API methods for category Accounts
@@ -150,6 +150,14 @@ public final class Onshape extends BaseClient {
    */
   public final Folders folders() {
     return new Folders(this);
+  }
+
+  /**
+   * Access API methods for category Insertables
+   *  @return API group object
+   */
+  public final Insertables insertables() {
+    return new Insertables(this);
   }
 
   /**
