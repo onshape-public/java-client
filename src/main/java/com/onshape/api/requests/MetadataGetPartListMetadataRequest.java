@@ -68,13 +68,20 @@ public final class MetadataGetPartListMetadataRequest {
   @JsonProperty("linkDocumentId")
   String linkDocumentId;
 
+  /**
+   * Configuration string
+   */
+  @JsonProperty("configuration")
+  String configuration;
+
   MetadataGetPartListMetadataRequest(Number depth, Number detailLevel, Boolean noNull,
-      Boolean thumbnail, String linkDocumentId) {
+      Boolean thumbnail, String linkDocumentId, String configuration) {
     this.depth = depth;
     this.detailLevel = detailLevel;
     this.noNull = noNull;
     this.thumbnail = thumbnail;
     this.linkDocumentId = linkDocumentId;
+    this.configuration = configuration;
   }
 
   @Override
@@ -113,6 +120,11 @@ public final class MetadataGetPartListMetadataRequest {
      * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
      */
     private String linkDocumentId;
+
+    /**
+     * Configuration string
+     */
+    private String configuration;
 
     Onshape onshape;
 
@@ -229,8 +241,30 @@ public final class MetadataGetPartListMetadataRequest {
       return this;
     }
 
+    /**
+     * Get Configuration string
+     *
+     * @return Configuration string
+     *
+     */
+    public final String configuration() {
+      return this.configuration;
+    }
+
+    /**
+     * Set Configuration string
+     *
+     * @param value Configuration string
+     *
+     * @return the Builder object.
+     */
+    public final Builder configuration(String value) {
+      this.configuration = value;
+      return this;
+    }
+
     private MetadataGetPartListMetadataRequest build() {
-      return new com.onshape.api.requests.MetadataGetPartListMetadataRequest(depth,detailLevel,noNull,thumbnail,linkDocumentId);
+      return new com.onshape.api.requests.MetadataGetPartListMetadataRequest(depth,detailLevel,noNull,thumbnail,linkDocumentId,configuration);
     }
 
     /**
@@ -249,7 +283,7 @@ public final class MetadataGetPartListMetadataRequest {
     public final MetadataGetPartListMetadataResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid/p", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "linkDocumentId", linkDocumentId), com.onshape.api.responses.MetadataGetPartListMetadataResponse.class);
+      return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid/p", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.MetadataGetPartListMetadataResponse.class);
     }
 
     /**
@@ -261,7 +295,7 @@ public final class MetadataGetPartListMetadataRequest {
     public final MetadataGetPartListMetadataResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid/p", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "linkDocumentId", linkDocumentId), com.onshape.api.responses.MetadataGetPartListMetadataResponse.class);
+      return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid/p", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.MetadataGetPartListMetadataResponse.class);
     }
   }
 }

@@ -39,20 +39,6 @@ import javax.validation.constraints.NotNull;
 )
 public final class PartStudiosIdTranslationsResponse {
   /**
-   * Configuration of part studio in which ids were acquired
-   */
-  @JsonProperty("sourceConfiguration")
-  @NotNull
-  String sourceConfiguration;
-
-  /**
-   * Configuration of part studio into which ids are to be translated
-   */
-  @JsonProperty("targetConfiguration")
-  @NotNull
-  String targetConfiguration;
-
-  /**
    * Document id
    */
   @JsonProperty("documentId")
@@ -93,26 +79,6 @@ public final class PartStudiosIdTranslationsResponse {
    */
   public final OnshapeDocument getDocument() {
     return new OnshapeDocument(documentId, null, null, null, elementId);
-  }
-
-  /**
-   * Get Configuration of part studio in which ids were acquired
-   *
-   * @return Configuration of part studio in which ids were acquired
-   *
-   */
-  public final String getSourceConfiguration() {
-    return this.sourceConfiguration;
-  }
-
-  /**
-   * Get Configuration of part studio into which ids are to be translated
-   *
-   * @return Configuration of part studio into which ids are to be translated
-   *
-   */
-  public final String getTargetConfiguration() {
-    return this.targetConfiguration;
   }
 
   /**

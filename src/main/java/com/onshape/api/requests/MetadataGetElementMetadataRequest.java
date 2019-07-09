@@ -80,8 +80,15 @@ public final class MetadataGetElementMetadataRequest {
   @JsonProperty("linkDocumentId")
   String linkDocumentId;
 
+  /**
+   * Configuration string
+   */
+  @JsonProperty("configuration")
+  String configuration;
+
   MetadataGetElementMetadataRequest(Number depth, Number detailLevel, Boolean noNull,
-      Boolean thumbnail, Number p_offset, Number p_limit, String linkDocumentId) {
+      Boolean thumbnail, Number p_offset, Number p_limit, String linkDocumentId,
+      String configuration) {
     this.depth = depth;
     this.detailLevel = detailLevel;
     this.noNull = noNull;
@@ -89,6 +96,7 @@ public final class MetadataGetElementMetadataRequest {
     this.p_offset = p_offset;
     this.p_limit = p_limit;
     this.linkDocumentId = linkDocumentId;
+    this.configuration = configuration;
   }
 
   @Override
@@ -137,6 +145,11 @@ public final class MetadataGetElementMetadataRequest {
      * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
      */
     private String linkDocumentId;
+
+    /**
+     * Configuration string
+     */
+    private String configuration;
 
     Onshape onshape;
 
@@ -297,8 +310,30 @@ public final class MetadataGetElementMetadataRequest {
       return this;
     }
 
+    /**
+     * Get Configuration string
+     *
+     * @return Configuration string
+     *
+     */
+    public final String configuration() {
+      return this.configuration;
+    }
+
+    /**
+     * Set Configuration string
+     *
+     * @param value Configuration string
+     *
+     * @return the Builder object.
+     */
+    public final Builder configuration(String value) {
+      this.configuration = value;
+      return this;
+    }
+
     private MetadataGetElementMetadataRequest build() {
-      return new com.onshape.api.requests.MetadataGetElementMetadataRequest(depth,detailLevel,noNull,thumbnail,p_offset,p_limit,linkDocumentId);
+      return new com.onshape.api.requests.MetadataGetElementMetadataRequest(depth,detailLevel,noNull,thumbnail,p_offset,p_limit,linkDocumentId,configuration);
     }
 
     /**
@@ -317,7 +352,7 @@ public final class MetadataGetElementMetadataRequest {
     public final MetadataGetElementMetadataResponse call(String did, WV wvType, String wv,
         String eid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/metadata/d/:did/[wv]/:wv/e/:eid", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv, "eid", eid), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "p-offset", p_offset, "p-limit", p_limit, "linkDocumentId", linkDocumentId), com.onshape.api.responses.MetadataGetElementMetadataResponse.class);
+      return onshape.call("get", "/metadata/d/:did/[wv]/:wv/e/:eid", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv, "eid", eid), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "p-offset", p_offset, "p-limit", p_limit, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.MetadataGetElementMetadataResponse.class);
     }
 
     /**
@@ -329,7 +364,7 @@ public final class MetadataGetElementMetadataRequest {
     public final MetadataGetElementMetadataResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/metadata/d/:did/[wv]/:wv/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "p-offset", p_offset, "p-limit", p_limit, "linkDocumentId", linkDocumentId), com.onshape.api.responses.MetadataGetElementMetadataResponse.class);
+      return onshape.call("get", "/metadata/d/:did/[wv]/:wv/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "p-offset", p_offset, "p-limit", p_limit, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.MetadataGetElementMetadataResponse.class);
     }
   }
 }

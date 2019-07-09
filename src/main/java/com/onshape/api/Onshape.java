@@ -30,7 +30,7 @@ import com.onshape.api.types.OnshapeVersion;
  * &copy; 2018 Onshape Inc.
  */
 public final class Onshape extends BaseClient {
-  private final OnshapeVersion buildVersion = new OnshapeVersion("1.0", "6f3bba4f3c77d7b94904f8f7b57b5085ec5d996e", "1.98.23765.6f3bba4f3c77");
+  private final OnshapeVersion buildVersion = new OnshapeVersion("1.0", "e4ce1bb7a429fb098cefad20d0040b9507444dbf", "1.99.23852.e4ce1bb7a429");
 
   /**
    * Access API methods for category Accounts

@@ -45,6 +45,20 @@ public final class PartStudiosIdTranslationsRequest {
   String sourceDocumentMicroversion;
 
   /**
+   * Configuration of part studio in which ids were acquired
+   */
+  @JsonProperty("sourceConfiguration")
+  @NotNull
+  String sourceConfiguration;
+
+  /**
+   * Configuration of part studio into which ids are to be translated
+   */
+  @JsonProperty("targetConfiguration")
+  @NotNull
+  String targetConfiguration;
+
+  /**
    * Array of topology ID strings
    */
   @JsonProperty("ids")
@@ -58,9 +72,11 @@ public final class PartStudiosIdTranslationsRequest {
   @NotNull
   String linkDocumentId;
 
-  PartStudiosIdTranslationsRequest(String sourceDocumentMicroversion, String[] ids,
-      String linkDocumentId) {
+  PartStudiosIdTranslationsRequest(String sourceDocumentMicroversion, String sourceConfiguration,
+      String targetConfiguration, String[] ids, String linkDocumentId) {
     this.sourceDocumentMicroversion = sourceDocumentMicroversion;
+    this.sourceConfiguration = sourceConfiguration;
+    this.targetConfiguration = targetConfiguration;
     this.ids = ids;
     this.linkDocumentId = linkDocumentId;
   }
@@ -73,6 +89,26 @@ public final class PartStudiosIdTranslationsRequest {
    */
   public final String getSourceDocumentMicroversion() {
     return this.sourceDocumentMicroversion;
+  }
+
+  /**
+   * Get Configuration of part studio in which ids were acquired
+   *
+   * @return Configuration of part studio in which ids were acquired
+   *
+   */
+  public final String getSourceConfiguration() {
+    return this.sourceConfiguration;
+  }
+
+  /**
+   * Get Configuration of part studio into which ids are to be translated
+   *
+   * @return Configuration of part studio into which ids are to be translated
+   *
+   */
+  public final String getTargetConfiguration() {
+    return this.targetConfiguration;
   }
 
   /**
@@ -113,6 +149,16 @@ public final class PartStudiosIdTranslationsRequest {
     private String sourceDocumentMicroversion;
 
     /**
+     * Configuration of part studio in which ids were acquired
+     */
+    private String sourceConfiguration;
+
+    /**
+     * Configuration of part studio into which ids are to be translated
+     */
+    private String targetConfiguration;
+
+    /**
      * Array of topology ID strings
      */
     private String[] ids;
@@ -146,6 +192,50 @@ public final class PartStudiosIdTranslationsRequest {
      */
     public final Builder sourceDocumentMicroversion(String value) {
       this.sourceDocumentMicroversion = value;
+      return this;
+    }
+
+    /**
+     * Get Configuration of part studio in which ids were acquired
+     *
+     * @return Configuration of part studio in which ids were acquired
+     *
+     */
+    public final String sourceConfiguration() {
+      return this.sourceConfiguration;
+    }
+
+    /**
+     * Set Configuration of part studio in which ids were acquired
+     *
+     * @param value Configuration of part studio in which ids were acquired
+     *
+     * @return the Builder object.
+     */
+    public final Builder sourceConfiguration(String value) {
+      this.sourceConfiguration = value;
+      return this;
+    }
+
+    /**
+     * Get Configuration of part studio into which ids are to be translated
+     *
+     * @return Configuration of part studio into which ids are to be translated
+     *
+     */
+    public final String targetConfiguration() {
+      return this.targetConfiguration;
+    }
+
+    /**
+     * Set Configuration of part studio into which ids are to be translated
+     *
+     * @param value Configuration of part studio into which ids are to be translated
+     *
+     * @return the Builder object.
+     */
+    public final Builder targetConfiguration(String value) {
+      this.targetConfiguration = value;
       return this;
     }
 
@@ -194,7 +284,7 @@ public final class PartStudiosIdTranslationsRequest {
     }
 
     private PartStudiosIdTranslationsRequest build() {
-      return new com.onshape.api.requests.PartStudiosIdTranslationsRequest(sourceDocumentMicroversion,ids,linkDocumentId);
+      return new com.onshape.api.requests.PartStudiosIdTranslationsRequest(sourceDocumentMicroversion,sourceConfiguration,targetConfiguration,ids,linkDocumentId);
     }
 
     /**
