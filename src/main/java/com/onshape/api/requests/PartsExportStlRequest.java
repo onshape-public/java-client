@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.PartsExportStlResponse;
+import com.onshape.api.types.InputStreamWithHeaders;
 import com.onshape.api.types.OnshapeDocument;
 import com.onshape.api.types.WVM;
 import java.lang.Boolean;
@@ -437,6 +438,27 @@ public final class PartsExportStlRequest {
         OnshapeException {
       onshape.validate(build());
       return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/stl", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap("grouping", grouping, "scale", scale, "units", units, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "minFacetWidth", minFacetWidth, "mode", mode, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartsExportStlResponse.class);
+    }
+
+    /**
+     * Calls exportStl method, Export the part in text or binary STL format; returns a 307 redirect.
+     * @return InputStreamWithHeaders stream with headers
+     * @throws OnshapeException On HTTP error
+     *
+     * @param did Document ID
+     *
+     * @param wvmType Type of Workspace, Version or Microversion
+     *
+     * @param wvm Workspace (w), Version (v) or Microversion (m) ID
+     *
+     * @param eid Part studio element ID
+     *
+     * @param partid Part ID
+     */
+    public final InputStreamWithHeaders callToStream(String did, WVM wvmType, String wvm,
+        String eid, String partid) throws OnshapeException {
+      onshape.validate(build());
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/stl", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "partid", partid), onshape.buildMap("grouping", grouping, "scale", scale, "units", units, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "minFacetWidth", minFacetWidth, "mode", mode, "linkDocumentId", linkDocumentId, "configuration", configuration), InputStreamWithHeaders.class);
     }
   }
 }

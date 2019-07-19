@@ -31,6 +31,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.types.Blob;
+import com.onshape.api.types.InputStreamWithHeaders;
 import com.onshape.api.types.OAuthTokenResponse;
 import com.onshape.api.types.OnshapeVersion;
 import java.io.File;
@@ -309,6 +310,10 @@ public class BaseClient {
         }
         // Call the HTTP method
         Response response = call(method, url, payload, urlParameters, queryParameters, jsonResponse);
+        // Return the raw stream and headers if requested
+        if (InputStreamWithHeaders.class.equals(type)) {
+            return type.cast(new InputStreamWithHeaders((InputStream) response.getEntity(), response.getHeaders()));
+        }
         // Deserialize the response
         if (response.getMediaType() == null) {
             if (type.getDeclaredFields().length == 0) {
@@ -358,6 +363,8 @@ public class BaseClient {
                     } catch (IOException ex) {
                         throw new OnshapeException("Error while copying to local file", ex);
                     }
+                } else if (InputStream.class.isAssignableFrom(type)) {
+                    return type.cast(input);
                 } else if (type.getDeclaredFields().length == 1) {
                     if (File.class.equals(type.getDeclaredFields()[0].getType())) {
                         try {

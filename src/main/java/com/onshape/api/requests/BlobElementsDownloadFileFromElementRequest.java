@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.BlobElementsDownloadFileFromElementResponse;
+import com.onshape.api.types.InputStreamWithHeaders;
 import com.onshape.api.types.OnshapeDocument;
 import com.onshape.api.types.WVM;
 import java.lang.Override;
@@ -157,6 +158,25 @@ public final class BlobElementsDownloadFileFromElementRequest {
         OnshapeException {
       onshape.validate(build());
       return onshape.call("get", "/blobelements/d/:did/[wvm]/:wvm/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("contentDisposition", contentDisposition, "linkDocumentId", linkDocumentId), com.onshape.api.responses.BlobElementsDownloadFileFromElementResponse.class);
+    }
+
+    /**
+     * Calls downloadFileFromElement method, Download a file from a blob element
+     * @return InputStreamWithHeaders stream with headers
+     * @throws OnshapeException On HTTP error
+     *
+     * @param did Document ID
+     *
+     * @param wvmType Type of Workspace, Version or Microversion
+     *
+     * @param wvm Workspace (w), Version (v) or Microversion (m) ID
+     *
+     * @param eid Element ID
+     */
+    public final InputStreamWithHeaders callToStream(String did, WVM wvmType, String wvm,
+        String eid) throws OnshapeException {
+      onshape.validate(build());
+      return onshape.call("get", "/blobelements/d/:did/[wvm]/:wvm/e/:eid", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("contentDisposition", contentDisposition, "linkDocumentId", linkDocumentId), InputStreamWithHeaders.class);
     }
   }
 }

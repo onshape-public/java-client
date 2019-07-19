@@ -22,6 +22,7 @@
 //
 package com.onshape.api.responses;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
@@ -153,6 +154,7 @@ public final class AssembliesCreateTranslationResponse {
    * Returns an OnshapeDocument object that can be used in subsequent calls to the related document
    * @return The OnshapeDocument object.
    */
+  @JsonIgnore
   public final OnshapeDocument getDocument() {
     return new OnshapeDocument(documentId, workspaceId, null, null, null);
   }

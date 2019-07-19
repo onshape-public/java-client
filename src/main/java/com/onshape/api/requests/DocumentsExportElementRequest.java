@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.DocumentsExportElementResponse;
+import com.onshape.api.types.InputStreamWithHeaders;
 import com.onshape.api.types.OnshapeDocument;
 import com.onshape.api.types.WV;
 import java.lang.Boolean;
@@ -542,6 +543,28 @@ public final class DocumentsExportElementRequest {
         Number scale, String mode) throws OnshapeException {
       onshape.validate(build());
       return onshape.call("get", "/documents/d/:did/[wv]/:wv/e/:eid/export", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap("format", format, "storeInDocument", storeInDocument, "linkDocumentWorkspaceId", linkDocumentWorkspaceId, "partIds", partIds, "microversion", microversion, "grouping", grouping, "zipSingleFileOutput", zipSingleFileOutput, "scale", scale, "units", units, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "minFacetWidth", minFacetWidth, "mode", mode, "version", version, "linkDocumentId", linkDocumentId), com.onshape.api.responses.DocumentsExportElementResponse.class);
+    }
+
+    /**
+     * Calls exportElement method, Export the given element in STL or Parasolid (PS) formats; returns a 307 redirect.
+     * @return InputStreamWithHeaders stream with headers
+     * @throws OnshapeException On HTTP error
+     *
+     * @param did Document ID
+     *
+     * @param wvType Type of Workspace or Version
+     *
+     * @param wv Workspace (w) or Version (v) ID
+     *
+     * @param eid Element ID
+     *
+     * @param format Export format: STL, PS (Default: null)
+     * @param scale Scale for measurements (STL) (Default: null)
+     * @param mode Type of file: text, binary (STL) (Default: null) */
+    public final InputStreamWithHeaders callToStream(String did, WV wvType, String wv, String eid,
+        String format, Number scale, String mode) throws OnshapeException {
+      onshape.validate(build());
+      return onshape.call("get", "/documents/d/:did/[wv]/:wv/e/:eid/export", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv, "eid", eid), onshape.buildMap("format", format, "storeInDocument", storeInDocument, "linkDocumentWorkspaceId", linkDocumentWorkspaceId, "partIds", partIds, "microversion", microversion, "grouping", grouping, "zipSingleFileOutput", zipSingleFileOutput, "scale", scale, "units", units, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "minFacetWidth", minFacetWidth, "mode", mode, "version", version, "linkDocumentId", linkDocumentId), InputStreamWithHeaders.class);
     }
   }
 }
