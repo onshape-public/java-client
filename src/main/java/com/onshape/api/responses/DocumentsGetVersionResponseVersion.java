@@ -80,6 +80,12 @@ public final class DocumentsGetVersionResponseVersion {
   public String id;
 
   /**
+   * Version name
+   */
+  @JsonProperty("name")
+  public String name;
+
+  /**
    * Get ID of parent version, or empty string for root version
    *
    * @return ID of parent version, or empty string for root version
@@ -147,6 +153,16 @@ public final class DocumentsGetVersionResponseVersion {
    */
   public final String getId() {
     return this.id;
+  }
+
+  /**
+   * Get Version name
+   *
+   * @return Version name
+   *
+   */
+  public final String getName() {
+    return this.name;
   }
 
   @Override

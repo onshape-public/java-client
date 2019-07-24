@@ -25,6 +25,7 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.DocumentsDownloadExternalDataResponse;
+import com.onshape.api.types.InputStreamWithHeaders;
 import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
@@ -85,6 +86,21 @@ public final class DocumentsDownloadExternalDataRequest {
         throws OnshapeException {
       onshape.validate(build());
       return onshape.call("get", "/documents/d/:did/externaldata/:fid", build(), onshape.buildMap("fid", fid, "did", document.getDocumentId()), onshape.buildMap(), com.onshape.api.responses.DocumentsDownloadExternalDataResponse.class);
+    }
+
+    /**
+     * Calls downloadExternalData method, Download external data
+     * @return InputStreamWithHeaders stream with headers
+     * @throws OnshapeException On HTTP error
+     *
+     * @param fid External data ID
+     *
+     * @param did Document ID
+     */
+    public final InputStreamWithHeaders callToStream(String fid, String did) throws
+        OnshapeException {
+      onshape.validate(build());
+      return onshape.call("get", "/documents/d/:did/externaldata/:fid", build(), onshape.buildMap("fid", fid, "did", did), onshape.buildMap(), InputStreamWithHeaders.class);
     }
   }
 }
