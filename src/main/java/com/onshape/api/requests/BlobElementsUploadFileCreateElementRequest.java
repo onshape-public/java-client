@@ -98,6 +98,12 @@ public final class BlobElementsUploadFileCreateElementRequest {
   Boolean allowFaultyParts;
 
   /**
+   * If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+   */
+  @JsonProperty("createComposite")
+  Boolean createComposite;
+
+  /**
    * For internal use.
    */
   @JsonProperty("locationGroupId")
@@ -118,8 +124,8 @@ public final class BlobElementsUploadFileCreateElementRequest {
   BlobElementsUploadFileCreateElementRequest(Boolean createDrawingIfPossible, Blob file,
       String encodedFilename, Number fileContentLength, Boolean translate,
       Boolean flattenAssemblies, Boolean yAxisIsUp, Boolean importInBackground,
-      Boolean allowFaultyParts, String locationGroupId, String locationElementId,
-      Number locationPosition) {
+      Boolean allowFaultyParts, Boolean createComposite, String locationGroupId,
+      String locationElementId, Number locationPosition) {
     this.createDrawingIfPossible = createDrawingIfPossible;
     this.file = file;
     this.encodedFilename = encodedFilename;
@@ -129,6 +135,7 @@ public final class BlobElementsUploadFileCreateElementRequest {
     this.yAxisIsUp = yAxisIsUp;
     this.importInBackground = importInBackground;
     this.allowFaultyParts = allowFaultyParts;
+    this.createComposite = createComposite;
     this.locationGroupId = locationGroupId;
     this.locationElementId = locationElementId;
     this.locationPosition = locationPosition;
@@ -225,6 +232,16 @@ public final class BlobElementsUploadFileCreateElementRequest {
   }
 
   /**
+   * Get If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+   *
+   * @return If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+   *
+   */
+  public final Boolean getCreateComposite() {
+    return this.createComposite;
+  }
+
+  /**
    * Get For internal use.
    *
    * @return For internal use.
@@ -310,6 +327,11 @@ public final class BlobElementsUploadFileCreateElementRequest {
      * If not specified or if specified as false, bodies to be imported are examined for validity and any found to be faulty are removed from the import. If all bodies are found to be faulty, the import fails. If the value is specified as true, we attempt to import the bodies that appear to have faults.
      */
     private Boolean allowFaultyParts;
+
+    /**
+     * If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     */
+    private Boolean createComposite;
 
     /**
      * For internal use.
@@ -530,6 +552,28 @@ public final class BlobElementsUploadFileCreateElementRequest {
     }
 
     /**
+     * Get If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     *
+     * @return If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     *
+     */
+    public final Boolean createComposite() {
+      return this.createComposite;
+    }
+
+    /**
+     * Set If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     *
+     * @param value If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     *
+     * @return the Builder object.
+     */
+    public final Builder createComposite(Boolean value) {
+      this.createComposite = value;
+      return this;
+    }
+
+    /**
      * Get For internal use.
      *
      * @return For internal use.
@@ -596,7 +640,7 @@ public final class BlobElementsUploadFileCreateElementRequest {
     }
 
     private BlobElementsUploadFileCreateElementRequest build() {
-      return new com.onshape.api.requests.BlobElementsUploadFileCreateElementRequest(createDrawingIfPossible,file,encodedFilename,fileContentLength,translate,flattenAssemblies,yAxisIsUp,importInBackground,allowFaultyParts,locationGroupId,locationElementId,locationPosition);
+      return new com.onshape.api.requests.BlobElementsUploadFileCreateElementRequest(createDrawingIfPossible,file,encodedFilename,fileContentLength,translate,flattenAssemblies,yAxisIsUp,importInBackground,allowFaultyParts,createComposite,locationGroupId,locationElementId,locationPosition);
     }
 
     /**

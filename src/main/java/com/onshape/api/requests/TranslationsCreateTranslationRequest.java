@@ -91,6 +91,12 @@ public final class TranslationsCreateTranslationRequest {
   Boolean allowFaultyParts;
 
   /**
+   * If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+   */
+  @JsonProperty("createComposite")
+  Boolean createComposite;
+
+  /**
    * controls whether the translation is stored as a new element or whether the data is stored as external data (storeInDocument=false).
    */
   @JsonProperty("storeInDocument")
@@ -99,7 +105,7 @@ public final class TranslationsCreateTranslationRequest {
 
   TranslationsCreateTranslationRequest(Blob file, String formatName, String versionString,
       Boolean notifyUser, Boolean flattenAssemblies, Boolean yAxisIsUp, Boolean importInBackground,
-      Boolean allowFaultyParts, Boolean storeInDocument) {
+      Boolean allowFaultyParts, Boolean createComposite, Boolean storeInDocument) {
     this.file = file;
     this.formatName = formatName;
     this.versionString = versionString;
@@ -108,6 +114,7 @@ public final class TranslationsCreateTranslationRequest {
     this.yAxisIsUp = yAxisIsUp;
     this.importInBackground = importInBackground;
     this.allowFaultyParts = allowFaultyParts;
+    this.createComposite = createComposite;
     this.storeInDocument = storeInDocument;
   }
 
@@ -192,6 +199,16 @@ public final class TranslationsCreateTranslationRequest {
   }
 
   /**
+   * Get If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+   *
+   * @return If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+   *
+   */
+  public final Boolean getCreateComposite() {
+    return this.createComposite;
+  }
+
+  /**
    * Get controls whether the translation is stored as a new element or whether the data is stored as external data (storeInDocument=false).
    *
    * @return controls whether the translation is stored as a new element or whether the data is stored as external data (storeInDocument=false).
@@ -252,6 +269,11 @@ public final class TranslationsCreateTranslationRequest {
      * If not specified or if specified as false, bodies to be imported are examined for validity and any found to be faulty are removed from the import. If all bodies are found to be faulty, the import fails. If the value is specified as true, we attempt to import the bodies that appear to have faults.
      */
     private Boolean allowFaultyParts;
+
+    /**
+     * If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     */
+    private Boolean createComposite;
 
     /**
      * controls whether the translation is stored as a new element or whether the data is stored as external data (storeInDocument=false).
@@ -440,6 +462,28 @@ public final class TranslationsCreateTranslationRequest {
     }
 
     /**
+     * Get If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     *
+     * @return If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     *
+     */
+    public final Boolean createComposite() {
+      return this.createComposite;
+    }
+
+    /**
+     * Set If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     *
+     * @param value If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     *
+     * @return the Builder object.
+     */
+    public final Builder createComposite(Boolean value) {
+      this.createComposite = value;
+      return this;
+    }
+
+    /**
      * Get controls whether the translation is stored as a new element or whether the data is stored as external data (storeInDocument=false).
      *
      * @return controls whether the translation is stored as a new element or whether the data is stored as external data (storeInDocument=false).
@@ -462,7 +506,7 @@ public final class TranslationsCreateTranslationRequest {
     }
 
     private TranslationsCreateTranslationRequest build() {
-      return new com.onshape.api.requests.TranslationsCreateTranslationRequest(file,formatName,versionString,notifyUser,flattenAssemblies,yAxisIsUp,importInBackground,allowFaultyParts,storeInDocument);
+      return new com.onshape.api.requests.TranslationsCreateTranslationRequest(file,formatName,versionString,notifyUser,flattenAssemblies,yAxisIsUp,importInBackground,allowFaultyParts,createComposite,storeInDocument);
     }
 
     /**

@@ -92,6 +92,12 @@ public final class BlobElementsUploadFileUpdateElementRequest {
   Boolean allowFaultyParts;
 
   /**
+   * If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+   */
+  @JsonProperty("createComposite")
+  Boolean createComposite;
+
+  /**
    * The element microversion of the blob element that will be updated. If the requested mv doesn&#39;t match the workspace mv, this call will result in a 400. The element microversionId can be retrieved from documents:getElementList.
    */
   @JsonProperty("parentChangeId")
@@ -99,7 +105,8 @@ public final class BlobElementsUploadFileUpdateElementRequest {
 
   BlobElementsUploadFileUpdateElementRequest(Blob file, String encodedFilename,
       Number fileContentLength, Boolean translate, Boolean flattenAssemblies, Boolean yAxisIsUp,
-      Boolean importInBackground, Boolean allowFaultyParts, String parentChangeId) {
+      Boolean importInBackground, Boolean allowFaultyParts, Boolean createComposite,
+      String parentChangeId) {
     this.file = file;
     this.encodedFilename = encodedFilename;
     this.fileContentLength = fileContentLength;
@@ -108,6 +115,7 @@ public final class BlobElementsUploadFileUpdateElementRequest {
     this.yAxisIsUp = yAxisIsUp;
     this.importInBackground = importInBackground;
     this.allowFaultyParts = allowFaultyParts;
+    this.createComposite = createComposite;
     this.parentChangeId = parentChangeId;
   }
 
@@ -191,6 +199,16 @@ public final class BlobElementsUploadFileUpdateElementRequest {
     return this.allowFaultyParts;
   }
 
+  /**
+   * Get If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+   *
+   * @return If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+   *
+   */
+  public final Boolean getCreateComposite() {
+    return this.createComposite;
+  }
+
   @Override
   public String toString() {
     return Onshape.toString(this);
@@ -242,6 +260,11 @@ public final class BlobElementsUploadFileUpdateElementRequest {
      * If not specified or if specified as false, bodies to be imported are examined for validity and any found to be faulty are removed from the import. If all bodies are found to be faulty, the import fails. If the value is specified as true, we attempt to import the bodies that appear to have faults.
      */
     private Boolean allowFaultyParts;
+
+    /**
+     * If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     */
+    private Boolean createComposite;
 
     /**
      * The element microversion of the blob element that will be updated. If the requested mv doesn&#39;t match the workspace mv, this call will result in a 400. The element microversionId can be retrieved from documents:getElementList.
@@ -430,6 +453,28 @@ public final class BlobElementsUploadFileUpdateElementRequest {
     }
 
     /**
+     * Get If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     *
+     * @return If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     *
+     */
+    public final Boolean createComposite() {
+      return this.createComposite;
+    }
+
+    /**
+     * Set If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     *
+     * @param value If the value is specified as true, each part studio contains a single composite part made up of all its topologies.
+     *
+     * @return the Builder object.
+     */
+    public final Builder createComposite(Boolean value) {
+      this.createComposite = value;
+      return this;
+    }
+
+    /**
      * Get The element microversion of the blob element that will be updated. If the requested mv doesn&#39;t match the workspace mv, this call will result in a 400. The element microversionId can be retrieved from documents:getElementList.
      *
      * @return The element microversion of the blob element that will be updated. If the requested mv doesn&#39;t match the workspace mv, this call will result in a 400. The element microversionId can be retrieved from documents:getElementList.
@@ -452,7 +497,7 @@ public final class BlobElementsUploadFileUpdateElementRequest {
     }
 
     private BlobElementsUploadFileUpdateElementRequest build() {
-      return new com.onshape.api.requests.BlobElementsUploadFileUpdateElementRequest(file,encodedFilename,fileContentLength,translate,flattenAssemblies,yAxisIsUp,importInBackground,allowFaultyParts,parentChangeId);
+      return new com.onshape.api.requests.BlobElementsUploadFileUpdateElementRequest(file,encodedFilename,fileContentLength,translate,flattenAssemblies,yAxisIsUp,importInBackground,allowFaultyParts,createComposite,parentChangeId);
     }
 
     /**

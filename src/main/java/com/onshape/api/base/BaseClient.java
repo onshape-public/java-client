@@ -34,7 +34,6 @@ import com.onshape.api.types.Blob;
 import com.onshape.api.types.InputStreamWithHeaders;
 import com.onshape.api.types.OAuthTokenResponse;
 import com.onshape.api.types.OnshapeVersion;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -76,7 +75,6 @@ import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
-
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.media.multipart.Boundary;
@@ -87,6 +85,7 @@ import org.hashids.Hashids;
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
 
 /**
+ *
  * @author Peter Harman peter.harman@cae.tech
  */
 public class BaseClient {
@@ -106,8 +105,6 @@ public class BaseClient {
     private boolean usingValidation;
     private final Set<RequestListener> requestListeners;
     private static final ObjectMapper TOSTRINGMAPPER;
-    //Set TIMEOUT to 10 minutes to match Onshape TIMEOUT.
-    private final int TIMEOUT = 600000;
 
     static {
         TOSTRINGMAPPER = new ObjectMapper();
@@ -122,8 +119,6 @@ public class BaseClient {
         JacksonJaxbJsonProvider jacksonProvider = new JacksonJaxbJsonProvider();
         jacksonProvider.setMapper(objectMapper);
         ClientConfig clientConfig = new ClientConfig(jacksonProvider);
-        clientConfig.property(ClientProperties.CONNECT_TIMEOUT, TIMEOUT);
-        clientConfig.property(ClientProperties.READ_TIMEOUT, TIMEOUT);
         clientConfig.register(MultiPartFeature.class);
         clientConfig.register(new CompressionReaderInterceptor());
         client = ClientBuilder.newClient(clientConfig);
@@ -194,10 +189,10 @@ public class BaseClient {
     /**
      * Set a previously requested OAuth token
      *
-     * @param token         Token object from server
+     * @param token Token object from server
      * @param tokenReceived Date that token was received
-     * @param clientId      Client id of application
-     * @param clientSecret  Client secret of application
+     * @param clientId Client id of application
+     * @param clientSecret Client secret of application
      */
     public void setOAuthTokenResponse(OAuthTokenResponse token, Date tokenReceived, String clientId, String clientSecret) {
         this.token = token;
@@ -227,12 +222,12 @@ public class BaseClient {
     /**
      * Set an access code received from an OAuth request.
      *
-     * @param code         Code returned from server
-     * @param clientId     Client id of application
+     * @param code Code returned from server
+     * @param clientId Client id of application
      * @param clientSecret Client secret of application
-     * @param redirectURI  URI to redirect to after authentication
+     * @param redirectURI URI to redirect to after authentication
      * @throws com.onshape.api.exceptions.OnshapeException On HTTP or
-     *                                                     serialization error.
+     * serialization error.
      */
     public void setOAuthAccessCode(String code, String clientId, String clientSecret, String redirectURI) throws OnshapeException {
         WebTarget target = client.target("https://oauth.onshape.com/oauth/token");
@@ -290,16 +285,16 @@ public class BaseClient {
     /**
      * Performs the HTTP call and transforms the result to the required class.
      *
-     * @param <T>             Return type
-     * @param method          HTTP method
-     * @param url             URL
-     * @param payload         Payload object for POST/PUT calls
-     * @param urlParameters   Map of path parameters
+     * @param <T> Return type
+     * @param method HTTP method
+     * @param url URL
+     * @param payload Payload object for POST/PUT calls
+     * @param urlParameters Map of path parameters
      * @param queryParameters Map of query parameters
-     * @param type            Return type
+     * @param type Return type
      * @return Response object
      * @throws com.onshape.api.exceptions.OnshapeException On HTTP or
-     *                                                     serialization error.
+     * serialization error.
      */
     public final <T> T call(String method, String url, Object payload, Map<String, Object> urlParameters, Map<String, Object> queryParameters, Class<T> type) throws OnshapeException {
         // Determine if the response type should be binary or JSON
@@ -421,8 +416,8 @@ public class BaseClient {
     /**
      * Shortcut for GET of specific URL
      *
-     * @param <T>  Return type
-     * @param url  URL
+     * @param <T> Return type
+     * @param url URL
      * @param type Return type
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
@@ -503,7 +498,7 @@ public class BaseClient {
             invocationBuilder.header("Content-Type", mediaType.toString());
             return Entity.entity(payload, mediaType);
         }
-        // Else create multipart entity
+        // Else create multipart entity        
         FormDataMultiPart multipart = new FormDataMultiPart();
         try {
             for (Field field : payload.getClass().getDeclaredFields()) {
@@ -648,8 +643,8 @@ public class BaseClient {
      * classes.
      *
      * @param obj The Request or Response object
-     * @return String of pretty-printed JSON
      * @throws RuntimeException On serialization error
+     * @return String of pretty-printed JSON
      */
     public static String toString(Object obj) {
         try {
@@ -722,8 +717,9 @@ public class BaseClient {
     public static interface RequestListener {
 
         /**
+         *
          * @param method HTTP method
-         * @param uri    The URI called, including path and query parameters
+         * @param uri The URI called, including path and query parameters
          * @param entity The Entity object used or null
          * @return A ResponseListener object to capture the response to this
          * HTTP call
