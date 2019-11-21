@@ -23,18 +23,38 @@
 package com.onshape.api.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
+import javax.validation.constraints.NotNull;
 
 /**
- * Response object for restoreMicroversion API endpoint.
+ * Response object for testVersionsUpdate API endpoint.
  * &copy; 2018 Onshape Inc.
  */
 @JsonIgnoreProperties(
     ignoreUnknown = true
 )
-public final class DocumentsRestoreMicroversionResponse {
+public final class VersionsTestVersionsUpdateResponse {
+  /**
+   * The version of the response
+   */
+  @JsonProperty("version")
+  @NotNull
+  Number version;
+
+  /**
+   * Get The version of the response
+   *
+   * @return The version of the response
+   *
+   */
+  public final Number getVersion() {
+    return this.version;
+  }
+
   @Override
   public String toString() {
     return Onshape.toString(this);

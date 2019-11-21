@@ -23,55 +23,18 @@
 package com.onshape.api.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
-import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
-import javax.validation.constraints.NotNull;
 
 /**
- * Response object for testVersion2 API endpoint.
+ * Response object for restoreFromHistory API endpoint.
  * &copy; 2018 Onshape Inc.
  */
 @JsonIgnoreProperties(
     ignoreUnknown = true
 )
-public final class VersionsTestVersion2Response {
-  /**
-   * The earliest support version
-   */
-  @JsonProperty("earliestVersion")
-  @NotNull
-  Number earliestVersion;
-
-  /**
-   * The list of supported version numbers
-   */
-  @JsonProperty("supportedVersions")
-  @NotNull
-  Number[] supportedVersions;
-
-  /**
-   * Get The earliest support version
-   *
-   * @return The earliest support version
-   *
-   */
-  public final Number getEarliestVersion() {
-    return this.earliestVersion;
-  }
-
-  /**
-   * Get The list of supported version numbers
-   *
-   * @return The list of supported version numbers
-   *
-   */
-  public final Number[] getSupportedVersions() {
-    return this.supportedVersions;
-  }
-
+public final class DocumentsRestoreFromHistoryResponse {
   @Override
   public String toString() {
     return Onshape.toString(this);

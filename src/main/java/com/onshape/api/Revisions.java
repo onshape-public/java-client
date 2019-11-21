@@ -22,6 +22,7 @@
 //
 package com.onshape.api;
 
+import com.onshape.api.requests.RevisionsEnumerateRevisionsRequest;
 import com.onshape.api.requests.RevisionsGetLatestInDocumentOrCompanyRequest;
 import com.onshape.api.requests.RevisionsGetRevisionHistoryInCompanyRequest;
 
@@ -34,6 +35,14 @@ public final class Revisions {
 
   Revisions(Onshape onshape) {
     this.onshape = onshape;
+  }
+
+  /**
+   * Create request for enumerateRevisions
+   *  @return Request builder object
+   */
+  public final RevisionsEnumerateRevisionsRequest.Builder enumerateRevisions() {
+    return RevisionsEnumerateRevisionsRequest.builder(onshape);
   }
 
   /**

@@ -92,6 +92,18 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
   public Boolean isAssembly;
 
   /**
+   * If true add the instance as suppressed
+   */
+  @JsonProperty("isSuppressed")
+  public Boolean isSuppressed;
+
+  /**
+   * If true add the instance as hidden
+   */
+  @JsonProperty("isHidden")
+  public Boolean isHidden;
+
+  /**
    * The revision containing the released part or assembly to be inserted.
    */
   @JsonProperty("revision")
@@ -105,8 +117,8 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
 
   AssembliesInsertTransformedInstancesRequestTransformGroupsInstances(String documentId,
       String elementId, String partId, String featureId, String microversionId, String versionId,
-      String configuration, Boolean isWholePartStudio, Boolean isAssembly, String revision,
-      String partNumber) {
+      String configuration, Boolean isWholePartStudio, Boolean isAssembly, Boolean isSuppressed,
+      Boolean isHidden, String revision, String partNumber) {
     this.documentId = documentId;
     this.elementId = elementId;
     this.partId = partId;
@@ -116,6 +128,8 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
     this.configuration = configuration;
     this.isWholePartStudio = isWholePartStudio;
     this.isAssembly = isAssembly;
+    this.isSuppressed = isSuppressed;
+    this.isHidden = isHidden;
     this.revision = revision;
     this.partNumber = partNumber;
   }
@@ -211,6 +225,26 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
   }
 
   /**
+   * Get If true add the instance as suppressed
+   *
+   * @return If true add the instance as suppressed
+   *
+   */
+  public final Boolean getIsSuppressed() {
+    return this.isSuppressed;
+  }
+
+  /**
+   * Get If true add the instance as hidden
+   *
+   * @return If true add the instance as hidden
+   *
+   */
+  public final Boolean getIsHidden() {
+    return this.isHidden;
+  }
+
+  /**
    * Get The revision containing the released part or assembly to be inserted.
    *
    * @return The revision containing the released part or assembly to be inserted.
@@ -285,6 +319,16 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
      * Whether the instance is the assembly specified by the element ID.
      */
     private Boolean isAssembly;
+
+    /**
+     * If true add the instance as suppressed
+     */
+    private Boolean isSuppressed;
+
+    /**
+     * If true add the instance as hidden
+     */
+    private Boolean isHidden;
 
     /**
      * The revision containing the released part or assembly to be inserted.
@@ -498,6 +542,50 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
     }
 
     /**
+     * Get If true add the instance as suppressed
+     *
+     * @return If true add the instance as suppressed
+     *
+     */
+    public final Boolean isSuppressed() {
+      return this.isSuppressed;
+    }
+
+    /**
+     * Set If true add the instance as suppressed
+     *
+     * @param value If true add the instance as suppressed
+     *
+     * @return the Builder object.
+     */
+    public final Builder isSuppressed(Boolean value) {
+      this.isSuppressed = value;
+      return this;
+    }
+
+    /**
+     * Get If true add the instance as hidden
+     *
+     * @return If true add the instance as hidden
+     *
+     */
+    public final Boolean isHidden() {
+      return this.isHidden;
+    }
+
+    /**
+     * Set If true add the instance as hidden
+     *
+     * @param value If true add the instance as hidden
+     *
+     * @return the Builder object.
+     */
+    public final Builder isHidden(Boolean value) {
+      this.isHidden = value;
+      return this;
+    }
+
+    /**
      * Get The revision containing the released part or assembly to be inserted.
      *
      * @return The revision containing the released part or assembly to be inserted.
@@ -542,7 +630,7 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
     }
 
     public final AssembliesInsertTransformedInstancesRequestTransformGroupsInstances build() {
-      return new com.onshape.api.requests.AssembliesInsertTransformedInstancesRequestTransformGroupsInstances(documentId,elementId,partId,featureId,microversionId,versionId,configuration,isWholePartStudio,isAssembly,revision,partNumber);
+      return new com.onshape.api.requests.AssembliesInsertTransformedInstancesRequestTransformGroupsInstances(documentId,elementId,partId,featureId,microversionId,versionId,configuration,isWholePartStudio,isAssembly,isSuppressed,isHidden,revision,partNumber);
     }
   }
 }

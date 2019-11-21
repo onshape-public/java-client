@@ -20,51 +20,43 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-package com.onshape.api.requests;
+package com.onshape.api.responses;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
-import com.onshape.api.exceptions.OnshapeException;
-import com.onshape.api.responses.VersionsTestVersion2Response;
+import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
+import javax.validation.constraints.NotNull;
 
 /**
- * Request object for testVersion2 API endpoint.
+ * Response object for testVersionsGet API endpoint.
  * &copy; 2018 Onshape Inc.
  */
-public final class VersionsTestVersion2Request {
-  VersionsTestVersion2Request() {
+@JsonIgnoreProperties(
+    ignoreUnknown = true
+)
+public final class VersionsTestVersionsGetResponse {
+  /**
+   * The version of the response
+   */
+  @JsonProperty("version")
+  @NotNull
+  Number version;
+
+  /**
+   * Get The version of the response
+   *
+   * @return The version of the response
+   *
+   */
+  public final Number getVersion() {
+    return this.version;
   }
 
   @Override
   public String toString() {
     return Onshape.toString(this);
-  }
-
-  public static final Builder builder(Onshape onshape) {
-    Builder builder = new Builder();
-    builder.onshape = onshape;
-    return builder;
-  }
-
-  public static final class Builder {
-    Onshape onshape;
-
-    Builder() {
-    }
-
-    private VersionsTestVersion2Request build() {
-      return new com.onshape.api.requests.VersionsTestVersion2Request();
-    }
-
-    /**
-     * Calls testVersion2 method, Returns an API version 2 structure; this is the default
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     */
-    public final VersionsTestVersion2Response call() throws OnshapeException {
-      onshape.validate(build());
-      return onshape.call("get", "/versions/test", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.VersionsTestVersion2Response.class);
-    }
   }
 }

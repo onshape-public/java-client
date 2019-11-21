@@ -125,6 +125,13 @@ public final class UsersGetUserSettingsResponse {
   String exportDrawingOptions;
 
   /**
+   * JSON string of Import options for solid models
+   */
+  @JsonProperty("importOptions")
+  @NotNull
+  String importOptions;
+
+  /**
    * Number of decimal places to be displayed per unit
    */
   @JsonProperty("unitsDisplayPrecision")
@@ -256,6 +263,16 @@ public final class UsersGetUserSettingsResponse {
    */
   public final String getExportDrawingOptions() {
     return this.exportDrawingOptions;
+  }
+
+  /**
+   * Get JSON string of Import options for solid models
+   *
+   * @return JSON string of Import options for solid models
+   *
+   */
+  public final String getImportOptions() {
+    return this.importOptions;
   }
 
   /**

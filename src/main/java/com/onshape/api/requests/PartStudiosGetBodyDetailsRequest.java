@@ -28,6 +28,7 @@ import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.PartStudiosGetBodyDetailsResponse;
 import com.onshape.api.types.OnshapeDocument;
 import com.onshape.api.types.WVM;
+import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
 
@@ -48,9 +49,17 @@ public final class PartStudiosGetBodyDetailsRequest {
   @JsonProperty("configuration")
   String configuration;
 
-  PartStudiosGetBodyDetailsRequest(String linkDocumentId, String configuration) {
+  /**
+   * Index specifying the location of the rollback bar when the call is evaluated. A -1 indicates that it should be at the end of the featurelist.
+   */
+  @JsonProperty("rollbackBarIndex")
+  Number rollbackBarIndex;
+
+  PartStudiosGetBodyDetailsRequest(String linkDocumentId, String configuration,
+      Number rollbackBarIndex) {
     this.linkDocumentId = linkDocumentId;
     this.configuration = configuration;
+    this.rollbackBarIndex = rollbackBarIndex;
   }
 
   @Override
@@ -74,6 +83,11 @@ public final class PartStudiosGetBodyDetailsRequest {
      * Configuration string
      */
     private String configuration;
+
+    /**
+     * Index specifying the location of the rollback bar when the call is evaluated. A -1 indicates that it should be at the end of the featurelist.
+     */
+    private Number rollbackBarIndex;
 
     Onshape onshape;
 
@@ -124,12 +138,34 @@ public final class PartStudiosGetBodyDetailsRequest {
       return this;
     }
 
-    private PartStudiosGetBodyDetailsRequest build() {
-      return new com.onshape.api.requests.PartStudiosGetBodyDetailsRequest(linkDocumentId,configuration);
+    /**
+     * Get Index specifying the location of the rollback bar when the call is evaluated. A -1 indicates that it should be at the end of the featurelist.
+     *
+     * @return Index specifying the location of the rollback bar when the call is evaluated. A -1 indicates that it should be at the end of the featurelist.
+     *
+     */
+    public final Number rollbackBarIndex() {
+      return this.rollbackBarIndex;
     }
 
     /**
-     * Calls getBodyDetails method, Get the body details of a Part Studio.  All coordinates are in meters.
+     * Set Index specifying the location of the rollback bar when the call is evaluated. A -1 indicates that it should be at the end of the featurelist.
+     *
+     * @param value Index specifying the location of the rollback bar when the call is evaluated. A -1 indicates that it should be at the end of the featurelist.
+     *
+     * @return the Builder object.
+     */
+    public final Builder rollbackBarIndex(Number value) {
+      this.rollbackBarIndex = value;
+      return this;
+    }
+
+    private PartStudiosGetBodyDetailsRequest build() {
+      return new com.onshape.api.requests.PartStudiosGetBodyDetailsRequest(linkDocumentId,configuration,rollbackBarIndex);
+    }
+
+    /**
+     * Calls getBodyDetails method, Get the body details of a Part Studio. All coordinates are in meters.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
@@ -144,11 +180,11 @@ public final class PartStudiosGetBodyDetailsRequest {
     public final PartStudiosGetBodyDetailsResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosGetBodyDetailsResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("linkDocumentId", linkDocumentId, "configuration", configuration, "rollbackBarIndex", rollbackBarIndex), com.onshape.api.responses.PartStudiosGetBodyDetailsResponse.class);
     }
 
     /**
-     * Calls getBodyDetails method, Get the body details of a Part Studio.  All coordinates are in meters.
+     * Calls getBodyDetails method, Get the body details of a Part Studio. All coordinates are in meters.
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
@@ -156,7 +192,7 @@ public final class PartStudiosGetBodyDetailsRequest {
     public final PartStudiosGetBodyDetailsResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosGetBodyDetailsResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("linkDocumentId", linkDocumentId, "configuration", configuration, "rollbackBarIndex", rollbackBarIndex), com.onshape.api.responses.PartStudiosGetBodyDetailsResponse.class);
     }
   }
 }

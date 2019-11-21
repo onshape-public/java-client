@@ -66,6 +66,18 @@ public final class AssembliesCreateInstanceRequest {
   String microversionId;
 
   /**
+   * If true add the instance as suppressed
+   */
+  @JsonProperty("isSuppressed")
+  Boolean isSuppressed;
+
+  /**
+   * If true add the instance as hidden
+   */
+  @JsonProperty("isHidden")
+  Boolean isHidden;
+
+  /**
    * If true then the source element must be an assembly and whole assembly is inserted.
    */
   @JsonProperty("isAssembly")
@@ -112,12 +124,15 @@ public final class AssembliesCreateInstanceRequest {
   String partNumber;
 
   AssembliesCreateInstanceRequest(String documentId, String elementId, String versionId,
-      String microversionId, Boolean isAssembly, Boolean isWholePartStudio, String partId,
-      String featureId, String configuration, String revision, String partNumber) {
+      String microversionId, Boolean isSuppressed, Boolean isHidden, Boolean isAssembly,
+      Boolean isWholePartStudio, String partId, String featureId, String configuration,
+      String revision, String partNumber) {
     this.documentId = documentId;
     this.elementId = elementId;
     this.versionId = versionId;
     this.microversionId = microversionId;
+    this.isSuppressed = isSuppressed;
+    this.isHidden = isHidden;
     this.isAssembly = isAssembly;
     this.isWholePartStudio = isWholePartStudio;
     this.partId = partId;
@@ -165,6 +180,26 @@ public final class AssembliesCreateInstanceRequest {
    */
   public final String getMicroversionId() {
     return this.microversionId;
+  }
+
+  /**
+   * Get If true add the instance as suppressed
+   *
+   * @return If true add the instance as suppressed
+   *
+   */
+  public final Boolean getIsSuppressed() {
+    return this.isSuppressed;
+  }
+
+  /**
+   * Get If true add the instance as hidden
+   *
+   * @return If true add the instance as hidden
+   *
+   */
+  public final Boolean getIsHidden() {
+    return this.isHidden;
   }
 
   /**
@@ -268,6 +303,16 @@ public final class AssembliesCreateInstanceRequest {
      * The document microversionId in which the elementId and partId will be resolved. This is valid only if no versionId is specified. When a versionId is specified, the partId must be obtained from the specified version.
      */
     private String microversionId;
+
+    /**
+     * If true add the instance as suppressed
+     */
+    private Boolean isSuppressed;
+
+    /**
+     * If true add the instance as hidden
+     */
+    private Boolean isHidden;
 
     /**
      * If true then the source element must be an assembly and whole assembly is inserted.
@@ -394,6 +439,50 @@ public final class AssembliesCreateInstanceRequest {
      */
     public final Builder microversionId(String value) {
       this.microversionId = value;
+      return this;
+    }
+
+    /**
+     * Get If true add the instance as suppressed
+     *
+     * @return If true add the instance as suppressed
+     *
+     */
+    public final Boolean isSuppressed() {
+      return this.isSuppressed;
+    }
+
+    /**
+     * Set If true add the instance as suppressed
+     *
+     * @param value If true add the instance as suppressed
+     *
+     * @return the Builder object.
+     */
+    public final Builder isSuppressed(Boolean value) {
+      this.isSuppressed = value;
+      return this;
+    }
+
+    /**
+     * Get If true add the instance as hidden
+     *
+     * @return If true add the instance as hidden
+     *
+     */
+    public final Boolean isHidden() {
+      return this.isHidden;
+    }
+
+    /**
+     * Set If true add the instance as hidden
+     *
+     * @param value If true add the instance as hidden
+     *
+     * @return the Builder object.
+     */
+    public final Builder isHidden(Boolean value) {
+      this.isHidden = value;
       return this;
     }
 
@@ -552,7 +641,7 @@ public final class AssembliesCreateInstanceRequest {
     }
 
     private AssembliesCreateInstanceRequest build() {
-      return new com.onshape.api.requests.AssembliesCreateInstanceRequest(documentId,elementId,versionId,microversionId,isAssembly,isWholePartStudio,partId,featureId,configuration,revision,partNumber);
+      return new com.onshape.api.requests.AssembliesCreateInstanceRequest(documentId,elementId,versionId,microversionId,isSuppressed,isHidden,isAssembly,isWholePartStudio,partId,featureId,configuration,revision,partNumber);
     }
 
     /**

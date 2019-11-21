@@ -43,7 +43,7 @@ import com.onshape.api.requests.DocumentsGetVersionsRequest;
 import com.onshape.api.requests.DocumentsGetWorkspacesRequest;
 import com.onshape.api.requests.DocumentsMergeIntoWorkspaceRequest;
 import com.onshape.api.requests.DocumentsMoveElementsToDocumentRequest;
-import com.onshape.api.requests.DocumentsRestoreMicroversionRequest;
+import com.onshape.api.requests.DocumentsRestoreFromHistoryRequest;
 import com.onshape.api.requests.DocumentsShareDocumentRequest;
 import com.onshape.api.requests.DocumentsSyncApplicationElementsRequest;
 import com.onshape.api.requests.DocumentsUnShareRequest;
@@ -230,11 +230,11 @@ public final class Documents {
   }
 
   /**
-   * Create request for restoreMicroversion
+   * Create request for restoreFromHistory
    *  @return Request builder object
    */
-  public final DocumentsRestoreMicroversionRequest.Builder restoreMicroversion() {
-    return DocumentsRestoreMicroversionRequest.builder(onshape);
+  public final DocumentsRestoreFromHistoryRequest.Builder restoreFromHistory() {
+    return DocumentsRestoreFromHistoryRequest.builder(onshape);
   }
 
   /**

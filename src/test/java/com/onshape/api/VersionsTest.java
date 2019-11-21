@@ -25,23 +25,9 @@ package com.onshape.api;
 import com.onshape.api.exceptions.OnshapeException;
 import java.lang.String;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 public final class VersionsTest {
   private static Onshape CLIENT;
-
-  @Test
-  @DisplayName("Test Version 1")
-  public void testVersion1() throws OnshapeException {
-    getGroup().testVersion1().call();
-  }
-
-  @Test
-  @DisplayName("Test Version 2")
-  public void testVersion2() throws OnshapeException {
-    getGroup().testVersion2().call();
-  }
 
   public Onshape getClient() {
     return CLIENT;

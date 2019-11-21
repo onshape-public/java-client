@@ -25,34 +25,61 @@ package com.onshape.api.responses;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
-import java.lang.Number;
+import com.onshape.api.exceptions.OnshapeException;
 import java.lang.Override;
 import java.lang.String;
 import javax.validation.constraints.NotNull;
 
 /**
- * Response object for testVersion1 API endpoint.
+ * Response object for enumerateRevisions API endpoint.
  * &copy; 2018 Onshape Inc.
  */
 @JsonIgnoreProperties(
     ignoreUnknown = true
 )
-public final class VersionsTestVersion1Response {
+public final class RevisionsEnumerateRevisionsResponse {
   /**
-   * The version of the response
+   * URL of next page of revisions
    */
-  @JsonProperty("version")
+  @JsonProperty("next")
   @NotNull
-  Number version;
+  String next;
 
   /**
-   * Get The version of the response
+   * Array of revisions ordered by oldest first
+   */
+  @JsonProperty("items")
+  @NotNull
+  RevisionsEnumerateRevisionsResponseItems[] items;
+
+  /**
+   * Fetch next page of results
+   * @param onshape The Onshape client object.
+   * @return Next page of results or null if this is last page.
+   * @throws OnshapeException On HTTP or serialization error.
+   */
+  public final RevisionsEnumerateRevisionsResponse next(Onshape onshape) throws OnshapeException {
+    return (next==null ? null : onshape.get(next, RevisionsEnumerateRevisionsResponse.class));
+  }
+
+  /**
+   * Get URL of next page of revisions
    *
-   * @return The version of the response
+   * @return URL of next page of revisions
    *
    */
-  public final Number getVersion() {
-    return this.version;
+  public final String getNext() {
+    return this.next;
+  }
+
+  /**
+   * Get Array of revisions ordered by oldest first
+   *
+   * @return Array of revisions ordered by oldest first
+   *
+   */
+  public final RevisionsEnumerateRevisionsResponseItems[] getItems() {
+    return this.items;
   }
 
   @Override

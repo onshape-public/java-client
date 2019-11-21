@@ -24,16 +24,16 @@ package com.onshape.api.requests;
 
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
-import com.onshape.api.responses.VersionsTestVersion1Response;
+import com.onshape.api.responses.VersionsTestVersionsUpdateResponse;
 import java.lang.Override;
 import java.lang.String;
 
 /**
- * Request object for testVersion1 API endpoint.
+ * Request object for testVersionsUpdate API endpoint.
  * &copy; 2018 Onshape Inc.
  */
-public final class VersionsTestVersion1Request {
-  VersionsTestVersion1Request() {
+public final class VersionsTestVersionsUpdateRequest {
+  VersionsTestVersionsUpdateRequest() {
   }
 
   @Override
@@ -53,18 +53,18 @@ public final class VersionsTestVersion1Request {
     Builder() {
     }
 
-    private VersionsTestVersion1Request build() {
-      return new com.onshape.api.requests.VersionsTestVersion1Request();
+    private VersionsTestVersionsUpdateRequest build() {
+      return new com.onshape.api.requests.VersionsTestVersionsUpdateRequest();
     }
 
     /**
-     * Calls testVersion1 method, Returns an API version 1 structure
+     * Calls testVersionsUpdate method, Returns an API version 1 or version 2 structure, based on the Accept header passed - POST
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      */
-    public final VersionsTestVersion1Response call() throws OnshapeException {
+    public final VersionsTestVersionsUpdateResponse call() throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/versions/test", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.VersionsTestVersion1Response.class);
+      return onshape.call("post", "/versions/test", build(), onshape.buildMap(), onshape.buildMap(), com.onshape.api.responses.VersionsTestVersionsUpdateResponse.class);
     }
   }
 }

@@ -22,8 +22,8 @@
 //
 package com.onshape.api;
 
-import com.onshape.api.requests.VersionsTestVersion1Request;
-import com.onshape.api.requests.VersionsTestVersion2Request;
+import com.onshape.api.requests.VersionsTestVersionsGetRequest;
+import com.onshape.api.requests.VersionsTestVersionsUpdateRequest;
 
 /**
  * Versions: API endpoints for Versions group.
@@ -37,18 +37,18 @@ public final class Versions {
   }
 
   /**
-   * Create request for testVersion1
+   * Create request for testVersionsGet
    *  @return Request builder object
    */
-  public final VersionsTestVersion1Request.Builder testVersion1() {
-    return VersionsTestVersion1Request.builder(onshape);
+  public final VersionsTestVersionsGetRequest.Builder testVersionsGet() {
+    return VersionsTestVersionsGetRequest.builder(onshape);
   }
 
   /**
-   * Create request for testVersion2
+   * Create request for testVersionsUpdate
    *  @return Request builder object
    */
-  public final VersionsTestVersion2Request.Builder testVersion2() {
-    return VersionsTestVersion2Request.builder(onshape);
+  public final VersionsTestVersionsUpdateRequest.Builder testVersionsUpdate() {
+    return VersionsTestVersionsUpdateRequest.builder(onshape);
   }
 }
