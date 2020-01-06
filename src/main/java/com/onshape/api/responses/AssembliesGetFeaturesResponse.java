@@ -48,14 +48,14 @@ public final class AssembliesGetFeaturesResponse extends AbstractResponseObject 
    */
   @JsonProperty("features")
   @NotNull
-  AssembliesGetFeaturesResponseFeatures[] features;
+  Map[] features;
 
   /**
-   * List of feature state information
+   * Map of feature state information
    */
   @JsonProperty("featureStates")
   @NotNull
-  Map<String, Map>[] featureStates;
+  Map<String, Map> featureStates;
 
   /**
    * The version of the serialization protocol for the response
@@ -87,17 +87,17 @@ public final class AssembliesGetFeaturesResponse extends AbstractResponseObject 
    * @return List of features
    *
    */
-  public final AssembliesGetFeaturesResponseFeatures[] getFeatures() {
+  public final Map[] getFeatures() {
     return this.features;
   }
 
   /**
-   * Get List of feature state information
+   * Get Map of feature state information
    *
-   * @return List of feature state information
+   * @return Map of feature state information
    *
    */
-  public final Map<String, Map>[] getFeatureStates() {
+  public final Map<String, Map> getFeatureStates() {
     return this.featureStates;
   }
 
