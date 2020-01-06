@@ -22,21 +22,18 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
 
 /**
  * Object used in calls to createDocument API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class DocumentsCreateDocumentResponseOwner {
+public final class DocumentsCreateDocumentResponseOwner extends AbstractResponseObject {
   /**
    * Owner&#39;s user type, which can be: 0: user 1: company 2:Team
    */

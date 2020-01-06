@@ -52,7 +52,7 @@ import com.onshape.api.requests.DocumentsUpdateExternalReferencesToLatestDocumen
 
 /**
  * Documents: API endpoints for Documents group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Documents {
   final Onshape onshape;
@@ -273,7 +273,8 @@ public final class Documents {
    * Create request for updateExternalReferencesToLatestDocuments
    *  @return Request builder object
    */
-  public final DocumentsUpdateExternalReferencesToLatestDocumentsRequest.Builder updateExternalReferencesToLatestDocuments() {
+  public final DocumentsUpdateExternalReferencesToLatestDocumentsRequest.Builder updateExternalReferencesToLatestDocuments(
+      ) {
     return DocumentsUpdateExternalReferencesToLatestDocumentsRequest.builder(onshape);
   }
 }

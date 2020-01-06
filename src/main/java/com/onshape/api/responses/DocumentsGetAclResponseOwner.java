@@ -22,21 +22,18 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
 
 /**
  * Object used in calls to getAcl API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class DocumentsGetAclResponseOwner {
+public final class DocumentsGetAclResponseOwner extends AbstractResponseObject {
   /**
    * Type of the object owner. Possible values include 0=User, 1=Company, 2=Team, 3=&lt;Reserved&gt;, 4=Application
    */

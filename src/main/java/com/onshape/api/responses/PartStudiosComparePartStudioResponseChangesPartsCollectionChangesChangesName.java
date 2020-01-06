@@ -22,20 +22,17 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
 
 /**
  * Object used in calls to comparePartStudio API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesName {
+public final class PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesName extends AbstractResponseObject {
   /**
    * NONE - nothing has changed|MODIFIED - name changed
    */

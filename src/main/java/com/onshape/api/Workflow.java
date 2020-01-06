@@ -26,7 +26,7 @@ import com.onshape.api.requests.WorkflowGetActiveWorkflowsRequest;
 
 /**
  * Workflow: API endpoints for Workflow group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Workflow {
   final Onshape onshape;

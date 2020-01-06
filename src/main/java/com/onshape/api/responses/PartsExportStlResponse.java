@@ -22,9 +22,9 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import com.onshape.api.types.Blob;
 import java.lang.Override;
 import java.lang.String;
@@ -32,12 +32,9 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Response object for exportStl API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class PartsExportStlResponse {
+public final class PartsExportStlResponse extends AbstractResponseObject {
   /**
    * The exported document, as an attachment (could be text or binary depending on parameters)
    */

@@ -22,20 +22,17 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
 
 /**
  * Object used in calls to createWorkflowableTestObject API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class TestCustomWorkflowsCreateWorkflowableTestObjectResponseWorkflowState {
+public final class TestCustomWorkflowsCreateWorkflowableTestObjectResponseWorkflowState extends AbstractResponseObject {
   /**
    * Always name of the initial state of the workflow
    */

@@ -23,10 +23,11 @@
 package com.onshape.api.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import com.onshape.api.types.OnshapeDocument;
+import com.onshape.api.types.ResponseWithDocument;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
@@ -34,12 +35,9 @@ import java.util.Map;
 
 /**
  * Object used in calls to getInsertables API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class DocumentsGetInsertablesResponseItems {
+public final class DocumentsGetInsertablesResponseItems extends AbstractResponseObject implements ResponseWithDocument {
   /**
    * Insertable ID
    */
@@ -349,6 +347,7 @@ public final class DocumentsGetInsertablesResponseItems {
    * @return The OnshapeDocument object.
    */
   @JsonIgnore
+  @Override
   public final OnshapeDocument getDocument() {
     return new OnshapeDocument(documentId, null, null, null, elementId);
   }

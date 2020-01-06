@@ -25,13 +25,14 @@ package com.onshape.api.requests;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.RevisionsGetRevisionHistoryInCompanyResponse;
+import java.lang.Boolean;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
 
 /**
  * Request object for getRevisionHistoryInCompany API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class RevisionsGetRevisionHistoryInCompanyRequest {
   RevisionsGetRevisionHistoryInCompanyRequest() {
@@ -68,11 +69,12 @@ public final class RevisionsGetRevisionHistoryInCompanyRequest {
      *
      * @param pnum Part number
      *
-     * @param elementType Type of element, which can be 0: Part Studio, 1: Assembly, 2: Drawing. 4: Blob (Default: null) */
+     * @param elementType Type of element, which can be 0: Part Studio, 1: Assembly, 2: Drawing. 4: Blob (Default: null)
+     * @param fillApprovers Include approvers of each revision (Default: null) */
     public final RevisionsGetRevisionHistoryInCompanyResponse call(String cid, String pnum,
-        Number elementType) throws OnshapeException {
+        Number elementType, Boolean fillApprovers) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/revisions/companies/:cid/partnumber/:pnum", build(), onshape.buildMap("cid", cid, "pnum", pnum), onshape.buildMap("elementType", elementType), com.onshape.api.responses.RevisionsGetRevisionHistoryInCompanyResponse.class);
+      return onshape.call("get", "/revisions/companies/:cid/partnumber/:pnum", build(), onshape.buildMap("cid", cid, "pnum", pnum), onshape.buildMap("elementType", elementType, "fillApprovers", fillApprovers), com.onshape.api.responses.RevisionsGetRevisionHistoryInCompanyResponse.class);
     }
   }
 }

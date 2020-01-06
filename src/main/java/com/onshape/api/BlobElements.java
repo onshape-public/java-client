@@ -24,14 +24,13 @@ package com.onshape.api;
 
 import com.onshape.api.requests.BlobElementsCreateTranslationRequest;
 import com.onshape.api.requests.BlobElementsDownloadFileFromElementRequest;
-import com.onshape.api.requests.BlobElementsGetTranslationFormatsRequest;
 import com.onshape.api.requests.BlobElementsUpdateMeshUnitsRequest;
 import com.onshape.api.requests.BlobElementsUploadFileCreateElementRequest;
 import com.onshape.api.requests.BlobElementsUploadFileUpdateElementRequest;
 
 /**
  * BlobElements: API endpoints for BlobElements group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class BlobElements {
   final Onshape onshape;
@@ -54,14 +53,6 @@ public final class BlobElements {
    */
   public final BlobElementsDownloadFileFromElementRequest.Builder downloadFileFromElement() {
     return BlobElementsDownloadFileFromElementRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getTranslationFormats
-   *  @return Request builder object
-   */
-  public final BlobElementsGetTranslationFormatsRequest.Builder getTranslationFormats() {
-    return BlobElementsGetTranslationFormatsRequest.builder(onshape);
   }
 
   /**

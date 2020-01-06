@@ -27,7 +27,7 @@ import com.onshape.api.requests.CompaniesGetRequest;
 
 /**
  * Companies: API endpoints for Companies group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Companies {
   final Onshape onshape;

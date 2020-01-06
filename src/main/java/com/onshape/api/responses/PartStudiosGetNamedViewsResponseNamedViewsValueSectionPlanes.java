@@ -22,21 +22,18 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
 
 /**
  * Object used in calls to getNamedViews API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class PartStudiosGetNamedViewsResponseNamedViewsValueSectionPlanes {
+public final class PartStudiosGetNamedViewsResponseNamedViewsValueSectionPlanes extends AbstractResponseObject {
   /**
    * A 3-element array storing the center vector of a section plane
    */

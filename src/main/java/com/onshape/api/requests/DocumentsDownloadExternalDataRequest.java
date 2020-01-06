@@ -32,7 +32,7 @@ import java.lang.String;
 
 /**
  * Request object for downloadExternalData API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class DocumentsDownloadExternalDataRequest {
   DocumentsDownloadExternalDataRequest() {

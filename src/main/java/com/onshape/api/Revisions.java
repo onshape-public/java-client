@@ -28,7 +28,7 @@ import com.onshape.api.requests.RevisionsGetRevisionHistoryInCompanyRequest;
 
 /**
  * Revisions: API endpoints for Revisions group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Revisions {
   final Onshape onshape;

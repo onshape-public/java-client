@@ -22,19 +22,16 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
 
 /**
  * Response object for deleteTranslation API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class TranslationsDeleteTranslationResponse {
+public final class TranslationsDeleteTranslationResponse extends AbstractResponseObject {
   @Override
   public String toString() {
     return Onshape.toString(this);

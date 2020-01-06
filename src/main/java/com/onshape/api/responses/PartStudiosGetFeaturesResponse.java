@@ -22,23 +22,21 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Boolean;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
  * Response object for getFeatures API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class PartStudiosGetFeaturesResponse {
+public final class PartStudiosGetFeaturesResponse extends AbstractResponseObject {
   /**
    * True if the full feature list is present, or false if it is filtered
    */
@@ -58,7 +56,7 @@ public final class PartStudiosGetFeaturesResponse {
    */
   @JsonProperty("features")
   @NotNull
-  PartStudiosGetFeaturesResponseFeatures[] features;
+  Map[] features;
 
   /**
    * Array of imports into the feature list
@@ -68,11 +66,11 @@ public final class PartStudiosGetFeaturesResponse {
   PartStudiosGetFeaturesResponseImports[] imports;
 
   /**
-   * List of feature state information
+   * Map of feature state information
    */
   @JsonProperty("featureStates")
   @NotNull
-  PartStudiosGetFeaturesResponseFeatureStates[] featureStates;
+  Map<String, Map> featureStates;
 
   /**
    * The version of the serialization protocol for the response
@@ -114,7 +112,7 @@ public final class PartStudiosGetFeaturesResponse {
    * @return List of features
    *
    */
-  public final PartStudiosGetFeaturesResponseFeatures[] getFeatures() {
+  public final Map[] getFeatures() {
     return this.features;
   }
 
@@ -129,12 +127,12 @@ public final class PartStudiosGetFeaturesResponse {
   }
 
   /**
-   * Get List of feature state information
+   * Get Map of feature state information
    *
-   * @return List of feature state information
+   * @return Map of feature state information
    *
    */
-  public final PartStudiosGetFeaturesResponseFeatureStates[] getFeatureStates() {
+  public final Map<String, Map> getFeatureStates() {
     return this.featureStates;
   }
 

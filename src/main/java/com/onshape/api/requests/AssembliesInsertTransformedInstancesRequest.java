@@ -33,7 +33,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Request object for insertTransformedInstances API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class AssembliesInsertTransformedInstancesRequest {
   /**
@@ -43,7 +43,8 @@ public final class AssembliesInsertTransformedInstancesRequest {
   @NotNull
   AssembliesInsertTransformedInstancesRequestTransformGroups[] transformGroups;
 
-  AssembliesInsertTransformedInstancesRequest(AssembliesInsertTransformedInstancesRequestTransformGroups[] transformGroups) {
+  AssembliesInsertTransformedInstancesRequest(
+      AssembliesInsertTransformedInstancesRequestTransformGroups[] transformGroups) {
     this.transformGroups = transformGroups;
   }
 
@@ -96,7 +97,8 @@ public final class AssembliesInsertTransformedInstancesRequest {
      *
      * @return the Builder object.
      */
-    public final Builder transformGroups(AssembliesInsertTransformedInstancesRequestTransformGroups[] value) {
+    public final Builder transformGroups(
+        AssembliesInsertTransformedInstancesRequestTransformGroups[] value) {
       this.transformGroups = value;
       return this;
     }

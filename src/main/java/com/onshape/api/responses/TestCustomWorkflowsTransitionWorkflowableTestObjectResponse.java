@@ -22,9 +22,9 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
@@ -32,12 +32,9 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Response object for transitionWorkflowableTestObject API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class TestCustomWorkflowsTransitionWorkflowableTestObjectResponse {
+public final class TestCustomWorkflowsTransitionWorkflowableTestObjectResponse extends AbstractResponseObject {
   /**
    * ID of the workflowable object.
    */
@@ -109,7 +106,8 @@ public final class TestCustomWorkflowsTransitionWorkflowableTestObjectResponse {
    * @return Array of properties for the object
    *
    */
-  public final TestCustomWorkflowsTransitionWorkflowableTestObjectResponseProperties[] getProperties() {
+  public final TestCustomWorkflowsTransitionWorkflowableTestObjectResponseProperties[] getProperties(
+      ) {
     return this.properties;
   }
 

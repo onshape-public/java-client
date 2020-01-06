@@ -30,7 +30,7 @@ import com.onshape.api.requests.AccountsGetPurchasesRequest;
 
 /**
  * Accounts: API endpoints for Accounts group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Accounts {
   final Onshape onshape;

@@ -32,7 +32,7 @@ import java.lang.String;
 
 /**
  * Request object for getConfiguredElementThumbnailWithSize API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class ThumbnailsGetConfiguredElementThumbnailWithSizeRequest {
   ThumbnailsGetConfiguredElementThumbnailWithSizeRequest() {
@@ -92,8 +92,9 @@ public final class ThumbnailsGetConfiguredElementThumbnailWithSizeRequest {
      * @param sz Requested thumbnail size, such as 300x300
      *
      * @param rejectEmpty If true, a 404 will be returned for thumbnails that are made for empty elements. Clients can use this parameter to skip the display of empty thumbnails and display a default icon instead. Defaults to false. (Default: null) */
-    public final ThumbnailsGetConfiguredElementThumbnailWithSizeResponse call(OnshapeDocument document,
-        String cid, String sz, Boolean rejectEmpty) throws OnshapeException {
+    public final ThumbnailsGetConfiguredElementThumbnailWithSizeResponse call(
+        OnshapeDocument document, String cid, String sz, Boolean rejectEmpty) throws
+        OnshapeException {
       onshape.validate(build());
       return onshape.call("get", "/thumbnails/d/:did/w/:wid/e/:eid/c/:cid/s/:sz", build(), onshape.buildMap("cid", cid, "sz", sz, "did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap("rejectEmpty", rejectEmpty), com.onshape.api.responses.ThumbnailsGetConfiguredElementThumbnailWithSizeResponse.class);
     }

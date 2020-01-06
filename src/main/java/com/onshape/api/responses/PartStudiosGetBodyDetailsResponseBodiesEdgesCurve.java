@@ -22,21 +22,18 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
 
 /**
  * Object used in calls to getBodyDetails API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class PartStudiosGetBodyDetailsResponseBodiesEdgesCurve {
+public final class PartStudiosGetBodyDetailsResponseBodiesEdgesCurve extends AbstractResponseObject {
   /**
    * Curve type - this can be one of &quot;bcurve&quot; (b-spline), &quot;circle&quot;, &quot;ellipse&quot;, &quot;icurve&quot; (surface intersection), &quot;line&quot;, &quot;other&quot;.
    */

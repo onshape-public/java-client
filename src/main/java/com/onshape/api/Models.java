@@ -24,7 +24,7 @@ package com.onshape.api;
 
 /**
  * Models: API endpoints for Models group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Models {
   final Onshape onshape;

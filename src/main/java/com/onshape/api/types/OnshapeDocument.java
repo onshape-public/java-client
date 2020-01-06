@@ -260,10 +260,7 @@ public class OnshapeDocument {
         if (!Objects.equals(this.elementId, other.elementId)) {
             return false;
         }
-        if (this.wvm != other.wvm) {
-            return false;
-        }
-        return true;
+        return this.wvm == other.wvm;
     }
 
     @Override

@@ -33,7 +33,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Request object for updateReference API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class AppElementsUpdateReferenceRequest {
   /**

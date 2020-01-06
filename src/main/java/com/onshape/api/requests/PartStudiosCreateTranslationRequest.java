@@ -35,7 +35,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Request object for createTranslation API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class PartStudiosCreateTranslationRequest {
   /**

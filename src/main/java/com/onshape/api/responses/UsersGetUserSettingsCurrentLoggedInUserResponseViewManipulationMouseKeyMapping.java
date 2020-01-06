@@ -22,20 +22,17 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
 
 /**
  * Object used in calls to getUserSettingsCurrentLoggedInUser API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMapping {
+public final class UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMapping extends AbstractResponseObject {
   /**
    * Array of sets of button and key presses that pan in 2D
    */
@@ -72,7 +69,8 @@ public final class UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulati
    * @return Array of sets of button and key presses that pan in 2D
    *
    */
-  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingPan2DMapping[] getPan2DMapping() {
+  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingPan2DMapping[] getPan2DMapping(
+      ) {
     return this.pan2DMapping;
   }
 
@@ -82,7 +80,8 @@ public final class UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulati
    * @return Array of sets of button and key presses that zoom in 2D
    *
    */
-  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingZoom2DMapping[] getZoom2DMapping() {
+  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingZoom2DMapping[] getZoom2DMapping(
+      ) {
     return this.zoom2DMapping;
   }
 
@@ -92,7 +91,8 @@ public final class UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulati
    * @return Array of sets of button and key presses that rotate in 3D
    *
    */
-  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingRotate3DMapping[] getRotate3DMapping() {
+  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingRotate3DMapping[] getRotate3DMapping(
+      ) {
     return this.rotate3DMapping;
   }
 
@@ -102,7 +102,8 @@ public final class UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulati
    * @return Array of sets of button and key presses that pan in 3D
    *
    */
-  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingPan3DMapping[] getPan3DMapping() {
+  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingPan3DMapping[] getPan3DMapping(
+      ) {
     return this.pan3DMapping;
   }
 
@@ -112,7 +113,8 @@ public final class UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulati
    * @return Array of sets of button and key presses that zoom in 3D
    *
    */
-  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingZoom3DMapping[] getZoom3DMapping() {
+  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingZoom3DMapping[] getZoom3DMapping(
+      ) {
     return this.zoom3DMapping;
   }
 

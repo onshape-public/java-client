@@ -36,7 +36,7 @@ import com.onshape.api.requests.PartsGetShadedViewsRequest;
 
 /**
  * Parts: API endpoints for Parts group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Parts {
   final Onshape onshape;

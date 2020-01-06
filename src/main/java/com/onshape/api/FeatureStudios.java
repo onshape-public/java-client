@@ -29,7 +29,7 @@ import com.onshape.api.requests.FeatureStudiosUpdateFeatureStudioContentsRequest
 
 /**
  * FeatureStudios: API endpoints for FeatureStudios group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class FeatureStudios {
   final Onshape onshape;
@@ -66,7 +66,8 @@ public final class FeatureStudios {
    * Create request for updateFeatureStudioContents
    *  @return Request builder object
    */
-  public final FeatureStudiosUpdateFeatureStudioContentsRequest.Builder updateFeatureStudioContents() {
+  public final FeatureStudiosUpdateFeatureStudioContentsRequest.Builder updateFeatureStudioContents(
+      ) {
     return FeatureStudiosUpdateFeatureStudioContentsRequest.builder(onshape);
   }
 }

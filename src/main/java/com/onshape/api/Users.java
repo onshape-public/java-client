@@ -28,7 +28,7 @@ import com.onshape.api.requests.UsersGetUserSettingsRequest;
 
 /**
  * Users: API endpoints for Users group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Users {
   final Onshape onshape;
@@ -57,7 +57,8 @@ public final class Users {
    * Create request for getUserSettingsCurrentLoggedInUser
    *  @return Request builder object
    */
-  public final UsersGetUserSettingsCurrentLoggedInUserRequest.Builder getUserSettingsCurrentLoggedInUser() {
+  public final UsersGetUserSettingsCurrentLoggedInUserRequest.Builder getUserSettingsCurrentLoggedInUser(
+      ) {
     return UsersGetUserSettingsCurrentLoggedInUserRequest.builder(onshape);
   }
 }

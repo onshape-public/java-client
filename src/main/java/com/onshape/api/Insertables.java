@@ -26,7 +26,7 @@ import com.onshape.api.requests.InsertablesGetLatestInDocumentRequest;
 
 /**
  * Insertables: API endpoints for Insertables group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Insertables {
   final Onshape onshape;

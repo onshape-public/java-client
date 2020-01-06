@@ -24,7 +24,7 @@ package com.onshape.api;
 
 /**
  * AppAssociativeData: API endpoints for AppAssociativeData group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class AppAssociativeData {
   final Onshape onshape;

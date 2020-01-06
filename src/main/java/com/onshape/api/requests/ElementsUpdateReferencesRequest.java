@@ -33,7 +33,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Request object for updateReferences API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class ElementsUpdateReferencesRequest {
   /**
@@ -43,7 +43,8 @@ public final class ElementsUpdateReferencesRequest {
   @NotNull
   ElementsUpdateReferencesRequestReferenceUpdates[] referenceUpdates;
 
-  ElementsUpdateReferencesRequest(ElementsUpdateReferencesRequestReferenceUpdates[] referenceUpdates) {
+  ElementsUpdateReferencesRequest(
+      ElementsUpdateReferencesRequestReferenceUpdates[] referenceUpdates) {
     this.referenceUpdates = referenceUpdates;
   }
 

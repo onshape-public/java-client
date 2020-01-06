@@ -27,12 +27,13 @@ import com.onshape.api.requests.ElementsDecodeConfigurationStringRequest;
 import com.onshape.api.requests.ElementsDeleteElementRequest;
 import com.onshape.api.requests.ElementsEncodeConfigurationRequest;
 import com.onshape.api.requests.ElementsGetConfigurationRequest;
+import com.onshape.api.requests.ElementsGetElementTranslatorFormatsByVersionOrWorkspaceRequest;
 import com.onshape.api.requests.ElementsUpdateConfigurationRequest;
 import com.onshape.api.requests.ElementsUpdateReferencesRequest;
 
 /**
  * Elements: API endpoints for Elements group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Elements {
   final Onshape onshape;
@@ -45,7 +46,8 @@ public final class Elements {
    * Create request for copyElementFromSourceDocument
    *  @return Request builder object
    */
-  public final ElementsCopyElementFromSourceDocumentRequest.Builder copyElementFromSourceDocument() {
+  public final ElementsCopyElementFromSourceDocumentRequest.Builder copyElementFromSourceDocument(
+      ) {
     return ElementsCopyElementFromSourceDocumentRequest.builder(onshape);
   }
 
@@ -79,6 +81,15 @@ public final class Elements {
    */
   public final ElementsGetConfigurationRequest.Builder getConfiguration() {
     return ElementsGetConfigurationRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getElementTranslatorFormatsByVersionOrWorkspace
+   *  @return Request builder object
+   */
+  public final ElementsGetElementTranslatorFormatsByVersionOrWorkspaceRequest.Builder getElementTranslatorFormatsByVersionOrWorkspace(
+      ) {
+    return ElementsGetElementTranslatorFormatsByVersionOrWorkspaceRequest.builder(onshape);
   }
 
   /**

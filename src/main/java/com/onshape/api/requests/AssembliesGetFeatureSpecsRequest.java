@@ -32,7 +32,7 @@ import java.lang.String;
 
 /**
  * Request object for getFeatureSpecs API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class AssembliesGetFeatureSpecsRequest {
   AssembliesGetFeatureSpecsRequest() {

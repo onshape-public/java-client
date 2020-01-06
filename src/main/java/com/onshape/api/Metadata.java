@@ -39,7 +39,7 @@ import com.onshape.api.requests.MetadataUpdateStandardContentMetadataRequest;
 
 /**
  * Metadata: API endpoints for Metadata group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Metadata {
   final Onshape onshape;
@@ -140,7 +140,8 @@ public final class Metadata {
    * Create request for updateStandardContentMetadata
    *  @return Request builder object
    */
-  public final MetadataUpdateStandardContentMetadataRequest.Builder updateStandardContentMetadata() {
+  public final MetadataUpdateStandardContentMetadataRequest.Builder updateStandardContentMetadata(
+      ) {
     return MetadataUpdateStandardContentMetadataRequest.builder(onshape);
   }
 

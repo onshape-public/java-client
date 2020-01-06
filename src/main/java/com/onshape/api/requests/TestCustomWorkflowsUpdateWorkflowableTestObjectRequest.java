@@ -33,7 +33,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Request object for updateWorkflowableTestObject API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class TestCustomWorkflowsUpdateWorkflowableTestObjectRequest {
   /**
@@ -43,7 +43,8 @@ public final class TestCustomWorkflowsUpdateWorkflowableTestObjectRequest {
   @NotNull
   TestCustomWorkflowsUpdateWorkflowableTestObjectRequestProperties[] properties;
 
-  TestCustomWorkflowsUpdateWorkflowableTestObjectRequest(TestCustomWorkflowsUpdateWorkflowableTestObjectRequestProperties[] properties) {
+  TestCustomWorkflowsUpdateWorkflowableTestObjectRequest(
+      TestCustomWorkflowsUpdateWorkflowableTestObjectRequestProperties[] properties) {
     this.properties = properties;
   }
 
@@ -96,7 +97,8 @@ public final class TestCustomWorkflowsUpdateWorkflowableTestObjectRequest {
      *
      * @return the Builder object.
      */
-    public final Builder properties(TestCustomWorkflowsUpdateWorkflowableTestObjectRequestProperties[] value) {
+    public final Builder properties(
+        TestCustomWorkflowsUpdateWorkflowableTestObjectRequestProperties[] value) {
       this.properties = value;
       return this;
     }

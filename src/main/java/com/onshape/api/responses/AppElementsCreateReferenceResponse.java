@@ -22,21 +22,18 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
 import javax.validation.constraints.NotNull;
 
 /**
  * Response object for createReference API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class AppElementsCreateReferenceResponse {
+public final class AppElementsCreateReferenceResponse extends AbstractResponseObject {
   /**
    * The changeId representing the element state after the reference creation
    */

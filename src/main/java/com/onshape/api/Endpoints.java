@@ -26,7 +26,7 @@ import com.onshape.api.requests.EndpointsGetEndpointsRequest;
 
 /**
  * Endpoints: API endpoints for Endpoints group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Endpoints {
   final Onshape onshape;

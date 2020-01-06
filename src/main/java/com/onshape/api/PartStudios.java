@@ -42,7 +42,6 @@ import com.onshape.api.requests.PartStudiosGetNamedViewsRequest;
 import com.onshape.api.requests.PartStudiosGetShadedViewsRequest;
 import com.onshape.api.requests.PartStudiosGetSketchInfoRequest;
 import com.onshape.api.requests.PartStudiosGetTessellatedEntitiesRequest;
-import com.onshape.api.requests.PartStudiosGetTranslationFormatsRequest;
 import com.onshape.api.requests.PartStudiosIdTranslationsRequest;
 import com.onshape.api.requests.PartStudiosUpdateFeatureRequest;
 import com.onshape.api.requests.PartStudiosUpdateFeaturesRequest;
@@ -50,7 +49,7 @@ import com.onshape.api.requests.PartStudiosUpdateRollbackRequest;
 
 /**
  * PartStudios: API endpoints for PartStudios group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class PartStudios {
   final Onshape onshape;
@@ -161,14 +160,6 @@ public final class PartStudios {
    */
   public final PartStudiosGetNamedViewsRequest.Builder getNamedViews() {
     return PartStudiosGetNamedViewsRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getTranslationFormats
-   *  @return Request builder object
-   */
-  public final PartStudiosGetTranslationFormatsRequest.Builder getTranslationFormats() {
-    return PartStudiosGetTranslationFormatsRequest.builder(onshape);
   }
 
   /**

@@ -35,7 +35,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Request object for transformOccurrences API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class AssembliesTransformOccurrencesRequest {
   /**
@@ -59,8 +59,9 @@ public final class AssembliesTransformOccurrencesRequest {
   @NotNull
   Boolean isRelative;
 
-  AssembliesTransformOccurrencesRequest(AssembliesTransformOccurrencesRequestOccurrences[] occurrences,
-      Number[] transform, Boolean isRelative) {
+  AssembliesTransformOccurrencesRequest(
+      AssembliesTransformOccurrencesRequestOccurrences[] occurrences, Number[] transform,
+      Boolean isRelative) {
     this.occurrences = occurrences;
     this.transform = transform;
     this.isRelative = isRelative;

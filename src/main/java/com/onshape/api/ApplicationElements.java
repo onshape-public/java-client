@@ -24,7 +24,7 @@ package com.onshape.api;
 
 /**
  * ApplicationElements: API endpoints for ApplicationElements group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class ApplicationElements {
   final Onshape onshape;

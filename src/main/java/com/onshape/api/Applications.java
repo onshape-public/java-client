@@ -28,7 +28,7 @@ import com.onshape.api.requests.ApplicationsUpdateAppSettingsRequest;
 
 /**
  * Applications: API endpoints for Applications group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Applications {
   final Onshape onshape;

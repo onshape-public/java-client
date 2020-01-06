@@ -32,7 +32,7 @@ import java.lang.String;
 
 /**
  * Request object for updateExternalReferencesToLatestDocuments API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class DocumentsUpdateExternalReferencesToLatestDocumentsRequest {
   /**
@@ -126,8 +126,8 @@ public final class DocumentsUpdateExternalReferencesToLatestDocumentsRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      */
-    public final DocumentsUpdateExternalReferencesToLatestDocumentsResponse call(OnshapeDocument document)
-        throws OnshapeException {
+    public final DocumentsUpdateExternalReferencesToLatestDocumentsResponse call(
+        OnshapeDocument document) throws OnshapeException {
       onshape.validate(build());
       return onshape.call("post", "/documents/d/:did/w/:wid/e/:eid/latestdocumentreferences", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.DocumentsUpdateExternalReferencesToLatestDocumentsResponse.class);
     }

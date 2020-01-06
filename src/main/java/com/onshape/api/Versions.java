@@ -27,7 +27,7 @@ import com.onshape.api.requests.VersionsTestVersionsUpdateRequest;
 
 /**
  * Versions: API endpoints for Versions group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Versions {
   final Onshape onshape;

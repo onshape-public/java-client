@@ -28,7 +28,7 @@ import com.onshape.api.requests.FoldersUnShareRequest;
 
 /**
  * Folders: API endpoints for Folders group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Folders {
   final Onshape onshape;

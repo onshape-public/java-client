@@ -22,9 +22,9 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
@@ -33,12 +33,9 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Response object for updateFeatures API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class PartStudiosUpdateFeaturesResponse {
+public final class PartStudiosUpdateFeaturesResponse extends AbstractResponseObject {
   /**
    * The modified features after updates have been applied
    */
@@ -51,7 +48,7 @@ public final class PartStudiosUpdateFeaturesResponse {
    */
   @JsonProperty("featureStates")
   @NotNull
-  PartStudiosUpdateFeaturesResponseFeatureStates[] featureStates;
+  Map<String, Map>[] featureStates;
 
   /**
    * The version of the serialization protocol for the response
@@ -90,7 +87,7 @@ public final class PartStudiosUpdateFeaturesResponse {
    * @return The states of the modified features
    *
    */
-  public final PartStudiosUpdateFeaturesResponseFeatureStates[] getFeatureStates() {
+  public final Map<String, Map>[] getFeatureStates() {
     return this.featureStates;
   }
 

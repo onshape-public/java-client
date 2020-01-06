@@ -22,34 +22,63 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
 
 /**
  * Object used in calls to getFeatures API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class PartStudiosGetFeaturesResponseImports {
+public final class PartStudiosGetFeaturesResponseImports extends AbstractResponseObject {
   /**
-   * The import definition
+   * The namespace for an import
    */
-  @JsonProperty("message")
-  public PartStudiosGetFeaturesResponseImportsMessage message;
+  @JsonProperty("namespace")
+  public String namespace;
 
   /**
-   * Get The import definition
+   * The path for an import
+   */
+  @JsonProperty("path")
+  public String path;
+
+  /**
+   * The version for an import
+   */
+  @JsonProperty("version")
+  public String version;
+
+  /**
+   * Get The namespace for an import
    *
-   * @return The import definition
+   * @return The namespace for an import
    *
    */
-  public final PartStudiosGetFeaturesResponseImportsMessage getMessage() {
-    return this.message;
+  public final String getNamespace() {
+    return this.namespace;
+  }
+
+  /**
+   * Get The path for an import
+   *
+   * @return The path for an import
+   *
+   */
+  public final String getPath() {
+    return this.path;
+  }
+
+  /**
+   * Get The version for an import
+   *
+   * @return The version for an import
+   *
+   */
+  public final String getVersion() {
+    return this.version;
   }
 
   @Override

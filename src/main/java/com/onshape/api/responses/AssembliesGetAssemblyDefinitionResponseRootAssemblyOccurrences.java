@@ -22,9 +22,9 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Boolean;
 import java.lang.Number;
 import java.lang.Override;
@@ -32,12 +32,9 @@ import java.lang.String;
 
 /**
  * Object used in calls to getAssemblyDefinition API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class AssembliesGetAssemblyDefinitionResponseRootAssemblyOccurrences {
+public final class AssembliesGetAssemblyDefinitionResponseRootAssemblyOccurrences extends AbstractResponseObject {
   /**
    * A list of occurrence IDs, representing the hierachical inclusion structure of the occurrence within the assembly. Each element in the list is an id value for an entry in rootAssembly.instances or rootAssembly.subAssemblies.N.instances
    */

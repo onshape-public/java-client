@@ -34,7 +34,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Request object for updateStandardContentMetadata API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class MetadataUpdateStandardContentMetadataRequest {
   /**
@@ -50,8 +50,8 @@ public final class MetadataUpdateStandardContentMetadataRequest {
   @JsonProperty("linkDocumentId")
   String linkDocumentId;
 
-  MetadataUpdateStandardContentMetadataRequest(MetadataUpdateStandardContentMetadataRequestItems[] items,
-      String linkDocumentId) {
+  MetadataUpdateStandardContentMetadataRequest(
+      MetadataUpdateStandardContentMetadataRequestItems[] items, String linkDocumentId) {
     this.items = items;
     this.linkDocumentId = linkDocumentId;
   }

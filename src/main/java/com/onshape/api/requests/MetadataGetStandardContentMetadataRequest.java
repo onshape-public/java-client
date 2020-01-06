@@ -35,7 +35,7 @@ import java.lang.String;
 
 /**
  * Request object for getStandardContentMetadata API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class MetadataGetStandardContentMetadataRequest {
   /**

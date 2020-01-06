@@ -36,14 +36,13 @@ import com.onshape.api.requests.AssembliesGetFeaturesRequest;
 import com.onshape.api.requests.AssembliesGetNamedViewsRequest;
 import com.onshape.api.requests.AssembliesGetOrCreateBillOfMaterialsElementRequest;
 import com.onshape.api.requests.AssembliesGetShadedViewsRequest;
-import com.onshape.api.requests.AssembliesGetTranslationFormatsRequest;
 import com.onshape.api.requests.AssembliesInsertTransformedInstancesRequest;
 import com.onshape.api.requests.AssembliesTransformOccurrencesRequest;
 import com.onshape.api.requests.AssembliesUpdateFeatureRequest;
 
 /**
  * Assemblies: API endpoints for Assemblies group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Assemblies {
   final Onshape onshape;
@@ -157,18 +156,11 @@ public final class Assemblies {
   }
 
   /**
-   * Create request for getTranslationFormats
-   *  @return Request builder object
-   */
-  public final AssembliesGetTranslationFormatsRequest.Builder getTranslationFormats() {
-    return AssembliesGetTranslationFormatsRequest.builder(onshape);
-  }
-
-  /**
    * Create request for getOrCreateBillOfMaterialsElement
    *  @return Request builder object
    */
-  public final AssembliesGetOrCreateBillOfMaterialsElementRequest.Builder getOrCreateBillOfMaterialsElement() {
+  public final AssembliesGetOrCreateBillOfMaterialsElementRequest.Builder getOrCreateBillOfMaterialsElement(
+      ) {
     return AssembliesGetOrCreateBillOfMaterialsElementRequest.builder(onshape);
   }
 

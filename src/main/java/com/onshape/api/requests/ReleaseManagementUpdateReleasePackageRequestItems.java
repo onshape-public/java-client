@@ -22,7 +22,6 @@
 //
 package com.onshape.api.requests;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import java.lang.Override;
@@ -30,11 +29,8 @@ import java.lang.String;
 
 /**
  * Object used in calls to updateReleasePackage API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
 public final class ReleaseManagementUpdateReleasePackageRequestItems {
   /**
    * Id of the item as returned by createObsoletionPackage, createReleasePackage or getReleasePackage
@@ -358,7 +354,8 @@ public final class ReleaseManagementUpdateReleasePackageRequestItems {
      *
      * @return the Builder object.
      */
-    public final Builder properties(ReleaseManagementUpdateReleasePackageRequestItemsProperties[] value) {
+    public final Builder properties(
+        ReleaseManagementUpdateReleasePackageRequestItemsProperties[] value) {
       this.properties = value;
       return this;
     }

@@ -31,7 +31,7 @@ import com.onshape.api.requests.WebhooksUpdateWebhookRequest;
 
 /**
  * Webhooks: API endpoints for Webhooks group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Webhooks {
   final Onshape onshape;

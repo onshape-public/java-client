@@ -22,9 +22,9 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Boolean;
 import java.lang.Number;
 import java.lang.Override;
@@ -34,12 +34,9 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Response object for getUserSettings API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class UsersGetUserSettingsResponse {
+public final class UsersGetUserSettingsResponse extends AbstractResponseObject {
   /**
    * Onshape internal use
    */
@@ -221,7 +218,8 @@ public final class UsersGetUserSettingsResponse {
    * @return Set of mouse buttons and modifier keys to manipulate view
    *
    */
-  public final UsersGetUserSettingsResponseViewManipulationMouseKeyMapping getViewManipulationMouseKeyMapping() {
+  public final UsersGetUserSettingsResponseViewManipulationMouseKeyMapping getViewManipulationMouseKeyMapping(
+      ) {
     return this.viewManipulationMouseKeyMapping;
   }
 

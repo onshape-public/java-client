@@ -27,7 +27,7 @@ import com.onshape.api.requests.TeamsGetRequest;
 
 /**
  * Teams: API endpoints for Teams group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Teams {
   final Onshape onshape;

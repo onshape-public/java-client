@@ -22,20 +22,17 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
 
 /**
  * Object used in calls to comparePartStudio API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChanges {
+public final class PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChanges extends AbstractResponseObject {
   /**
    * Part name difference
    */
@@ -84,7 +81,8 @@ public final class PartStudiosComparePartStudioResponseChangesPartsCollectionCha
    * @return Part name difference
    *
    */
-  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesName getName() {
+  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesName getName(
+      ) {
     return this.name;
   }
 
@@ -94,7 +92,8 @@ public final class PartStudiosComparePartStudioResponseChangesPartsCollectionCha
    * @return Part appearance difference
    *
    */
-  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesAppearance getAppearance() {
+  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesAppearance getAppearance(
+      ) {
     return this.appearance;
   }
 
@@ -104,7 +103,8 @@ public final class PartStudiosComparePartStudioResponseChangesPartsCollectionCha
    * @return Part material difference
    *
    */
-  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesMaterial getMaterial() {
+  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesMaterial getMaterial(
+      ) {
     return this.material;
   }
 
@@ -114,7 +114,8 @@ public final class PartStudiosComparePartStudioResponseChangesPartsCollectionCha
    * @return Part visibility difference
    *
    */
-  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesVisibility getVisibility() {
+  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesVisibility getVisibility(
+      ) {
     return this.visibility;
   }
 
@@ -124,7 +125,8 @@ public final class PartStudiosComparePartStudioResponseChangesPartsCollectionCha
    * @return Part metadata difference
    *
    */
-  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesMetadata getMetadata() {
+  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesMetadata getMetadata(
+      ) {
     return this.metadata;
   }
 
@@ -134,7 +136,8 @@ public final class PartStudiosComparePartStudioResponseChangesPartsCollectionCha
    * @return Part geometry difference
    *
    */
-  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesGeometry getGeometry() {
+  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesGeometry getGeometry(
+      ) {
     return this.geometry;
   }
 
@@ -144,7 +147,8 @@ public final class PartStudiosComparePartStudioResponseChangesPartsCollectionCha
    * @return Part other data difference
    *
    */
-  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesOther getOther() {
+  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChangesOther getOther(
+      ) {
     return this.other;
   }
 

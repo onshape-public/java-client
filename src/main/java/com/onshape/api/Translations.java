@@ -30,7 +30,7 @@ import com.onshape.api.requests.TranslationsGetTranslatorFormatsRequest;
 
 /**
  * Translations: API endpoints for Translations group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Translations {
   final Onshape onshape;

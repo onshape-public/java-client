@@ -22,7 +22,6 @@
 //
 package com.onshape.api.requests;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import java.lang.Override;
@@ -30,11 +29,8 @@ import java.lang.String;
 
 /**
  * Object used in calls to updateReferences API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
 public final class ElementsUpdateReferencesRequestReferenceUpdates {
   /**
    * The ids of items in the element that should be updated. For an assembly element these are the ids of the instances. For a part studio element these are the nodeIds of the features. Should not be specified with fromReference.
@@ -160,7 +156,8 @@ public final class ElementsUpdateReferencesRequestReferenceUpdates {
      *
      * @return the Builder object.
      */
-    public final Builder fromReference(ElementsUpdateReferencesRequestReferenceUpdatesFromReference value) {
+    public final Builder fromReference(
+        ElementsUpdateReferencesRequestReferenceUpdatesFromReference value) {
       this.fromReference = value;
       return this;
     }
@@ -182,7 +179,8 @@ public final class ElementsUpdateReferencesRequestReferenceUpdates {
      *
      * @return the Builder object.
      */
-    public final Builder toReference(ElementsUpdateReferencesRequestReferenceUpdatesToReference value) {
+    public final Builder toReference(
+        ElementsUpdateReferencesRequestReferenceUpdatesToReference value) {
       this.toReference = value;
       return this;
     }

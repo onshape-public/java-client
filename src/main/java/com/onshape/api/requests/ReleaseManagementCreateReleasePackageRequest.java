@@ -32,7 +32,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Request object for createReleasePackage API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class ReleaseManagementCreateReleasePackageRequest {
   /**
@@ -42,7 +42,8 @@ public final class ReleaseManagementCreateReleasePackageRequest {
   @NotNull
   ReleaseManagementCreateReleasePackageRequestItems[] items;
 
-  ReleaseManagementCreateReleasePackageRequest(ReleaseManagementCreateReleasePackageRequestItems[] items) {
+  ReleaseManagementCreateReleasePackageRequest(
+      ReleaseManagementCreateReleasePackageRequestItems[] items) {
     this.items = items;
   }
 

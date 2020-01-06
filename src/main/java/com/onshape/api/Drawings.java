@@ -27,7 +27,7 @@ import com.onshape.api.requests.DrawingsGetTranslationFormatsRequest;
 
 /**
  * Drawings: API endpoints for Drawings group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Drawings {
   final Onshape onshape;

@@ -29,7 +29,7 @@ import com.onshape.api.requests.ReleaseManagementUpdateReleasePackageRequest;
 
 /**
  * ReleaseManagement: API endpoints for ReleaseManagement group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class ReleaseManagement {
   final Onshape onshape;

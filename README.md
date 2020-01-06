@@ -4,7 +4,7 @@ Onshape API Java Client
 This is a Java library for accessing the Onshape APIs from both cloud and
 desktop applications.
 
-Copyright 2018 Onshape Inc.
+Copyright 2018-Present Onshape Inc.
 
 [Javadoc documentation](http://onshape-public.github.io/java-client/index.html?com/onshape/api/Onshape.html)
 
@@ -27,7 +27,7 @@ and
 	<dependency>
 	    <groupId>com.github.onshape-public</groupId>
 	    <artifactId>java-client</artifactId>
-	    <version>v1.105.24505.1a731ee358cd</version>
+	    <version>v1.106.24625.56a35b263da3</version>
 	</dependency>
 ```
 
@@ -48,7 +48,7 @@ and
 
 ```
 	dependencies {
-	        implementation 'com.github.onshape-public:java-client:v1.105.24505.1a731ee358cd'
+	        implementation 'com.github.onshape-public:java-client:v1.106.24625.56a35b263da3'
 	}
 ```
 

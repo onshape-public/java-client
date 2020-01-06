@@ -35,7 +35,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Request object for setApplicationElementThumbnail API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class ThumbnailsSetApplicationElementThumbnailRequest {
   /**
@@ -51,8 +51,8 @@ public final class ThumbnailsSetApplicationElementThumbnailRequest {
   @JsonProperty("overwrite")
   Boolean overwrite;
 
-  ThumbnailsSetApplicationElementThumbnailRequest(ThumbnailsSetApplicationElementThumbnailRequestThumbnails[] thumbnails,
-      Boolean overwrite) {
+  ThumbnailsSetApplicationElementThumbnailRequest(
+      ThumbnailsSetApplicationElementThumbnailRequestThumbnails[] thumbnails, Boolean overwrite) {
     this.thumbnails = thumbnails;
     this.overwrite = overwrite;
   }
@@ -111,7 +111,8 @@ public final class ThumbnailsSetApplicationElementThumbnailRequest {
      *
      * @return the Builder object.
      */
-    public final Builder thumbnails(ThumbnailsSetApplicationElementThumbnailRequestThumbnails[] value) {
+    public final Builder thumbnails(
+        ThumbnailsSetApplicationElementThumbnailRequestThumbnails[] value) {
       this.thumbnails = value;
       return this;
     }

@@ -38,7 +38,7 @@ import com.onshape.api.requests.AppElementsUpdateReferenceRequest;
 
 /**
  * AppElements: API endpoints for AppElements group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class AppElements {
   final Onshape onshape;

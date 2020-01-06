@@ -35,7 +35,7 @@ import com.onshape.api.requests.ThumbnailsSetApplicationElementThumbnailRequest;
 
 /**
  * Thumbnails: API endpoints for Thumbnails group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Thumbnails {
   final Onshape onshape;
@@ -56,7 +56,8 @@ public final class Thumbnails {
    * Create request for getConfiguredElementThumbnailWithSize
    *  @return Request builder object
    */
-  public final ThumbnailsGetConfiguredElementThumbnailWithSizeRequest.Builder getConfiguredElementThumbnailWithSize() {
+  public final ThumbnailsGetConfiguredElementThumbnailWithSizeRequest.Builder getConfiguredElementThumbnailWithSize(
+      ) {
     return ThumbnailsGetConfiguredElementThumbnailWithSizeRequest.builder(onshape);
   }
 
@@ -96,7 +97,8 @@ public final class Thumbnails {
    * Create request for getElementThumbnailWithApiConfiguration
    *  @return Request builder object
    */
-  public final ThumbnailsGetElementThumbnailWithApiConfigurationRequest.Builder getElementThumbnailWithApiConfiguration() {
+  public final ThumbnailsGetElementThumbnailWithApiConfigurationRequest.Builder getElementThumbnailWithApiConfiguration(
+      ) {
     return ThumbnailsGetElementThumbnailWithApiConfigurationRequest.builder(onshape);
   }
 
@@ -104,7 +106,8 @@ public final class Thumbnails {
    * Create request for getThumbnailForDocumentAndVersion
    *  @return Request builder object
    */
-  public final ThumbnailsGetThumbnailForDocumentAndVersionRequest.Builder getThumbnailForDocumentAndVersion() {
+  public final ThumbnailsGetThumbnailForDocumentAndVersionRequest.Builder getThumbnailForDocumentAndVersion(
+      ) {
     return ThumbnailsGetThumbnailForDocumentAndVersionRequest.builder(onshape);
   }
 
@@ -112,7 +115,8 @@ public final class Thumbnails {
    * Create request for getDocumentThumbnailWithSize
    *  @return Request builder object
    */
-  public final ThumbnailsGetDocumentThumbnailWithSizeRequest.Builder getDocumentThumbnailWithSize() {
+  public final ThumbnailsGetDocumentThumbnailWithSizeRequest.Builder getDocumentThumbnailWithSize(
+      ) {
     return ThumbnailsGetDocumentThumbnailWithSizeRequest.builder(onshape);
   }
 
@@ -120,7 +124,8 @@ public final class Thumbnails {
    * Create request for setApplicationElementThumbnail
    *  @return Request builder object
    */
-  public final ThumbnailsSetApplicationElementThumbnailRequest.Builder setApplicationElementThumbnail() {
+  public final ThumbnailsSetApplicationElementThumbnailRequest.Builder setApplicationElementThumbnail(
+      ) {
     return ThumbnailsSetApplicationElementThumbnailRequest.builder(onshape);
   }
 }

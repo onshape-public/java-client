@@ -32,7 +32,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Request object for updateReleasePackage API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class ReleaseManagementUpdateReleasePackageRequest {
   /**
@@ -49,7 +49,8 @@ public final class ReleaseManagementUpdateReleasePackageRequest {
   @NotNull
   ReleaseManagementUpdateReleasePackageRequestItems[] items;
 
-  ReleaseManagementUpdateReleasePackageRequest(ReleaseManagementUpdateReleasePackageRequestProperties[] properties,
+  ReleaseManagementUpdateReleasePackageRequest(
+      ReleaseManagementUpdateReleasePackageRequestProperties[] properties,
       ReleaseManagementUpdateReleasePackageRequestItems[] items) {
     this.properties = properties;
     this.items = items;
@@ -119,7 +120,8 @@ public final class ReleaseManagementUpdateReleasePackageRequest {
      *
      * @return the Builder object.
      */
-    public final Builder properties(ReleaseManagementUpdateReleasePackageRequestProperties[] value) {
+    public final Builder properties(
+        ReleaseManagementUpdateReleasePackageRequestProperties[] value) {
       this.properties = value;
       return this;
     }

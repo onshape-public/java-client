@@ -22,22 +22,20 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
  * Response object for getFeatures API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class AssembliesGetFeaturesResponse {
+public final class AssembliesGetFeaturesResponse extends AbstractResponseObject {
   /**
    * True if the full feature list is present, or false if it is filtered
    */
@@ -57,7 +55,7 @@ public final class AssembliesGetFeaturesResponse {
    */
   @JsonProperty("featureStates")
   @NotNull
-  AssembliesGetFeaturesResponseFeatureStates[] featureStates;
+  Map<String, Map>[] featureStates;
 
   /**
    * The version of the serialization protocol for the response
@@ -99,7 +97,7 @@ public final class AssembliesGetFeaturesResponse {
    * @return List of feature state information
    *
    */
-  public final AssembliesGetFeaturesResponseFeatureStates[] getFeatureStates() {
+  public final Map<String, Map>[] getFeatureStates() {
     return this.featureStates;
   }
 

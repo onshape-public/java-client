@@ -30,7 +30,7 @@ import java.lang.String;
 
 /**
  * Request object for deleteTranslation API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class TranslationsDeleteTranslationRequest {
   TranslationsDeleteTranslationRequest() {

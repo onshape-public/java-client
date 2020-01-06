@@ -22,10 +22,10 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
@@ -34,12 +34,9 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Response object for getElementMetadata API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class MetadataGetElementMetadataResponse {
+public final class MetadataGetElementMetadataResponse extends AbstractResponseObject {
   /**
    * Element properties
    */

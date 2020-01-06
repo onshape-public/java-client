@@ -22,27 +22,25 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
  * Response object for getUserAppSettings API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class ApplicationsGetUserAppSettingsResponse {
+public final class ApplicationsGetUserAppSettingsResponse extends AbstractResponseObject {
   /**
    * User-specific settings for given client/user/key
    */
   @JsonProperty("settings")
   @NotNull
-  ApplicationsGetUserAppSettingsResponseSettings[] settings;
+  Map<String, Map>[] settings;
 
   /**
    * Get User-specific settings for given client/user/key
@@ -50,7 +48,7 @@ public final class ApplicationsGetUserAppSettingsResponse {
    * @return User-specific settings for given client/user/key
    *
    */
-  public final ApplicationsGetUserAppSettingsResponseSettings[] getSettings() {
+  public final Map<String, Map>[] getSettings() {
     return this.settings;
   }
 

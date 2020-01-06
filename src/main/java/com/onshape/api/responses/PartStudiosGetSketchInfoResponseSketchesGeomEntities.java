@@ -22,9 +22,9 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Boolean;
 import java.lang.Number;
 import java.lang.Override;
@@ -33,12 +33,9 @@ import java.util.Map;
 
 /**
  * Object used in calls to getSketchInfo API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class PartStudiosGetSketchInfoResponseSketchesGeomEntities {
+public final class PartStudiosGetSketchInfoResponseSketchesGeomEntities extends AbstractResponseObject {
   /**
    * The type of the entity. Can be one of: &quot;point&quot;, &quot;line&quot;, &quot;lineSegment&quot;, &quot;circle&quot;, &quot;arc&quot;, &quot;ellipse&quot;, &quot;ellipticArc&quot;, &quot;spline&quot;, &quot;splineSegment&quot;, &quot;interpolatedSpline&quot;, &quot;interpolatedSplineSegment&quot;, &quot;unknownGeometry&quot;.
    */

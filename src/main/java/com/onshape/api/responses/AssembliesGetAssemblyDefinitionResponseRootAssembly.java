@@ -23,21 +23,19 @@
 package com.onshape.api.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import com.onshape.api.types.OnshapeDocument;
+import com.onshape.api.types.ResponseWithDocument;
 import java.lang.Override;
 import java.lang.String;
 
 /**
  * Object used in calls to getAssemblyDefinition API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class AssembliesGetAssemblyDefinitionResponseRootAssembly {
+public final class AssembliesGetAssemblyDefinitionResponseRootAssembly extends AbstractResponseObject implements ResponseWithDocument {
   /**
    * Document ID
    */
@@ -139,6 +137,7 @@ public final class AssembliesGetAssemblyDefinitionResponseRootAssembly {
    * @return The OnshapeDocument object.
    */
   @JsonIgnore
+  @Override
   public final OnshapeDocument getDocument() {
     return new OnshapeDocument(documentId, null, null, documentMicroversion, elementId);
   }

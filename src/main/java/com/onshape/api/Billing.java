@@ -26,7 +26,7 @@ import com.onshape.api.requests.BillingGetClientPlansRequest;
 
 /**
  * Billing: API endpoints for Billing group.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
 public final class Billing {
   final Onshape onshape;

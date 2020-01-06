@@ -22,7 +22,6 @@
 //
 package com.onshape.api.requests;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import java.lang.Number;
@@ -31,11 +30,8 @@ import java.lang.String;
 
 /**
  * Object used in calls to insertTransformedInstances API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
 public final class AssembliesInsertTransformedInstancesRequestTransformGroups {
   /**
    * The transform to apply to the instances. Must be 9, 12, or 16 elements in length, representing a 3x3, 4x3 or 4x4 matrix, respectively. All translation matrix components are in meters.
@@ -71,7 +67,8 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroups {
    * @return The instances to insert with the transform.
    *
    */
-  public final AssembliesInsertTransformedInstancesRequestTransformGroupsInstances[] getInstances() {
+  public final AssembliesInsertTransformedInstancesRequestTransformGroupsInstances[] getInstances(
+      ) {
     return this.instances;
   }
 
@@ -138,7 +135,8 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroups {
      *
      * @return the Builder object.
      */
-    public final Builder instances(AssembliesInsertTransformedInstancesRequestTransformGroupsInstances[] value) {
+    public final Builder instances(
+        AssembliesInsertTransformedInstancesRequestTransformGroupsInstances[] value) {
       this.instances = value;
       return this;
     }

@@ -23,10 +23,11 @@
 package com.onshape.api.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
+import com.onshape.api.types.AbstractResponseObject;
 import com.onshape.api.types.OnshapeDocument;
+import com.onshape.api.types.ResponseWithDocument;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
@@ -34,12 +35,9 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Response object for getReleasePackage API endpoint.
- * &copy; 2018 Onshape Inc.
+ * &copy; 2018-Present Onshape Inc.
  */
-@JsonIgnoreProperties(
-    ignoreUnknown = true
-)
-public final class ReleaseManagementGetReleasePackageResponse {
+public final class ReleaseManagementGetReleasePackageResponse extends AbstractResponseObject implements ResponseWithDocument {
   /**
    * ID of the release package.
    */
@@ -106,6 +104,7 @@ public final class ReleaseManagementGetReleasePackageResponse {
    * @return The OnshapeDocument object.
    */
   @JsonIgnore
+  @Override
   public final OnshapeDocument getDocument() {
     return new OnshapeDocument(documentId, workspaceId, null, null, null);
   }
