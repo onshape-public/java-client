@@ -182,8 +182,7 @@ public final class UsersGetUserSettingsCurrentLoggedInUserResponse extends Abstr
    * @return Set of mouse buttons and modifier keys to manipulate view
    *
    */
-  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMapping getViewManipulationMouseKeyMapping(
-      ) {
+  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMapping getViewManipulationMouseKeyMapping() {
     return this.viewManipulationMouseKeyMapping;
   }
 

@@ -58,8 +58,8 @@ public final class ApplicationsUpdateAppSettingsRequest {
     }
 
     /**
-     * Calls updateAppSettings method, Update a user's application settings.
-     *                 This API may only be used with an OAuth token and only by the current user or admin.
+     * Calls updateAppSettings method, Update a user's application settings. This API may only be used with an OAuth token and only by
+     *                 the current user or admin.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *

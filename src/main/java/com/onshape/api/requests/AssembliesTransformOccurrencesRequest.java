@@ -59,9 +59,8 @@ public final class AssembliesTransformOccurrencesRequest {
   @NotNull
   Boolean isRelative;
 
-  AssembliesTransformOccurrencesRequest(
-      AssembliesTransformOccurrencesRequestOccurrences[] occurrences, Number[] transform,
-      Boolean isRelative) {
+  AssembliesTransformOccurrencesRequest(AssembliesTransformOccurrencesRequestOccurrences[] occurrences,
+      Number[] transform, Boolean isRelative) {
     this.occurrences = occurrences;
     this.transform = transform;
     this.isRelative = isRelative;

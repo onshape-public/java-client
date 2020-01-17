@@ -61,8 +61,7 @@ public final class PartStudiosComparePartStudioResponseChangesParts extends Abst
    * @return List of changes in Part Studio Parts collection
    *
    */
-  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChanges[] getCollectionChanges(
-      ) {
+  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChanges[] getCollectionChanges() {
     return this.collectionChanges;
   }
 

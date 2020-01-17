@@ -84,8 +84,8 @@ public final class ElementsGetElementTranslatorFormatsByVersionOrWorkspaceReques
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      */
-    public final ElementsGetElementTranslatorFormatsByVersionOrWorkspaceResponse call(
-        OnshapeDocument document) throws OnshapeException {
+    public final ElementsGetElementTranslatorFormatsByVersionOrWorkspaceResponse call(OnshapeDocument document)
+        throws OnshapeException {
       onshape.validate(build());
       return onshape.call("get", "/elements/translatorFormats/:did/[wv]/:wv/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.ElementsGetElementTranslatorFormatsByVersionOrWorkspaceResponse.class);
     }

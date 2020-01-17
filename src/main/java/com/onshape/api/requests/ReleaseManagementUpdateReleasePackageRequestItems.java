@@ -354,8 +354,7 @@ public final class ReleaseManagementUpdateReleasePackageRequestItems {
      *
      * @return the Builder object.
      */
-    public final Builder properties(
-        ReleaseManagementUpdateReleasePackageRequestItemsProperties[] value) {
+    public final Builder properties(ReleaseManagementUpdateReleasePackageRequestItemsProperties[] value) {
       this.properties = value;
       return this;
     }

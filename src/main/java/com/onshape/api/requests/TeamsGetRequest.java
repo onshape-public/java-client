@@ -58,8 +58,7 @@ public final class TeamsGetRequest {
     }
 
     /**
-     * Calls get method, Get team info. Caller must be admin, or member
-     * of the team.
+     * Calls get method, Get team info. Caller must be admin, or member of the team.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *

@@ -42,8 +42,7 @@ public final class ReleaseManagementCreateReleasePackageRequest {
   @NotNull
   ReleaseManagementCreateReleasePackageRequestItems[] items;
 
-  ReleaseManagementCreateReleasePackageRequest(
-      ReleaseManagementCreateReleasePackageRequestItems[] items) {
+  ReleaseManagementCreateReleasePackageRequest(ReleaseManagementCreateReleasePackageRequestItems[] items) {
     this.items = items;
   }
 

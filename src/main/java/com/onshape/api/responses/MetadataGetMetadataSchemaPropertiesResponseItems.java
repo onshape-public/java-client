@@ -191,8 +191,7 @@ public final class MetadataGetMetadataSchemaPropertiesResponseItems extends Abst
    * @return Additional information about property.
    *
    */
-  public final MetadataGetMetadataSchemaPropertiesResponseItemsPropertyConfigSummaryInfoList[] getPropertyConfigSummaryInfoList(
-      ) {
+  public final MetadataGetMetadataSchemaPropertiesResponseItemsPropertyConfigSummaryInfoList[] getPropertyConfigSummaryInfoList() {
     return this.propertyConfigSummaryInfoList;
   }
 

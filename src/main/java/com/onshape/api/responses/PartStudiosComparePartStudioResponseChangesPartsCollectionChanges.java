@@ -93,8 +93,7 @@ public final class PartStudiosComparePartStudioResponseChangesPartsCollectionCha
    * @return Map of changes in a specific MODIFIED part
    *
    */
-  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChanges getChanges(
-      ) {
+  public final PartStudiosComparePartStudioResponseChangesPartsCollectionChangesChanges getChanges() {
     return this.changes;
   }
 

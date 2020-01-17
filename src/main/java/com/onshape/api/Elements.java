@@ -46,8 +46,7 @@ public final class Elements {
    * Create request for copyElementFromSourceDocument
    *  @return Request builder object
    */
-  public final ElementsCopyElementFromSourceDocumentRequest.Builder copyElementFromSourceDocument(
-      ) {
+  public final ElementsCopyElementFromSourceDocumentRequest.Builder copyElementFromSourceDocument() {
     return ElementsCopyElementFromSourceDocumentRequest.builder(onshape);
   }
 
@@ -87,8 +86,7 @@ public final class Elements {
    * Create request for getElementTranslatorFormatsByVersionOrWorkspace
    *  @return Request builder object
    */
-  public final ElementsGetElementTranslatorFormatsByVersionOrWorkspaceRequest.Builder getElementTranslatorFormatsByVersionOrWorkspace(
-      ) {
+  public final ElementsGetElementTranslatorFormatsByVersionOrWorkspaceRequest.Builder getElementTranslatorFormatsByVersionOrWorkspace() {
     return ElementsGetElementTranslatorFormatsByVersionOrWorkspaceRequest.builder(onshape);
   }
 

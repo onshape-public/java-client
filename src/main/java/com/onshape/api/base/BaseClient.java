@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.onshape.api.exceptions.OnshapeException;
+import com.onshape.api.types.AbstractBlob;
 import com.onshape.api.types.Blob;
 import com.onshape.api.types.InputStreamWithHeaders;
 import com.onshape.api.types.JsonObjectOrArrayInputStream;
@@ -57,9 +58,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TimeZone;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.zip.GZIPInputStream;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -81,6 +85,8 @@ import javax.ws.rs.core.UriBuilder;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.media.multipart.Boundary;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
@@ -110,8 +116,14 @@ public class BaseClient {
     //Set TIMEOUT to 10 minutes to match Onshape TIMEOUT.
     private final int TIMEOUT = 600000;
 
-    public static final String ONSHAPE_JSON = "application/vnd.onshape.v2+json";
-    public static final String ONSHAPE_OCTET_STREAM = "application/vnd.onshape.v2+octet-stream";
+    public static final String ONSHAPE_JSON_V1 = "application/vnd.onshape.v1+json";
+    public static final String ONSHAPE_JSON_V2 = "application/vnd.onshape.v2+json";
+    private static final String[] JSON_MEDIA_TYPES = new String[]{ONSHAPE_JSON_V2, ONSHAPE_JSON_V1, MediaType.APPLICATION_JSON};
+    private static final Predicate<String> IS_JSON_MEDIA_TYPE = (String type) -> Stream.of(JSON_MEDIA_TYPES).anyMatch(jsonType -> type.startsWith(jsonType));
+
+    public static final String ONSHAPE_OCTET_STREAM_V1 = "application/vnd.onshape.v1+octet-stream";
+    public static final String ONSHAPE_OCTET_STREAM_V2 = "application/vnd.onshape.v2+octet-stream";
+    private static final String[] BINARY_MEDIA_TYPES = new String[]{ONSHAPE_OCTET_STREAM_V2, ONSHAPE_OCTET_STREAM_V1, MediaType.APPLICATION_OCTET_STREAM, "*/*"};
 
     static {
         TOSTRINGMAPPER = new ObjectMapper();
@@ -335,11 +347,25 @@ public class BaseClient {
             }
             throw new OnshapeException("No entity in response");
         }
-        if (response.getMediaType().toString().startsWith(MediaType.APPLICATION_JSON)
-                || response.getMediaType().toString().startsWith(ONSHAPE_JSON)) {
+        if (IS_JSON_MEDIA_TYPE.test(response.getMediaType().toString())) {
             // Special case: Return a String
             if (String.class.equals(type)) {
                 return type.cast(response.readEntity(String.class));
+            }
+            // Get the Content-Length value
+            Optional<Integer> contentLength = Optional.ofNullable(response.getHeaderString("Content-Length"))
+                    .filter(cL -> cL.matches("[0-9]+")).map(cL -> Integer.valueOf(cL));
+            // Special case: If Content-Length is 0
+            if (contentLength.isPresent() && contentLength.get() == 0) {
+                if (type.getDeclaredFields().length == 0) {
+                    try {
+                        // Response type is just an empty object, create one
+                        return type.newInstance();
+                    } catch (IllegalAccessException | InstantiationException ex) {
+                        throw new OnshapeException("Failed to create response object");
+                    }
+                }
+                throw new OnshapeException("No entity in response");
             }
             try {
                 // Special case: If it is an array, and the response type has a single array field, then read that
@@ -436,8 +462,7 @@ public class BaseClient {
         URI uri = buildURI(url, urlParameters, queryParameters);
         // Create a WebTarget for the URI
         WebTarget target = client.target(uri).property(ClientProperties.FOLLOW_REDIRECTS, Boolean.FALSE);
-        Invocation.Builder invocationBuilder = target.request(jsonResponse ? MediaType.APPLICATION_JSON_TYPE : MediaType.APPLICATION_OCTET_STREAM_TYPE)
-                .header("Accept", jsonResponse ? ONSHAPE_JSON : ONSHAPE_OCTET_STREAM);
+        Invocation.Builder invocationBuilder = target.request(jsonResponse ? JSON_MEDIA_TYPES : BINARY_MEDIA_TYPES);
         // Accept gzip compressed responses
         invocationBuilder.header("Accept-Encoding", "gzip");
         // Set the content-type and build the entity
@@ -492,13 +517,16 @@ public class BaseClient {
     Entity createEntity(Object payload, Invocation.Builder invocationBuilder) throws OnshapeException {
         MediaType mediaType;
         Field fileField = null;
+        Field blobField = null;
         for (Field field : payload.getClass().getDeclaredFields()) {
             if (File.class.equals(field.getType())) {
                 fileField = field;
+            } else if (AbstractBlob.class.isAssignableFrom(field.getType())) {
+                blobField = field;
             }
         }
         // If no File, then return JSON entity
-        if (fileField == null) {
+        if (fileField == null && blobField == null) {
             mediaType = MediaType.APPLICATION_JSON_TYPE;
             invocationBuilder.header("Content-Type", mediaType.toString());
             return Entity.entity(payload, mediaType);
@@ -508,12 +536,26 @@ public class BaseClient {
         try {
             for (Field field : payload.getClass().getDeclaredFields()) {
                 field.setAccessible(true);
-                if (!fileField.equals(field) && field.get(payload) != null) {
+                if ("fileContentLength".equals(field.getName())) {
+                    if (fileField != null) {
+                        fileField.setAccessible(true);
+                        multipart.field(field.getName(), Long.toString(((File) fileField.get(payload)).length()));
+                    } else if (blobField != null) {
+                        blobField.setAccessible(true);
+                        multipart.field(field.getName(), Integer.toString(((AbstractBlob) blobField.get(payload)).getData().length));
+                    }
+                } else if (!field.equals(fileField) && !field.equals(blobField) && field.get(payload) != null) {
                     multipart.field(field.getName(), field.get(payload).toString());
                 }
             }
-            fileField.setAccessible(true);
-            multipart.bodyPart(new FileDataBodyPart("file", (File) fileField.get(payload), MediaType.WILDCARD_TYPE));
+            if (fileField != null) {
+                fileField.setAccessible(true);
+                multipart.bodyPart(new FileDataBodyPart("file", (File) fileField.get(payload), MediaType.WILDCARD_TYPE));
+            } else if (blobField != null) {
+                blobField.setAccessible(true);
+                multipart.bodyPart(new FormDataBodyPart(FormDataContentDisposition.name("file").build(),
+                        ((AbstractBlob) blobField.get(payload)).getData(), MediaType.WILDCARD_TYPE));
+            }
         } catch (IllegalArgumentException | IllegalAccessException ex) {
             throw new OnshapeException("Failed to convert payload to multipart form", ex);
         }

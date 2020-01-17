@@ -273,8 +273,7 @@ public final class Documents {
    * Create request for updateExternalReferencesToLatestDocuments
    *  @return Request builder object
    */
-  public final DocumentsUpdateExternalReferencesToLatestDocumentsRequest.Builder updateExternalReferencesToLatestDocuments(
-      ) {
+  public final DocumentsUpdateExternalReferencesToLatestDocumentsRequest.Builder updateExternalReferencesToLatestDocuments() {
     return DocumentsUpdateExternalReferencesToLatestDocumentsRequest.builder(onshape);
   }
 }

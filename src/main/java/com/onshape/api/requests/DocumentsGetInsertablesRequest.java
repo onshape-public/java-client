@@ -128,6 +128,12 @@ public final class DocumentsGetInsertablesRequest {
   String allowedApplicationMimeTypes;
 
   /**
+   * Returns composite parts
+   */
+  @JsonProperty("includeCompositeParts")
+  Boolean includeCompositeParts;
+
+  /**
    * If specified and is greater than zero, insertables that are created using feature script version less than or equal to maxFeatureScriptVersion will be returned
    */
   @JsonProperty("maxFeatureScriptVersion")
@@ -138,7 +144,8 @@ public final class DocumentsGetInsertablesRequest {
       Boolean includeReferenceFeatures, Boolean includeAssemblies, Boolean includeFeatureStudios,
       Boolean includeFeatures, Boolean includeBlobs, Boolean includeMeshes,
       Boolean includeFlattenedBodies, Boolean includeApplications, String allowedBlobMimeTypes,
-      String allowedApplicationMimeTypes, Number maxFeatureScriptVersion) {
+      String allowedApplicationMimeTypes, Boolean includeCompositeParts,
+      Number maxFeatureScriptVersion) {
     this.betaCapabilityIds = betaCapabilityIds;
     this.includeParts = includeParts;
     this.includeSurfaces = includeSurfaces;
@@ -154,6 +161,7 @@ public final class DocumentsGetInsertablesRequest {
     this.includeApplications = includeApplications;
     this.allowedBlobMimeTypes = allowedBlobMimeTypes;
     this.allowedApplicationMimeTypes = allowedApplicationMimeTypes;
+    this.includeCompositeParts = includeCompositeParts;
     this.maxFeatureScriptVersion = maxFeatureScriptVersion;
   }
 
@@ -243,6 +251,11 @@ public final class DocumentsGetInsertablesRequest {
      * Comma separated list of application format ids to include
      */
     private String allowedApplicationMimeTypes;
+
+    /**
+     * Returns composite parts
+     */
+    private Boolean includeCompositeParts;
 
     /**
      * If specified and is greater than zero, insertables that are created using feature script version less than or equal to maxFeatureScriptVersion will be returned
@@ -585,6 +598,28 @@ public final class DocumentsGetInsertablesRequest {
     }
 
     /**
+     * Get Returns composite parts
+     *
+     * @return Returns composite parts
+     *
+     */
+    public final Boolean includeCompositeParts() {
+      return this.includeCompositeParts;
+    }
+
+    /**
+     * Set Returns composite parts
+     *
+     * @param value Returns composite parts
+     *
+     * @return the Builder object.
+     */
+    public final Builder includeCompositeParts(Boolean value) {
+      this.includeCompositeParts = value;
+      return this;
+    }
+
+    /**
      * Get If specified and is greater than zero, insertables that are created using feature script version less than or equal to maxFeatureScriptVersion will be returned
      *
      * @return If specified and is greater than zero, insertables that are created using feature script version less than or equal to maxFeatureScriptVersion will be returned
@@ -607,7 +642,7 @@ public final class DocumentsGetInsertablesRequest {
     }
 
     private DocumentsGetInsertablesRequest build() {
-      return new com.onshape.api.requests.DocumentsGetInsertablesRequest(betaCapabilityIds,includeParts,includeSurfaces,includeWires,includeSketches,includeReferenceFeatures,includeAssemblies,includeFeatureStudios,includeFeatures,includeBlobs,includeMeshes,includeFlattenedBodies,includeApplications,allowedBlobMimeTypes,allowedApplicationMimeTypes,maxFeatureScriptVersion);
+      return new com.onshape.api.requests.DocumentsGetInsertablesRequest(betaCapabilityIds,includeParts,includeSurfaces,includeWires,includeSketches,includeReferenceFeatures,includeAssemblies,includeFeatureStudios,includeFeatures,includeBlobs,includeMeshes,includeFlattenedBodies,includeApplications,allowedBlobMimeTypes,allowedApplicationMimeTypes,includeCompositeParts,maxFeatureScriptVersion);
     }
 
     /**
@@ -622,7 +657,7 @@ public final class DocumentsGetInsertablesRequest {
     public final DocumentsGetInsertablesResponse call(String did, String vid) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/documents/d/:did/v/:vid/insertables", build(), onshape.buildMap("did", did, "vid", vid), onshape.buildMap("betaCapabilityIds", betaCapabilityIds, "includeParts", includeParts, "includeSurfaces", includeSurfaces, "includeWires", includeWires, "includeSketches", includeSketches, "includeReferenceFeatures", includeReferenceFeatures, "includeAssemblies", includeAssemblies, "includeFeatureStudios", includeFeatureStudios, "includeFeatures", includeFeatures, "includeBlobs", includeBlobs, "includeMeshes", includeMeshes, "includeFlattenedBodies", includeFlattenedBodies, "includeApplications", includeApplications, "allowedBlobMimeTypes", allowedBlobMimeTypes, "allowedApplicationMimeTypes", allowedApplicationMimeTypes, "maxFeatureScriptVersion", maxFeatureScriptVersion), com.onshape.api.responses.DocumentsGetInsertablesResponse.class);
+      return onshape.call("get", "/documents/d/:did/v/:vid/insertables", build(), onshape.buildMap("did", did, "vid", vid), onshape.buildMap("betaCapabilityIds", betaCapabilityIds, "includeParts", includeParts, "includeSurfaces", includeSurfaces, "includeWires", includeWires, "includeSketches", includeSketches, "includeReferenceFeatures", includeReferenceFeatures, "includeAssemblies", includeAssemblies, "includeFeatureStudios", includeFeatureStudios, "includeFeatures", includeFeatures, "includeBlobs", includeBlobs, "includeMeshes", includeMeshes, "includeFlattenedBodies", includeFlattenedBodies, "includeApplications", includeApplications, "allowedBlobMimeTypes", allowedBlobMimeTypes, "allowedApplicationMimeTypes", allowedApplicationMimeTypes, "includeCompositeParts", includeCompositeParts, "maxFeatureScriptVersion", maxFeatureScriptVersion), com.onshape.api.responses.DocumentsGetInsertablesResponse.class);
     }
 
     /**
@@ -636,7 +671,7 @@ public final class DocumentsGetInsertablesRequest {
     public final DocumentsGetInsertablesResponse call(OnshapeDocument document, String vid) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/documents/d/:did/v/:vid/insertables", build(), onshape.buildMap("did", document.getDocumentId(), "vid", vid), onshape.buildMap("betaCapabilityIds", betaCapabilityIds, "includeParts", includeParts, "includeSurfaces", includeSurfaces, "includeWires", includeWires, "includeSketches", includeSketches, "includeReferenceFeatures", includeReferenceFeatures, "includeAssemblies", includeAssemblies, "includeFeatureStudios", includeFeatureStudios, "includeFeatures", includeFeatures, "includeBlobs", includeBlobs, "includeMeshes", includeMeshes, "includeFlattenedBodies", includeFlattenedBodies, "includeApplications", includeApplications, "allowedBlobMimeTypes", allowedBlobMimeTypes, "allowedApplicationMimeTypes", allowedApplicationMimeTypes, "maxFeatureScriptVersion", maxFeatureScriptVersion), com.onshape.api.responses.DocumentsGetInsertablesResponse.class);
+      return onshape.call("get", "/documents/d/:did/v/:vid/insertables", build(), onshape.buildMap("did", document.getDocumentId(), "vid", vid), onshape.buildMap("betaCapabilityIds", betaCapabilityIds, "includeParts", includeParts, "includeSurfaces", includeSurfaces, "includeWires", includeWires, "includeSketches", includeSketches, "includeReferenceFeatures", includeReferenceFeatures, "includeAssemblies", includeAssemblies, "includeFeatureStudios", includeFeatureStudios, "includeFeatures", includeFeatures, "includeBlobs", includeBlobs, "includeMeshes", includeMeshes, "includeFlattenedBodies", includeFlattenedBodies, "includeApplications", includeApplications, "allowedBlobMimeTypes", allowedBlobMimeTypes, "allowedApplicationMimeTypes", allowedApplicationMimeTypes, "includeCompositeParts", includeCompositeParts, "maxFeatureScriptVersion", maxFeatureScriptVersion), com.onshape.api.responses.DocumentsGetInsertablesResponse.class);
     }
   }
 }

@@ -133,8 +133,7 @@ public final class MetadataUpdateStandardContentMetadataRequestItems {
      *
      * @return the Builder object.
      */
-    public final Builder properties(
-        MetadataUpdateStandardContentMetadataRequestItemsProperties[] value) {
+    public final Builder properties(MetadataUpdateStandardContentMetadataRequestItemsProperties[] value) {
       this.properties = value;
       return this;
     }

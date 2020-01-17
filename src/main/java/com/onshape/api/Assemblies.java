@@ -159,8 +159,7 @@ public final class Assemblies {
    * Create request for getOrCreateBillOfMaterialsElement
    *  @return Request builder object
    */
-  public final AssembliesGetOrCreateBillOfMaterialsElementRequest.Builder getOrCreateBillOfMaterialsElement(
-      ) {
+  public final AssembliesGetOrCreateBillOfMaterialsElementRequest.Builder getOrCreateBillOfMaterialsElement() {
     return AssembliesGetOrCreateBillOfMaterialsElementRequest.builder(onshape);
   }
 

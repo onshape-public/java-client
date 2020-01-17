@@ -57,8 +57,7 @@ public final class Users {
    * Create request for getUserSettingsCurrentLoggedInUser
    *  @return Request builder object
    */
-  public final UsersGetUserSettingsCurrentLoggedInUserRequest.Builder getUserSettingsCurrentLoggedInUser(
-      ) {
+  public final UsersGetUserSettingsCurrentLoggedInUserRequest.Builder getUserSettingsCurrentLoggedInUser() {
     return UsersGetUserSettingsCurrentLoggedInUserRequest.builder(onshape);
   }
 }

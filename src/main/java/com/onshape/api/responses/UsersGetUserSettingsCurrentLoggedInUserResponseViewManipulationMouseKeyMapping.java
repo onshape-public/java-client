@@ -69,8 +69,7 @@ public final class UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulati
    * @return Array of sets of button and key presses that pan in 2D
    *
    */
-  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingPan2DMapping[] getPan2DMapping(
-      ) {
+  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingPan2DMapping[] getPan2DMapping() {
     return this.pan2DMapping;
   }
 
@@ -80,8 +79,7 @@ public final class UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulati
    * @return Array of sets of button and key presses that zoom in 2D
    *
    */
-  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingZoom2DMapping[] getZoom2DMapping(
-      ) {
+  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingZoom2DMapping[] getZoom2DMapping() {
     return this.zoom2DMapping;
   }
 
@@ -91,8 +89,7 @@ public final class UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulati
    * @return Array of sets of button and key presses that rotate in 3D
    *
    */
-  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingRotate3DMapping[] getRotate3DMapping(
-      ) {
+  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingRotate3DMapping[] getRotate3DMapping() {
     return this.rotate3DMapping;
   }
 
@@ -102,8 +99,7 @@ public final class UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulati
    * @return Array of sets of button and key presses that pan in 3D
    *
    */
-  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingPan3DMapping[] getPan3DMapping(
-      ) {
+  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingPan3DMapping[] getPan3DMapping() {
     return this.pan3DMapping;
   }
 
@@ -113,8 +109,7 @@ public final class UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulati
    * @return Array of sets of button and key presses that zoom in 3D
    *
    */
-  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingZoom3DMapping[] getZoom3DMapping(
-      ) {
+  public final UsersGetUserSettingsCurrentLoggedInUserResponseViewManipulationMouseKeyMappingZoom3DMapping[] getZoom3DMapping() {
     return this.zoom3DMapping;
   }
 

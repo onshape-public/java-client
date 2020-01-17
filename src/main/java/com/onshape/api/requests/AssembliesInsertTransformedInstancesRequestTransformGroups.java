@@ -67,8 +67,7 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroups {
    * @return The instances to insert with the transform.
    *
    */
-  public final AssembliesInsertTransformedInstancesRequestTransformGroupsInstances[] getInstances(
-      ) {
+  public final AssembliesInsertTransformedInstancesRequestTransformGroupsInstances[] getInstances() {
     return this.instances;
   }
 
@@ -135,8 +134,7 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroups {
      *
      * @return the Builder object.
      */
-    public final Builder instances(
-        AssembliesInsertTransformedInstancesRequestTransformGroupsInstances[] value) {
+    public final Builder instances(AssembliesInsertTransformedInstancesRequestTransformGroupsInstances[] value) {
       this.instances = value;
       return this;
     }

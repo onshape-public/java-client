@@ -43,8 +43,7 @@ public final class TestCustomWorkflowsUpdateWorkflowableTestObjectRequest {
   @NotNull
   TestCustomWorkflowsUpdateWorkflowableTestObjectRequestProperties[] properties;
 
-  TestCustomWorkflowsUpdateWorkflowableTestObjectRequest(
-      TestCustomWorkflowsUpdateWorkflowableTestObjectRequestProperties[] properties) {
+  TestCustomWorkflowsUpdateWorkflowableTestObjectRequest(TestCustomWorkflowsUpdateWorkflowableTestObjectRequestProperties[] properties) {
     this.properties = properties;
   }
 
@@ -97,8 +96,7 @@ public final class TestCustomWorkflowsUpdateWorkflowableTestObjectRequest {
      *
      * @return the Builder object.
      */
-    public final Builder properties(
-        TestCustomWorkflowsUpdateWorkflowableTestObjectRequestProperties[] value) {
+    public final Builder properties(TestCustomWorkflowsUpdateWorkflowableTestObjectRequestProperties[] value) {
       this.properties = value;
       return this;
     }

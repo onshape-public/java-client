@@ -106,8 +106,7 @@ public final class TestCustomWorkflowsTransitionWorkflowableTestObjectResponse e
    * @return Array of properties for the object
    *
    */
-  public final TestCustomWorkflowsTransitionWorkflowableTestObjectResponseProperties[] getProperties(
-      ) {
+  public final TestCustomWorkflowsTransitionWorkflowableTestObjectResponseProperties[] getProperties() {
     return this.properties;
   }
 

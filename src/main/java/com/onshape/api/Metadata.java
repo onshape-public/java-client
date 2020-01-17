@@ -140,8 +140,7 @@ public final class Metadata {
    * Create request for updateStandardContentMetadata
    *  @return Request builder object
    */
-  public final MetadataUpdateStandardContentMetadataRequest.Builder updateStandardContentMetadata(
-      ) {
+  public final MetadataUpdateStandardContentMetadataRequest.Builder updateStandardContentMetadata() {
     return MetadataUpdateStandardContentMetadataRequest.builder(onshape);
   }
 

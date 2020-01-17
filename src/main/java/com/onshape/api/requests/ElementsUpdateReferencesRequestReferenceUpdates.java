@@ -156,8 +156,7 @@ public final class ElementsUpdateReferencesRequestReferenceUpdates {
      *
      * @return the Builder object.
      */
-    public final Builder fromReference(
-        ElementsUpdateReferencesRequestReferenceUpdatesFromReference value) {
+    public final Builder fromReference(ElementsUpdateReferencesRequestReferenceUpdatesFromReference value) {
       this.fromReference = value;
       return this;
     }
@@ -179,8 +178,7 @@ public final class ElementsUpdateReferencesRequestReferenceUpdates {
      *
      * @return the Builder object.
      */
-    public final Builder toReference(
-        ElementsUpdateReferencesRequestReferenceUpdatesToReference value) {
+    public final Builder toReference(ElementsUpdateReferencesRequestReferenceUpdatesToReference value) {
       this.toReference = value;
       return this;
     }

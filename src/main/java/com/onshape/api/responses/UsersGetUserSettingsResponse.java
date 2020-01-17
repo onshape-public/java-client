@@ -218,8 +218,7 @@ public final class UsersGetUserSettingsResponse extends AbstractResponseObject {
    * @return Set of mouse buttons and modifier keys to manipulate view
    *
    */
-  public final UsersGetUserSettingsResponseViewManipulationMouseKeyMapping getViewManipulationMouseKeyMapping(
-      ) {
+  public final UsersGetUserSettingsResponseViewManipulationMouseKeyMapping getViewManipulationMouseKeyMapping() {
     return this.viewManipulationMouseKeyMapping;
   }
 

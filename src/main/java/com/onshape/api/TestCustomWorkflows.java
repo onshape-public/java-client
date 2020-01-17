@@ -42,8 +42,7 @@ public final class TestCustomWorkflows {
    * Create request for createWorkflowableTestObject
    *  @return Request builder object
    */
-  public final TestCustomWorkflowsCreateWorkflowableTestObjectRequest.Builder createWorkflowableTestObject(
-      ) {
+  public final TestCustomWorkflowsCreateWorkflowableTestObjectRequest.Builder createWorkflowableTestObject() {
     return TestCustomWorkflowsCreateWorkflowableTestObjectRequest.builder(onshape);
   }
 
@@ -51,8 +50,7 @@ public final class TestCustomWorkflows {
    * Create request for getWorkflowableTestObject
    *  @return Request builder object
    */
-  public final TestCustomWorkflowsGetWorkflowableTestObjectRequest.Builder getWorkflowableTestObject(
-      ) {
+  public final TestCustomWorkflowsGetWorkflowableTestObjectRequest.Builder getWorkflowableTestObject() {
     return TestCustomWorkflowsGetWorkflowableTestObjectRequest.builder(onshape);
   }
 
@@ -60,8 +58,7 @@ public final class TestCustomWorkflows {
    * Create request for transitionWorkflowableTestObject
    *  @return Request builder object
    */
-  public final TestCustomWorkflowsTransitionWorkflowableTestObjectRequest.Builder transitionWorkflowableTestObject(
-      ) {
+  public final TestCustomWorkflowsTransitionWorkflowableTestObjectRequest.Builder transitionWorkflowableTestObject() {
     return TestCustomWorkflowsTransitionWorkflowableTestObjectRequest.builder(onshape);
   }
 
@@ -69,8 +66,7 @@ public final class TestCustomWorkflows {
    * Create request for updateWorkflowableTestObject
    *  @return Request builder object
    */
-  public final TestCustomWorkflowsUpdateWorkflowableTestObjectRequest.Builder updateWorkflowableTestObject(
-      ) {
+  public final TestCustomWorkflowsUpdateWorkflowableTestObjectRequest.Builder updateWorkflowableTestObject() {
     return TestCustomWorkflowsUpdateWorkflowableTestObjectRequest.builder(onshape);
   }
 }

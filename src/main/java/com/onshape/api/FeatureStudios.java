@@ -66,8 +66,7 @@ public final class FeatureStudios {
    * Create request for updateFeatureStudioContents
    *  @return Request builder object
    */
-  public final FeatureStudiosUpdateFeatureStudioContentsRequest.Builder updateFeatureStudioContents(
-      ) {
+  public final FeatureStudiosUpdateFeatureStudioContentsRequest.Builder updateFeatureStudioContents() {
     return FeatureStudiosUpdateFeatureStudioContentsRequest.builder(onshape);
   }
 }

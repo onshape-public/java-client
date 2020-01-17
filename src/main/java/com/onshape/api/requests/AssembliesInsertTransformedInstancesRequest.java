@@ -43,8 +43,7 @@ public final class AssembliesInsertTransformedInstancesRequest {
   @NotNull
   AssembliesInsertTransformedInstancesRequestTransformGroups[] transformGroups;
 
-  AssembliesInsertTransformedInstancesRequest(
-      AssembliesInsertTransformedInstancesRequestTransformGroups[] transformGroups) {
+  AssembliesInsertTransformedInstancesRequest(AssembliesInsertTransformedInstancesRequestTransformGroups[] transformGroups) {
     this.transformGroups = transformGroups;
   }
 
@@ -97,8 +96,7 @@ public final class AssembliesInsertTransformedInstancesRequest {
      *
      * @return the Builder object.
      */
-    public final Builder transformGroups(
-        AssembliesInsertTransformedInstancesRequestTransformGroups[] value) {
+    public final Builder transformGroups(AssembliesInsertTransformedInstancesRequestTransformGroups[] value) {
       this.transformGroups = value;
       return this;
     }

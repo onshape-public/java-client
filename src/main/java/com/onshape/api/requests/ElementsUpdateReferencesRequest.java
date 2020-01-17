@@ -43,8 +43,7 @@ public final class ElementsUpdateReferencesRequest {
   @NotNull
   ElementsUpdateReferencesRequestReferenceUpdates[] referenceUpdates;
 
-  ElementsUpdateReferencesRequest(
-      ElementsUpdateReferencesRequestReferenceUpdates[] referenceUpdates) {
+  ElementsUpdateReferencesRequest(ElementsUpdateReferencesRequestReferenceUpdates[] referenceUpdates) {
     this.referenceUpdates = referenceUpdates;
   }
 

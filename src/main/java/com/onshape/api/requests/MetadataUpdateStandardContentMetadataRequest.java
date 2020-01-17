@@ -50,8 +50,8 @@ public final class MetadataUpdateStandardContentMetadataRequest {
   @JsonProperty("linkDocumentId")
   String linkDocumentId;
 
-  MetadataUpdateStandardContentMetadataRequest(
-      MetadataUpdateStandardContentMetadataRequestItems[] items, String linkDocumentId) {
+  MetadataUpdateStandardContentMetadataRequest(MetadataUpdateStandardContentMetadataRequestItems[] items,
+      String linkDocumentId) {
     this.items = items;
     this.linkDocumentId = linkDocumentId;
   }
