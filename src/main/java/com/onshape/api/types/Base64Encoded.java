@@ -39,6 +39,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Base64;
 import java.util.Objects;
+import org.glassfish.jersey.media.multipart.ContentDisposition;
 
 /**
  * Represents binary data encoded as Base64. This is serialized as a String in
@@ -61,10 +62,11 @@ public class Base64Encoded extends AbstractBlob {
     }
 
     public Base64Encoded(byte[] data) {
-        this.base64String = Base64.getEncoder().encodeToString(data);
+        this(Base64.getEncoder().encodeToString(data));
     }
 
     public Base64Encoded(String base64String) {
+        super(ContentDisposition.type("attachement").build());
         this.base64String = base64String;
     }
 

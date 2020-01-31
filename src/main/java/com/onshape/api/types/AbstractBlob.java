@@ -30,6 +30,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Date;
+import org.glassfish.jersey.media.multipart.ContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 
 /**
  * Base class for binary data.
@@ -38,18 +41,83 @@ import java.nio.file.Path;
  */
 public abstract class AbstractBlob {
 
+    private final ContentDisposition contentDisposition;
+
+    protected AbstractBlob(ContentDisposition contentDisposition) {
+        this.contentDisposition = contentDisposition;
+    }
+
+    /**
+     * Get the contents of this Blob as a byte array
+     * @return byte[] of contents
+     */
     public abstract byte[] getData();
 
+    /**
+     * Write the contents of this Blob to a File
+     * 
+     * @param f File to write to
+     * @throws IOException If writing fails
+     */
     public final void toFile(File f) throws IOException {
         toFile(f.toPath());
     }
 
+    /**
+     * Write the contents of this Blob to a File
+     * 
+     * @param p Path to write to
+     * @throws IOException If writing fails
+     */
     public final void toFile(Path p) throws IOException {
         Files.write(p, getData());
     }
 
+    /**
+     * Get an InputStream to read the contents of this Blob
+     * @return An InputStream
+     */
     public final InputStream toInputStream() {
         return new ByteArrayInputStream(getData());
+    }
+
+    /**
+     * Get the name, if any, associated with this Blob
+     * @return String of filename or null
+     */
+    public final String getFileName() {
+        return contentDisposition.getFileName();
+    }
+
+    /**
+     * Get the creation date, if any, associated with this Blob
+     * @return Date of creation or null
+     */
+    public final Date getCreationDate() {
+        return contentDisposition.getCreationDate();
+    }
+
+    /**
+     * Get the last modified date, if any, associated with this Blob
+     * @return Date of modification or null
+     */
+    public final Date getModificationDate() {
+        return contentDisposition.getModificationDate();
+    }
+
+    /**
+     * Create a FormDataContentDisposition suitable for submitting this Blob
+     * as part of a multipart form submission
+     * 
+     * @param name Name of the blob field
+     * @return A FormDataContentDisposition
+     */
+    public final FormDataContentDisposition getFormDataContentDisposition(String name) {
+        return FormDataContentDisposition.name(name).creationDate(contentDisposition.getCreationDate())
+                .modificationDate(contentDisposition.getModificationDate())
+                .fileName(contentDisposition.getFileName())
+                .readDate(contentDisposition.getReadDate())
+                .size(contentDisposition.getSize()).build();
     }
 
     protected static byte[] fromFile(File file) throws IOException {

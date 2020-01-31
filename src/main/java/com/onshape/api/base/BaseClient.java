@@ -32,6 +32,7 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.types.AbstractBlob;
 import com.onshape.api.types.Blob;
+import com.onshape.api.types.ErrorResponse;
 import com.onshape.api.types.InputStreamWithHeaders;
 import com.onshape.api.types.JsonObjectOrArrayInputStream;
 import com.onshape.api.types.OAuthTokenResponse;
@@ -86,7 +87,6 @@ import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.media.multipart.Boundary;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
@@ -422,7 +422,7 @@ public class BaseClient {
                         }
                     } else if (Blob.class.equals(type.getDeclaredFields()[0].getType())) {
                         try {
-                            Blob blob = new Blob(input);
+                            Blob blob = new Blob(input, response.getHeaderString("Content-Disposition"));
                             Constructor<T> constructor = type.getDeclaredConstructor();
                             constructor.setAccessible(true);
                             T out = constructor.newInstance();
@@ -502,6 +502,17 @@ public class BaseClient {
             case REDIRECTION:
                 return call(method, response.getHeaderString("Location"), payload, buildMap(), buildMap(), jsonResponse);
             default:
+                // Attempt to read further details from the response from Onshape
+                ErrorResponse errorResponse = null;
+                try {
+                    errorResponse = response.readEntity(ErrorResponse.class);
+                } catch (Throwable ex) {
+                }
+                if (errorResponse != null && errorResponse.getMessage() != null
+                        && !errorResponse.getMessage().isEmpty()) {
+                    throw new OnshapeException(response.getStatusInfo().getStatusCode(), errorResponse.getMessage());
+                }
+                // Failed to deserialize an error message so just repond with the status code
                 throw new OnshapeException(response.getStatusInfo().getStatusCode(), response.getStatusInfo().getReasonPhrase());
         }
     }
@@ -553,7 +564,8 @@ public class BaseClient {
                 multipart.bodyPart(new FileDataBodyPart("file", (File) fileField.get(payload), MediaType.WILDCARD_TYPE));
             } else if (blobField != null) {
                 blobField.setAccessible(true);
-                multipart.bodyPart(new FormDataBodyPart(FormDataContentDisposition.name("file").build(),
+                multipart.bodyPart(new FormDataBodyPart(
+                        ((AbstractBlob) blobField.get(payload)).getFormDataContentDisposition("file"),
                         ((AbstractBlob) blobField.get(payload)).getData(), MediaType.WILDCARD_TYPE));
             }
         } catch (IllegalArgumentException | IllegalAccessException ex) {

@@ -37,8 +37,12 @@ import com.onshape.api.types.Blob.BlobSerializer;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.ParseException;
 import java.util.Arrays;
+import java.util.Date;
+import org.glassfish.jersey.media.multipart.ContentDisposition;
 
 /**
  * Represents binary data as byte array.
@@ -51,19 +55,73 @@ public final class Blob extends AbstractBlob {
 
     private final byte[] data;
 
+    /**
+     * Creates a new Blob from a File
+     *
+     * @param file The File instance
+     * @throws IOException if reading fails
+     */
     public Blob(File file) throws IOException {
-        this(fromFile(file));
+        this(fromFile(file), ContentDisposition.type("attachment")
+                .fileName(file.getName())
+                .modificationDate(new Date(file.lastModified()))
+                .size(file.length()).build());
     }
 
+    /**
+     * Creates a new Blob from a File
+     *
+     * @param path The Path instance
+     * @throws IOException if reading fails
+     */
     public Blob(Path path) throws IOException {
-        this(fromPath(path));
+        this(fromPath(path), ContentDisposition.type("attachment")
+                .fileName(path.getFileName().toString())
+                .modificationDate(new Date(Files.getLastModifiedTime(path).toMillis()))
+                .size(Files.size(path)).build());
     }
 
+    /**
+     * Creates a new Blob from an InputStream
+     *
+     * @param is The stream to read from
+     * @throws IOException if reading fails
+     */
     public Blob(InputStream is) throws IOException {
         this(fromInputStream(is));
     }
 
+    /**
+     * Creates a new Blob from an InputStream and the contents of a
+     * Content-Disposition header
+     *
+     * @param is The stream to read from
+     * @param contentDispositionHeader String of the Content-Disposition header
+     * @throws IOException if reading fails
+     */
+    public Blob(InputStream is, String contentDispositionHeader) throws IOException {
+        this(fromInputStream(is), parseHeader(contentDispositionHeader));
+    }
+
+    static ContentDisposition parseHeader(String contentDispositionHeader) throws IOException {
+        try {
+            return new ContentDisposition(contentDispositionHeader);
+        } catch (ParseException ex) {
+            throw new IOException("Failed to parse Content-Disposition header" + contentDispositionHeader, ex);
+        }
+    }
+
+    /**
+     * Creates a new Blob from an byte array
+     *
+     * @param data The byte array to wrap
+     */
     public Blob(byte[] data) {
+        this(data, ContentDisposition.type("attachment").build());
+    }
+
+    Blob(byte[] data, ContentDisposition contentDisposition) {
+        super(contentDisposition);
         this.data = data;
     }
 

@@ -24,11 +24,11 @@ package com.onshape.api.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
-import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -65,21 +65,11 @@ public final class MetadataGetMetadataSchemaResponse extends AbstractResponseObj
   Number objectType;
 
   /**
-   * URL to the schema
+   * Category Object info
    */
-  @JsonProperty("href")
+  @JsonProperty("Metadata")
   @NotNull
-  String href;
-
-  /**
-   * Refresh this page of results
-   * @param onshape The Onshape client object.
-   * @return Updated response.
-   * @throws OnshapeException On HTTP or serialization error.
-   */
-  public final MetadataGetMetadataSchemaResponse refresh(Onshape onshape) throws OnshapeException {
-    return onshape.get(href, MetadataGetMetadataSchemaResponse.class);
-  }
+  Map Metadata;
 
   /**
    * Get Metadata schema ID
@@ -122,13 +112,13 @@ public final class MetadataGetMetadataSchemaResponse extends AbstractResponseObj
   }
 
   /**
-   * Get URL to the schema
+   * Get Category Object info
    *
-   * @return URL to the schema
+   * @return Category Object info
    *
    */
-  public final String getHref() {
-    return this.href;
+  public final Map getMetadata() {
+    return this.Metadata;
   }
 
   @Override
