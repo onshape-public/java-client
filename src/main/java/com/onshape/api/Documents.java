@@ -33,6 +33,7 @@ import com.onshape.api.requests.DocumentsExportElementPostJsonRequest;
 import com.onshape.api.requests.DocumentsExportElementRequest;
 import com.onshape.api.requests.DocumentsGetAclRequest;
 import com.onshape.api.requests.DocumentsGetCurrentMicroversionRequest;
+import com.onshape.api.requests.DocumentsGetDocumentHistoryRequest;
 import com.onshape.api.requests.DocumentsGetDocumentPermissionSetRequest;
 import com.onshape.api.requests.DocumentsGetDocumentRequest;
 import com.onshape.api.requests.DocumentsGetDocumentsRequest;
@@ -163,6 +164,14 @@ public final class Documents {
    */
   public final DocumentsGetDocumentRequest.Builder getDocument() {
     return DocumentsGetDocumentRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getDocumentHistory
+   *  @return Request builder object
+   */
+  public final DocumentsGetDocumentHistoryRequest.Builder getDocumentHistory() {
+    return DocumentsGetDocumentHistoryRequest.builder(onshape);
   }
 
   /**

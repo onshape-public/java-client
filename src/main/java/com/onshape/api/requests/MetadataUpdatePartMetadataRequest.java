@@ -44,8 +44,16 @@ public final class MetadataUpdatePartMetadataRequest {
   @NotNull
   MetadataUpdatePartMetadataRequestItems[] items;
 
-  MetadataUpdatePartMetadataRequest(MetadataUpdatePartMetadataRequestItems[] items) {
+  /**
+   * Configuration string
+   */
+  @JsonProperty("configuration")
+  String configuration;
+
+  MetadataUpdatePartMetadataRequest(MetadataUpdatePartMetadataRequestItems[] items,
+      String configuration) {
     this.items = items;
+    this.configuration = configuration;
   }
 
   /**
@@ -75,6 +83,11 @@ public final class MetadataUpdatePartMetadataRequest {
      */
     private MetadataUpdatePartMetadataRequestItems[] items;
 
+    /**
+     * Configuration string
+     */
+    private String configuration;
+
     Onshape onshape;
 
     Builder() {
@@ -102,8 +115,30 @@ public final class MetadataUpdatePartMetadataRequest {
       return this;
     }
 
+    /**
+     * Get Configuration string
+     *
+     * @return Configuration string
+     *
+     */
+    public final String configuration() {
+      return this.configuration;
+    }
+
+    /**
+     * Set Configuration string
+     *
+     * @param value Configuration string
+     *
+     * @return the Builder object.
+     */
+    public final Builder configuration(String value) {
+      this.configuration = value;
+      return this;
+    }
+
     private MetadataUpdatePartMetadataRequest build() {
-      return new com.onshape.api.requests.MetadataUpdatePartMetadataRequest(items);
+      return new com.onshape.api.requests.MetadataUpdatePartMetadataRequest(items,configuration);
     }
 
     /**
@@ -124,7 +159,7 @@ public final class MetadataUpdatePartMetadataRequest {
     public final MetadataUpdatePartMetadataResponse call(String pid, String did, WV wvType,
         String wv, String eid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p/:pid", build(), onshape.buildMap("pid", pid, "did", did, "wvType", wvType, "wv", wv, "eid", eid), onshape.buildMap(), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
+      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p/:pid", build(), onshape.buildMap("pid", pid, "did", did, "wvType", wvType, "wv", wv, "eid", eid), onshape.buildMap("configuration", configuration), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
     }
 
     /**
@@ -138,7 +173,7 @@ public final class MetadataUpdatePartMetadataRequest {
     public final MetadataUpdatePartMetadataResponse call(OnshapeDocument document, String pid)
         throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p/:pid", build(), onshape.buildMap("pid", pid, "did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
+      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p/:pid", build(), onshape.buildMap("pid", pid, "did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap("configuration", configuration), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
     }
   }
 }

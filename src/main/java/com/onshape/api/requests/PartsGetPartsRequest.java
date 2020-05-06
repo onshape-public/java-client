@@ -44,6 +44,12 @@ public final class PartsGetPartsRequest {
   Boolean withThumbnails;
 
   /**
+   * Whether or not to include flattened sheet metal parts
+   */
+  @JsonProperty("includeFlatParts")
+  Boolean includeFlatParts;
+
+  /**
    * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
    */
   @JsonProperty("linkDocumentId")
@@ -55,9 +61,10 @@ public final class PartsGetPartsRequest {
   @JsonProperty("includePropertyDefaults")
   Boolean includePropertyDefaults;
 
-  PartsGetPartsRequest(Boolean withThumbnails, String linkDocumentId,
+  PartsGetPartsRequest(Boolean withThumbnails, Boolean includeFlatParts, String linkDocumentId,
       Boolean includePropertyDefaults) {
     this.withThumbnails = withThumbnails;
+    this.includeFlatParts = includeFlatParts;
     this.linkDocumentId = linkDocumentId;
     this.includePropertyDefaults = includePropertyDefaults;
   }
@@ -78,6 +85,11 @@ public final class PartsGetPartsRequest {
      * Whether or not to include thumbnails (not supported for microversion)
      */
     private Boolean withThumbnails;
+
+    /**
+     * Whether or not to include flattened sheet metal parts
+     */
+    private Boolean includeFlatParts;
 
     /**
      * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
@@ -113,6 +125,28 @@ public final class PartsGetPartsRequest {
      */
     public final Builder withThumbnails(Boolean value) {
       this.withThumbnails = value;
+      return this;
+    }
+
+    /**
+     * Get Whether or not to include flattened sheet metal parts
+     *
+     * @return Whether or not to include flattened sheet metal parts
+     *
+     */
+    public final Boolean includeFlatParts() {
+      return this.includeFlatParts;
+    }
+
+    /**
+     * Set Whether or not to include flattened sheet metal parts
+     *
+     * @param value Whether or not to include flattened sheet metal parts
+     *
+     * @return the Builder object.
+     */
+    public final Builder includeFlatParts(Boolean value) {
+      this.includeFlatParts = value;
       return this;
     }
 
@@ -161,7 +195,7 @@ public final class PartsGetPartsRequest {
     }
 
     private PartsGetPartsRequest build() {
-      return new com.onshape.api.requests.PartsGetPartsRequest(withThumbnails,linkDocumentId,includePropertyDefaults);
+      return new com.onshape.api.requests.PartsGetPartsRequest(withThumbnails,includeFlatParts,linkDocumentId,includePropertyDefaults);
     }
 
     /**
@@ -178,7 +212,7 @@ public final class PartsGetPartsRequest {
     public final PartsGetPartsResponse call(String did, WVM wvmType, String wvm) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm), onshape.buildMap("withThumbnails", withThumbnails, "linkDocumentId", linkDocumentId, "includePropertyDefaults", includePropertyDefaults), com.onshape.api.responses.PartsGetPartsResponse.class);
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm), onshape.buildMap("withThumbnails", withThumbnails, "includeFlatParts", includeFlatParts, "linkDocumentId", linkDocumentId, "includePropertyDefaults", includePropertyDefaults), com.onshape.api.responses.PartsGetPartsResponse.class);
     }
 
     /**
@@ -189,7 +223,7 @@ public final class PartsGetPartsRequest {
      */
     public final PartsGetPartsResponse call(OnshapeDocument document) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId()), onshape.buildMap("withThumbnails", withThumbnails, "linkDocumentId", linkDocumentId, "includePropertyDefaults", includePropertyDefaults), com.onshape.api.responses.PartsGetPartsResponse.class);
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId()), onshape.buildMap("withThumbnails", withThumbnails, "includeFlatParts", includeFlatParts, "linkDocumentId", linkDocumentId, "includePropertyDefaults", includePropertyDefaults), com.onshape.api.responses.PartsGetPartsResponse.class);
     }
   }
 }

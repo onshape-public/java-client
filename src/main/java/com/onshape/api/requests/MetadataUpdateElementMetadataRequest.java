@@ -44,8 +44,16 @@ public final class MetadataUpdateElementMetadataRequest {
   @NotNull
   MetadataUpdateElementMetadataRequestItems[] items;
 
-  MetadataUpdateElementMetadataRequest(MetadataUpdateElementMetadataRequestItems[] items) {
+  /**
+   * Configuration string
+   */
+  @JsonProperty("configuration")
+  String configuration;
+
+  MetadataUpdateElementMetadataRequest(MetadataUpdateElementMetadataRequestItems[] items,
+      String configuration) {
     this.items = items;
+    this.configuration = configuration;
   }
 
   /**
@@ -75,6 +83,11 @@ public final class MetadataUpdateElementMetadataRequest {
      */
     private MetadataUpdateElementMetadataRequestItems[] items;
 
+    /**
+     * Configuration string
+     */
+    private String configuration;
+
     Onshape onshape;
 
     Builder() {
@@ -102,8 +115,30 @@ public final class MetadataUpdateElementMetadataRequest {
       return this;
     }
 
+    /**
+     * Get Configuration string
+     *
+     * @return Configuration string
+     *
+     */
+    public final String configuration() {
+      return this.configuration;
+    }
+
+    /**
+     * Set Configuration string
+     *
+     * @param value Configuration string
+     *
+     * @return the Builder object.
+     */
+    public final Builder configuration(String value) {
+      this.configuration = value;
+      return this;
+    }
+
     private MetadataUpdateElementMetadataRequest build() {
-      return new com.onshape.api.requests.MetadataUpdateElementMetadataRequest(items);
+      return new com.onshape.api.requests.MetadataUpdateElementMetadataRequest(items,configuration);
     }
 
     /**
@@ -122,7 +157,7 @@ public final class MetadataUpdateElementMetadataRequest {
     public final MetadataUpdateElementMetadataResponse call(String did, WV wvType, String wv,
         String eid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv, "eid", eid), onshape.buildMap(), com.onshape.api.responses.MetadataUpdateElementMetadataResponse.class);
+      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv, "eid", eid), onshape.buildMap("configuration", configuration), com.onshape.api.responses.MetadataUpdateElementMetadataResponse.class);
     }
 
     /**
@@ -134,7 +169,7 @@ public final class MetadataUpdateElementMetadataRequest {
     public final MetadataUpdateElementMetadataResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap(), com.onshape.api.responses.MetadataUpdateElementMetadataResponse.class);
+      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap("configuration", configuration), com.onshape.api.responses.MetadataUpdateElementMetadataResponse.class);
     }
   }
 }

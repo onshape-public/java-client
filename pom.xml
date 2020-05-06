@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.onshape</groupId>
     <artifactId>api-client</artifactId>
-    <version>1.108.24816.73fd74d0338a</version>
+    <version>1.112.25249.c59053ce003d</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

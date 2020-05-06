@@ -27,7 +27,7 @@ import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.MetadataGetElementMetadataResponse;
 import com.onshape.api.types.OnshapeDocument;
-import com.onshape.api.types.WV;
+import com.onshape.api.types.WVM;
 import java.lang.Boolean;
 import java.lang.Number;
 import java.lang.Override;
@@ -343,16 +343,16 @@ public final class MetadataGetElementMetadataRequest {
      *
      * @param did Document ID
      *
-     * @param wvType Type of Workspace or Version
+     * @param wvmType Type of Workspace, Version or Microversion
      *
-     * @param wv Workspace (w) or Version (v) ID
+     * @param wvm Workspace (w), Version (v) or Microversion (m) ID
      *
      * @param eid Element ID
      */
-    public final MetadataGetElementMetadataResponse call(String did, WV wvType, String wv,
+    public final MetadataGetElementMetadataResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/metadata/d/:did/[wv]/:wv/e/:eid", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv, "eid", eid), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "p-offset", p_offset, "p-limit", p_limit, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.MetadataGetElementMetadataResponse.class);
+      return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "p-offset", p_offset, "p-limit", p_limit, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.MetadataGetElementMetadataResponse.class);
     }
 
     /**
@@ -364,7 +364,7 @@ public final class MetadataGetElementMetadataRequest {
     public final MetadataGetElementMetadataResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/metadata/d/:did/[wv]/:wv/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "p-offset", p_offset, "p-limit", p_limit, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.MetadataGetElementMetadataResponse.class);
+      return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "p-offset", p_offset, "p-limit", p_limit, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.MetadataGetElementMetadataResponse.class);
     }
   }
 }
