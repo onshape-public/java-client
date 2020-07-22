@@ -123,10 +123,16 @@ public final class AssembliesCreateInstanceRequest {
   @JsonProperty("partNumber")
   String partNumber;
 
+  /**
+   * The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+   */
+  @JsonProperty("includePartTypes")
+  String[] includePartTypes;
+
   AssembliesCreateInstanceRequest(String documentId, String elementId, String versionId,
       String microversionId, Boolean isSuppressed, Boolean isHidden, Boolean isAssembly,
       Boolean isWholePartStudio, String partId, String featureId, String configuration,
-      String revision, String partNumber) {
+      String revision, String partNumber, String[] includePartTypes) {
     this.documentId = documentId;
     this.elementId = elementId;
     this.versionId = versionId;
@@ -140,6 +146,7 @@ public final class AssembliesCreateInstanceRequest {
     this.configuration = configuration;
     this.revision = revision;
     this.partNumber = partNumber;
+    this.includePartTypes = includePartTypes;
   }
 
   /**
@@ -272,6 +279,16 @@ public final class AssembliesCreateInstanceRequest {
     return this.partNumber;
   }
 
+  /**
+   * Get The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+   *
+   * @return The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+   *
+   */
+  public final String[] getIncludePartTypes() {
+    return this.includePartTypes;
+  }
+
   @Override
   public String toString() {
     return Onshape.toString(this);
@@ -348,6 +365,11 @@ public final class AssembliesCreateInstanceRequest {
      * The part number identifying the part or assembly in the release that is to be inserted.
      */
     private String partNumber;
+
+    /**
+     * The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+     */
+    private String[] includePartTypes;
 
     Onshape onshape;
 
@@ -640,8 +662,30 @@ public final class AssembliesCreateInstanceRequest {
       return this;
     }
 
+    /**
+     * Get The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+     *
+     * @return The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+     *
+     */
+    public final String[] includePartTypes() {
+      return this.includePartTypes;
+    }
+
+    /**
+     * Set The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+     *
+     * @param value The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+     *
+     * @return the Builder object.
+     */
+    public final Builder includePartTypes(String[] value) {
+      this.includePartTypes = value;
+      return this;
+    }
+
     private AssembliesCreateInstanceRequest build() {
-      return new com.onshape.api.requests.AssembliesCreateInstanceRequest(documentId,elementId,versionId,microversionId,isSuppressed,isHidden,isAssembly,isWholePartStudio,partId,featureId,configuration,revision,partNumber);
+      return new com.onshape.api.requests.AssembliesCreateInstanceRequest(documentId,elementId,versionId,microversionId,isSuppressed,isHidden,isAssembly,isWholePartStudio,partId,featureId,configuration,revision,partNumber,includePartTypes);
     }
 
     /**

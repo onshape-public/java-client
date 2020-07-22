@@ -29,6 +29,7 @@ import com.onshape.api.responses.AppElementsUpdateElementResponse;
 import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -64,12 +65,20 @@ public final class AppElementsUpdateElementRequest {
   @NotNull
   AppElementsUpdateElementRequestChanges[] changes;
 
+  /**
+   * A change to the JSON tree encoded as a BTJEdit
+   */
+  @JsonProperty("jsonTreeEdit")
+  @NotNull
+  Map jsonTreeEdit;
+
   AppElementsUpdateElementRequest(String transactionId, String parentChangeId, String description,
-      AppElementsUpdateElementRequestChanges[] changes) {
+      AppElementsUpdateElementRequestChanges[] changes, Map jsonTreeEdit) {
     this.transactionId = transactionId;
     this.parentChangeId = parentChangeId;
     this.description = description;
     this.changes = changes;
+    this.jsonTreeEdit = jsonTreeEdit;
   }
 
   /**
@@ -112,6 +121,16 @@ public final class AppElementsUpdateElementRequest {
     return this.changes;
   }
 
+  /**
+   * Get A change to the JSON tree encoded as a BTJEdit
+   *
+   * @return A change to the JSON tree encoded as a BTJEdit
+   *
+   */
+  public final Map getJsonTreeEdit() {
+    return this.jsonTreeEdit;
+  }
+
   @Override
   public String toString() {
     return Onshape.toString(this);
@@ -143,6 +162,11 @@ public final class AppElementsUpdateElementRequest {
      * List of changes to make to the application element
      */
     private AppElementsUpdateElementRequestChanges[] changes;
+
+    /**
+     * A change to the JSON tree encoded as a BTJEdit
+     */
+    private Map jsonTreeEdit;
 
     Onshape onshape;
 
@@ -237,12 +261,60 @@ public final class AppElementsUpdateElementRequest {
       return this;
     }
 
+    /**
+     * Get A change to the JSON tree encoded as a BTJEdit
+     *
+     * @return A change to the JSON tree encoded as a BTJEdit
+     *
+     */
+    public final Map jsonTreeEdit() {
+      return this.jsonTreeEdit;
+    }
+
+    /**
+     * Set A change to the JSON tree encoded as a BTJEdit
+     *
+     * @param value A change to the JSON tree encoded as a BTJEdit
+     *
+     * @return the Builder object.
+     */
+    public final Builder jsonTreeEdit(Map value) {
+      this.jsonTreeEdit = value;
+      return this;
+    }
+
     private AppElementsUpdateElementRequest build() {
-      return new com.onshape.api.requests.AppElementsUpdateElementRequest(transactionId,parentChangeId,description,changes);
+      return new com.onshape.api.requests.AppElementsUpdateElementRequest(transactionId,parentChangeId,description,changes,jsonTreeEdit);
     }
 
     /**
      * Calls updateElement method, Update an app element
+     *                 <p>
+     *                 The BTJEdit encoding is as follows:
+     *                 <p>
+     *                 An edit is one of
+     *                 <p>
+     *                 * Deletion: { 'btType' : 'BTJEditDelete-1992', 'path' : path }
+     *                 <p>
+     *                 * Insertion: { 'btType' : 'BTJEditInsert-2523', 'path' : path, 'value' : newValue }
+     *                 <p>
+     *                 * Change: { 'btType' : 'BTJEditChange-2636', 'path' : path, 'value' : newValue }
+     *                 <p>
+     *                 * Move: { 'btType' : 'BTJEditMove-3245', 'sourcePath' : path, 'destinationPath' : path }
+     *                 <p>
+     *                 * List: { 'btType' : 'BTJEditList-2707', 'edits' : [ edit1, edit2, ...] }
+     *                 <p>
+     *                 Where edit1, edit2, etc. are zero or more edits, newValue is any JSON, and path is:
+     *                 <p>
+     *                 { 'btType' : 'BTJPath-3073', 'startNode' : startNode, 'path' : [ pathElement1, pathElement2, ...]
+     *                 }
+     *                 <p>
+     *                 where startNode is a string that is either empty or a nodeId of a node in the tree and
+     *                 pathElement is one of:
+     *                 <p>
+     *                 * Key: { 'btType' : 'BTJPathKey-3221', 'key' : string }
+     *                 <p>
+     *                 * Index: { 'btType' : 'BTJPathIndex-1871', 'index' : integer }
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
@@ -260,6 +332,32 @@ public final class AppElementsUpdateElementRequest {
 
     /**
      * Calls updateElement method, Update an app element
+     *                 <p>
+     *                 The BTJEdit encoding is as follows:
+     *                 <p>
+     *                 An edit is one of
+     *                 <p>
+     *                 * Deletion: { 'btType' : 'BTJEditDelete-1992', 'path' : path }
+     *                 <p>
+     *                 * Insertion: { 'btType' : 'BTJEditInsert-2523', 'path' : path, 'value' : newValue }
+     *                 <p>
+     *                 * Change: { 'btType' : 'BTJEditChange-2636', 'path' : path, 'value' : newValue }
+     *                 <p>
+     *                 * Move: { 'btType' : 'BTJEditMove-3245', 'sourcePath' : path, 'destinationPath' : path }
+     *                 <p>
+     *                 * List: { 'btType' : 'BTJEditList-2707', 'edits' : [ edit1, edit2, ...] }
+     *                 <p>
+     *                 Where edit1, edit2, etc. are zero or more edits, newValue is any JSON, and path is:
+     *                 <p>
+     *                 { 'btType' : 'BTJPath-3073', 'startNode' : startNode, 'path' : [ pathElement1, pathElement2, ...]
+     *                 }
+     *                 <p>
+     *                 where startNode is a string that is either empty or a nodeId of a node in the tree and
+     *                 pathElement is one of:
+     *                 <p>
+     *                 * Key: { 'btType' : 'BTJPathKey-3221', 'key' : string }
+     *                 <p>
+     *                 * Index: { 'btType' : 'BTJPathIndex-1871', 'index' : integer }
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error

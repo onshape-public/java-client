@@ -22,53 +22,16 @@
 //
 package com.onshape.api.responses;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
-import javax.validation.constraints.NotNull;
 
 /**
- * Response object for insertTransformedInstances API endpoint.
+ * Response object for updateAppCompanySettings API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class AssembliesInsertTransformedInstancesResponse extends AbstractResponseObject {
-  /**
-   * (deprecated) Flattened list of occurrences.
-   */
-  @JsonProperty("occurrences")
-  @NotNull
-  Map[] occurrences;
-
-  /**
-   * The insert response for each of the instance inserts.
-   */
-  @JsonProperty("insertInstanceResponses")
-  @NotNull
-  AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] insertInstanceResponses;
-
-  /**
-   * Get (deprecated) Flattened list of occurrences.
-   *
-   * @return (deprecated) Flattened list of occurrences.
-   *
-   */
-  public final Map[] getOccurrences() {
-    return this.occurrences;
-  }
-
-  /**
-   * Get The insert response for each of the instance inserts.
-   *
-   * @return The insert response for each of the instance inserts.
-   *
-   */
-  public final AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] getInsertInstanceResponses() {
-    return this.insertInstanceResponses;
-  }
-
+public final class ApplicationsUpdateAppCompanySettingsResponse extends AbstractResponseObject {
   @Override
   public String toString() {
     return Onshape.toString(this);

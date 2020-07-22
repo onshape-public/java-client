@@ -25,48 +25,62 @@ package com.onshape.api.responses;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.types.AbstractResponseObject;
+import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Map;
-import javax.validation.constraints.NotNull;
 
 /**
- * Response object for insertTransformedInstances API endpoint.
+ * Object used in calls to getProjects API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class AssembliesInsertTransformedInstancesResponse extends AbstractResponseObject {
+public final class ProjectsGetProjectsResponseItems extends AbstractResponseObject {
   /**
-   * (deprecated) Flattened list of occurrences.
+   * the list of role maps.
    */
-  @JsonProperty("occurrences")
-  @NotNull
-  Map[] occurrences;
+  @JsonProperty("roleMapEntries")
+  public Map[] roleMapEntries;
 
   /**
-   * The insert response for each of the instance inserts.
+   * permission schemes.
    */
-  @JsonProperty("insertInstanceResponses")
-  @NotNull
-  AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] insertInstanceResponses;
+  @JsonProperty("permissionScheme")
+  public Map permissionScheme;
 
   /**
-   * Get (deprecated) Flattened list of occurrences.
+   * trash.
+   */
+  @JsonProperty("trash")
+  public Boolean trash;
+
+  /**
+   * Get the list of role maps.
    *
-   * @return (deprecated) Flattened list of occurrences.
+   * @return the list of role maps.
    *
    */
-  public final Map[] getOccurrences() {
-    return this.occurrences;
+  public final Map[] getRoleMapEntries() {
+    return this.roleMapEntries;
   }
 
   /**
-   * Get The insert response for each of the instance inserts.
+   * Get permission schemes.
    *
-   * @return The insert response for each of the instance inserts.
+   * @return permission schemes.
    *
    */
-  public final AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] getInsertInstanceResponses() {
-    return this.insertInstanceResponses;
+  public final Map getPermissionScheme() {
+    return this.permissionScheme;
+  }
+
+  /**
+   * Get trash.
+   *
+   * @return trash.
+   *
+   */
+  public final Boolean getTrash() {
+    return this.trash;
   }
 
   @Override

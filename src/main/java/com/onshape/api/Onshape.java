@@ -30,7 +30,7 @@ import com.onshape.api.types.OnshapeVersion;
  * &copy; 2018-Present Onshape Inc.
  */
 public final class Onshape extends BaseClient {
-  private final OnshapeVersion buildVersion = new OnshapeVersion("1.0", "c59053ce003d3997413be3036dd7200a82345282", "1.112.25249.c59053ce003d");
+  private final OnshapeVersion buildVersion = new OnshapeVersion("1.0", "7dcf157c0d9df9dd387c2681ba04ad4fa1699bba", "1.116.25700.7dcf157c0d9d");
 
   /**
    * Access API methods for category Accounts
@@ -198,6 +198,22 @@ public final class Onshape extends BaseClient {
    */
   public final Parts parts() {
     return new Parts(this);
+  }
+
+  /**
+   * Access API methods for category Project
+   *  @return API group object
+   */
+  public final Project project() {
+    return new Project(this);
+  }
+
+  /**
+   * Access API methods for category Projects
+   *  @return API group object
+   */
+  public final Projects projects() {
+    return new Projects(this);
   }
 
   /**

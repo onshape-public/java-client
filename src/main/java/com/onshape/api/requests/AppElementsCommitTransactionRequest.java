@@ -27,6 +27,7 @@ import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.AppElementsCommitTransactionResponse;
 import com.onshape.api.types.OnshapeDocument;
+import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 
@@ -41,8 +42,15 @@ public final class AppElementsCommitTransactionRequest {
   @JsonProperty("description")
   String description;
 
-  AppElementsCommitTransactionRequest(String description) {
+  /**
+   * If false, return an error in the case of concurrency, even if changes could be merged. Default is true.
+   */
+  @JsonProperty("allowMerge")
+  Boolean allowMerge;
+
+  AppElementsCommitTransactionRequest(String description, Boolean allowMerge) {
     this.description = description;
+    this.allowMerge = allowMerge;
   }
 
   /**
@@ -53,6 +61,16 @@ public final class AppElementsCommitTransactionRequest {
    */
   public final String getDescription() {
     return this.description;
+  }
+
+  /**
+   * Get If false, return an error in the case of concurrency, even if changes could be merged. Default is true.
+   *
+   * @return If false, return an error in the case of concurrency, even if changes could be merged. Default is true.
+   *
+   */
+  public final Boolean getAllowMerge() {
+    return this.allowMerge;
   }
 
   @Override
@@ -71,6 +89,11 @@ public final class AppElementsCommitTransactionRequest {
      * Description of the change being made, for history tracking
      */
     private String description;
+
+    /**
+     * If false, return an error in the case of concurrency, even if changes could be merged. Default is true.
+     */
+    private Boolean allowMerge;
 
     Onshape onshape;
 
@@ -99,8 +122,30 @@ public final class AppElementsCommitTransactionRequest {
       return this;
     }
 
+    /**
+     * Get If false, return an error in the case of concurrency, even if changes could be merged. Default is true.
+     *
+     * @return If false, return an error in the case of concurrency, even if changes could be merged. Default is true.
+     *
+     */
+    public final Boolean allowMerge() {
+      return this.allowMerge;
+    }
+
+    /**
+     * Set If false, return an error in the case of concurrency, even if changes could be merged. Default is true.
+     *
+     * @param value If false, return an error in the case of concurrency, even if changes could be merged. Default is true.
+     *
+     * @return the Builder object.
+     */
+    public final Builder allowMerge(Boolean value) {
+      this.allowMerge = value;
+      return this;
+    }
+
     private AppElementsCommitTransactionRequest build() {
-      return new com.onshape.api.requests.AppElementsCommitTransactionRequest(description);
+      return new com.onshape.api.requests.AppElementsCommitTransactionRequest(description,allowMerge);
     }
 
     /**

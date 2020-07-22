@@ -31,42 +31,25 @@ import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
- * Response object for insertTransformedInstances API endpoint.
+ * Response object for getCompanyAppSettings API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class AssembliesInsertTransformedInstancesResponse extends AbstractResponseObject {
+public final class ApplicationsGetCompanyAppSettingsResponse extends AbstractResponseObject {
   /**
-   * (deprecated) Flattened list of occurrences.
+   * User-specific settings for given client/company/key
    */
-  @JsonProperty("occurrences")
+  @JsonProperty("settings")
   @NotNull
-  Map[] occurrences;
+  Map<String, Map>[] settings;
 
   /**
-   * The insert response for each of the instance inserts.
-   */
-  @JsonProperty("insertInstanceResponses")
-  @NotNull
-  AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] insertInstanceResponses;
-
-  /**
-   * Get (deprecated) Flattened list of occurrences.
+   * Get User-specific settings for given client/company/key
    *
-   * @return (deprecated) Flattened list of occurrences.
+   * @return User-specific settings for given client/company/key
    *
    */
-  public final Map[] getOccurrences() {
-    return this.occurrences;
-  }
-
-  /**
-   * Get The insert response for each of the instance inserts.
-   *
-   * @return The insert response for each of the instance inserts.
-   *
-   */
-  public final AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] getInsertInstanceResponses() {
-    return this.insertInstanceResponses;
+  public final Map<String, Map>[] getSettings() {
+    return this.settings;
   }
 
   @Override

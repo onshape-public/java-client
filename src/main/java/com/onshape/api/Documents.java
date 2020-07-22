@@ -46,7 +46,7 @@ import com.onshape.api.requests.DocumentsMergeIntoWorkspaceRequest;
 import com.onshape.api.requests.DocumentsMoveElementsToDocumentRequest;
 import com.onshape.api.requests.DocumentsRestoreFromHistoryRequest;
 import com.onshape.api.requests.DocumentsShareDocumentRequest;
-import com.onshape.api.requests.DocumentsSyncApplicationElementsRequest;
+import com.onshape.api.requests.DocumentsSyncAppElementsRequest;
 import com.onshape.api.requests.DocumentsUnShareRequest;
 import com.onshape.api.requests.DocumentsUpdateDocumentAttributesRequest;
 import com.onshape.api.requests.DocumentsUpdateExternalReferencesToLatestDocumentsRequest;
@@ -255,11 +255,11 @@ public final class Documents {
   }
 
   /**
-   * Create request for syncApplicationElements
+   * Create request for syncAppElements
    *  @return Request builder object
    */
-  public final DocumentsSyncApplicationElementsRequest.Builder syncApplicationElements() {
-    return DocumentsSyncApplicationElementsRequest.builder(onshape);
+  public final DocumentsSyncAppElementsRequest.Builder syncAppElements() {
+    return DocumentsSyncAppElementsRequest.builder(onshape);
   }
 
   /**

@@ -20,57 +20,53 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-package com.onshape.api.responses;
+package com.onshape.api.requests;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
-import com.onshape.api.types.AbstractResponseObject;
+import com.onshape.api.exceptions.OnshapeException;
+import com.onshape.api.responses.RevisionsGetRuleByIdResponse;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
-import javax.validation.constraints.NotNull;
 
 /**
- * Response object for insertTransformedInstances API endpoint.
+ * Request object for getRuleById API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class AssembliesInsertTransformedInstancesResponse extends AbstractResponseObject {
-  /**
-   * (deprecated) Flattened list of occurrences.
-   */
-  @JsonProperty("occurrences")
-  @NotNull
-  Map[] occurrences;
-
-  /**
-   * The insert response for each of the instance inserts.
-   */
-  @JsonProperty("insertInstanceResponses")
-  @NotNull
-  AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] insertInstanceResponses;
-
-  /**
-   * Get (deprecated) Flattened list of occurrences.
-   *
-   * @return (deprecated) Flattened list of occurrences.
-   *
-   */
-  public final Map[] getOccurrences() {
-    return this.occurrences;
-  }
-
-  /**
-   * Get The insert response for each of the instance inserts.
-   *
-   * @return The insert response for each of the instance inserts.
-   *
-   */
-  public final AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] getInsertInstanceResponses() {
-    return this.insertInstanceResponses;
+public final class RevisionsGetRuleByIdRequest {
+  RevisionsGetRuleByIdRequest() {
   }
 
   @Override
   public String toString() {
     return Onshape.toString(this);
+  }
+
+  public static final Builder builder(Onshape onshape) {
+    Builder builder = new Builder();
+    builder.onshape = onshape;
+    return builder;
+  }
+
+  public static final class Builder {
+    Onshape onshape;
+
+    Builder() {
+    }
+
+    private RevisionsGetRuleByIdRequest build() {
+      return new com.onshape.api.requests.RevisionsGetRuleByIdRequest();
+    }
+
+    /**
+     * Calls getRuleById method, Get Revision Rule by id
+     * @return Response object
+     * @throws OnshapeException On HTTP or serialization error
+     *
+     * @param ruleid ID of revision rule
+     */
+    public final RevisionsGetRuleByIdResponse call(String ruleid) throws OnshapeException {
+      onshape.validate(build());
+      return onshape.call("get", "/revisionrules/:ruleid", build(), onshape.buildMap("ruleid", ruleid), onshape.buildMap(), com.onshape.api.responses.RevisionsGetRuleByIdResponse.class);
+    }
   }
 }

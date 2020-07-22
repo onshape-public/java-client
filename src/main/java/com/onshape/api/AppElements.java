@@ -23,11 +23,14 @@
 package com.onshape.api;
 
 import com.onshape.api.requests.AppElementsCommitTransactionRequest;
+import com.onshape.api.requests.AppElementsCompareAppElementJsonRequest;
 import com.onshape.api.requests.AppElementsCreateElementRequest;
 import com.onshape.api.requests.AppElementsCreateReferenceRequest;
 import com.onshape.api.requests.AppElementsDeleteContentRequest;
 import com.onshape.api.requests.AppElementsDeleteReferenceRequest;
 import com.onshape.api.requests.AppElementsGetHistoryByWorkspaceRequest;
+import com.onshape.api.requests.AppElementsGetJsonPathsRequest;
+import com.onshape.api.requests.AppElementsGetJsonRequest;
 import com.onshape.api.requests.AppElementsGetSubElementContentRequest;
 import com.onshape.api.requests.AppElementsGetSubElementIdsRequest;
 import com.onshape.api.requests.AppElementsResolveReferenceRequest;
@@ -53,6 +56,14 @@ public final class AppElements {
    */
   public final AppElementsCommitTransactionRequest.Builder commitTransaction() {
     return AppElementsCommitTransactionRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for compareAppElementJson
+   *  @return Request builder object
+   */
+  public final AppElementsCompareAppElementJsonRequest.Builder compareAppElementJson() {
+    return AppElementsCompareAppElementJsonRequest.builder(onshape);
   }
 
   /**
@@ -101,6 +112,22 @@ public final class AppElements {
    */
   public final AppElementsGetHistoryByWorkspaceRequest.Builder getHistoryByWorkspace() {
     return AppElementsGetHistoryByWorkspaceRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getJson
+   *  @return Request builder object
+   */
+  public final AppElementsGetJsonRequest.Builder getJson() {
+    return AppElementsGetJsonRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getJsonPaths
+   *  @return Request builder object
+   */
+  public final AppElementsGetJsonPathsRequest.Builder getJsonPaths() {
+    return AppElementsGetJsonPathsRequest.builder(onshape);
   }
 
   /**

@@ -28,6 +28,7 @@ import com.onshape.api.requests.ElementsDeleteElementRequest;
 import com.onshape.api.requests.ElementsEncodeConfigurationRequest;
 import com.onshape.api.requests.ElementsGetConfigurationRequest;
 import com.onshape.api.requests.ElementsGetElementTranslatorFormatsByVersionOrWorkspaceRequest;
+import com.onshape.api.requests.ElementsGetTranslatorFormatsRequest;
 import com.onshape.api.requests.ElementsUpdateConfigurationRequest;
 import com.onshape.api.requests.ElementsUpdateReferencesRequest;
 
@@ -88,6 +89,14 @@ public final class Elements {
    */
   public final ElementsGetElementTranslatorFormatsByVersionOrWorkspaceRequest.Builder getElementTranslatorFormatsByVersionOrWorkspace() {
     return ElementsGetElementTranslatorFormatsByVersionOrWorkspaceRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getTranslatorFormats
+   *  @return Request builder object
+   */
+  public final ElementsGetTranslatorFormatsRequest.Builder getTranslatorFormats() {
+    return ElementsGetTranslatorFormatsRequest.builder(onshape);
   }
 
   /**

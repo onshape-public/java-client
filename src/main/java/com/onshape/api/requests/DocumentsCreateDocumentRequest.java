@@ -30,6 +30,7 @@ import java.lang.Boolean;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -82,9 +83,15 @@ public final class DocumentsCreateDocumentRequest {
   @JsonProperty("tags")
   String[] tags;
 
+  /**
+   * custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+   */
+  @JsonProperty("documentParamElements")
+  Map[] documentParamElements;
+
   DocumentsCreateDocumentRequest(String name, String ownerId, Number ownerType,
       String[] betaCapabilityIds, Boolean isPublic, Boolean isGenerateUnknownMessages,
-      String[] tags) {
+      String[] tags, Map[] documentParamElements) {
     this.name = name;
     this.ownerId = ownerId;
     this.ownerType = ownerType;
@@ -92,6 +99,7 @@ public final class DocumentsCreateDocumentRequest {
     this.isPublic = isPublic;
     this.isGenerateUnknownMessages = isGenerateUnknownMessages;
     this.tags = tags;
+    this.documentParamElements = documentParamElements;
   }
 
   /**
@@ -164,6 +172,16 @@ public final class DocumentsCreateDocumentRequest {
     return this.tags;
   }
 
+  /**
+   * Get custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+   *
+   * @return custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+   *
+   */
+  public final Map[] getDocumentParamElements() {
+    return this.documentParamElements;
+  }
+
   @Override
   public String toString() {
     return Onshape.toString(this);
@@ -210,6 +228,11 @@ public final class DocumentsCreateDocumentRequest {
      * Onshape internal use
      */
     private String[] tags;
+
+    /**
+     * custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+     */
+    private Map[] documentParamElements;
 
     Onshape onshape;
 
@@ -370,8 +393,30 @@ public final class DocumentsCreateDocumentRequest {
       return this;
     }
 
+    /**
+     * Get custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+     *
+     * @return custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+     *
+     */
+    public final Map[] documentParamElements() {
+      return this.documentParamElements;
+    }
+
+    /**
+     * Set custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+     *
+     * @param value custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+     *
+     * @return the Builder object.
+     */
+    public final Builder documentParamElements(Map[] value) {
+      this.documentParamElements = value;
+      return this;
+    }
+
     private DocumentsCreateDocumentRequest build() {
-      return new com.onshape.api.requests.DocumentsCreateDocumentRequest(name,ownerId,ownerType,betaCapabilityIds,isPublic,isGenerateUnknownMessages,tags);
+      return new com.onshape.api.requests.DocumentsCreateDocumentRequest(name,ownerId,ownerType,betaCapabilityIds,isPublic,isGenerateUnknownMessages,tags,documentParamElements);
     }
 
     /**

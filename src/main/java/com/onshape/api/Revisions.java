@@ -22,10 +22,16 @@
 //
 package com.onshape.api;
 
+import com.onshape.api.requests.RevisionsCreateRuleRequest;
 import com.onshape.api.requests.RevisionsDeleteRevisionHistoryRequest;
 import com.onshape.api.requests.RevisionsEnumerateRevisionsRequest;
+import com.onshape.api.requests.RevisionsGetAllRulesRequest;
+import com.onshape.api.requests.RevisionsGetBulkNextRevisionNamesRequest;
 import com.onshape.api.requests.RevisionsGetLatestInDocumentOrCompanyRequest;
+import com.onshape.api.requests.RevisionsGetNextRevisionNamesRequest;
 import com.onshape.api.requests.RevisionsGetRevisionHistoryInCompanyRequest;
+import com.onshape.api.requests.RevisionsGetRuleByIdRequest;
+import com.onshape.api.requests.RevisionsUpdateRuleRequest;
 
 /**
  * Revisions: API endpoints for Revisions group.
@@ -68,5 +74,53 @@ public final class Revisions {
    */
   public final RevisionsGetRevisionHistoryInCompanyRequest.Builder getRevisionHistoryInCompany() {
     return RevisionsGetRevisionHistoryInCompanyRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for createRule
+   *  @return Request builder object
+   */
+  public final RevisionsCreateRuleRequest.Builder createRule() {
+    return RevisionsCreateRuleRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getRuleById
+   *  @return Request builder object
+   */
+  public final RevisionsGetRuleByIdRequest.Builder getRuleById() {
+    return RevisionsGetRuleByIdRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getAllRules
+   *  @return Request builder object
+   */
+  public final RevisionsGetAllRulesRequest.Builder getAllRules() {
+    return RevisionsGetAllRulesRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getNextRevisionNames
+   *  @return Request builder object
+   */
+  public final RevisionsGetNextRevisionNamesRequest.Builder getNextRevisionNames() {
+    return RevisionsGetNextRevisionNamesRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getBulkNextRevisionNames
+   *  @return Request builder object
+   */
+  public final RevisionsGetBulkNextRevisionNamesRequest.Builder getBulkNextRevisionNames() {
+    return RevisionsGetBulkNextRevisionNamesRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for updateRule
+   *  @return Request builder object
+   */
+  public final RevisionsUpdateRuleRequest.Builder updateRule() {
+    return RevisionsUpdateRuleRequest.builder(onshape);
   }
 }

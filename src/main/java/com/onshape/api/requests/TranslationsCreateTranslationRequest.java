@@ -46,7 +46,7 @@ public final class TranslationsCreateTranslationRequest {
   Blob file;
 
   /**
-   * Name of format into which this element should be translated. ONSHAPE indicates that the model file should be translated into a Part Studio or Assembly.
+   * Name of format into which this file or element should be translated.
    */
   @JsonProperty("formatName")
   @NotNull
@@ -129,9 +129,9 @@ public final class TranslationsCreateTranslationRequest {
   }
 
   /**
-   * Get Name of format into which this element should be translated. ONSHAPE indicates that the model file should be translated into a Part Studio or Assembly.
+   * Get Name of format into which this file or element should be translated.
    *
-   * @return Name of format into which this element should be translated. ONSHAPE indicates that the model file should be translated into a Part Studio or Assembly.
+   * @return Name of format into which this file or element should be translated.
    *
    */
   public final String getFormatName() {
@@ -236,7 +236,7 @@ public final class TranslationsCreateTranslationRequest {
     private Blob file;
 
     /**
-     * Name of format into which this element should be translated. ONSHAPE indicates that the model file should be translated into a Part Studio or Assembly.
+     * Name of format into which this file or element should be translated.
      */
     private String formatName;
 
@@ -308,9 +308,9 @@ public final class TranslationsCreateTranslationRequest {
     }
 
     /**
-     * Get Name of format into which this element should be translated. ONSHAPE indicates that the model file should be translated into a Part Studio or Assembly.
+     * Get Name of format into which this file or element should be translated.
      *
-     * @return Name of format into which this element should be translated. ONSHAPE indicates that the model file should be translated into a Part Studio or Assembly.
+     * @return Name of format into which this file or element should be translated.
      *
      */
     public final String formatName() {
@@ -318,9 +318,9 @@ public final class TranslationsCreateTranslationRequest {
     }
 
     /**
-     * Set Name of format into which this element should be translated. ONSHAPE indicates that the model file should be translated into a Part Studio or Assembly.
+     * Set Name of format into which this file or element should be translated.
      *
-     * @param value Name of format into which this element should be translated. ONSHAPE indicates that the model file should be translated into a Part Studio or Assembly.
+     * @param value Name of format into which this file or element should be translated.
      *
      * @return the Builder object.
      */

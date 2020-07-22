@@ -29,6 +29,7 @@ import com.onshape.api.responses.AppElementsCreateElementResponse;
 import com.onshape.api.types.OnshapeDocument;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -65,18 +66,26 @@ public final class AppElementsCreateElementRequest {
   AppElementsCreateElementRequestSubelements[] subelements;
 
   /**
+   * The initial json tree in the element.
+   */
+  @JsonProperty("jsonTree")
+  @NotNull
+  Map jsonTree;
+
+  /**
    * Location at which element should be inserted.
    */
   @JsonProperty("location")
   AppElementsCreateElementRequestLocation location;
 
   AppElementsCreateElementRequest(String formatId, String name, String description,
-      AppElementsCreateElementRequestSubelements[] subelements,
+      AppElementsCreateElementRequestSubelements[] subelements, Map jsonTree,
       AppElementsCreateElementRequestLocation location) {
     this.formatId = formatId;
     this.name = name;
     this.description = description;
     this.subelements = subelements;
+    this.jsonTree = jsonTree;
     this.location = location;
   }
 
@@ -121,6 +130,16 @@ public final class AppElementsCreateElementRequest {
   }
 
   /**
+   * Get The initial json tree in the element.
+   *
+   * @return The initial json tree in the element.
+   *
+   */
+  public final Map getJsonTree() {
+    return this.jsonTree;
+  }
+
+  /**
    * Get Location at which element should be inserted.
    *
    * @return Location at which element should be inserted.
@@ -161,6 +180,11 @@ public final class AppElementsCreateElementRequest {
      * Initial list of sub-element contents
      */
     private AppElementsCreateElementRequestSubelements[] subelements;
+
+    /**
+     * The initial json tree in the element.
+     */
+    private Map jsonTree;
 
     /**
      * Location at which element should be inserted.
@@ -261,6 +285,28 @@ public final class AppElementsCreateElementRequest {
     }
 
     /**
+     * Get The initial json tree in the element.
+     *
+     * @return The initial json tree in the element.
+     *
+     */
+    public final Map jsonTree() {
+      return this.jsonTree;
+    }
+
+    /**
+     * Set The initial json tree in the element.
+     *
+     * @param value The initial json tree in the element.
+     *
+     * @return the Builder object.
+     */
+    public final Builder jsonTree(Map value) {
+      this.jsonTree = value;
+      return this;
+    }
+
+    /**
      * Get Location at which element should be inserted.
      *
      * @return Location at which element should be inserted.
@@ -283,7 +329,7 @@ public final class AppElementsCreateElementRequest {
     }
 
     private AppElementsCreateElementRequest build() {
-      return new com.onshape.api.requests.AppElementsCreateElementRequest(formatId,name,description,subelements,location);
+      return new com.onshape.api.requests.AppElementsCreateElementRequest(formatId,name,description,subelements,jsonTree,location);
     }
 
     /**

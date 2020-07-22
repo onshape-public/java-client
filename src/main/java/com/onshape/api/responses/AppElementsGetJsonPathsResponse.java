@@ -31,42 +31,42 @@ import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
- * Response object for insertTransformedInstances API endpoint.
+ * Response object for getJsonPaths API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class AssembliesInsertTransformedInstancesResponse extends AbstractResponseObject {
+public final class AppElementsGetJsonPathsResponse extends AbstractResponseObject {
   /**
-   * (deprecated) Flattened list of occurrences.
+   * Id of the change at which the JSON was actually retrieved
    */
-  @JsonProperty("occurrences")
+  @JsonProperty("changeId")
   @NotNull
-  Map[] occurrences;
+  String changeId;
 
   /**
-   * The insert response for each of the instance inserts.
+   * Retrieved data
    */
-  @JsonProperty("insertInstanceResponses")
+  @JsonProperty("results")
   @NotNull
-  AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] insertInstanceResponses;
+  Map[] results;
 
   /**
-   * Get (deprecated) Flattened list of occurrences.
+   * Get Id of the change at which the JSON was actually retrieved
    *
-   * @return (deprecated) Flattened list of occurrences.
+   * @return Id of the change at which the JSON was actually retrieved
    *
    */
-  public final Map[] getOccurrences() {
-    return this.occurrences;
+  public final String getChangeId() {
+    return this.changeId;
   }
 
   /**
-   * Get The insert response for each of the instance inserts.
+   * Get Retrieved data
    *
-   * @return The insert response for each of the instance inserts.
+   * @return Retrieved data
    *
    */
-  public final AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] getInsertInstanceResponses() {
-    return this.insertInstanceResponses;
+  public final Map[] getResults() {
+    return this.results;
   }
 
   @Override

@@ -20,57 +20,53 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-package com.onshape.api.responses;
+package com.onshape.api.requests;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
-import com.onshape.api.types.AbstractResponseObject;
+import com.onshape.api.exceptions.OnshapeException;
+import com.onshape.api.responses.ProjectsDeleteProjectResponse;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
-import javax.validation.constraints.NotNull;
 
 /**
- * Response object for insertTransformedInstances API endpoint.
+ * Request object for deleteProject API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class AssembliesInsertTransformedInstancesResponse extends AbstractResponseObject {
-  /**
-   * (deprecated) Flattened list of occurrences.
-   */
-  @JsonProperty("occurrences")
-  @NotNull
-  Map[] occurrences;
-
-  /**
-   * The insert response for each of the instance inserts.
-   */
-  @JsonProperty("insertInstanceResponses")
-  @NotNull
-  AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] insertInstanceResponses;
-
-  /**
-   * Get (deprecated) Flattened list of occurrences.
-   *
-   * @return (deprecated) Flattened list of occurrences.
-   *
-   */
-  public final Map[] getOccurrences() {
-    return this.occurrences;
-  }
-
-  /**
-   * Get The insert response for each of the instance inserts.
-   *
-   * @return The insert response for each of the instance inserts.
-   *
-   */
-  public final AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] getInsertInstanceResponses() {
-    return this.insertInstanceResponses;
+public final class ProjectsDeleteProjectRequest {
+  ProjectsDeleteProjectRequest() {
   }
 
   @Override
   public String toString() {
     return Onshape.toString(this);
+  }
+
+  public static final Builder builder(Onshape onshape) {
+    Builder builder = new Builder();
+    builder.onshape = onshape;
+    return builder;
+  }
+
+  public static final class Builder {
+    Onshape onshape;
+
+    Builder() {
+    }
+
+    private ProjectsDeleteProjectRequest build() {
+      return new com.onshape.api.requests.ProjectsDeleteProjectRequest();
+    }
+
+    /**
+     * Calls deleteProject method, Delete a project defined in the session's enterprise company
+     * @return Response object
+     * @throws OnshapeException On HTTP or serialization error
+     *
+     * @param pid The project id to inspect.
+     */
+    public final ProjectsDeleteProjectResponse call(String pid) throws OnshapeException {
+      onshape.validate(build());
+      return onshape.call("delete", "/projects/:pid", build(), onshape.buildMap("pid", pid), onshape.buildMap(), com.onshape.api.responses.ProjectsDeleteProjectResponse.class);
+    }
   }
 }

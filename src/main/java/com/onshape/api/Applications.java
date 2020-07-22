@@ -23,7 +23,10 @@
 package com.onshape.api;
 
 import com.onshape.api.requests.ApplicationsDeleteAppSettingsRequest;
+import com.onshape.api.requests.ApplicationsDeleteCompanyAppSettingsRequest;
+import com.onshape.api.requests.ApplicationsGetCompanyAppSettingsRequest;
 import com.onshape.api.requests.ApplicationsGetUserAppSettingsRequest;
+import com.onshape.api.requests.ApplicationsUpdateAppCompanySettingsRequest;
 import com.onshape.api.requests.ApplicationsUpdateAppSettingsRequest;
 
 /**
@@ -46,6 +49,22 @@ public final class Applications {
   }
 
   /**
+   * Create request for deleteCompanyAppSettings
+   *  @return Request builder object
+   */
+  public final ApplicationsDeleteCompanyAppSettingsRequest.Builder deleteCompanyAppSettings() {
+    return ApplicationsDeleteCompanyAppSettingsRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getCompanyAppSettings
+   *  @return Request builder object
+   */
+  public final ApplicationsGetCompanyAppSettingsRequest.Builder getCompanyAppSettings() {
+    return ApplicationsGetCompanyAppSettingsRequest.builder(onshape);
+  }
+
+  /**
    * Create request for getUserAppSettings
    *  @return Request builder object
    */
@@ -59,5 +78,13 @@ public final class Applications {
    */
   public final ApplicationsUpdateAppSettingsRequest.Builder updateAppSettings() {
     return ApplicationsUpdateAppSettingsRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for updateAppCompanySettings
+   *  @return Request builder object
+   */
+  public final ApplicationsUpdateAppCompanySettingsRequest.Builder updateAppCompanySettings() {
+    return ApplicationsUpdateAppCompanySettingsRequest.builder(onshape);
   }
 }

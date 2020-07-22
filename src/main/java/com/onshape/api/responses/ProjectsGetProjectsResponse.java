@@ -27,46 +27,28 @@ import com.onshape.api.Onshape;
 import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
- * Response object for insertTransformedInstances API endpoint.
+ * Response object for getProjects API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class AssembliesInsertTransformedInstancesResponse extends AbstractResponseObject {
+public final class ProjectsGetProjectsResponse extends AbstractResponseObject {
   /**
-   * (deprecated) Flattened list of occurrences.
+   * the list of projects.
    */
-  @JsonProperty("occurrences")
+  @JsonProperty("items")
   @NotNull
-  Map[] occurrences;
+  ProjectsGetProjectsResponseItems[] items;
 
   /**
-   * The insert response for each of the instance inserts.
-   */
-  @JsonProperty("insertInstanceResponses")
-  @NotNull
-  AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] insertInstanceResponses;
-
-  /**
-   * Get (deprecated) Flattened list of occurrences.
+   * Get the list of projects.
    *
-   * @return (deprecated) Flattened list of occurrences.
+   * @return the list of projects.
    *
    */
-  public final Map[] getOccurrences() {
-    return this.occurrences;
-  }
-
-  /**
-   * Get The insert response for each of the instance inserts.
-   *
-   * @return The insert response for each of the instance inserts.
-   *
-   */
-  public final AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] getInsertInstanceResponses() {
-    return this.insertInstanceResponses;
+  public final ProjectsGetProjectsResponseItems[] getItems() {
+    return this.items;
   }
 
   @Override

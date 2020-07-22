@@ -27,46 +27,28 @@ import com.onshape.api.Onshape;
 import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
- * Response object for insertTransformedInstances API endpoint.
+ * Response object for getAllRules API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class AssembliesInsertTransformedInstancesResponse extends AbstractResponseObject {
+public final class RevisionsGetAllRulesResponse extends AbstractResponseObject {
   /**
-   * (deprecated) Flattened list of occurrences.
+   * Revision rules
    */
-  @JsonProperty("occurrences")
+  @JsonProperty("items")
   @NotNull
-  Map[] occurrences;
+  RevisionsGetAllRulesResponseItems[] items;
 
   /**
-   * The insert response for each of the instance inserts.
-   */
-  @JsonProperty("insertInstanceResponses")
-  @NotNull
-  AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] insertInstanceResponses;
-
-  /**
-   * Get (deprecated) Flattened list of occurrences.
+   * Get Revision rules
    *
-   * @return (deprecated) Flattened list of occurrences.
+   * @return Revision rules
    *
    */
-  public final Map[] getOccurrences() {
-    return this.occurrences;
-  }
-
-  /**
-   * Get The insert response for each of the instance inserts.
-   *
-   * @return The insert response for each of the instance inserts.
-   *
-   */
-  public final AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] getInsertInstanceResponses() {
-    return this.insertInstanceResponses;
+  public final RevisionsGetAllRulesResponseItems[] getItems() {
+    return this.items;
   }
 
   @Override

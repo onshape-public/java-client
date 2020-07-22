@@ -82,6 +82,12 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
   public Boolean isWholePartStudio;
 
   /**
+   * The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+   */
+  @JsonProperty("includePartTypes")
+  public String[] includePartTypes;
+
+  /**
    * Whether the instance is the assembly specified by the element ID.
    */
   @JsonProperty("isAssembly")
@@ -113,8 +119,9 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
 
   AssembliesInsertTransformedInstancesRequestTransformGroupsInstances(String documentId,
       String elementId, String partId, String featureId, String microversionId, String versionId,
-      String configuration, Boolean isWholePartStudio, Boolean isAssembly, Boolean isSuppressed,
-      Boolean isHidden, String revision, String partNumber) {
+      String configuration, Boolean isWholePartStudio, String[] includePartTypes,
+      Boolean isAssembly, Boolean isSuppressed, Boolean isHidden, String revision,
+      String partNumber) {
     this.documentId = documentId;
     this.elementId = elementId;
     this.partId = partId;
@@ -123,6 +130,7 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
     this.versionId = versionId;
     this.configuration = configuration;
     this.isWholePartStudio = isWholePartStudio;
+    this.includePartTypes = includePartTypes;
     this.isAssembly = isAssembly;
     this.isSuppressed = isSuppressed;
     this.isHidden = isHidden;
@@ -208,6 +216,16 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
    */
   public final Boolean getIsWholePartStudio() {
     return this.isWholePartStudio;
+  }
+
+  /**
+   * Get The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+   *
+   * @return The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+   *
+   */
+  public final String[] getIncludePartTypes() {
+    return this.includePartTypes;
   }
 
   /**
@@ -310,6 +328,11 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
      * Whether the instance is the entire part studio specified by the element ID.
      */
     private Boolean isWholePartStudio;
+
+    /**
+     * The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+     */
+    private String[] includePartTypes;
 
     /**
      * Whether the instance is the assembly specified by the element ID.
@@ -516,6 +539,28 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
     }
 
     /**
+     * Get The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+     *
+     * @return The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+     *
+     */
+    public final String[] includePartTypes() {
+      return this.includePartTypes;
+    }
+
+    /**
+     * Set The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+     *
+     * @param value The part types to include. used only if &quot;isWholePartStudio&quot; is &quot;true&quot;. Can be: {&quot;PARTS&quot;, &quot;SKETCHES&quot;,&quot;SURFACES&quot;,&quot;FLATTENED_PARTS&quot;, &quot;COMPOSITE_PARTS&quot;, &quot;PART_STUDIOS&quot;, &quot;WIRES&quot;, &quot;UNKNOWN&quot;}.
+     *
+     * @return the Builder object.
+     */
+    public final Builder includePartTypes(String[] value) {
+      this.includePartTypes = value;
+      return this;
+    }
+
+    /**
      * Get Whether the instance is the assembly specified by the element ID.
      *
      * @return Whether the instance is the assembly specified by the element ID.
@@ -626,7 +671,7 @@ public final class AssembliesInsertTransformedInstancesRequestTransformGroupsIns
     }
 
     public final AssembliesInsertTransformedInstancesRequestTransformGroupsInstances build() {
-      return new com.onshape.api.requests.AssembliesInsertTransformedInstancesRequestTransformGroupsInstances(documentId,elementId,partId,featureId,microversionId,versionId,configuration,isWholePartStudio,isAssembly,isSuppressed,isHidden,revision,partNumber);
+      return new com.onshape.api.requests.AssembliesInsertTransformedInstancesRequestTransformGroupsInstances(documentId,elementId,partId,featureId,microversionId,versionId,configuration,isWholePartStudio,includePartTypes,isAssembly,isSuppressed,isHidden,revision,partNumber);
     }
   }
 }

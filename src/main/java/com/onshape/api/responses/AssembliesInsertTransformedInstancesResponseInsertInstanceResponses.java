@@ -28,45 +28,26 @@ import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Map;
-import javax.validation.constraints.NotNull;
 
 /**
- * Response object for insertTransformedInstances API endpoint.
+ * Object used in calls to insertTransformedInstances API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class AssembliesInsertTransformedInstancesResponse extends AbstractResponseObject {
+public final class AssembliesInsertTransformedInstancesResponseInsertInstanceResponses extends AbstractResponseObject {
   /**
-   * (deprecated) Flattened list of occurrences.
+   * list of occurrences created as a result of this insert.
    */
   @JsonProperty("occurrences")
-  @NotNull
-  Map[] occurrences;
+  public Map[] occurrences;
 
   /**
-   * The insert response for each of the instance inserts.
-   */
-  @JsonProperty("insertInstanceResponses")
-  @NotNull
-  AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] insertInstanceResponses;
-
-  /**
-   * Get (deprecated) Flattened list of occurrences.
+   * Get list of occurrences created as a result of this insert.
    *
-   * @return (deprecated) Flattened list of occurrences.
+   * @return list of occurrences created as a result of this insert.
    *
    */
   public final Map[] getOccurrences() {
     return this.occurrences;
-  }
-
-  /**
-   * Get The insert response for each of the instance inserts.
-   *
-   * @return The insert response for each of the instance inserts.
-   *
-   */
-  public final AssembliesInsertTransformedInstancesResponseInsertInstanceResponses[] getInsertInstanceResponses() {
-    return this.insertInstanceResponses;
   }
 
   @Override

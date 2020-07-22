@@ -75,6 +75,12 @@ public final class AssembliesGetShadedViewsRequest {
   Boolean includeSurfaces;
 
   /**
+   * Whether or not curves should be shown in the element. If false, curves will be excluded. If true, all curves will be shown.
+   */
+  @JsonProperty("includeWires")
+  Boolean includeWires;
+
+  /**
    * If true, an anti-aliasing factor will be used to smooth model boundaries in the final image result. If false, the image will be rasterized at the given resolution. Setting to true can have negative performance implications with respect to rendering time and memory usage. If a high-resolution image is requested and anti-aliasing is turned on, the server may not be able to fulfill the request.
    */
   @JsonProperty("useAntiAliasing")
@@ -93,14 +99,15 @@ public final class AssembliesGetShadedViewsRequest {
   String linkDocumentId;
 
   AssembliesGetShadedViewsRequest(Number outputHeight, Number outputWidth, Number pixelSize,
-      String edges, Boolean showAllParts, Boolean includeSurfaces, Boolean useAntiAliasing,
-      String viewMatrix, String linkDocumentId) {
+      String edges, Boolean showAllParts, Boolean includeSurfaces, Boolean includeWires,
+      Boolean useAntiAliasing, String viewMatrix, String linkDocumentId) {
     this.outputHeight = outputHeight;
     this.outputWidth = outputWidth;
     this.pixelSize = pixelSize;
     this.edges = edges;
     this.showAllParts = showAllParts;
     this.includeSurfaces = includeSurfaces;
+    this.includeWires = includeWires;
     this.useAntiAliasing = useAntiAliasing;
     this.viewMatrix = viewMatrix;
     this.linkDocumentId = linkDocumentId;
@@ -147,6 +154,11 @@ public final class AssembliesGetShadedViewsRequest {
      * Whether or not surfaces should be shown in the element. If false, surfaces will be excluded. If true, all surfaces will be shown.
      */
     private Boolean includeSurfaces;
+
+    /**
+     * Whether or not curves should be shown in the element. If false, curves will be excluded. If true, all curves will be shown.
+     */
+    private Boolean includeWires;
 
     /**
      * If true, an anti-aliasing factor will be used to smooth model boundaries in the final image result. If false, the image will be rasterized at the given resolution. Setting to true can have negative performance implications with respect to rendering time and memory usage. If a high-resolution image is requested and anti-aliasing is turned on, the server may not be able to fulfill the request.
@@ -301,6 +313,28 @@ public final class AssembliesGetShadedViewsRequest {
     }
 
     /**
+     * Get Whether or not curves should be shown in the element. If false, curves will be excluded. If true, all curves will be shown.
+     *
+     * @return Whether or not curves should be shown in the element. If false, curves will be excluded. If true, all curves will be shown.
+     *
+     */
+    public final Boolean includeWires() {
+      return this.includeWires;
+    }
+
+    /**
+     * Set Whether or not curves should be shown in the element. If false, curves will be excluded. If true, all curves will be shown.
+     *
+     * @param value Whether or not curves should be shown in the element. If false, curves will be excluded. If true, all curves will be shown.
+     *
+     * @return the Builder object.
+     */
+    public final Builder includeWires(Boolean value) {
+      this.includeWires = value;
+      return this;
+    }
+
+    /**
      * Get If true, an anti-aliasing factor will be used to smooth model boundaries in the final image result. If false, the image will be rasterized at the given resolution. Setting to true can have negative performance implications with respect to rendering time and memory usage. If a high-resolution image is requested and anti-aliasing is turned on, the server may not be able to fulfill the request.
      *
      * @return If true, an anti-aliasing factor will be used to smooth model boundaries in the final image result. If false, the image will be rasterized at the given resolution. Setting to true can have negative performance implications with respect to rendering time and memory usage. If a high-resolution image is requested and anti-aliasing is turned on, the server may not be able to fulfill the request.
@@ -367,7 +401,7 @@ public final class AssembliesGetShadedViewsRequest {
     }
 
     private AssembliesGetShadedViewsRequest build() {
-      return new com.onshape.api.requests.AssembliesGetShadedViewsRequest(outputHeight,outputWidth,pixelSize,edges,showAllParts,includeSurfaces,useAntiAliasing,viewMatrix,linkDocumentId);
+      return new com.onshape.api.requests.AssembliesGetShadedViewsRequest(outputHeight,outputWidth,pixelSize,edges,showAllParts,includeSurfaces,includeWires,useAntiAliasing,viewMatrix,linkDocumentId);
     }
 
     /**
@@ -386,7 +420,7 @@ public final class AssembliesGetShadedViewsRequest {
     public final AssembliesGetShadedViewsResponse call(String did, WVM wvmType, String wvm,
         String eid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/shadedviews", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("outputHeight", outputHeight, "outputWidth", outputWidth, "pixelSize", pixelSize, "edges", edges, "showAllParts", showAllParts, "includeSurfaces", includeSurfaces, "useAntiAliasing", useAntiAliasing, "viewMatrix", viewMatrix, "linkDocumentId", linkDocumentId), com.onshape.api.responses.AssembliesGetShadedViewsResponse.class);
+      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/shadedviews", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("outputHeight", outputHeight, "outputWidth", outputWidth, "pixelSize", pixelSize, "edges", edges, "showAllParts", showAllParts, "includeSurfaces", includeSurfaces, "includeWires", includeWires, "useAntiAliasing", useAntiAliasing, "viewMatrix", viewMatrix, "linkDocumentId", linkDocumentId), com.onshape.api.responses.AssembliesGetShadedViewsResponse.class);
     }
 
     /**
@@ -398,7 +432,7 @@ public final class AssembliesGetShadedViewsRequest {
     public final AssembliesGetShadedViewsResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/shadedviews", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("outputHeight", outputHeight, "outputWidth", outputWidth, "pixelSize", pixelSize, "edges", edges, "showAllParts", showAllParts, "includeSurfaces", includeSurfaces, "useAntiAliasing", useAntiAliasing, "viewMatrix", viewMatrix, "linkDocumentId", linkDocumentId), com.onshape.api.responses.AssembliesGetShadedViewsResponse.class);
+      return onshape.call("get", "/assemblies/d/:did/[wvm]/:wvm/e/:eid/shadedviews", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("outputHeight", outputHeight, "outputWidth", outputWidth, "pixelSize", pixelSize, "edges", edges, "showAllParts", showAllParts, "includeSurfaces", includeSurfaces, "includeWires", includeWires, "useAntiAliasing", useAntiAliasing, "viewMatrix", viewMatrix, "linkDocumentId", linkDocumentId), com.onshape.api.responses.AssembliesGetShadedViewsResponse.class);
     }
   }
 }

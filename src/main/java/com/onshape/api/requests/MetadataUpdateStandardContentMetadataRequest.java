@@ -143,8 +143,8 @@ public final class MetadataUpdateStandardContentMetadataRequest {
 
     /**
      * Calls updateStandardContentMetadata method, Update metadata of a standard content part in a version for a specific user or company.
-     *     Configuration information must be included within the items.*.href fields. The response format varies depending
-     *     on whether there are multiple items to update.
+     *                 Configuration information must be included within the items.*.href fields. The response format
+     *                 varies depending on whether there are multiple items to update.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
@@ -168,8 +168,8 @@ public final class MetadataUpdateStandardContentMetadataRequest {
 
     /**
      * Calls updateStandardContentMetadata method, Update metadata of a standard content part in a version for a specific user or company.
-     *     Configuration information must be included within the items.*.href fields. The response format varies depending
-     *     on whether there are multiple items to update.
+     *                 Configuration information must be included within the items.*.href fields. The response format
+     *                 varies depending on whether there are multiple items to update.
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
