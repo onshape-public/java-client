@@ -22,9 +22,11 @@
 //
 package com.onshape.api;
 
+import com.onshape.api.requests.ProjectsCreateProjectRequest;
 import com.onshape.api.requests.ProjectsDeleteProjectRequest;
 import com.onshape.api.requests.ProjectsGetProjectRequest;
 import com.onshape.api.requests.ProjectsGetProjectsRequest;
+import com.onshape.api.requests.ProjectsUpdateProjectRequest;
 
 /**
  * Projects: API endpoints for Projects group.
@@ -35,6 +37,14 @@ public final class Projects {
 
   Projects(Onshape onshape) {
     this.onshape = onshape;
+  }
+
+  /**
+   * Create request for createProject
+   *  @return Request builder object
+   */
+  public final ProjectsCreateProjectRequest.Builder createProject() {
+    return ProjectsCreateProjectRequest.builder(onshape);
   }
 
   /**
@@ -59,5 +69,13 @@ public final class Projects {
    */
   public final ProjectsGetProjectsRequest.Builder getProjects() {
     return ProjectsGetProjectsRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for updateProject
+   *  @return Request builder object
+   */
+  public final ProjectsUpdateProjectRequest.Builder updateProject() {
+    return ProjectsUpdateProjectRequest.builder(onshape);
   }
 }

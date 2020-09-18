@@ -45,6 +45,7 @@ import com.onshape.api.requests.DocumentsGetWorkspacesRequest;
 import com.onshape.api.requests.DocumentsMergeIntoWorkspaceRequest;
 import com.onshape.api.requests.DocumentsMoveElementsToDocumentRequest;
 import com.onshape.api.requests.DocumentsRestoreFromHistoryRequest;
+import com.onshape.api.requests.DocumentsSearchRequest;
 import com.onshape.api.requests.DocumentsShareDocumentRequest;
 import com.onshape.api.requests.DocumentsSyncAppElementsRequest;
 import com.onshape.api.requests.DocumentsUnShareRequest;
@@ -60,6 +61,14 @@ public final class Documents {
 
   Documents(Onshape onshape) {
     this.onshape = onshape;
+  }
+
+  /**
+   * Create request for search
+   *  @return Request builder object
+   */
+  public final DocumentsSearchRequest.Builder search() {
+    return DocumentsSearchRequest.builder(onshape);
   }
 
   /**

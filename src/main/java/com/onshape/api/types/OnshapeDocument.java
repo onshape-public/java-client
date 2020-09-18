@@ -23,6 +23,7 @@
  */
 package com.onshape.api.types;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.exceptions.OnshapeException;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -36,13 +37,28 @@ import java.util.regex.Pattern;
  */
 public class OnshapeDocument {
 
-    private static final Pattern PATTERN = Pattern.compile("^https:\\/\\/cad\\.onshape\\.com\\/documents\\/([0-9a-z]+)\\/([wvm])\\/([0-9a-z]+)\\/e\\/([0-9a-z]+)$");
+    private static final Pattern PATTERN = Pattern.compile("^(https:\\/\\/\\w+(?:\\.\\w+){1,})\\/documents\\/([0-9a-z]+)\\/([wvm])\\/([0-9a-z]+)\\/e\\/([0-9a-z]+)$");
+    @JsonProperty
+    private final String baseURL;
+    @JsonProperty
     private final String documentId;
+    @JsonProperty
     private final WVM wvm;
+    @JsonProperty
     private final String workspaceId;
+    @JsonProperty
     private final String versionId;
+    @JsonProperty
     private final String microversionId;
+    @JsonProperty
     private final String elementId;
+
+    /**
+     * Create a null instance, for deserialization purposes
+     */
+    public OnshapeDocument() {
+        this(null, null, null);
+    }
 
     /**
      * Parse the given URL to determine document id, workspace id, and element
@@ -56,27 +72,28 @@ public class OnshapeDocument {
         if (!matcher.matches()) {
             throw new OnshapeException("URL is not a valid Onshape document URL: " + url);
         }
-        this.documentId = matcher.group(1);
-        switch (matcher.group(2)) {
+        this.baseURL = matcher.group(1);
+        this.documentId = matcher.group(2);
+        switch (matcher.group(3)) {
             case "v":
                 this.wvm = WVM.Version;
                 this.workspaceId = null;
-                this.versionId = matcher.group(3);
+                this.versionId = matcher.group(4);
                 this.microversionId = null;
                 break;
             case "m":
                 this.wvm = WVM.Microversion;
                 this.workspaceId = null;
                 this.versionId = null;
-                this.microversionId = matcher.group(3);
+                this.microversionId = matcher.group(4);
                 break;
             default:
                 this.wvm = WVM.Workspace;
-                this.workspaceId = matcher.group(3);
+                this.workspaceId = matcher.group(4);
                 this.versionId = null;
                 this.microversionId = null;
         }
-        this.elementId = matcher.group(4);
+        this.elementId = matcher.group(5);
     }
 
     /**
@@ -87,6 +104,7 @@ public class OnshapeDocument {
      * @param elementId Element id.
      */
     public OnshapeDocument(String documentId, String workspaceId, String elementId) {
+        this.baseURL = "https://cad.onshape.com";
         this.documentId = documentId;
         this.wvm = WVM.Workspace;
         this.workspaceId = workspaceId;
@@ -106,12 +124,22 @@ public class OnshapeDocument {
      * @param elementId Element id.
      */
     public OnshapeDocument(String documentId, String workspaceId, String versionId, String microversionId, String elementId) {
+        this.baseURL = "https://cad.onshape.com";
         this.documentId = documentId;
         this.wvm = workspaceId != null ? WVM.Workspace : (versionId != null ? WVM.Version : (microversionId != null ? WVM.Microversion : null));
         this.workspaceId = workspaceId;
         this.versionId = versionId;
         this.microversionId = microversionId;
         this.elementId = elementId;
+    }
+
+    /**
+     * Get the base URL, typically https://cad.onshape.com
+     *
+     * @return
+     */
+    public String getBaseURL() {
+        return baseURL;
     }
 
     /**
@@ -224,6 +252,7 @@ public class OnshapeDocument {
     @Override
     public int hashCode() {
         int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.baseURL);
         hash = 59 * hash + Objects.hashCode(this.documentId);
         hash = 59 * hash + Objects.hashCode(this.wvm);
         hash = 59 * hash + Objects.hashCode(this.workspaceId);
@@ -245,6 +274,9 @@ public class OnshapeDocument {
             return false;
         }
         final OnshapeDocument other = (OnshapeDocument) obj;
+        if (!Objects.equals(this.baseURL, other.baseURL)) {
+            return false;
+        }
         if (!Objects.equals(this.documentId, other.documentId)) {
             return false;
         }
@@ -265,8 +297,9 @@ public class OnshapeDocument {
 
     @Override
     public String toString() {
-        StringBuilder out = new StringBuilder("https://cad.onshape.com/documents/");
-        out.append(documentId);
+        StringBuilder out = new StringBuilder(this.baseURL)
+                .append("/documents/")
+                .append(documentId);
         if (wvm != null) {
             switch (wvm) {
                 case Version:

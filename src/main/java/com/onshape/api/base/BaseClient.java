@@ -99,6 +99,7 @@ import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator
 public class BaseClient {
 
     private String baseURL = "https://cad.onshape.com";
+    private String oauthURL = "https://oauth.onshape.com/oauth/token";
     private final Client client;
     private final Hashids hashids = new Hashids("cloudCADIsGreat", 25, "abcdefghijklmnopqrstuvwxyz01234567890");
     private final ObjectMapper objectMapper;
@@ -164,6 +165,14 @@ public class BaseClient {
      */
     public void setBaseURL(String baseURL) {
         this.baseURL = baseURL;
+    }
+
+    public String getOauthURL() {
+        return oauthURL;
+    }
+
+    public void setOauthURL(String oauthURL) {
+        this.oauthURL = oauthURL;
     }
 
     /**
@@ -269,7 +278,7 @@ public class BaseClient {
     }
 
     void refreshOAuthToken() throws OnshapeException {
-        WebTarget target = client.target("https://oauth.onshape.com/oauth/token");
+        WebTarget target = client.target(oauthURL);
         MultivaluedMap<String, String> formData = new MultivaluedHashMap<>();
         formData.add("grant_type", "refresh_token");
         formData.add("refresh_token", token.getRefreshToken());

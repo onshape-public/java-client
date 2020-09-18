@@ -29,7 +29,9 @@ import com.onshape.api.requests.RevisionsGetAllRulesRequest;
 import com.onshape.api.requests.RevisionsGetBulkNextRevisionNamesRequest;
 import com.onshape.api.requests.RevisionsGetLatestInDocumentOrCompanyRequest;
 import com.onshape.api.requests.RevisionsGetNextRevisionNamesRequest;
-import com.onshape.api.requests.RevisionsGetRevisionHistoryInCompanyRequest;
+import com.onshape.api.requests.RevisionsGetRevisionHistoryInCompanyByElementIdRequest;
+import com.onshape.api.requests.RevisionsGetRevisionHistoryInCompanyByPartIdRequest;
+import com.onshape.api.requests.RevisionsGetRevisionHistoryInCompanyByPartNumberRequest;
 import com.onshape.api.requests.RevisionsGetRuleByIdRequest;
 import com.onshape.api.requests.RevisionsUpdateRuleRequest;
 
@@ -69,14 +71,6 @@ public final class Revisions {
   }
 
   /**
-   * Create request for getRevisionHistoryInCompany
-   *  @return Request builder object
-   */
-  public final RevisionsGetRevisionHistoryInCompanyRequest.Builder getRevisionHistoryInCompany() {
-    return RevisionsGetRevisionHistoryInCompanyRequest.builder(onshape);
-  }
-
-  /**
    * Create request for createRule
    *  @return Request builder object
    */
@@ -106,6 +100,30 @@ public final class Revisions {
    */
   public final RevisionsGetNextRevisionNamesRequest.Builder getNextRevisionNames() {
     return RevisionsGetNextRevisionNamesRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getRevisionHistoryInCompanyByPartId
+   *  @return Request builder object
+   */
+  public final RevisionsGetRevisionHistoryInCompanyByPartIdRequest.Builder getRevisionHistoryInCompanyByPartId() {
+    return RevisionsGetRevisionHistoryInCompanyByPartIdRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getRevisionHistoryInCompanyByPartNumber
+   *  @return Request builder object
+   */
+  public final RevisionsGetRevisionHistoryInCompanyByPartNumberRequest.Builder getRevisionHistoryInCompanyByPartNumber() {
+    return RevisionsGetRevisionHistoryInCompanyByPartNumberRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getRevisionHistoryInCompanyByElementId
+   *  @return Request builder object
+   */
+  public final RevisionsGetRevisionHistoryInCompanyByElementIdRequest.Builder getRevisionHistoryInCompanyByElementId() {
+    return RevisionsGetRevisionHistoryInCompanyByElementIdRequest.builder(onshape);
   }
 
   /**

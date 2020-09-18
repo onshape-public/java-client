@@ -24,6 +24,8 @@ package com.onshape.api;
 
 import com.onshape.api.requests.ReleaseManagementCreateObsoletionPackageRequest;
 import com.onshape.api.requests.ReleaseManagementCreateReleasePackageRequest;
+import com.onshape.api.requests.ReleaseManagementFindByDocumentIdAndVersionIdRequest;
+import com.onshape.api.requests.ReleaseManagementFindByDocumentIdRequest;
 import com.onshape.api.requests.ReleaseManagementGetReleasePackageRequest;
 import com.onshape.api.requests.ReleaseManagementUpdateReleasePackageRequest;
 
@@ -55,11 +57,27 @@ public final class ReleaseManagement {
   }
 
   /**
+   * Create request for findByDocumentId
+   *  @return Request builder object
+   */
+  public final ReleaseManagementFindByDocumentIdRequest.Builder findByDocumentId() {
+    return ReleaseManagementFindByDocumentIdRequest.builder(onshape);
+  }
+
+  /**
    * Create request for getReleasePackage
    *  @return Request builder object
    */
   public final ReleaseManagementGetReleasePackageRequest.Builder getReleasePackage() {
     return ReleaseManagementGetReleasePackageRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for findByDocumentIdAndVersionId
+   *  @return Request builder object
+   */
+  public final ReleaseManagementFindByDocumentIdAndVersionIdRequest.Builder findByDocumentIdAndVersionId() {
+    return ReleaseManagementFindByDocumentIdAndVersionIdRequest.builder(onshape);
   }
 
   /**

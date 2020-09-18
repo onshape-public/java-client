@@ -25,9 +25,9 @@ package com.onshape.api.responses;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.types.AbstractResponseObject;
+import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -47,7 +47,7 @@ public final class AppElementsGetJsonPathsResponse extends AbstractResponseObjec
    */
   @JsonProperty("results")
   @NotNull
-  Map[] results;
+  Object[][] results;
 
   /**
    * Get Id of the change at which the JSON was actually retrieved
@@ -65,7 +65,7 @@ public final class AppElementsGetJsonPathsResponse extends AbstractResponseObjec
    * @return Retrieved data
    *
    */
-  public final Map[] getResults() {
+  public final Object[][] getResults() {
     return this.results;
   }
 

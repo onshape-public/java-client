@@ -22,22 +22,28 @@
 //
 package com.onshape.api;
 
+import com.onshape.api.requests.AppElementsAbortTransactionRequest;
 import com.onshape.api.requests.AppElementsCommitTransactionRequest;
 import com.onshape.api.requests.AppElementsCompareAppElementJsonRequest;
 import com.onshape.api.requests.AppElementsCreateElementRequest;
 import com.onshape.api.requests.AppElementsCreateReferenceRequest;
+import com.onshape.api.requests.AppElementsDeleteBlobSubelementRequest;
 import com.onshape.api.requests.AppElementsDeleteContentRequest;
 import com.onshape.api.requests.AppElementsDeleteReferenceRequest;
+import com.onshape.api.requests.AppElementsDownloadBlobSubelementRequest;
+import com.onshape.api.requests.AppElementsGetBlobSubelementIdsRequest;
 import com.onshape.api.requests.AppElementsGetHistoryByWorkspaceRequest;
 import com.onshape.api.requests.AppElementsGetJsonPathsRequest;
 import com.onshape.api.requests.AppElementsGetJsonRequest;
 import com.onshape.api.requests.AppElementsGetSubElementContentRequest;
 import com.onshape.api.requests.AppElementsGetSubElementIdsRequest;
+import com.onshape.api.requests.AppElementsListTransactionsRequest;
 import com.onshape.api.requests.AppElementsResolveReferenceRequest;
 import com.onshape.api.requests.AppElementsResolveReferencesRequest;
 import com.onshape.api.requests.AppElementsStartTransactionRequest;
 import com.onshape.api.requests.AppElementsUpdateElementRequest;
 import com.onshape.api.requests.AppElementsUpdateReferenceRequest;
+import com.onshape.api.requests.AppElementsUploadBlobSubelementRequest;
 
 /**
  * AppElements: API endpoints for AppElements group.
@@ -48,6 +54,14 @@ public final class AppElements {
 
   AppElements(Onshape onshape) {
     this.onshape = onshape;
+  }
+
+  /**
+   * Create request for abortTransaction
+   *  @return Request builder object
+   */
+  public final AppElementsAbortTransactionRequest.Builder abortTransaction() {
+    return AppElementsAbortTransactionRequest.builder(onshape);
   }
 
   /**
@@ -99,6 +113,30 @@ public final class AppElements {
   }
 
   /**
+   * Create request for deleteBlobSubelement
+   *  @return Request builder object
+   */
+  public final AppElementsDeleteBlobSubelementRequest.Builder deleteBlobSubelement() {
+    return AppElementsDeleteBlobSubelementRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for downloadBlobSubelement
+   *  @return Request builder object
+   */
+  public final AppElementsDownloadBlobSubelementRequest.Builder downloadBlobSubelement() {
+    return AppElementsDownloadBlobSubelementRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getBlobSubelementIds
+   *  @return Request builder object
+   */
+  public final AppElementsGetBlobSubelementIdsRequest.Builder getBlobSubelementIds() {
+    return AppElementsGetBlobSubelementIdsRequest.builder(onshape);
+  }
+
+  /**
    * Create request for getSubElementContent
    *  @return Request builder object
    */
@@ -139,6 +177,14 @@ public final class AppElements {
   }
 
   /**
+   * Create request for listTransactions
+   *  @return Request builder object
+   */
+  public final AppElementsListTransactionsRequest.Builder listTransactions() {
+    return AppElementsListTransactionsRequest.builder(onshape);
+  }
+
+  /**
    * Create request for resolveReference
    *  @return Request builder object
    */
@@ -176,5 +222,13 @@ public final class AppElements {
    */
   public final AppElementsUpdateReferenceRequest.Builder updateReference() {
     return AppElementsUpdateReferenceRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for uploadBlobSubelement
+   *  @return Request builder object
+   */
+  public final AppElementsUploadBlobSubelementRequest.Builder uploadBlobSubelement() {
+    return AppElementsUploadBlobSubelementRequest.builder(onshape);
   }
 }

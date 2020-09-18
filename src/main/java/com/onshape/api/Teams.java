@@ -23,6 +23,7 @@
 package com.onshape.api;
 
 import com.onshape.api.requests.TeamsFindRequest;
+import com.onshape.api.requests.TeamsGetMembersRequest;
 import com.onshape.api.requests.TeamsGetRequest;
 
 /**
@@ -34,6 +35,14 @@ public final class Teams {
 
   Teams(Onshape onshape) {
     this.onshape = onshape;
+  }
+
+  /**
+   * Create request for getMembers
+   *  @return Request builder object
+   */
+  public final TeamsGetMembersRequest.Builder getMembers() {
+    return TeamsGetMembersRequest.builder(onshape);
   }
 
   /**

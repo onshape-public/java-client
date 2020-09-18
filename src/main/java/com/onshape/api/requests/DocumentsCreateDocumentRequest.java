@@ -30,7 +30,6 @@ import java.lang.Boolean;
 import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -84,14 +83,14 @@ public final class DocumentsCreateDocumentRequest {
   String[] tags;
 
   /**
-   * custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+   * custom elements definition to be created with document.
    */
-  @JsonProperty("documentParamElements")
-  Map[] documentParamElements;
+  @JsonProperty("elements")
+  DocumentsCreateDocumentRequestElements[] elements;
 
   DocumentsCreateDocumentRequest(String name, String ownerId, Number ownerType,
       String[] betaCapabilityIds, Boolean isPublic, Boolean isGenerateUnknownMessages,
-      String[] tags, Map[] documentParamElements) {
+      String[] tags, DocumentsCreateDocumentRequestElements[] elements) {
     this.name = name;
     this.ownerId = ownerId;
     this.ownerType = ownerType;
@@ -99,7 +98,7 @@ public final class DocumentsCreateDocumentRequest {
     this.isPublic = isPublic;
     this.isGenerateUnknownMessages = isGenerateUnknownMessages;
     this.tags = tags;
-    this.documentParamElements = documentParamElements;
+    this.elements = elements;
   }
 
   /**
@@ -173,13 +172,13 @@ public final class DocumentsCreateDocumentRequest {
   }
 
   /**
-   * Get custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+   * Get custom elements definition to be created with document.
    *
-   * @return custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+   * @return custom elements definition to be created with document.
    *
    */
-  public final Map[] getDocumentParamElements() {
-    return this.documentParamElements;
+  public final DocumentsCreateDocumentRequestElements[] getElements() {
+    return this.elements;
   }
 
   @Override
@@ -230,9 +229,9 @@ public final class DocumentsCreateDocumentRequest {
     private String[] tags;
 
     /**
-     * custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+     * custom elements definition to be created with document.
      */
-    private Map[] documentParamElements;
+    private DocumentsCreateDocumentRequestElements[] elements;
 
     Onshape onshape;
 
@@ -394,29 +393,29 @@ public final class DocumentsCreateDocumentRequest {
     }
 
     /**
-     * Get custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+     * Get custom elements definition to be created with document.
      *
-     * @return custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+     * @return custom elements definition to be created with document.
      *
      */
-    public final Map[] documentParamElements() {
-      return this.documentParamElements;
+    public final DocumentsCreateDocumentRequestElements[] elements() {
+      return this.elements;
     }
 
     /**
-     * Set custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+     * Set custom elements definition to be created with document.
      *
-     * @param value custom elements definition to be created with document. If defined overrides the default behvaior of creating PARTSTUDIO and ASSEMBLY
+     * @param value custom elements definition to be created with document.
      *
      * @return the Builder object.
      */
-    public final Builder documentParamElements(Map[] value) {
-      this.documentParamElements = value;
+    public final Builder elements(DocumentsCreateDocumentRequestElements[] value) {
+      this.elements = value;
       return this;
     }
 
     private DocumentsCreateDocumentRequest build() {
-      return new com.onshape.api.requests.DocumentsCreateDocumentRequest(name,ownerId,ownerType,betaCapabilityIds,isPublic,isGenerateUnknownMessages,tags,documentParamElements);
+      return new com.onshape.api.requests.DocumentsCreateDocumentRequest(name,ownerId,ownerType,betaCapabilityIds,isPublic,isGenerateUnknownMessages,tags,elements);
     }
 
     /**
