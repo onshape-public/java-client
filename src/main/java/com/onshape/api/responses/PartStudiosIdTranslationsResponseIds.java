@@ -41,9 +41,9 @@ public final class PartStudiosIdTranslationsResponseIds extends AbstractResponse
   public String source;
 
   /**
-   * [] Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
+   * Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
    */
-  @JsonProperty("target")
+  @JsonProperty("target[]")
   public String[] target;
 
   /**
@@ -63,9 +63,9 @@ public final class PartStudiosIdTranslationsResponseIds extends AbstractResponse
   }
 
   /**
-   * Get [] Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
+   * Get Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
    *
-   * @return [] Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
+   * @return Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
    *
    */
   public final String[] getTarget() {

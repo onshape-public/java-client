@@ -136,7 +136,7 @@ public class OnshapeDocument {
     /**
      * Get the base URL, typically https://cad.onshape.com
      *
-     * @return
+     * @return Base URL as a String
      */
     public String getBaseURL() {
         return baseURL;

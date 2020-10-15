@@ -25,6 +25,7 @@ package com.onshape.api.responses;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.types.AbstractResponseObject;
+import com.onshape.api.types.Blob;
 import java.lang.Override;
 import java.lang.String;
 import javax.validation.constraints.NotNull;
@@ -39,7 +40,7 @@ public final class ThumbnailsGetElementThumbnailWithSizeResponse extends Abstrac
    */
   @JsonProperty("image")
   @NotNull
-  String image;
+  Blob image;
 
   /**
    * Get A string containing the PNG image of the thumbnail
@@ -47,7 +48,7 @@ public final class ThumbnailsGetElementThumbnailWithSizeResponse extends Abstrac
    * @return A string containing the PNG image of the thumbnail
    *
    */
-  public final String getImage() {
+  public final Blob getImage() {
     return this.image;
   }
 

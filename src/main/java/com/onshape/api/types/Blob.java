@@ -103,11 +103,11 @@ public final class Blob extends AbstractBlob {
         this(fromInputStream(is), parseHeader(contentDispositionHeader));
     }
 
-    static ContentDisposition parseHeader(String contentDispositionHeader) throws IOException {
+    static ContentDisposition parseHeader(String contentDispositionHeader) {
         try {
             return new ContentDisposition(contentDispositionHeader);
         } catch (ParseException ex) {
-            throw new IOException("Failed to parse Content-Disposition header" + contentDispositionHeader, ex);
+            return ContentDisposition.type("attachment").build();
         }
     }
 

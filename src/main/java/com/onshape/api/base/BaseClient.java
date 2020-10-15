@@ -53,6 +53,7 @@ import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -126,9 +127,18 @@ public class BaseClient {
     public static final String ONSHAPE_OCTET_STREAM_V2 = "application/vnd.onshape.v2+octet-stream";
     private static final String[] BINARY_MEDIA_TYPES = new String[]{ONSHAPE_OCTET_STREAM_V2, ONSHAPE_OCTET_STREAM_V1, MediaType.APPLICATION_OCTET_STREAM, "*/*"};
 
+    private static final EnumMap<AcceptCategory, String[]> MEDIA_TYPES = new EnumMap<>(AcceptCategory.class);
+
+    private static enum AcceptCategory {
+        Json, Binary, Any;
+    }
+
     static {
         TOSTRINGMAPPER = new ObjectMapper();
         TOSTRINGMAPPER.enable(SerializationFeature.INDENT_OUTPUT);
+        MEDIA_TYPES.put(AcceptCategory.Json, JSON_MEDIA_TYPES);
+        MEDIA_TYPES.put(AcceptCategory.Binary, BINARY_MEDIA_TYPES);
+        MEDIA_TYPES.put(AcceptCategory.Any, new String[]{MediaType.WILDCARD});
     }
 
     public BaseClient() {
@@ -328,18 +338,20 @@ public class BaseClient {
      */
     public final <T> T call(String method, String url, Object payload, Map<String, Object> urlParameters, Map<String, Object> queryParameters, Class<T> type) throws OnshapeException {
         // Determine if the response type should be binary or JSON
-        boolean jsonResponse = true;
-        if (File.class.equals(type) || Blob.class.equals(type)) {
-            jsonResponse = false;
+        AcceptCategory acceptCategory = AcceptCategory.Json;
+        if (File.class.equals(type) || Blob.class.equals(type) || InputStream.class.equals(type)) {
+            acceptCategory = AcceptCategory.Binary;
+        } else if (InputStreamWithHeaders.class.equals(type)) {
+            acceptCategory = AcceptCategory.Any;
         } else {
             for (Field field : type.getDeclaredFields()) {
                 if (File.class.equals(field.getType()) || Blob.class.equals(field.getType())) {
-                    jsonResponse = false;
+                    acceptCategory = AcceptCategory.Binary;
                 }
             }
         }
         // Call the HTTP method
-        Response response = call(method, url, payload, urlParameters, queryParameters, jsonResponse);
+        Response response = call(method, url, payload, urlParameters, queryParameters, acceptCategory);
         // Return the raw stream and headers if requested
         if (InputStreamWithHeaders.class.equals(type)) {
             return type.cast(new InputStreamWithHeaders((InputStream) response.getEntity(), response.getHeaders()));
@@ -466,12 +478,12 @@ public class BaseClient {
         return call("get", url, null, buildMap(), buildMap(), type);
     }
 
-    Response call(String method, String url, Object payload, Map<String, Object> urlParameters, Map<String, Object> queryParameters, boolean jsonResponse) throws OnshapeException {
+    Response call(String method, String url, Object payload, Map<String, Object> urlParameters, Map<String, Object> queryParameters, AcceptCategory acceptCategory) throws OnshapeException {
         // Construct the URI from the parameters
         URI uri = buildURI(url, urlParameters, queryParameters);
         // Create a WebTarget for the URI
         WebTarget target = client.target(uri).property(ClientProperties.FOLLOW_REDIRECTS, Boolean.FALSE);
-        Invocation.Builder invocationBuilder = target.request(jsonResponse ? JSON_MEDIA_TYPES : BINARY_MEDIA_TYPES);
+        Invocation.Builder invocationBuilder = target.request(MEDIA_TYPES.get(acceptCategory));
         // Accept gzip compressed responses
         invocationBuilder.header("Accept-Encoding", "gzip");
         // Set the content-type and build the entity
@@ -509,7 +521,7 @@ public class BaseClient {
             case SUCCESSFUL:
                 return response;
             case REDIRECTION:
-                return call(method, response.getHeaderString("Location"), payload, buildMap(), buildMap(), jsonResponse);
+                return call(method, response.getHeaderString("Location"), payload, buildMap(), buildMap(), acceptCategory);
             default:
                 // Attempt to read further details from the response from Onshape
                 ErrorResponse errorResponse = null;
@@ -596,7 +608,7 @@ public class BaseClient {
      */
     void addXSRFHeader(Invocation.Builder invocationBuilder) throws OnshapeException {
         // Fetch the /api/clientinfo/xsrf method
-        Response xsrfResponse = call("get", "/clientinfo/xsrf", null, buildMap(), buildMap(), true);
+        Response xsrfResponse = call("get", "/clientinfo/xsrf", null, buildMap(), buildMap(), AcceptCategory.Json);
         XSRFResponse xsrfValues = xsrfResponse.readEntity(XSRFResponse.class);
         // Find the Set-Cookie header containing the token value
         String xsrfToken = null;
