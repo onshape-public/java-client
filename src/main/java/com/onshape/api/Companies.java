@@ -22,7 +22,9 @@
 //
 package com.onshape.api;
 
+import com.onshape.api.requests.CompaniesAddUserRequest;
 import com.onshape.api.requests.CompaniesFindRequest;
+import com.onshape.api.requests.CompaniesGetCompanyAppPurchasesRequest;
 import com.onshape.api.requests.CompaniesGetRequest;
 
 /**
@@ -37,11 +39,27 @@ public final class Companies {
   }
 
   /**
+   * Create request for addUser
+   *  @return Request builder object
+   */
+  public final CompaniesAddUserRequest.Builder addUser() {
+    return CompaniesAddUserRequest.builder(onshape);
+  }
+
+  /**
    * Create request for find
    *  @return Request builder object
    */
   public final CompaniesFindRequest.Builder find() {
     return CompaniesFindRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getCompanyAppPurchases
+   *  @return Request builder object
+   */
+  public final CompaniesGetCompanyAppPurchasesRequest.Builder getCompanyAppPurchases() {
+    return CompaniesGetCompanyAppPurchasesRequest.builder(onshape);
   }
 
   /**

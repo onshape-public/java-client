@@ -24,18 +24,16 @@ package com.onshape.api.requests;
 
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
-import com.onshape.api.responses.ElementsGetTranslatorFormatsResponse;
-import java.lang.Boolean;
-import java.lang.Number;
+import com.onshape.api.responses.CompaniesGetCompanyAppPurchasesResponse;
 import java.lang.Override;
 import java.lang.String;
 
 /**
- * Request object for getTranslatorFormats API endpoint.
+ * Request object for getCompanyAppPurchases API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class ElementsGetTranslatorFormatsRequest {
-  ElementsGetTranslatorFormatsRequest() {
+public final class CompaniesGetCompanyAppPurchasesRequest {
+  CompaniesGetCompanyAppPurchasesRequest() {
   }
 
   @Override
@@ -55,22 +53,21 @@ public final class ElementsGetTranslatorFormatsRequest {
     Builder() {
     }
 
-    private ElementsGetTranslatorFormatsRequest build() {
-      return new com.onshape.api.requests.ElementsGetTranslatorFormatsRequest();
+    private CompaniesGetCompanyAppPurchasesRequest build() {
+      return new com.onshape.api.requests.CompaniesGetCompanyAppPurchasesRequest();
     }
 
     /**
-     * Calls getTranslatorFormats method, Get translator formats
+     * Calls getCompanyAppPurchases method, Returns list of application purchases for the company. This is only available to company
+     *                 administrators.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param objectType restrict to only formats that support given object type (0 - GLOBAL, 2 - PART, 3 - ASSEMBLY, 4 - DRAWING, 5 - PART STUDIO) (Default: null)
-     * @param onlyImportable restrict to only formats that can be imported from (Default: null)
-     * @param onlyExportable restrict to only formats that can be exported to (Default: null) */
-    public final ElementsGetTranslatorFormatsResponse call(Number objectType,
-        Boolean onlyImportable, Boolean onlyExportable) throws OnshapeException {
+     * @param cid Company id
+     */
+    public final CompaniesGetCompanyAppPurchasesResponse call(String cid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/elements/translatorFormats", build(), onshape.buildMap(), onshape.buildMap("objectType", objectType, "onlyImportable", onlyImportable, "onlyExportable", onlyExportable), com.onshape.api.responses.ElementsGetTranslatorFormatsResponse.class);
+      return onshape.call("get", "/companies/:cid/appPurchases", build(), onshape.buildMap("cid", cid), onshape.buildMap(), com.onshape.api.responses.CompaniesGetCompanyAppPurchasesResponse.class);
     }
   }
 }

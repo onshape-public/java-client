@@ -25,61 +25,77 @@ package com.onshape.api.responses;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.types.AbstractResponseObject;
+import java.lang.Number;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
 
 /**
- * Object used in calls to idTranslations API endpoint.
+ * Object used in calls to getCompanyAppPurchases API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class PartStudiosIdTranslationsResponseIds extends AbstractResponseObject {
+public final class CompaniesGetCompanyAppPurchasesResponseItemsCard extends AbstractResponseObject {
   /**
-   * The id in source microversion
+   * Card type
    */
-  @JsonProperty("source")
-  public String source;
+  @JsonProperty("type")
+  public String type;
 
   /**
-   * Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
+   * Card last four digits
    */
-  @JsonProperty("target")
-  public String[] target;
+  @JsonProperty("last4")
+  public String last4;
 
   /**
-   * Translation status (OK|SPLIT|FAILED_TO_RESOLVE|TRANSLATION_ERROR)
+   * Card expiration year
    */
-  @JsonProperty("status")
-  public Map status;
+  @JsonProperty("expYear")
+  public Number expYear;
 
   /**
-   * Get The id in source microversion
+   * Card expiration month
+   */
+  @JsonProperty("expMonth")
+  public Number expMonth;
+
+  /**
+   * Get Card type
    *
-   * @return The id in source microversion
+   * @return Card type
    *
    */
-  public final String getSource() {
-    return this.source;
+  public final String getType() {
+    return this.type;
   }
 
   /**
-   * Get Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
+   * Get Card last four digits
    *
-   * @return Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
+   * @return Card last four digits
    *
    */
-  public final String[] getTarget() {
-    return this.target;
+  public final String getLast4() {
+    return this.last4;
   }
 
   /**
-   * Get Translation status (OK|SPLIT|FAILED_TO_RESOLVE|TRANSLATION_ERROR)
+   * Get Card expiration year
    *
-   * @return Translation status (OK|SPLIT|FAILED_TO_RESOLVE|TRANSLATION_ERROR)
+   * @return Card expiration year
    *
    */
-  public final Map getStatus() {
-    return this.status;
+  public final Number getExpYear() {
+    return this.expYear;
+  }
+
+  /**
+   * Get Card expiration month
+   *
+   * @return Card expiration month
+   *
+   */
+  public final Number getExpMonth() {
+    return this.expMonth;
   }
 
   @Override

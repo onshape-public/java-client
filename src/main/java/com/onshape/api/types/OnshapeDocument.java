@@ -23,6 +23,7 @@
  */
 package com.onshape.api.types;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.exceptions.OnshapeException;
 import java.util.Objects;
@@ -174,6 +175,7 @@ public class OnshapeDocument {
      *
      * @return wv or null if no workspace or version
      */
+    @JsonIgnore
     public WV getWV() {
         if (wvm == null || wvm == WVM.Microversion) {
             return null;
@@ -187,10 +189,47 @@ public class OnshapeDocument {
     }
 
     /**
+     * Gets the choice of WM (Workspace, Microversion)
+     *
+     * @return wm or null if no workspace or microversion
+     */
+    @JsonIgnore
+    public WM getWM() {
+        if (wvm == null || wvm == WVM.Version) {
+            return null;
+        }
+        switch (wvm) {
+            case Workspace:
+                return WM.Workspace;
+            default:
+                return WM.Microversion;
+        }
+    }
+
+    /**
+     * Gets the choice of VM (Version, Microversion)
+     *
+     * @return vm or null if no version or microversion
+     */
+    @JsonIgnore
+    public VM getVM() {
+        if (wvm == null || wvm == WVM.Workspace) {
+            return null;
+        }
+        switch (wvm) {
+            case Version:
+                return VM.Version;
+            default:
+                return VM.Microversion;
+        }
+    }
+
+    /**
      * Gets either Workspace, Version or Microversion, depending on WVM variable
      *
      * @return An id, or null if none available
      */
+    @JsonIgnore
     public String getWVMId() {
         if (wvm == null) {
             return null;
@@ -210,6 +249,7 @@ public class OnshapeDocument {
      *
      * @return An id, or null if none available
      */
+    @JsonIgnore
     public String getWVId() {
         if (wvm == null || wvm == WVM.Microversion) {
             return null;
@@ -219,6 +259,42 @@ public class OnshapeDocument {
                 return workspaceId;
             default:
                 return versionId;
+        }
+    }
+
+    /**
+     * Gets either Workspace or Microversion, depending on WM variable
+     *
+     * @return An id, or null if none available
+     */
+    @JsonIgnore
+    public String getWMId() {
+        if (wvm == null || wvm == WVM.Version) {
+            return null;
+        }
+        switch (wvm) {
+            case Workspace:
+                return workspaceId;
+            default:
+                return microversionId;
+        }
+    }
+
+    /**
+     * Gets either Version or Microversion, depending on VM variable
+     *
+     * @return An id, or null if none available
+     */
+    @JsonIgnore
+    public String getVMId() {
+        if (wvm == null || wvm == WVM.Workspace) {
+            return null;
+        }
+        switch (wvm) {
+            case Version:
+                return versionId;
+            default:
+                return microversionId;
         }
     }
 

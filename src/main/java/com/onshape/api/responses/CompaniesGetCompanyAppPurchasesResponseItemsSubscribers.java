@@ -27,59 +27,90 @@ import com.onshape.api.Onshape;
 import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
 
 /**
- * Object used in calls to idTranslations API endpoint.
+ * Object used in calls to getCompanyAppPurchases API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class PartStudiosIdTranslationsResponseIds extends AbstractResponseObject {
+public final class CompaniesGetCompanyAppPurchasesResponseItemsSubscribers extends AbstractResponseObject {
   /**
-   * The id in source microversion
+   * User id
    */
-  @JsonProperty("source")
-  public String source;
+  @JsonProperty("id")
+  public String id;
 
   /**
-   * Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
+   * User&#39;s name (requires OAuth2ReadPII scope)
    */
-  @JsonProperty("target")
-  public String[] target;
+  @JsonProperty("name")
+  public String name;
 
   /**
-   * Translation status (OK|SPLIT|FAILED_TO_RESOLVE|TRANSLATION_ERROR)
+   * User&#39;s first name (requires OAuth2ReadPII scope)
    */
-  @JsonProperty("status")
-  public Map status;
+  @JsonProperty("firstName")
+  public String firstName;
 
   /**
-   * Get The id in source microversion
+   * User&#39;s last name (requires OAuth2ReadPII scope)
+   */
+  @JsonProperty("lastName")
+  public String lastName;
+
+  /**
+   * User&#39;s email (requires OAuth2ReadPII scope)
+   */
+  @JsonProperty("email")
+  public String email;
+
+  /**
+   * Get User id
    *
-   * @return The id in source microversion
+   * @return User id
    *
    */
-  public final String getSource() {
-    return this.source;
+  public final String getId() {
+    return this.id;
   }
 
   /**
-   * Get Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
+   * Get User&#39;s name (requires OAuth2ReadPII scope)
    *
-   * @return Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
+   * @return User&#39;s name (requires OAuth2ReadPII scope)
    *
    */
-  public final String[] getTarget() {
-    return this.target;
+  public final String getName() {
+    return this.name;
   }
 
   /**
-   * Get Translation status (OK|SPLIT|FAILED_TO_RESOLVE|TRANSLATION_ERROR)
+   * Get User&#39;s first name (requires OAuth2ReadPII scope)
    *
-   * @return Translation status (OK|SPLIT|FAILED_TO_RESOLVE|TRANSLATION_ERROR)
+   * @return User&#39;s first name (requires OAuth2ReadPII scope)
    *
    */
-  public final Map getStatus() {
-    return this.status;
+  public final String getFirstName() {
+    return this.firstName;
+  }
+
+  /**
+   * Get User&#39;s last name (requires OAuth2ReadPII scope)
+   *
+   * @return User&#39;s last name (requires OAuth2ReadPII scope)
+   *
+   */
+  public final String getLastName() {
+    return this.lastName;
+  }
+
+  /**
+   * Get User&#39;s email (requires OAuth2ReadPII scope)
+   *
+   * @return User&#39;s email (requires OAuth2ReadPII scope)
+   *
+   */
+  public final String getEmail() {
+    return this.email;
   }
 
   @Override

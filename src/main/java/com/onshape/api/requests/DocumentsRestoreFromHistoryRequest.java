@@ -26,6 +26,7 @@ import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.DocumentsRestoreFromHistoryResponse;
 import com.onshape.api.types.OnshapeDocument;
+import com.onshape.api.types.VM;
 import java.lang.Override;
 import java.lang.String;
 
@@ -67,12 +68,14 @@ public final class DocumentsRestoreFromHistoryRequest {
      *
      * @param wid The workspace in which to restore
      *
+     * @param vmType Type of Version or Microversion
+     *
      * @param vm The version (v) or microversion (m) to restore from
      */
-    public final DocumentsRestoreFromHistoryResponse call(String did, String wid, String vm) throws
-        OnshapeException {
+    public final DocumentsRestoreFromHistoryResponse call(String did, String wid, VM vmType,
+        String vm) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/documents/:did/w/:wid/restore/[vm]/:vm", build(), onshape.buildMap("did", did, "wid", wid, "vm", vm), onshape.buildMap(), com.onshape.api.responses.DocumentsRestoreFromHistoryResponse.class);
+      return onshape.call("post", "/documents/:did/w/:wid/restore/[vm]/:vm", build(), onshape.buildMap("did", did, "wid", wid, "vmType", vmType, "vm", vm), onshape.buildMap(), com.onshape.api.responses.DocumentsRestoreFromHistoryResponse.class);
     }
 
     /**
@@ -80,13 +83,11 @@ public final class DocumentsRestoreFromHistoryRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param vm The version (v) or microversion (m) to restore from
      */
-    public final DocumentsRestoreFromHistoryResponse call(OnshapeDocument document, String vm)
-        throws OnshapeException {
+    public final DocumentsRestoreFromHistoryResponse call(OnshapeDocument document) throws
+        OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/documents/:did/w/:wid/restore/[vm]/:vm", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "vm", vm), onshape.buildMap(), com.onshape.api.responses.DocumentsRestoreFromHistoryResponse.class);
+      return onshape.call("post", "/documents/:did/w/:wid/restore/[vm]/:vm", build(), onshape.buildMap("did", document.getDocumentId(), "wid", document.getWorkspaceId(), "vmType", document.getVM(), "vm", document.getVMId()), onshape.buildMap(), com.onshape.api.responses.DocumentsRestoreFromHistoryResponse.class);
     }
   }
 }

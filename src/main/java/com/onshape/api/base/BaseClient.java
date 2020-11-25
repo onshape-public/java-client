@@ -662,15 +662,11 @@ public class BaseClient {
         if (path.startsWith("/")) {
             uriBuilder = UriBuilder.fromUri(baseURL + "/api" + path
                     .replaceAll(":([a-zA-Z][a-zA-Z0-9]*)", "{$1}")
-                    .replace("[wvm]", "{wvmType}")
-                    .replace("[wv]", "{wvType}")
-                    .replace("[cu]", "{cuType}"));
+                    .replaceAll("\\[([a-z]+)\\]", "{$1Type}"));
         } else {
             uriBuilder = UriBuilder.fromUri(path
                     .replaceAll(":([a-zA-Z][a-zA-Z0-9]*)", "{$1}")
-                    .replace("[wvm]", "{wvmType}")
-                    .replace("[wv]", "{wvType}")
-                    .replace("[cu]", "{cuType}"));
+                    .replaceAll("\\[([a-z]+)\\]", "{$1Type}"));
         }
         queryParameters.entrySet().stream().filter((queryParameter) -> (queryParameter.getValue() != null))
                 .forEachOrdered((queryParameter) -> {

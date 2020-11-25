@@ -59,6 +59,12 @@ public final class ElementsDecodeConfigurationStringResponseParameters extends A
   public String parameterDisplayValue;
 
   /**
+   * The abbreviated value of the parameter
+   */
+  @JsonProperty("parameterAbbreviatedDisplayValue_")
+  public String parameterAbbreviatedDisplayValue_;
+
+  /**
    * True if the parameter is explicit in the configuration string rather than being defaulted from the element configuration
    */
   @JsonProperty("explicit")
@@ -102,6 +108,16 @@ public final class ElementsDecodeConfigurationStringResponseParameters extends A
    */
   public final String getParameterDisplayValue() {
     return this.parameterDisplayValue;
+  }
+
+  /**
+   * Get The abbreviated value of the parameter
+   *
+   * @return The abbreviated value of the parameter
+   *
+   */
+  public final String getParameterAbbreviatedDisplayValue_() {
+    return this.parameterAbbreviatedDisplayValue_;
   }
 
   /**

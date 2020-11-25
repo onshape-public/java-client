@@ -26,6 +26,7 @@ import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.DocumentsGetDocumentHistoryResponse;
 import com.onshape.api.types.OnshapeDocument;
+import com.onshape.api.types.WM;
 import java.lang.Override;
 import java.lang.String;
 
@@ -65,12 +66,14 @@ public final class DocumentsGetDocumentHistoryRequest {
      *
      * @param did Document ID
      *
+     * @param wmType Type of Workspace or Microversion
+     *
      * @param wm Workspace (w) or Microversion (m) ID
      */
-    public final DocumentsGetDocumentHistoryResponse call(String did, String wm) throws
+    public final DocumentsGetDocumentHistoryResponse call(String did, WM wmType, String wm) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/documents/d/:did/[wm]/:wm/documenthistory", build(), onshape.buildMap("did", did, "wm", wm), onshape.buildMap(), com.onshape.api.responses.DocumentsGetDocumentHistoryResponse.class);
+      return onshape.call("get", "/documents/d/:did/[wm]/:wm/documenthistory", build(), onshape.buildMap("did", did, "wmType", wmType, "wm", wm), onshape.buildMap(), com.onshape.api.responses.DocumentsGetDocumentHistoryResponse.class);
     }
 
     /**
@@ -78,13 +81,11 @@ public final class DocumentsGetDocumentHistoryRequest {
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param wm Workspace (w) or Microversion (m) ID
      */
-    public final DocumentsGetDocumentHistoryResponse call(OnshapeDocument document, String wm)
-        throws OnshapeException {
+    public final DocumentsGetDocumentHistoryResponse call(OnshapeDocument document) throws
+        OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/documents/d/:did/[wm]/:wm/documenthistory", build(), onshape.buildMap("did", document.getDocumentId(), "wm", wm), onshape.buildMap(), com.onshape.api.responses.DocumentsGetDocumentHistoryResponse.class);
+      return onshape.call("get", "/documents/d/:did/[wm]/:wm/documenthistory", build(), onshape.buildMap("did", document.getDocumentId(), "wmType", document.getWM(), "wm", document.getWMId()), onshape.buildMap(), com.onshape.api.responses.DocumentsGetDocumentHistoryResponse.class);
     }
   }
 }

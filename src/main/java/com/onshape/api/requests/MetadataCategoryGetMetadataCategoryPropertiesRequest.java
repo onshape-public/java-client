@@ -60,12 +60,27 @@ public final class MetadataCategoryGetMetadataCategoryPropertiesRequest {
   @JsonProperty("includeObjectTypeDefaults")
   Boolean includeObjectTypeDefaults;
 
+  /**
+   * If true, only default properties for the &lt;code&gt;objectType&lt;/code&gt; will be included in the response, so &lt;code&gt;includeObjectTypeDefaults&lt;/code&gt; should also be true for the response to contain properties. This means that that any properties from categories given by categoryIds will be ignored.
+   */
+  @JsonProperty("onlyObjectTypeDefaults")
+  Boolean onlyObjectTypeDefaults;
+
+  /**
+   * If true, only active properties will be returned
+   */
+  @JsonProperty("onlyActive")
+  Boolean onlyActive;
+
   MetadataCategoryGetMetadataCategoryPropertiesRequest(String documentId, Number objectType,
-      Boolean strict, Boolean includeObjectTypeDefaults) {
+      Boolean strict, Boolean includeObjectTypeDefaults, Boolean onlyObjectTypeDefaults,
+      Boolean onlyActive) {
     this.documentId = documentId;
     this.objectType = objectType;
     this.strict = strict;
     this.includeObjectTypeDefaults = includeObjectTypeDefaults;
+    this.onlyObjectTypeDefaults = onlyObjectTypeDefaults;
+    this.onlyActive = onlyActive;
   }
 
   @Override
@@ -99,6 +114,16 @@ public final class MetadataCategoryGetMetadataCategoryPropertiesRequest {
      * Default properties for the &lt;code&gt;objectType&lt;/code&gt; specified should be included in the response
      */
     private Boolean includeObjectTypeDefaults;
+
+    /**
+     * If true, only default properties for the &lt;code&gt;objectType&lt;/code&gt; will be included in the response, so &lt;code&gt;includeObjectTypeDefaults&lt;/code&gt; should also be true for the response to contain properties. This means that that any properties from categories given by categoryIds will be ignored.
+     */
+    private Boolean onlyObjectTypeDefaults;
+
+    /**
+     * If true, only active properties will be returned
+     */
+    private Boolean onlyActive;
 
     Onshape onshape;
 
@@ -193,8 +218,52 @@ public final class MetadataCategoryGetMetadataCategoryPropertiesRequest {
       return this;
     }
 
+    /**
+     * Get If true, only default properties for the &lt;code&gt;objectType&lt;/code&gt; will be included in the response, so &lt;code&gt;includeObjectTypeDefaults&lt;/code&gt; should also be true for the response to contain properties. This means that that any properties from categories given by categoryIds will be ignored.
+     *
+     * @return If true, only default properties for the &lt;code&gt;objectType&lt;/code&gt; will be included in the response, so &lt;code&gt;includeObjectTypeDefaults&lt;/code&gt; should also be true for the response to contain properties. This means that that any properties from categories given by categoryIds will be ignored.
+     *
+     */
+    public final Boolean onlyObjectTypeDefaults() {
+      return this.onlyObjectTypeDefaults;
+    }
+
+    /**
+     * Set If true, only default properties for the &lt;code&gt;objectType&lt;/code&gt; will be included in the response, so &lt;code&gt;includeObjectTypeDefaults&lt;/code&gt; should also be true for the response to contain properties. This means that that any properties from categories given by categoryIds will be ignored.
+     *
+     * @param value If true, only default properties for the &lt;code&gt;objectType&lt;/code&gt; will be included in the response, so &lt;code&gt;includeObjectTypeDefaults&lt;/code&gt; should also be true for the response to contain properties. This means that that any properties from categories given by categoryIds will be ignored.
+     *
+     * @return the Builder object.
+     */
+    public final Builder onlyObjectTypeDefaults(Boolean value) {
+      this.onlyObjectTypeDefaults = value;
+      return this;
+    }
+
+    /**
+     * Get If true, only active properties will be returned
+     *
+     * @return If true, only active properties will be returned
+     *
+     */
+    public final Boolean onlyActive() {
+      return this.onlyActive;
+    }
+
+    /**
+     * Set If true, only active properties will be returned
+     *
+     * @param value If true, only active properties will be returned
+     *
+     * @return the Builder object.
+     */
+    public final Builder onlyActive(Boolean value) {
+      this.onlyActive = value;
+      return this;
+    }
+
     private MetadataCategoryGetMetadataCategoryPropertiesRequest build() {
-      return new com.onshape.api.requests.MetadataCategoryGetMetadataCategoryPropertiesRequest(documentId,objectType,strict,includeObjectTypeDefaults);
+      return new com.onshape.api.requests.MetadataCategoryGetMetadataCategoryPropertiesRequest(documentId,objectType,strict,includeObjectTypeDefaults,onlyObjectTypeDefaults,onlyActive);
     }
 
     /**
@@ -208,7 +277,7 @@ public final class MetadataCategoryGetMetadataCategoryPropertiesRequest {
     public final MetadataCategoryGetMetadataCategoryPropertiesResponse call(String ownerId,
         Number ownerType, String[] categoryIds) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/metadatacategory/categoryproperties", build(), onshape.buildMap(), onshape.buildMap("ownerId", ownerId, "ownerType", ownerType, "documentId", documentId, "categoryIds", categoryIds, "objectType", objectType, "strict", strict, "includeObjectTypeDefaults", includeObjectTypeDefaults), com.onshape.api.responses.MetadataCategoryGetMetadataCategoryPropertiesResponse.class);
+      return onshape.call("get", "/metadatacategory/categoryproperties", build(), onshape.buildMap(), onshape.buildMap("ownerId", ownerId, "ownerType", ownerType, "documentId", documentId, "categoryIds", categoryIds, "objectType", objectType, "strict", strict, "includeObjectTypeDefaults", includeObjectTypeDefaults, "onlyObjectTypeDefaults", onlyObjectTypeDefaults, "onlyActive", onlyActive), com.onshape.api.responses.MetadataCategoryGetMetadataCategoryPropertiesResponse.class);
     }
   }
 }

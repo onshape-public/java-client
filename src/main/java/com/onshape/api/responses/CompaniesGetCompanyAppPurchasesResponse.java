@@ -27,59 +27,28 @@ import com.onshape.api.Onshape;
 import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
+import javax.validation.constraints.NotNull;
 
 /**
- * Object used in calls to idTranslations API endpoint.
+ * Response object for getCompanyAppPurchases API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class PartStudiosIdTranslationsResponseIds extends AbstractResponseObject {
+public final class CompaniesGetCompanyAppPurchasesResponse extends AbstractResponseObject {
   /**
-   * The id in source microversion
+   * Information about purchases
    */
-  @JsonProperty("source")
-  public String source;
+  @JsonProperty("items")
+  @NotNull
+  CompaniesGetCompanyAppPurchasesResponseItems[] items;
 
   /**
-   * Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
-   */
-  @JsonProperty("target")
-  public String[] target;
-
-  /**
-   * Translation status (OK|SPLIT|FAILED_TO_RESOLVE|TRANSLATION_ERROR)
-   */
-  @JsonProperty("status")
-  public Map status;
-
-  /**
-   * Get The id in source microversion
+   * Get Information about purchases
    *
-   * @return The id in source microversion
+   * @return Information about purchases
    *
    */
-  public final String getSource() {
-    return this.source;
-  }
-
-  /**
-   * Get Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
-   *
-   * @return Set of ids which corresponds to the source id. Can have 0, 1, or more id-s.
-   *
-   */
-  public final String[] getTarget() {
-    return this.target;
-  }
-
-  /**
-   * Get Translation status (OK|SPLIT|FAILED_TO_RESOLVE|TRANSLATION_ERROR)
-   *
-   * @return Translation status (OK|SPLIT|FAILED_TO_RESOLVE|TRANSLATION_ERROR)
-   *
-   */
-  public final Map getStatus() {
-    return this.status;
+  public final CompaniesGetCompanyAppPurchasesResponseItems[] getItems() {
+    return this.items;
   }
 
   @Override
