@@ -22,51 +22,24 @@
 //
 package com.onshape.api;
 
-import com.onshape.api.requests.AccountsCancelPurchaseNewRequest;
-import com.onshape.api.requests.AccountsConsumePurchaseRequest;
-import com.onshape.api.requests.AccountsGetPlanPurchasesRequest;
-import com.onshape.api.requests.AccountsGetPurchasesRequest;
+import com.onshape.api.requests.ExportRulesGetValidRuleOptionsRequest;
 
 /**
- * Accounts: API endpoints for Accounts group.
+ * ExportRules: API endpoints for ExportRules group.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class Accounts {
+public final class ExportRules {
   final Onshape onshape;
 
-  Accounts(Onshape onshape) {
+  ExportRules(Onshape onshape) {
     this.onshape = onshape;
   }
 
   /**
-   * Create request for cancelPurchaseNew
+   * Create request for getValidRuleOptions
    *  @return Request builder object
    */
-  public final AccountsCancelPurchaseNewRequest.Builder cancelPurchaseNew() {
-    return AccountsCancelPurchaseNewRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getPlanPurchases
-   *  @return Request builder object
-   */
-  public final AccountsGetPlanPurchasesRequest.Builder getPlanPurchases() {
-    return AccountsGetPlanPurchasesRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getPurchases
-   *  @return Request builder object
-   */
-  public final AccountsGetPurchasesRequest.Builder getPurchases() {
-    return AccountsGetPurchasesRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for consumePurchase
-   *  @return Request builder object
-   */
-  public final AccountsConsumePurchaseRequest.Builder consumePurchase() {
-    return AccountsConsumePurchaseRequest.builder(onshape);
+  public final ExportRulesGetValidRuleOptionsRequest.Builder getValidRuleOptions() {
+    return ExportRulesGetValidRuleOptionsRequest.builder(onshape);
   }
 }

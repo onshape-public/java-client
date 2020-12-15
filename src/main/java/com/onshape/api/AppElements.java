@@ -23,7 +23,7 @@
 package com.onshape.api;
 
 import com.onshape.api.requests.AppElementsAbortTransactionRequest;
-import com.onshape.api.requests.AppElementsCommitTransactionRequest;
+import com.onshape.api.requests.AppElementsCommitTransactionsRequest;
 import com.onshape.api.requests.AppElementsCompareAppElementJsonRequest;
 import com.onshape.api.requests.AppElementsCreateElementRequest;
 import com.onshape.api.requests.AppElementsCreateReferenceRequest;
@@ -65,11 +65,11 @@ public final class AppElements {
   }
 
   /**
-   * Create request for commitTransaction
+   * Create request for commitTransactions
    *  @return Request builder object
    */
-  public final AppElementsCommitTransactionRequest.Builder commitTransaction() {
-    return AppElementsCommitTransactionRequest.builder(onshape);
+  public final AppElementsCommitTransactionsRequest.Builder commitTransactions() {
+    return AppElementsCommitTransactionsRequest.builder(onshape);
   }
 
   /**

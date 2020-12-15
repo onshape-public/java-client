@@ -25,6 +25,7 @@ package com.onshape.api;
 import com.onshape.api.requests.CompaniesAddUserRequest;
 import com.onshape.api.requests.CompaniesFindRequest;
 import com.onshape.api.requests.CompaniesGetCompanyAppPurchasesRequest;
+import com.onshape.api.requests.CompaniesGetCompanyOneTimeAppPurchasesRequest;
 import com.onshape.api.requests.CompaniesGetRequest;
 
 /**
@@ -60,6 +61,14 @@ public final class Companies {
    */
   public final CompaniesGetCompanyAppPurchasesRequest.Builder getCompanyAppPurchases() {
     return CompaniesGetCompanyAppPurchasesRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getCompanyOneTimeAppPurchases
+   *  @return Request builder object
+   */
+  public final CompaniesGetCompanyOneTimeAppPurchasesRequest.Builder getCompanyOneTimeAppPurchases() {
+    return CompaniesGetCompanyOneTimeAppPurchasesRequest.builder(onshape);
   }
 
   /**
