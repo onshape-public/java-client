@@ -39,24 +39,6 @@ import java.lang.String;
  */
 public final class PartStudiosGetFacesRequest {
   /**
-   * Angle tolerance (in radians). This specifies the limit on the sum of the angular deviations of a tessellation chord from the tangent vectors at two chord endpoints. The specified value must be less than PI/2. This parameter currently has a default value chosen based on the complexity of the parts being tessellated.
-   */
-  @JsonProperty("angleTolerance")
-  Number angleTolerance;
-
-  /**
-   * Chord tolerance (in meters). This specifies the limit on the maximum deviation of a tessellation chord from the true surface/edge. This parameter currently has a default value chosen based on the size and complexity of the parts being tessellated.
-   */
-  @JsonProperty("chordTolerance")
-  Number chordTolerance;
-
-  /**
-   * Max facet width. This specifies the limit on the size of any side of a tessellation facet.
-   */
-  @JsonProperty("maxFacetWidth")
-  Number maxFacetWidth;
-
-  /**
    * If true, output vertex normals corresponding to surface normals at facet vertex points.
    */
   @JsonProperty("outputVertexNormals")
@@ -81,6 +63,30 @@ public final class PartStudiosGetFacesRequest {
   Boolean outputIndexTable;
 
   /**
+   * Whether or not to output faces that cause an error
+   */
+  @JsonProperty("outputErrorFaces")
+  Boolean outputErrorFaces;
+
+  /**
+   * Angle tolerance (in radians). This specifies the limit on the sum of the angular deviations of a tessellation chord from the tangent vectors at two chord endpoints. The specified value must be less than PI/2. This parameter currently has a default value chosen based on the complexity of the parts being tessellated.
+   */
+  @JsonProperty("angleTolerance")
+  Number angleTolerance;
+
+  /**
+   * Chord tolerance (in meters). This specifies the limit on the maximum deviation of a tessellation chord from the true surface/edge. This parameter currently has a default value chosen based on the size and complexity of the parts being tessellated.
+   */
+  @JsonProperty("chordTolerance")
+  Number chordTolerance;
+
+  /**
+   * Max facet width. This specifies the limit on the size of any side of a tessellation facet.
+   */
+  @JsonProperty("maxFacetWidth")
+  Number maxFacetWidth;
+
+  /**
    * IDs of the faces to tessellate (repeat query param to add more than one, i.e. faceId=JHK&amp;faceId=JHD)
    */
   @JsonProperty("faceId")
@@ -93,10 +99,22 @@ public final class PartStudiosGetFacesRequest {
   String partId;
 
   /**
-   * Whether or not to output faces that cause an error
+   * medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored.
    */
-  @JsonProperty("outputErrorFaces")
-  Boolean outputErrorFaces;
+  @JsonProperty("precomputedLevelOfDetail")
+  String precomputedLevelOfDetail;
+
+  /**
+   * Determines if face appearance data will be included in the output
+   */
+  @JsonProperty("outputFaceAppearances")
+  Boolean outputFaceAppearances;
+
+  /**
+   * Determines if separate nodes will be created for each face or per part.
+   */
+  @JsonProperty("outputSeparateFaceNodes")
+  Boolean outputSeparateFaceNodes;
 
   /**
    * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
@@ -110,22 +128,34 @@ public final class PartStudiosGetFacesRequest {
   @JsonProperty("configuration")
   String configuration;
 
-  PartStudiosGetFacesRequest(Number angleTolerance, Number chordTolerance, Number maxFacetWidth,
-      Boolean outputVertexNormals, Boolean outputFacetNormals, Boolean outputTextureCoordinates,
-      Boolean outputIndexTable, String faceId, String partId, Boolean outputErrorFaces,
-      String linkDocumentId, String configuration) {
-    this.angleTolerance = angleTolerance;
-    this.chordTolerance = chordTolerance;
-    this.maxFacetWidth = maxFacetWidth;
+  /**
+   * If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
+   */
+  @JsonProperty("combineCompositePartConstituents")
+  String combineCompositePartConstituents;
+
+  PartStudiosGetFacesRequest(Boolean outputVertexNormals, Boolean outputFacetNormals,
+      Boolean outputTextureCoordinates, Boolean outputIndexTable, Boolean outputErrorFaces,
+      Number angleTolerance, Number chordTolerance, Number maxFacetWidth, String faceId,
+      String partId, String precomputedLevelOfDetail, Boolean outputFaceAppearances,
+      Boolean outputSeparateFaceNodes, String linkDocumentId, String configuration,
+      String combineCompositePartConstituents) {
     this.outputVertexNormals = outputVertexNormals;
     this.outputFacetNormals = outputFacetNormals;
     this.outputTextureCoordinates = outputTextureCoordinates;
     this.outputIndexTable = outputIndexTable;
+    this.outputErrorFaces = outputErrorFaces;
+    this.angleTolerance = angleTolerance;
+    this.chordTolerance = chordTolerance;
+    this.maxFacetWidth = maxFacetWidth;
     this.faceId = faceId;
     this.partId = partId;
-    this.outputErrorFaces = outputErrorFaces;
+    this.precomputedLevelOfDetail = precomputedLevelOfDetail;
+    this.outputFaceAppearances = outputFaceAppearances;
+    this.outputSeparateFaceNodes = outputSeparateFaceNodes;
     this.linkDocumentId = linkDocumentId;
     this.configuration = configuration;
+    this.combineCompositePartConstituents = combineCompositePartConstituents;
   }
 
   @Override
@@ -140,21 +170,6 @@ public final class PartStudiosGetFacesRequest {
   }
 
   public static final class Builder {
-    /**
-     * Angle tolerance (in radians). This specifies the limit on the sum of the angular deviations of a tessellation chord from the tangent vectors at two chord endpoints. The specified value must be less than PI/2. This parameter currently has a default value chosen based on the complexity of the parts being tessellated.
-     */
-    private Number angleTolerance;
-
-    /**
-     * Chord tolerance (in meters). This specifies the limit on the maximum deviation of a tessellation chord from the true surface/edge. This parameter currently has a default value chosen based on the size and complexity of the parts being tessellated.
-     */
-    private Number chordTolerance;
-
-    /**
-     * Max facet width. This specifies the limit on the size of any side of a tessellation facet.
-     */
-    private Number maxFacetWidth;
-
     /**
      * If true, output vertex normals corresponding to surface normals at facet vertex points.
      */
@@ -176,6 +191,26 @@ public final class PartStudiosGetFacesRequest {
     private Boolean outputIndexTable;
 
     /**
+     * Whether or not to output faces that cause an error
+     */
+    private Boolean outputErrorFaces;
+
+    /**
+     * Angle tolerance (in radians). This specifies the limit on the sum of the angular deviations of a tessellation chord from the tangent vectors at two chord endpoints. The specified value must be less than PI/2. This parameter currently has a default value chosen based on the complexity of the parts being tessellated.
+     */
+    private Number angleTolerance;
+
+    /**
+     * Chord tolerance (in meters). This specifies the limit on the maximum deviation of a tessellation chord from the true surface/edge. This parameter currently has a default value chosen based on the size and complexity of the parts being tessellated.
+     */
+    private Number chordTolerance;
+
+    /**
+     * Max facet width. This specifies the limit on the size of any side of a tessellation facet.
+     */
+    private Number maxFacetWidth;
+
+    /**
      * IDs of the faces to tessellate (repeat query param to add more than one, i.e. faceId=JHK&amp;faceId=JHD)
      */
     private String faceId;
@@ -186,9 +221,19 @@ public final class PartStudiosGetFacesRequest {
     private String partId;
 
     /**
-     * Whether or not to output faces that cause an error
+     * medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored.
      */
-    private Boolean outputErrorFaces;
+    private String precomputedLevelOfDetail;
+
+    /**
+     * Determines if face appearance data will be included in the output
+     */
+    private Boolean outputFaceAppearances;
+
+    /**
+     * Determines if separate nodes will be created for each face or per part.
+     */
+    private Boolean outputSeparateFaceNodes;
 
     /**
      * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
@@ -200,75 +245,14 @@ public final class PartStudiosGetFacesRequest {
      */
     private String configuration;
 
+    /**
+     * If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
+     */
+    private String combineCompositePartConstituents;
+
     Onshape onshape;
 
     Builder() {
-    }
-
-    /**
-     * Get Angle tolerance (in radians). This specifies the limit on the sum of the angular deviations of a tessellation chord from the tangent vectors at two chord endpoints. The specified value must be less than PI/2. This parameter currently has a default value chosen based on the complexity of the parts being tessellated.
-     *
-     * @return Angle tolerance (in radians). This specifies the limit on the sum of the angular deviations of a tessellation chord from the tangent vectors at two chord endpoints. The specified value must be less than PI/2. This parameter currently has a default value chosen based on the complexity of the parts being tessellated.
-     *
-     */
-    public final Number angleTolerance() {
-      return this.angleTolerance;
-    }
-
-    /**
-     * Set Angle tolerance (in radians). This specifies the limit on the sum of the angular deviations of a tessellation chord from the tangent vectors at two chord endpoints. The specified value must be less than PI/2. This parameter currently has a default value chosen based on the complexity of the parts being tessellated.
-     *
-     * @param value Angle tolerance (in radians). This specifies the limit on the sum of the angular deviations of a tessellation chord from the tangent vectors at two chord endpoints. The specified value must be less than PI/2. This parameter currently has a default value chosen based on the complexity of the parts being tessellated.
-     *
-     * @return the Builder object.
-     */
-    public final Builder angleTolerance(Number value) {
-      this.angleTolerance = value;
-      return this;
-    }
-
-    /**
-     * Get Chord tolerance (in meters). This specifies the limit on the maximum deviation of a tessellation chord from the true surface/edge. This parameter currently has a default value chosen based on the size and complexity of the parts being tessellated.
-     *
-     * @return Chord tolerance (in meters). This specifies the limit on the maximum deviation of a tessellation chord from the true surface/edge. This parameter currently has a default value chosen based on the size and complexity of the parts being tessellated.
-     *
-     */
-    public final Number chordTolerance() {
-      return this.chordTolerance;
-    }
-
-    /**
-     * Set Chord tolerance (in meters). This specifies the limit on the maximum deviation of a tessellation chord from the true surface/edge. This parameter currently has a default value chosen based on the size and complexity of the parts being tessellated.
-     *
-     * @param value Chord tolerance (in meters). This specifies the limit on the maximum deviation of a tessellation chord from the true surface/edge. This parameter currently has a default value chosen based on the size and complexity of the parts being tessellated.
-     *
-     * @return the Builder object.
-     */
-    public final Builder chordTolerance(Number value) {
-      this.chordTolerance = value;
-      return this;
-    }
-
-    /**
-     * Get Max facet width. This specifies the limit on the size of any side of a tessellation facet.
-     *
-     * @return Max facet width. This specifies the limit on the size of any side of a tessellation facet.
-     *
-     */
-    public final Number maxFacetWidth() {
-      return this.maxFacetWidth;
-    }
-
-    /**
-     * Set Max facet width. This specifies the limit on the size of any side of a tessellation facet.
-     *
-     * @param value Max facet width. This specifies the limit on the size of any side of a tessellation facet.
-     *
-     * @return the Builder object.
-     */
-    public final Builder maxFacetWidth(Number value) {
-      this.maxFacetWidth = value;
-      return this;
     }
 
     /**
@@ -360,6 +344,94 @@ public final class PartStudiosGetFacesRequest {
     }
 
     /**
+     * Get Whether or not to output faces that cause an error
+     *
+     * @return Whether or not to output faces that cause an error
+     *
+     */
+    public final Boolean outputErrorFaces() {
+      return this.outputErrorFaces;
+    }
+
+    /**
+     * Set Whether or not to output faces that cause an error
+     *
+     * @param value Whether or not to output faces that cause an error
+     *
+     * @return the Builder object.
+     */
+    public final Builder outputErrorFaces(Boolean value) {
+      this.outputErrorFaces = value;
+      return this;
+    }
+
+    /**
+     * Get Angle tolerance (in radians). This specifies the limit on the sum of the angular deviations of a tessellation chord from the tangent vectors at two chord endpoints. The specified value must be less than PI/2. This parameter currently has a default value chosen based on the complexity of the parts being tessellated.
+     *
+     * @return Angle tolerance (in radians). This specifies the limit on the sum of the angular deviations of a tessellation chord from the tangent vectors at two chord endpoints. The specified value must be less than PI/2. This parameter currently has a default value chosen based on the complexity of the parts being tessellated.
+     *
+     */
+    public final Number angleTolerance() {
+      return this.angleTolerance;
+    }
+
+    /**
+     * Set Angle tolerance (in radians). This specifies the limit on the sum of the angular deviations of a tessellation chord from the tangent vectors at two chord endpoints. The specified value must be less than PI/2. This parameter currently has a default value chosen based on the complexity of the parts being tessellated.
+     *
+     * @param value Angle tolerance (in radians). This specifies the limit on the sum of the angular deviations of a tessellation chord from the tangent vectors at two chord endpoints. The specified value must be less than PI/2. This parameter currently has a default value chosen based on the complexity of the parts being tessellated.
+     *
+     * @return the Builder object.
+     */
+    public final Builder angleTolerance(Number value) {
+      this.angleTolerance = value;
+      return this;
+    }
+
+    /**
+     * Get Chord tolerance (in meters). This specifies the limit on the maximum deviation of a tessellation chord from the true surface/edge. This parameter currently has a default value chosen based on the size and complexity of the parts being tessellated.
+     *
+     * @return Chord tolerance (in meters). This specifies the limit on the maximum deviation of a tessellation chord from the true surface/edge. This parameter currently has a default value chosen based on the size and complexity of the parts being tessellated.
+     *
+     */
+    public final Number chordTolerance() {
+      return this.chordTolerance;
+    }
+
+    /**
+     * Set Chord tolerance (in meters). This specifies the limit on the maximum deviation of a tessellation chord from the true surface/edge. This parameter currently has a default value chosen based on the size and complexity of the parts being tessellated.
+     *
+     * @param value Chord tolerance (in meters). This specifies the limit on the maximum deviation of a tessellation chord from the true surface/edge. This parameter currently has a default value chosen based on the size and complexity of the parts being tessellated.
+     *
+     * @return the Builder object.
+     */
+    public final Builder chordTolerance(Number value) {
+      this.chordTolerance = value;
+      return this;
+    }
+
+    /**
+     * Get Max facet width. This specifies the limit on the size of any side of a tessellation facet.
+     *
+     * @return Max facet width. This specifies the limit on the size of any side of a tessellation facet.
+     *
+     */
+    public final Number maxFacetWidth() {
+      return this.maxFacetWidth;
+    }
+
+    /**
+     * Set Max facet width. This specifies the limit on the size of any side of a tessellation facet.
+     *
+     * @param value Max facet width. This specifies the limit on the size of any side of a tessellation facet.
+     *
+     * @return the Builder object.
+     */
+    public final Builder maxFacetWidth(Number value) {
+      this.maxFacetWidth = value;
+      return this;
+    }
+
+    /**
      * Get IDs of the faces to tessellate (repeat query param to add more than one, i.e. faceId=JHK&amp;faceId=JHD)
      *
      * @return IDs of the faces to tessellate (repeat query param to add more than one, i.e. faceId=JHK&amp;faceId=JHD)
@@ -404,24 +476,68 @@ public final class PartStudiosGetFacesRequest {
     }
 
     /**
-     * Get Whether or not to output faces that cause an error
+     * Get medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored.
      *
-     * @return Whether or not to output faces that cause an error
+     * @return medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored.
      *
      */
-    public final Boolean outputErrorFaces() {
-      return this.outputErrorFaces;
+    public final String precomputedLevelOfDetail() {
+      return this.precomputedLevelOfDetail;
     }
 
     /**
-     * Set Whether or not to output faces that cause an error
+     * Set medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored.
      *
-     * @param value Whether or not to output faces that cause an error
+     * @param value medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored.
      *
      * @return the Builder object.
      */
-    public final Builder outputErrorFaces(Boolean value) {
-      this.outputErrorFaces = value;
+    public final Builder precomputedLevelOfDetail(String value) {
+      this.precomputedLevelOfDetail = value;
+      return this;
+    }
+
+    /**
+     * Get Determines if face appearance data will be included in the output
+     *
+     * @return Determines if face appearance data will be included in the output
+     *
+     */
+    public final Boolean outputFaceAppearances() {
+      return this.outputFaceAppearances;
+    }
+
+    /**
+     * Set Determines if face appearance data will be included in the output
+     *
+     * @param value Determines if face appearance data will be included in the output
+     *
+     * @return the Builder object.
+     */
+    public final Builder outputFaceAppearances(Boolean value) {
+      this.outputFaceAppearances = value;
+      return this;
+    }
+
+    /**
+     * Get Determines if separate nodes will be created for each face or per part.
+     *
+     * @return Determines if separate nodes will be created for each face or per part.
+     *
+     */
+    public final Boolean outputSeparateFaceNodes() {
+      return this.outputSeparateFaceNodes;
+    }
+
+    /**
+     * Set Determines if separate nodes will be created for each face or per part.
+     *
+     * @param value Determines if separate nodes will be created for each face or per part.
+     *
+     * @return the Builder object.
+     */
+    public final Builder outputSeparateFaceNodes(Boolean value) {
+      this.outputSeparateFaceNodes = value;
       return this;
     }
 
@@ -469,8 +585,30 @@ public final class PartStudiosGetFacesRequest {
       return this;
     }
 
+    /**
+     * Get If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
+     *
+     * @return If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
+     *
+     */
+    public final String combineCompositePartConstituents() {
+      return this.combineCompositePartConstituents;
+    }
+
+    /**
+     * Set If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
+     *
+     * @param value If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
+     *
+     * @return the Builder object.
+     */
+    public final Builder combineCompositePartConstituents(String value) {
+      this.combineCompositePartConstituents = value;
+      return this;
+    }
+
     private PartStudiosGetFacesRequest build() {
-      return new com.onshape.api.requests.PartStudiosGetFacesRequest(angleTolerance,chordTolerance,maxFacetWidth,outputVertexNormals,outputFacetNormals,outputTextureCoordinates,outputIndexTable,faceId,partId,outputErrorFaces,linkDocumentId,configuration);
+      return new com.onshape.api.requests.PartStudiosGetFacesRequest(outputVertexNormals,outputFacetNormals,outputTextureCoordinates,outputIndexTable,outputErrorFaces,angleTolerance,chordTolerance,maxFacetWidth,faceId,partId,precomputedLevelOfDetail,outputFaceAppearances,outputSeparateFaceNodes,linkDocumentId,configuration,combineCompositePartConstituents);
     }
 
     /**
@@ -492,7 +630,7 @@ public final class PartStudiosGetFacesRequest {
     public final PartStudiosGetFacesResponse call(String did, WVM wvmType, String wvm, String eid)
         throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "outputVertexNormals", outputVertexNormals, "outputFacetNormals", outputFacetNormals, "outputTextureCoordinates", outputTextureCoordinates, "outputIndexTable", outputIndexTable, "faceId", faceId, "partId", partId, "outputErrorFaces", outputErrorFaces, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosGetFacesResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("outputVertexNormals", outputVertexNormals, "outputFacetNormals", outputFacetNormals, "outputTextureCoordinates", outputTextureCoordinates, "outputIndexTable", outputIndexTable, "outputErrorFaces", outputErrorFaces, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "faceId", faceId, "partId", partId, "precomputedLevelOfDetail", precomputedLevelOfDetail, "outputFaceAppearances", outputFaceAppearances, "outputSeparateFaceNodes", outputSeparateFaceNodes, "linkDocumentId", linkDocumentId, "configuration", configuration, "combineCompositePartConstituents", combineCompositePartConstituents), com.onshape.api.responses.PartStudiosGetFacesResponse.class);
     }
 
     /**
@@ -507,7 +645,7 @@ public final class PartStudiosGetFacesRequest {
     public final PartStudiosGetFacesResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "outputVertexNormals", outputVertexNormals, "outputFacetNormals", outputFacetNormals, "outputTextureCoordinates", outputTextureCoordinates, "outputIndexTable", outputIndexTable, "faceId", faceId, "partId", partId, "outputErrorFaces", outputErrorFaces, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosGetFacesResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("outputVertexNormals", outputVertexNormals, "outputFacetNormals", outputFacetNormals, "outputTextureCoordinates", outputTextureCoordinates, "outputIndexTable", outputIndexTable, "outputErrorFaces", outputErrorFaces, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "faceId", faceId, "partId", partId, "precomputedLevelOfDetail", precomputedLevelOfDetail, "outputFaceAppearances", outputFaceAppearances, "outputSeparateFaceNodes", outputSeparateFaceNodes, "linkDocumentId", linkDocumentId, "configuration", configuration, "combineCompositePartConstituents", combineCompositePartConstituents), com.onshape.api.responses.PartStudiosGetFacesResponse.class);
     }
   }
 }

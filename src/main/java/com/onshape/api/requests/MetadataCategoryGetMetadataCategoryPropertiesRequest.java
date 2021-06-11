@@ -43,7 +43,7 @@ public final class MetadataCategoryGetMetadataCategoryPropertiesRequest {
   String documentId;
 
   /**
-   * Metadata object type. Optional but if specified it must be BTMetadataObjectType enum ordinal except GLOBAL.
+   * Metadata object type. Optional but if specified it must be any BTMetadataObjectType enum ordinal except GLOBAL.
    */
   @JsonProperty("objectType")
   Number objectType;
@@ -73,12 +73,6 @@ public final class MetadataCategoryGetMetadataCategoryPropertiesRequest {
   Boolean includePartPropertiesTableOnlyProperties;
 
   /**
-   * If true, only default properties for the &lt;code&gt;objectType&lt;/code&gt; will be included in the response, so &lt;code&gt;includeObjectTypeDefaults&lt;/code&gt; should also be true for the response to contain properties. This means that that any properties from categories given by categoryIds will be ignored.
-   */
-  @JsonProperty("onlyObjectTypeDefaults")
-  Boolean onlyObjectTypeDefaults;
-
-  /**
    * If true, only active properties will be returned
    */
   @JsonProperty("onlyActive")
@@ -86,15 +80,13 @@ public final class MetadataCategoryGetMetadataCategoryPropertiesRequest {
 
   MetadataCategoryGetMetadataCategoryPropertiesRequest(String documentId, Number objectType,
       Boolean strict, Boolean includeObjectTypeDefaults, Boolean includeComputedProperties,
-      Boolean includePartPropertiesTableOnlyProperties, Boolean onlyObjectTypeDefaults,
-      Boolean onlyActive) {
+      Boolean includePartPropertiesTableOnlyProperties, Boolean onlyActive) {
     this.documentId = documentId;
     this.objectType = objectType;
     this.strict = strict;
     this.includeObjectTypeDefaults = includeObjectTypeDefaults;
     this.includeComputedProperties = includeComputedProperties;
     this.includePartPropertiesTableOnlyProperties = includePartPropertiesTableOnlyProperties;
-    this.onlyObjectTypeDefaults = onlyObjectTypeDefaults;
     this.onlyActive = onlyActive;
   }
 
@@ -116,7 +108,7 @@ public final class MetadataCategoryGetMetadataCategoryPropertiesRequest {
     private String documentId;
 
     /**
-     * Metadata object type. Optional but if specified it must be BTMetadataObjectType enum ordinal except GLOBAL.
+     * Metadata object type. Optional but if specified it must be any BTMetadataObjectType enum ordinal except GLOBAL.
      */
     private Number objectType;
 
@@ -139,11 +131,6 @@ public final class MetadataCategoryGetMetadataCategoryPropertiesRequest {
      * If true, properties found in the part properties table wil be included in the results
      */
     private Boolean includePartPropertiesTableOnlyProperties;
-
-    /**
-     * If true, only default properties for the &lt;code&gt;objectType&lt;/code&gt; will be included in the response, so &lt;code&gt;includeObjectTypeDefaults&lt;/code&gt; should also be true for the response to contain properties. This means that that any properties from categories given by categoryIds will be ignored.
-     */
-    private Boolean onlyObjectTypeDefaults;
 
     /**
      * If true, only active properties will be returned
@@ -178,9 +165,9 @@ public final class MetadataCategoryGetMetadataCategoryPropertiesRequest {
     }
 
     /**
-     * Get Metadata object type. Optional but if specified it must be BTMetadataObjectType enum ordinal except GLOBAL.
+     * Get Metadata object type. Optional but if specified it must be any BTMetadataObjectType enum ordinal except GLOBAL.
      *
-     * @return Metadata object type. Optional but if specified it must be BTMetadataObjectType enum ordinal except GLOBAL.
+     * @return Metadata object type. Optional but if specified it must be any BTMetadataObjectType enum ordinal except GLOBAL.
      *
      */
     public final Number objectType() {
@@ -188,9 +175,9 @@ public final class MetadataCategoryGetMetadataCategoryPropertiesRequest {
     }
 
     /**
-     * Set Metadata object type. Optional but if specified it must be BTMetadataObjectType enum ordinal except GLOBAL.
+     * Set Metadata object type. Optional but if specified it must be any BTMetadataObjectType enum ordinal except GLOBAL.
      *
-     * @param value Metadata object type. Optional but if specified it must be BTMetadataObjectType enum ordinal except GLOBAL.
+     * @param value Metadata object type. Optional but if specified it must be any BTMetadataObjectType enum ordinal except GLOBAL.
      *
      * @return the Builder object.
      */
@@ -288,28 +275,6 @@ public final class MetadataCategoryGetMetadataCategoryPropertiesRequest {
     }
 
     /**
-     * Get If true, only default properties for the &lt;code&gt;objectType&lt;/code&gt; will be included in the response, so &lt;code&gt;includeObjectTypeDefaults&lt;/code&gt; should also be true for the response to contain properties. This means that that any properties from categories given by categoryIds will be ignored.
-     *
-     * @return If true, only default properties for the &lt;code&gt;objectType&lt;/code&gt; will be included in the response, so &lt;code&gt;includeObjectTypeDefaults&lt;/code&gt; should also be true for the response to contain properties. This means that that any properties from categories given by categoryIds will be ignored.
-     *
-     */
-    public final Boolean onlyObjectTypeDefaults() {
-      return this.onlyObjectTypeDefaults;
-    }
-
-    /**
-     * Set If true, only default properties for the &lt;code&gt;objectType&lt;/code&gt; will be included in the response, so &lt;code&gt;includeObjectTypeDefaults&lt;/code&gt; should also be true for the response to contain properties. This means that that any properties from categories given by categoryIds will be ignored.
-     *
-     * @param value If true, only default properties for the &lt;code&gt;objectType&lt;/code&gt; will be included in the response, so &lt;code&gt;includeObjectTypeDefaults&lt;/code&gt; should also be true for the response to contain properties. This means that that any properties from categories given by categoryIds will be ignored.
-     *
-     * @return the Builder object.
-     */
-    public final Builder onlyObjectTypeDefaults(Boolean value) {
-      this.onlyObjectTypeDefaults = value;
-      return this;
-    }
-
-    /**
      * Get If true, only active properties will be returned
      *
      * @return If true, only active properties will be returned
@@ -332,7 +297,7 @@ public final class MetadataCategoryGetMetadataCategoryPropertiesRequest {
     }
 
     private MetadataCategoryGetMetadataCategoryPropertiesRequest build() {
-      return new com.onshape.api.requests.MetadataCategoryGetMetadataCategoryPropertiesRequest(documentId,objectType,strict,includeObjectTypeDefaults,includeComputedProperties,includePartPropertiesTableOnlyProperties,onlyObjectTypeDefaults,onlyActive);
+      return new com.onshape.api.requests.MetadataCategoryGetMetadataCategoryPropertiesRequest(documentId,objectType,strict,includeObjectTypeDefaults,includeComputedProperties,includePartPropertiesTableOnlyProperties,onlyActive);
     }
 
     /**
@@ -342,11 +307,11 @@ public final class MetadataCategoryGetMetadataCategoryPropertiesRequest {
      *
      * @param ownerId Owner ID. Must be specified. (Default: null)
      * @param ownerType Schema owner type must be 1 company which is the default. (Default: null)
-     * @param categoryIds Metadata category IDs. Must be specified. (Default: null) */
+     * @param categoryIds Metadata category IDs, must be specified if &lt;code&gt;strict&lt;/code&gt; is true (Default: null) */
     public final MetadataCategoryGetMetadataCategoryPropertiesResponse call(String ownerId,
         Number ownerType, String[] categoryIds) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/metadatacategory/categoryproperties", build(), onshape.buildMap(), onshape.buildMap("ownerId", ownerId, "ownerType", ownerType, "documentId", documentId, "categoryIds", categoryIds, "objectType", objectType, "strict", strict, "includeObjectTypeDefaults", includeObjectTypeDefaults, "includeComputedProperties", includeComputedProperties, "includePartPropertiesTableOnlyProperties", includePartPropertiesTableOnlyProperties, "onlyObjectTypeDefaults", onlyObjectTypeDefaults, "onlyActive", onlyActive), com.onshape.api.responses.MetadataCategoryGetMetadataCategoryPropertiesResponse.class);
+      return onshape.call("get", "/metadatacategory/categoryproperties", build(), onshape.buildMap(), onshape.buildMap("ownerId", ownerId, "ownerType", ownerType, "documentId", documentId, "categoryIds", categoryIds, "objectType", objectType, "strict", strict, "includeObjectTypeDefaults", includeObjectTypeDefaults, "includeComputedProperties", includeComputedProperties, "includePartPropertiesTableOnlyProperties", includePartPropertiesTableOnlyProperties, "onlyActive", onlyActive), com.onshape.api.responses.MetadataCategoryGetMetadataCategoryPropertiesResponse.class);
     }
   }
 }

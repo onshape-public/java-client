@@ -141,7 +141,7 @@ public final class PartsGetBodyDetailsRequest {
      *
      * @param eid Element ID
      *
-     * @param partid Part ID
+     * @param partid Part ID (must be URL encoded)
      */
     public final PartsGetBodyDetailsResponse call(String did, WVM wvmType, String wvm, String eid,
         String partid) throws OnshapeException {
@@ -155,7 +155,7 @@ public final class PartsGetBodyDetailsRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param partid Part ID
+     * @param partid Part ID (must be URL encoded)
      */
     public final PartsGetBodyDetailsResponse call(OnshapeDocument document, String partid) throws
         OnshapeException {

@@ -24,6 +24,7 @@ package com.onshape.api;
 
 import com.onshape.api.requests.AliasesCreateAliasRequest;
 import com.onshape.api.requests.AliasesDeleteAliasRequest;
+import com.onshape.api.requests.AliasesGetAliasMembersRequest;
 import com.onshape.api.requests.AliasesGetAliasRequest;
 import com.onshape.api.requests.AliasesGetAliasesInCompanyRequest;
 import com.onshape.api.requests.AliasesUpdateAliasRequest;
@@ -61,6 +62,14 @@ public final class Aliases {
    */
   public final AliasesGetAliasRequest.Builder getAlias() {
     return AliasesGetAliasRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getAliasMembers
+   *  @return Request builder object
+   */
+  public final AliasesGetAliasMembersRequest.Builder getAliasMembers() {
+    return AliasesGetAliasMembersRequest.builder(onshape);
   }
 
   /**

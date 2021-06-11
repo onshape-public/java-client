@@ -51,6 +51,13 @@ public final class TeamsGetResponse extends AbstractResponseObject {
   Boolean admin;
 
   /**
+   * Whether current user is a member of team
+   */
+  @JsonProperty("member")
+  @NotNull
+  Boolean member;
+
+  /**
    * Team name
    */
   @JsonProperty("name")
@@ -99,6 +106,16 @@ public final class TeamsGetResponse extends AbstractResponseObject {
    */
   public final Boolean getAdmin() {
     return this.admin;
+  }
+
+  /**
+   * Get Whether current user is a member of team
+   *
+   * @return Whether current user is a member of team
+   *
+   */
+  public final Boolean getMember() {
+    return this.member;
   }
 
   /**

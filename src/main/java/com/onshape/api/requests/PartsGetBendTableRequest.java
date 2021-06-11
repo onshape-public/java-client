@@ -107,7 +107,7 @@ public final class PartsGetBendTableRequest {
      *
      * @param eid Element ID
      *
-     * @param partid Part ID
+     * @param partid Part ID (must be URL encoded)
      */
     public final PartsGetBendTableResponse call(String did, WVM wvmType, String wvm, String eid,
         String partid) throws OnshapeException {
@@ -121,7 +121,7 @@ public final class PartsGetBendTableRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param partid Part ID
+     * @param partid Part ID (must be URL encoded)
      */
     public final PartsGetBendTableResponse call(OnshapeDocument document, String partid) throws
         OnshapeException {

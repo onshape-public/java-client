@@ -36,7 +36,7 @@ import java.lang.String;
  */
 public final class RevisionsGetLatestInDocumentOrCompanyRequest {
   /**
-   * Element type integer
+   * Element type integer... 0: Part Studio, 1: Assembly, 2: Drawing. 4: Blob
    */
   @JsonProperty("et")
   Number et;
@@ -58,7 +58,7 @@ public final class RevisionsGetLatestInDocumentOrCompanyRequest {
 
   public static final class Builder {
     /**
-     * Element type integer
+     * Element type integer... 0: Part Studio, 1: Assembly, 2: Drawing. 4: Blob
      */
     private Number et;
 
@@ -68,9 +68,9 @@ public final class RevisionsGetLatestInDocumentOrCompanyRequest {
     }
 
     /**
-     * Get Element type integer
+     * Get Element type integer... 0: Part Studio, 1: Assembly, 2: Drawing. 4: Blob
      *
-     * @return Element type integer
+     * @return Element type integer... 0: Part Studio, 1: Assembly, 2: Drawing. 4: Blob
      *
      */
     public final Number et() {
@@ -78,9 +78,9 @@ public final class RevisionsGetLatestInDocumentOrCompanyRequest {
     }
 
     /**
-     * Set Element type integer
+     * Set Element type integer... 0: Part Studio, 1: Assembly, 2: Drawing. 4: Blob
      *
-     * @param value Element type integer
+     * @param value Element type integer... 0: Part Studio, 1: Assembly, 2: Drawing. 4: Blob
      *
      * @return the Builder object.
      */

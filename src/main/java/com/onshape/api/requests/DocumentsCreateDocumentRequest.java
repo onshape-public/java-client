@@ -45,6 +45,13 @@ public final class DocumentsCreateDocumentRequest {
   String name;
 
   /**
+   * Id of a folder to place the created document in
+   */
+  @JsonProperty("parentId")
+  @NotNull
+  String parentId;
+
+  /**
    * Owner&#39;s user ID (default: current user)
    */
   @JsonProperty("ownerId")
@@ -88,10 +95,11 @@ public final class DocumentsCreateDocumentRequest {
   @JsonProperty("elements")
   DocumentsCreateDocumentRequestElements[] elements;
 
-  DocumentsCreateDocumentRequest(String name, String ownerId, Number ownerType,
+  DocumentsCreateDocumentRequest(String name, String parentId, String ownerId, Number ownerType,
       String[] betaCapabilityIds, Boolean isPublic, Boolean isGenerateUnknownMessages,
       String[] tags, DocumentsCreateDocumentRequestElements[] elements) {
     this.name = name;
+    this.parentId = parentId;
     this.ownerId = ownerId;
     this.ownerType = ownerType;
     this.betaCapabilityIds = betaCapabilityIds;
@@ -109,6 +117,16 @@ public final class DocumentsCreateDocumentRequest {
    */
   public final String getName() {
     return this.name;
+  }
+
+  /**
+   * Get Id of a folder to place the created document in
+   *
+   * @return Id of a folder to place the created document in
+   *
+   */
+  public final String getParentId() {
+    return this.parentId;
   }
 
   /**
@@ -199,6 +217,11 @@ public final class DocumentsCreateDocumentRequest {
     private String name;
 
     /**
+     * Id of a folder to place the created document in
+     */
+    private String parentId;
+
+    /**
      * Owner&#39;s user ID (default: current user)
      */
     private String ownerId;
@@ -257,6 +280,28 @@ public final class DocumentsCreateDocumentRequest {
      */
     public final Builder name(String value) {
       this.name = value;
+      return this;
+    }
+
+    /**
+     * Get Id of a folder to place the created document in
+     *
+     * @return Id of a folder to place the created document in
+     *
+     */
+    public final String parentId() {
+      return this.parentId;
+    }
+
+    /**
+     * Set Id of a folder to place the created document in
+     *
+     * @param value Id of a folder to place the created document in
+     *
+     * @return the Builder object.
+     */
+    public final Builder parentId(String value) {
+      this.parentId = value;
       return this;
     }
 
@@ -415,7 +460,7 @@ public final class DocumentsCreateDocumentRequest {
     }
 
     private DocumentsCreateDocumentRequest build() {
-      return new com.onshape.api.requests.DocumentsCreateDocumentRequest(name,ownerId,ownerType,betaCapabilityIds,isPublic,isGenerateUnknownMessages,tags,elements);
+      return new com.onshape.api.requests.DocumentsCreateDocumentRequest(name,parentId,ownerId,ownerType,betaCapabilityIds,isPublic,isGenerateUnknownMessages,tags,elements);
     }
 
     /**

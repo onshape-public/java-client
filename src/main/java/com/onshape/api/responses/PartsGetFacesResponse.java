@@ -46,7 +46,6 @@ public final class PartsGetFacesResponse extends AbstractResponseObject {
    * Array of facet vertex data
    */
   @JsonProperty("facetPoints")
-  @NotNull
   Number[][] facetPoints;
 
   /**

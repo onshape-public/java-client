@@ -28,11 +28,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
 import java.io.SequenceInputStream;
+import java.util.stream.Stream;
+import javax.validation.constraints.NotNull;
 
 /**
  * InputStream that modifies a wrapped stream in the case where an array of JSON
  * is returned but is to be deserialized to an array field within an object.
- * 
+ *
  * @author Peter Harman peter.harman@cae.tech
  */
 public class JsonObjectOrArrayInputStream extends InputStream {
@@ -48,24 +50,47 @@ public class JsonObjectOrArrayInputStream extends InputStream {
         boolean streamIsArray = first == '[';
         // Check the type we are deserializing to
         boolean typeIsArray = serializationType.isArray();
-        boolean typeContainsArray = !typeIsArray
-                && serializationType.getDeclaredFields().length == 1
-                && serializationType.getDeclaredFields()[0].getType().isArray();
+        // Determine a possible array field to serialize to
+        String singleNonOptionalArrayField = streamIsArray && !typeIsArray
+                ? singleNonOptionalArrayField(serializationType)
+                : null;
         // Stream is array but type isn't or vice versa
-        if (streamIsArray && !(typeIsArray || typeContainsArray)) {
+        if (streamIsArray && !(typeIsArray || singleNonOptionalArrayField != null)) {
             throw new IOException("Attempting to map array response to object type");
         }
         if (!streamIsArray && typeIsArray) {
             throw new IOException("Attempting to map object response to array type");
         }
-        if (streamIsArray && typeContainsArray) {
+        if (streamIsArray && singleNonOptionalArrayField != null) {
             // Stream modified to wrap array element
-            String fieldName = serializationType.getDeclaredFields()[0].getName();
-            this.stream = new SequenceInputStream(new ByteArrayInputStream(("{\"" + fieldName + "\":").getBytes("UTF-8")),
-                    new SequenceInputStream(pushbackStream, new ByteArrayInputStream(("}").getBytes("UTF-8"))));
+            this.stream = new SequenceInputStream(
+                    new ByteArrayInputStream(("{\"" + singleNonOptionalArrayField + "\":").getBytes("UTF-8")),
+                    new SequenceInputStream(
+                            pushbackStream,
+                            new ByteArrayInputStream(("}").getBytes("UTF-8"))));
         } else {
             // Stream should be returned as-is
             this.stream = pushbackStream;
+        }
+    }
+
+    static String singleNonOptionalArrayField(Class<?> serializationType) {
+        switch (serializationType.getDeclaredFields().length) {
+            case 0:
+                return null;
+            case 1:
+                // If there is only 1 field and it is an array return that
+                if (serializationType.getDeclaredFields()[0].getType().isArray()) {
+                    return serializationType.getDeclaredFields()[0].getName();
+                }
+                return null;
+            default:
+                // If there is only 1 required field and it is an array return that
+                return Stream.of(serializationType.getDeclaredFields())
+                        .filter(field -> field.getAnnotation(NotNull.class) != null)
+                        .reduce((a, b) -> null)
+                        .filter(field -> field.getType().isArray())
+                        .map(field -> field.getName()).orElse(null);
         }
     }
 

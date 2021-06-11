@@ -64,6 +64,13 @@ public final class AliasesGetAliasResponse extends AbstractResponseObject {
   Map[] identities;
 
   /**
+   * BTAliasEntryInfo, entries.0.createdAt, entries.0.identity (user/team) contained in the alias
+   */
+  @JsonProperty("entries")
+  @NotNull
+  Map[] entries;
+
+  /**
    * Get ID of the alias
    *
    * @return ID of the alias
@@ -101,6 +108,16 @@ public final class AliasesGetAliasResponse extends AbstractResponseObject {
    */
   public final Map[] getIdentities() {
     return this.identities;
+  }
+
+  /**
+   * Get BTAliasEntryInfo, entries.0.createdAt, entries.0.identity (user/team) contained in the alias
+   *
+   * @return BTAliasEntryInfo, entries.0.createdAt, entries.0.identity (user/team) contained in the alias
+   *
+   */
+  public final Map[] getEntries() {
+    return this.entries;
   }
 
   @Override

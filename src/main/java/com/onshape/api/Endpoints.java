@@ -22,8 +22,6 @@
 //
 package com.onshape.api;
 
-import com.onshape.api.requests.EndpointsGetEndpointsRequest;
-
 /**
  * Endpoints: API endpoints for Endpoints group.
  * &copy; 2018-Present Onshape Inc.
@@ -33,13 +31,5 @@ public final class Endpoints {
 
   Endpoints(Onshape onshape) {
     this.onshape = onshape;
-  }
-
-  /**
-   * Create request for getEndpoints
-   *  @return Request builder object
-   */
-  public final EndpointsGetEndpointsRequest.Builder getEndpoints() {
-    return EndpointsGetEndpointsRequest.builder(onshape);
   }
 }

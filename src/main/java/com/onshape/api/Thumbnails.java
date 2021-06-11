@@ -23,7 +23,6 @@
 package com.onshape.api;
 
 import com.onshape.api.requests.ThumbnailsDeleteApplicationThumbnailsRequest;
-import com.onshape.api.requests.ThumbnailsGetConfiguredElementThumbnailWithSizeRequest;
 import com.onshape.api.requests.ThumbnailsGetDocumentThumbnailRequest;
 import com.onshape.api.requests.ThumbnailsGetDocumentThumbnailWithSizeRequest;
 import com.onshape.api.requests.ThumbnailsGetElementThumbnailRequest;
@@ -50,14 +49,6 @@ public final class Thumbnails {
    */
   public final ThumbnailsDeleteApplicationThumbnailsRequest.Builder deleteApplicationThumbnails() {
     return ThumbnailsDeleteApplicationThumbnailsRequest.builder(onshape);
-  }
-
-  /**
-   * Create request for getConfiguredElementThumbnailWithSize
-   *  @return Request builder object
-   */
-  public final ThumbnailsGetConfiguredElementThumbnailWithSizeRequest.Builder getConfiguredElementThumbnailWithSize() {
-    return ThumbnailsGetConfiguredElementThumbnailWithSizeRequest.builder(onshape);
   }
 
   /**

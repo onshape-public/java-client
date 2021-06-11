@@ -28,7 +28,6 @@ import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
-import javax.validation.constraints.NotNull;
 
 /**
  * Response object for updateElementMetadata API endpoint.
@@ -39,28 +38,24 @@ public final class MetadataUpdateElementMetadataResponse extends AbstractRespons
    * Overall status of updates
    */
   @JsonProperty("status")
-  @NotNull
   String status;
 
   /**
    * Status of item updates
    */
   @JsonProperty("items")
-  @NotNull
   MetadataUpdateElementMetadataResponseItems[] items;
 
   /**
    * URL of current object of the response
    */
   @JsonProperty("href")
-  @NotNull
   String href;
 
   /**
    * Collection of status information of individual metadata property updates
    */
   @JsonProperty("properties")
-  @NotNull
   MetadataUpdateElementMetadataResponseProperties[] properties;
 
   /**

@@ -176,7 +176,7 @@ public final class PartsGetBoundingBoxesRequest {
      *
      * @param eid Element ID
      *
-     * @param partid Part ID
+     * @param partid Part ID (must be URL encoded)
      */
     public final PartsGetBoundingBoxesResponse call(String did, WVM wvmType, String wvm, String eid,
         String partid) throws OnshapeException {
@@ -190,7 +190,7 @@ public final class PartsGetBoundingBoxesRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param partid Part ID
+     * @param partid Part ID (must be URL encoded)
      */
     public final PartsGetBoundingBoxesResponse call(OnshapeDocument document, String partid) throws
         OnshapeException {

@@ -99,15 +99,28 @@ public final class PartsGetFacesRequest {
   String linkDocumentId;
 
   /**
+   * medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner.
+   */
+  @JsonProperty("precomputedLevelOfDetail")
+  String precomputedLevelOfDetail;
+
+  /**
    * Configuration string
    */
   @JsonProperty("configuration")
   String configuration;
 
+  /**
+   * If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
+   */
+  @JsonProperty("combineCompositePartConstituents")
+  String combineCompositePartConstituents;
+
   PartsGetFacesRequest(Number angleTolerance, Number chordTolerance, Number maxFacetWidth,
       Boolean outputVertexNormals, Boolean outputFacetNormals, Boolean outputTextureCoordinates,
       Boolean outputIndexTable, String faceId, Boolean outputErrorFaces, String linkDocumentId,
-      String configuration) {
+      String precomputedLevelOfDetail, String configuration,
+      String combineCompositePartConstituents) {
     this.angleTolerance = angleTolerance;
     this.chordTolerance = chordTolerance;
     this.maxFacetWidth = maxFacetWidth;
@@ -118,7 +131,9 @@ public final class PartsGetFacesRequest {
     this.faceId = faceId;
     this.outputErrorFaces = outputErrorFaces;
     this.linkDocumentId = linkDocumentId;
+    this.precomputedLevelOfDetail = precomputedLevelOfDetail;
     this.configuration = configuration;
+    this.combineCompositePartConstituents = combineCompositePartConstituents;
   }
 
   @Override
@@ -184,9 +199,19 @@ public final class PartsGetFacesRequest {
     private String linkDocumentId;
 
     /**
+     * medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner.
+     */
+    private String precomputedLevelOfDetail;
+
+    /**
      * Configuration string
      */
     private String configuration;
+
+    /**
+     * If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
+     */
+    private String combineCompositePartConstituents;
 
     Onshape onshape;
 
@@ -414,6 +439,28 @@ public final class PartsGetFacesRequest {
     }
 
     /**
+     * Get medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner.
+     *
+     * @return medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner.
+     *
+     */
+    public final String precomputedLevelOfDetail() {
+      return this.precomputedLevelOfDetail;
+    }
+
+    /**
+     * Set medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner.
+     *
+     * @param value medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner.
+     *
+     * @return the Builder object.
+     */
+    public final Builder precomputedLevelOfDetail(String value) {
+      this.precomputedLevelOfDetail = value;
+      return this;
+    }
+
+    /**
      * Get Configuration string
      *
      * @return Configuration string
@@ -435,8 +482,30 @@ public final class PartsGetFacesRequest {
       return this;
     }
 
+    /**
+     * Get If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
+     *
+     * @return If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
+     *
+     */
+    public final String combineCompositePartConstituents() {
+      return this.combineCompositePartConstituents;
+    }
+
+    /**
+     * Set If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
+     *
+     * @param value If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
+     *
+     * @return the Builder object.
+     */
+    public final Builder combineCompositePartConstituents(String value) {
+      this.combineCompositePartConstituents = value;
+      return this;
+    }
+
     private PartsGetFacesRequest build() {
-      return new com.onshape.api.requests.PartsGetFacesRequest(angleTolerance,chordTolerance,maxFacetWidth,outputVertexNormals,outputFacetNormals,outputTextureCoordinates,outputIndexTable,faceId,outputErrorFaces,linkDocumentId,configuration);
+      return new com.onshape.api.requests.PartsGetFacesRequest(angleTolerance,chordTolerance,maxFacetWidth,outputVertexNormals,outputFacetNormals,outputTextureCoordinates,outputIndexTable,faceId,outputErrorFaces,linkDocumentId,precomputedLevelOfDetail,configuration,combineCompositePartConstituents);
     }
 
     /**
@@ -455,12 +524,12 @@ public final class PartsGetFacesRequest {
      *
      * @param eid Element ID
      *
-     * @param partid Part ID
+     * @param partid Part ID (must be URL encoded)
      */
     public final PartsGetFacesResponse call(String did, WVM wvmType, String wvm, String eid,
         String partid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/tessellatedfaces", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "partid", partid), onshape.buildMap("angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "outputVertexNormals", outputVertexNormals, "outputFacetNormals", outputFacetNormals, "outputTextureCoordinates", outputTextureCoordinates, "outputIndexTable", outputIndexTable, "faceId", faceId, "outputErrorFaces", outputErrorFaces, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartsGetFacesResponse.class);
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/tessellatedfaces", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "partid", partid), onshape.buildMap("angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "outputVertexNormals", outputVertexNormals, "outputFacetNormals", outputFacetNormals, "outputTextureCoordinates", outputTextureCoordinates, "outputIndexTable", outputIndexTable, "faceId", faceId, "outputErrorFaces", outputErrorFaces, "linkDocumentId", linkDocumentId, "precomputedLevelOfDetail", precomputedLevelOfDetail, "configuration", configuration, "combineCompositePartConstituents", combineCompositePartConstituents), com.onshape.api.responses.PartsGetFacesResponse.class);
     }
 
     /**
@@ -472,12 +541,12 @@ public final class PartsGetFacesRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param partid Part ID
+     * @param partid Part ID (must be URL encoded)
      */
     public final PartsGetFacesResponse call(OnshapeDocument document, String partid) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/tessellatedfaces", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap("angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "outputVertexNormals", outputVertexNormals, "outputFacetNormals", outputFacetNormals, "outputTextureCoordinates", outputTextureCoordinates, "outputIndexTable", outputIndexTable, "faceId", faceId, "outputErrorFaces", outputErrorFaces, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartsGetFacesResponse.class);
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/tessellatedfaces", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap("angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "outputVertexNormals", outputVertexNormals, "outputFacetNormals", outputFacetNormals, "outputTextureCoordinates", outputTextureCoordinates, "outputIndexTable", outputIndexTable, "faceId", faceId, "outputErrorFaces", outputErrorFaces, "linkDocumentId", linkDocumentId, "precomputedLevelOfDetail", precomputedLevelOfDetail, "configuration", configuration, "combineCompositePartConstituents", combineCompositePartConstituents), com.onshape.api.responses.PartsGetFacesResponse.class);
     }
   }
 }

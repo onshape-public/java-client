@@ -1,0 +1,91 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2018 - Present Onshape Inc. 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+package com.onshape.api.requests;
+
+import com.onshape.api.Onshape;
+import com.onshape.api.exceptions.OnshapeException;
+import com.onshape.api.responses.CommentsGetAttachmentResponse;
+import com.onshape.api.types.InputStreamWithHeaders;
+import java.lang.Override;
+import java.lang.String;
+
+/**
+ * Request object for getAttachment API endpoint.
+ * &copy; 2018-Present Onshape Inc.
+ */
+public final class CommentsGetAttachmentRequest {
+  CommentsGetAttachmentRequest() {
+  }
+
+  @Override
+  public String toString() {
+    return Onshape.toString(this);
+  }
+
+  public static final Builder builder(Onshape onshape) {
+    Builder builder = new Builder();
+    builder.onshape = onshape;
+    return builder;
+  }
+
+  public static final class Builder {
+    Onshape onshape;
+
+    Builder() {
+    }
+
+    private CommentsGetAttachmentRequest build() {
+      return new com.onshape.api.requests.CommentsGetAttachmentRequest();
+    }
+
+    /**
+     * Calls getAttachment method, Get an attachment associated with comment
+     * @return Response object
+     * @throws OnshapeException On HTTP or serialization error
+     *
+     * @param cid Comment ID
+     *
+     * @param fdid Foreign data ID
+     */
+    public final CommentsGetAttachmentResponse call(String cid, String fdid) throws
+        OnshapeException {
+      onshape.validate(build());
+      return onshape.call("get", "/comments/:cid/attachment/:fdid", build(), onshape.buildMap("cid", cid, "fdid", fdid), onshape.buildMap(), com.onshape.api.responses.CommentsGetAttachmentResponse.class);
+    }
+
+    /**
+     * Calls getAttachment method, Get an attachment associated with comment
+     * @return InputStreamWithHeaders stream with headers
+     * @throws OnshapeException On HTTP error
+     *
+     * @param cid Comment ID
+     *
+     * @param fdid Foreign data ID
+     */
+    public final InputStreamWithHeaders callToStream(String cid, String fdid) throws
+        OnshapeException {
+      onshape.validate(build());
+      return onshape.call("get", "/comments/:cid/attachment/:fdid", build(), onshape.buildMap("cid", cid, "fdid", fdid), onshape.buildMap(), InputStreamWithHeaders.class);
+    }
+  }
+}

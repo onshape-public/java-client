@@ -22,6 +22,8 @@
 //
 package com.onshape.api;
 
+import com.onshape.api.requests.AppAssociativeDataCopyAssociativeDataRequest;
+
 /**
  * AppAssociativeData: API endpoints for AppAssociativeData group.
  * &copy; 2018-Present Onshape Inc.
@@ -31,5 +33,13 @@ public final class AppAssociativeData {
 
   AppAssociativeData(Onshape onshape) {
     this.onshape = onshape;
+  }
+
+  /**
+   * Create request for copyAssociativeData
+   *  @return Request builder object
+   */
+  public final AppAssociativeDataCopyAssociativeDataRequest.Builder copyAssociativeData() {
+    return AppAssociativeDataCopyAssociativeDataRequest.builder(onshape);
   }
 }

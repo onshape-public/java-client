@@ -26,6 +26,7 @@ import com.onshape.api.requests.CompaniesAddUserRequest;
 import com.onshape.api.requests.CompaniesFindRequest;
 import com.onshape.api.requests.CompaniesGetCompanyAppPurchasesRequest;
 import com.onshape.api.requests.CompaniesGetCompanyOneTimeAppPurchasesRequest;
+import com.onshape.api.requests.CompaniesGetDocumentsByNameRequest;
 import com.onshape.api.requests.CompaniesGetRequest;
 
 /**
@@ -77,5 +78,13 @@ public final class Companies {
    */
   public final CompaniesGetRequest.Builder get() {
     return CompaniesGetRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getDocumentsByName
+   *  @return Request builder object
+   */
+  public final CompaniesGetDocumentsByNameRequest.Builder getDocumentsByName() {
+    return CompaniesGetDocumentsByNameRequest.builder(onshape);
   }
 }

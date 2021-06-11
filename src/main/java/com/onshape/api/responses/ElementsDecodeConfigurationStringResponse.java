@@ -39,7 +39,6 @@ public final class ElementsDecodeConfigurationStringResponse extends AbstractRes
    * If true, the configuration string encodes standard content configuration in addition to part studio configuration.
    */
   @JsonProperty("isStandardContent")
-  @NotNull
   Boolean isStandardContent;
 
   /**

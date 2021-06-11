@@ -30,7 +30,7 @@ import com.onshape.api.types.OnshapeVersion;
  * &copy; 2018-Present Onshape Inc.
  */
 public final class Onshape extends BaseClient {
-  private final OnshapeVersion buildVersion = new OnshapeVersion("1.0", "7333ff5109290592867a37abf297ebc7dd1846a1", "1.123.26497.7333ff510929");
+  private final OnshapeVersion buildVersion = new OnshapeVersion("1.0", "5dca45f4e88303aec83bc9b1189d4c44e846e582", "1.131.27307.5dca45f4e883");
 
   /**
    * Access API methods for category Accounts
@@ -102,6 +102,14 @@ public final class Onshape extends BaseClient {
    */
   public final BlobElements blobElements() {
     return new BlobElements(this);
+  }
+
+  /**
+   * Access API methods for category Comments
+   *  @return API group object
+   */
+  public final Comments comments() {
+    return new Comments(this);
   }
 
   /**

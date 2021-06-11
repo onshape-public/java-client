@@ -272,7 +272,7 @@ public final class MetadataGetPartMetadataRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param pid Part ID
+     * @param pid Part ID (must be URL encoded)
      *
      * @param did Document ID
      *
@@ -294,7 +294,7 @@ public final class MetadataGetPartMetadataRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param pid Part ID
+     * @param pid Part ID (must be URL encoded)
      */
     public final MetadataGetPartMetadataResponse call(OnshapeDocument document, String pid) throws
         OnshapeException {

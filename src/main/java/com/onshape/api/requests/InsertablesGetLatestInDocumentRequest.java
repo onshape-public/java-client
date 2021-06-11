@@ -56,22 +56,28 @@ public final class InsertablesGetLatestInDocumentRequest {
   Boolean includeSurfaces;
 
   /**
-   * Returns wires
-   */
-  @JsonProperty("includeWires")
-  Boolean includeWires;
-
-  /**
    * Returns sketches
    */
   @JsonProperty("includeSketches")
   Boolean includeSketches;
 
   /**
+   * Returns wires
+   */
+  @JsonProperty("includeWires")
+  Boolean includeWires;
+
+  /**
    * Returns reference features
    */
   @JsonProperty("includeReferenceFeatures")
   Boolean includeReferenceFeatures;
+
+  /**
+   * Returns part studios
+   */
+  @JsonProperty("includePartStudios")
+  Boolean includePartStudios;
 
   /**
    * Returns assemblies
@@ -145,19 +151,27 @@ public final class InsertablesGetLatestInDocumentRequest {
   @JsonProperty("includeFSTables")
   Boolean includeFSTables;
 
+  /**
+   * Returns FeatureScript computed part property functions
+   */
+  @JsonProperty("includeFSComputedPartProperties")
+  Boolean includeFSComputedPartProperties;
+
   InsertablesGetLatestInDocumentRequest(String betaCapabilityIds, Boolean includeParts,
-      Boolean includeSurfaces, Boolean includeWires, Boolean includeSketches,
-      Boolean includeReferenceFeatures, Boolean includeAssemblies, Boolean includeFeatureStudios,
-      Boolean includeFeatures, Boolean includeBlobs, Boolean includeMeshes,
-      Boolean includeFlattenedBodies, Boolean includeApplications, String allowedBlobMimeTypes,
-      String allowedApplicationMimeTypes, Boolean includeCompositeParts,
-      Number maxFeatureScriptVersion, Boolean includeFSTables) {
+      Boolean includeSurfaces, Boolean includeSketches, Boolean includeWires,
+      Boolean includeReferenceFeatures, Boolean includePartStudios, Boolean includeAssemblies,
+      Boolean includeFeatureStudios, Boolean includeFeatures, Boolean includeBlobs,
+      Boolean includeMeshes, Boolean includeFlattenedBodies, Boolean includeApplications,
+      String allowedBlobMimeTypes, String allowedApplicationMimeTypes,
+      Boolean includeCompositeParts, Number maxFeatureScriptVersion, Boolean includeFSTables,
+      Boolean includeFSComputedPartProperties) {
     this.betaCapabilityIds = betaCapabilityIds;
     this.includeParts = includeParts;
     this.includeSurfaces = includeSurfaces;
-    this.includeWires = includeWires;
     this.includeSketches = includeSketches;
+    this.includeWires = includeWires;
     this.includeReferenceFeatures = includeReferenceFeatures;
+    this.includePartStudios = includePartStudios;
     this.includeAssemblies = includeAssemblies;
     this.includeFeatureStudios = includeFeatureStudios;
     this.includeFeatures = includeFeatures;
@@ -170,6 +184,7 @@ public final class InsertablesGetLatestInDocumentRequest {
     this.includeCompositeParts = includeCompositeParts;
     this.maxFeatureScriptVersion = maxFeatureScriptVersion;
     this.includeFSTables = includeFSTables;
+    this.includeFSComputedPartProperties = includeFSComputedPartProperties;
   }
 
   @Override
@@ -200,19 +215,24 @@ public final class InsertablesGetLatestInDocumentRequest {
     private Boolean includeSurfaces;
 
     /**
-     * Returns wires
-     */
-    private Boolean includeWires;
-
-    /**
      * Returns sketches
      */
     private Boolean includeSketches;
 
     /**
+     * Returns wires
+     */
+    private Boolean includeWires;
+
+    /**
      * Returns reference features
      */
     private Boolean includeReferenceFeatures;
+
+    /**
+     * Returns part studios
+     */
+    private Boolean includePartStudios;
 
     /**
      * Returns assemblies
@@ -273,6 +293,11 @@ public final class InsertablesGetLatestInDocumentRequest {
      * Returns FeatureScript tables
      */
     private Boolean includeFSTables;
+
+    /**
+     * Returns FeatureScript computed part property functions
+     */
+    private Boolean includeFSComputedPartProperties;
 
     Onshape onshape;
 
@@ -346,28 +371,6 @@ public final class InsertablesGetLatestInDocumentRequest {
     }
 
     /**
-     * Get Returns wires
-     *
-     * @return Returns wires
-     *
-     */
-    public final Boolean includeWires() {
-      return this.includeWires;
-    }
-
-    /**
-     * Set Returns wires
-     *
-     * @param value Returns wires
-     *
-     * @return the Builder object.
-     */
-    public final Builder includeWires(Boolean value) {
-      this.includeWires = value;
-      return this;
-    }
-
-    /**
      * Get Returns sketches
      *
      * @return Returns sketches
@@ -390,6 +393,28 @@ public final class InsertablesGetLatestInDocumentRequest {
     }
 
     /**
+     * Get Returns wires
+     *
+     * @return Returns wires
+     *
+     */
+    public final Boolean includeWires() {
+      return this.includeWires;
+    }
+
+    /**
+     * Set Returns wires
+     *
+     * @param value Returns wires
+     *
+     * @return the Builder object.
+     */
+    public final Builder includeWires(Boolean value) {
+      this.includeWires = value;
+      return this;
+    }
+
+    /**
      * Get Returns reference features
      *
      * @return Returns reference features
@@ -408,6 +433,28 @@ public final class InsertablesGetLatestInDocumentRequest {
      */
     public final Builder includeReferenceFeatures(Boolean value) {
       this.includeReferenceFeatures = value;
+      return this;
+    }
+
+    /**
+     * Get Returns part studios
+     *
+     * @return Returns part studios
+     *
+     */
+    public final Boolean includePartStudios() {
+      return this.includePartStudios;
+    }
+
+    /**
+     * Set Returns part studios
+     *
+     * @param value Returns part studios
+     *
+     * @return the Builder object.
+     */
+    public final Builder includePartStudios(Boolean value) {
+      this.includePartStudios = value;
       return this;
     }
 
@@ -675,8 +722,30 @@ public final class InsertablesGetLatestInDocumentRequest {
       return this;
     }
 
+    /**
+     * Get Returns FeatureScript computed part property functions
+     *
+     * @return Returns FeatureScript computed part property functions
+     *
+     */
+    public final Boolean includeFSComputedPartProperties() {
+      return this.includeFSComputedPartProperties;
+    }
+
+    /**
+     * Set Returns FeatureScript computed part property functions
+     *
+     * @param value Returns FeatureScript computed part property functions
+     *
+     * @return the Builder object.
+     */
+    public final Builder includeFSComputedPartProperties(Boolean value) {
+      this.includeFSComputedPartProperties = value;
+      return this;
+    }
+
     private InsertablesGetLatestInDocumentRequest build() {
-      return new com.onshape.api.requests.InsertablesGetLatestInDocumentRequest(betaCapabilityIds,includeParts,includeSurfaces,includeWires,includeSketches,includeReferenceFeatures,includeAssemblies,includeFeatureStudios,includeFeatures,includeBlobs,includeMeshes,includeFlattenedBodies,includeApplications,allowedBlobMimeTypes,allowedApplicationMimeTypes,includeCompositeParts,maxFeatureScriptVersion,includeFSTables);
+      return new com.onshape.api.requests.InsertablesGetLatestInDocumentRequest(betaCapabilityIds,includeParts,includeSurfaces,includeSketches,includeWires,includeReferenceFeatures,includePartStudios,includeAssemblies,includeFeatureStudios,includeFeatures,includeBlobs,includeMeshes,includeFlattenedBodies,includeApplications,allowedBlobMimeTypes,allowedApplicationMimeTypes,includeCompositeParts,maxFeatureScriptVersion,includeFSTables,includeFSComputedPartProperties);
     }
 
     /**
@@ -688,7 +757,7 @@ public final class InsertablesGetLatestInDocumentRequest {
      */
     public final InsertablesGetLatestInDocumentResponse call(String did) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/insertables/d/:did/latest", build(), onshape.buildMap("did", did), onshape.buildMap("betaCapabilityIds", betaCapabilityIds, "includeParts", includeParts, "includeSurfaces", includeSurfaces, "includeWires", includeWires, "includeSketches", includeSketches, "includeReferenceFeatures", includeReferenceFeatures, "includeAssemblies", includeAssemblies, "includeFeatureStudios", includeFeatureStudios, "includeFeatures", includeFeatures, "includeBlobs", includeBlobs, "includeMeshes", includeMeshes, "includeFlattenedBodies", includeFlattenedBodies, "includeApplications", includeApplications, "allowedBlobMimeTypes", allowedBlobMimeTypes, "allowedApplicationMimeTypes", allowedApplicationMimeTypes, "includeCompositeParts", includeCompositeParts, "maxFeatureScriptVersion", maxFeatureScriptVersion, "includeFSTables", includeFSTables), com.onshape.api.responses.InsertablesGetLatestInDocumentResponse.class);
+      return onshape.call("get", "/insertables/d/:did/latest", build(), onshape.buildMap("did", did), onshape.buildMap("betaCapabilityIds", betaCapabilityIds, "includeParts", includeParts, "includeSurfaces", includeSurfaces, "includeSketches", includeSketches, "includeWires", includeWires, "includeReferenceFeatures", includeReferenceFeatures, "includePartStudios", includePartStudios, "includeAssemblies", includeAssemblies, "includeFeatureStudios", includeFeatureStudios, "includeFeatures", includeFeatures, "includeBlobs", includeBlobs, "includeMeshes", includeMeshes, "includeFlattenedBodies", includeFlattenedBodies, "includeApplications", includeApplications, "allowedBlobMimeTypes", allowedBlobMimeTypes, "allowedApplicationMimeTypes", allowedApplicationMimeTypes, "includeCompositeParts", includeCompositeParts, "maxFeatureScriptVersion", maxFeatureScriptVersion, "includeFSTables", includeFSTables, "includeFSComputedPartProperties", includeFSComputedPartProperties), com.onshape.api.responses.InsertablesGetLatestInDocumentResponse.class);
     }
 
     /**
@@ -700,7 +769,7 @@ public final class InsertablesGetLatestInDocumentRequest {
     public final InsertablesGetLatestInDocumentResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/insertables/d/:did/latest", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap("betaCapabilityIds", betaCapabilityIds, "includeParts", includeParts, "includeSurfaces", includeSurfaces, "includeWires", includeWires, "includeSketches", includeSketches, "includeReferenceFeatures", includeReferenceFeatures, "includeAssemblies", includeAssemblies, "includeFeatureStudios", includeFeatureStudios, "includeFeatures", includeFeatures, "includeBlobs", includeBlobs, "includeMeshes", includeMeshes, "includeFlattenedBodies", includeFlattenedBodies, "includeApplications", includeApplications, "allowedBlobMimeTypes", allowedBlobMimeTypes, "allowedApplicationMimeTypes", allowedApplicationMimeTypes, "includeCompositeParts", includeCompositeParts, "maxFeatureScriptVersion", maxFeatureScriptVersion, "includeFSTables", includeFSTables), com.onshape.api.responses.InsertablesGetLatestInDocumentResponse.class);
+      return onshape.call("get", "/insertables/d/:did/latest", build(), onshape.buildMap("did", document.getDocumentId()), onshape.buildMap("betaCapabilityIds", betaCapabilityIds, "includeParts", includeParts, "includeSurfaces", includeSurfaces, "includeSketches", includeSketches, "includeWires", includeWires, "includeReferenceFeatures", includeReferenceFeatures, "includePartStudios", includePartStudios, "includeAssemblies", includeAssemblies, "includeFeatureStudios", includeFeatureStudios, "includeFeatures", includeFeatures, "includeBlobs", includeBlobs, "includeMeshes", includeMeshes, "includeFlattenedBodies", includeFlattenedBodies, "includeApplications", includeApplications, "allowedBlobMimeTypes", allowedBlobMimeTypes, "allowedApplicationMimeTypes", allowedApplicationMimeTypes, "includeCompositeParts", includeCompositeParts, "maxFeatureScriptVersion", maxFeatureScriptVersion, "includeFSTables", includeFSTables, "includeFSComputedPartProperties", includeFSComputedPartProperties), com.onshape.api.responses.InsertablesGetLatestInDocumentResponse.class);
     }
   }
 }

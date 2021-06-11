@@ -349,7 +349,7 @@ public final class PartsGetShadedViewsRequest {
      *
      * @param eid Element ID
      *
-     * @param partid Part ID
+     * @param partid Part ID (must be URL encoded)
      */
     public final PartsGetShadedViewsResponse call(String did, WVM wvmType, String wvm, String eid,
         String partid) throws OnshapeException {
@@ -363,7 +363,7 @@ public final class PartsGetShadedViewsRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param partid Part ID
+     * @param partid Part ID (must be URL encoded)
      */
     public final PartsGetShadedViewsResponse call(OnshapeDocument document, String partid) throws
         OnshapeException {

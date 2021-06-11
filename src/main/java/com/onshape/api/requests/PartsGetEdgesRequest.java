@@ -56,6 +56,12 @@ public final class PartsGetEdgesRequest {
   String edgeId;
 
   /**
+   * medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner.
+   */
+  @JsonProperty("precomputedLevelOfDetail")
+  String precomputedLevelOfDetail;
+
+  /**
    * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
    */
   @JsonProperty("linkDocumentId")
@@ -68,10 +74,11 @@ public final class PartsGetEdgesRequest {
   String configuration;
 
   PartsGetEdgesRequest(Number angleTolerance, Number chordTolerance, String edgeId,
-      String linkDocumentId, String configuration) {
+      String precomputedLevelOfDetail, String linkDocumentId, String configuration) {
     this.angleTolerance = angleTolerance;
     this.chordTolerance = chordTolerance;
     this.edgeId = edgeId;
+    this.precomputedLevelOfDetail = precomputedLevelOfDetail;
     this.linkDocumentId = linkDocumentId;
     this.configuration = configuration;
   }
@@ -102,6 +109,11 @@ public final class PartsGetEdgesRequest {
      * Edges to tessellate (repeat query param to add more than one, i.e. edgeId=JHK&amp;edgeId=JHD)
      */
     private String edgeId;
+
+    /**
+     * medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner.
+     */
+    private String precomputedLevelOfDetail;
 
     /**
      * Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
@@ -185,6 +197,28 @@ public final class PartsGetEdgesRequest {
     }
 
     /**
+     * Get medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner.
+     *
+     * @return medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner.
+     *
+     */
+    public final String precomputedLevelOfDetail() {
+      return this.precomputedLevelOfDetail;
+    }
+
+    /**
+     * Set medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner.
+     *
+     * @param value medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner.
+     *
+     * @return the Builder object.
+     */
+    public final Builder precomputedLevelOfDetail(String value) {
+      this.precomputedLevelOfDetail = value;
+      return this;
+    }
+
+    /**
      * Get Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
      *
      * @return Id of document that links to the document being accessed. This may provide additional access rights to the document. Allowed only with version (v) path parameter.
@@ -229,7 +263,7 @@ public final class PartsGetEdgesRequest {
     }
 
     private PartsGetEdgesRequest build() {
-      return new com.onshape.api.requests.PartsGetEdgesRequest(angleTolerance,chordTolerance,edgeId,linkDocumentId,configuration);
+      return new com.onshape.api.requests.PartsGetEdgesRequest(angleTolerance,chordTolerance,edgeId,precomputedLevelOfDetail,linkDocumentId,configuration);
     }
 
     /**
@@ -248,12 +282,12 @@ public final class PartsGetEdgesRequest {
      *
      * @param eid Element ID
      *
-     * @param partid Part ID
+     * @param partid Part ID (must be URL encoded)
      */
     public final PartsGetEdgesResponse call(String did, WVM wvmType, String wvm, String eid,
         String partid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/tessellatededges", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "partid", partid), onshape.buildMap("angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "edgeId", edgeId, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartsGetEdgesResponse.class);
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/tessellatededges", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "partid", partid), onshape.buildMap("angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "edgeId", edgeId, "precomputedLevelOfDetail", precomputedLevelOfDetail, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartsGetEdgesResponse.class);
     }
 
     /**
@@ -265,12 +299,12 @@ public final class PartsGetEdgesRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param partid Part ID
+     * @param partid Part ID (must be URL encoded)
      */
     public final PartsGetEdgesResponse call(OnshapeDocument document, String partid) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/tessellatededges", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap("angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "edgeId", edgeId, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartsGetEdgesResponse.class);
+      return onshape.call("get", "/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/tessellatededges", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "partid", partid), onshape.buildMap("angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "edgeId", edgeId, "precomputedLevelOfDetail", precomputedLevelOfDetail, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartsGetEdgesResponse.class);
     }
   }
 }

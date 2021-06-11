@@ -22,7 +22,7 @@
 //
 package com.onshape.api;
 
-import com.onshape.api.requests.PartStudiosAddFeatureRequest;
+import com.onshape.api.requests.PartStudiosAddPartStudioFeatureRequest;
 import com.onshape.api.requests.PartStudiosComparePartStudioRequest;
 import com.onshape.api.requests.PartStudiosCreatePartStudioRequest;
 import com.onshape.api.requests.PartStudiosCreateTranslationRequest;
@@ -59,11 +59,11 @@ public final class PartStudios {
   }
 
   /**
-   * Create request for addFeature
+   * Create request for addPartStudioFeature
    *  @return Request builder object
    */
-  public final PartStudiosAddFeatureRequest.Builder addFeature() {
-    return PartStudiosAddFeatureRequest.builder(onshape);
+  public final PartStudiosAddPartStudioFeatureRequest.Builder addPartStudioFeature() {
+    return PartStudiosAddPartStudioFeatureRequest.builder(onshape);
   }
 
   /**

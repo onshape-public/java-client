@@ -66,7 +66,7 @@ public class Base64Encoded extends AbstractBlob {
     }
 
     public Base64Encoded(String base64String) {
-        super(ContentDisposition.type("attachement").build());
+        super(ContentDisposition.type("attachment").build());
         this.base64String = base64String;
     }
 

@@ -25,17 +25,9 @@ package com.onshape.api;
 import com.onshape.api.exceptions.OnshapeException;
 import java.lang.String;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 public final class EndpointsTest {
   private static Onshape CLIENT;
-
-  @Test
-  @DisplayName("Get Endpoints")
-  public void getEndpoints() throws OnshapeException {
-    getGroup().getEndpoints().call();
-  }
 
   public Onshape getClient() {
     return CLIENT;

@@ -38,19 +38,19 @@ public final class AssembliesGetNamedViewsResponseNamedViewsValueSectionPlanes e
    * A 3-element array storing the center vector of a section plane
    */
   @JsonProperty("center")
-  public Number center;
+  public Number[] center;
 
   /**
    * A 3-element array storing the tangent vector of a section plane
    */
   @JsonProperty("tangent")
-  public Number tangent;
+  public Number[] tangent;
 
   /**
    * A 3-element array storing the normal vector of a section plane
    */
   @JsonProperty("normal")
-  public Number normal;
+  public Number[] normal;
 
   /**
    * Get A 3-element array storing the center vector of a section plane
@@ -58,7 +58,7 @@ public final class AssembliesGetNamedViewsResponseNamedViewsValueSectionPlanes e
    * @return A 3-element array storing the center vector of a section plane
    *
    */
-  public final Number getCenter() {
+  public final Number[] getCenter() {
     return this.center;
   }
 
@@ -68,7 +68,7 @@ public final class AssembliesGetNamedViewsResponseNamedViewsValueSectionPlanes e
    * @return A 3-element array storing the tangent vector of a section plane
    *
    */
-  public final Number getTangent() {
+  public final Number[] getTangent() {
     return this.tangent;
   }
 
@@ -78,7 +78,7 @@ public final class AssembliesGetNamedViewsResponseNamedViewsValueSectionPlanes e
    * @return A 3-element array storing the normal vector of a section plane
    *
    */
-  public final Number getNormal() {
+  public final Number[] getNormal() {
     return this.normal;
   }
 

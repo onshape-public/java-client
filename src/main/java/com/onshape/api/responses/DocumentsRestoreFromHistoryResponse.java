@@ -22,16 +22,35 @@
 //
 package com.onshape.api.responses;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
+import javax.validation.constraints.NotNull;
 
 /**
  * Response object for restoreFromHistory API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
 public final class DocumentsRestoreFromHistoryResponse extends AbstractResponseObject {
+  /**
+   * Id of the microversion created from the restore call. If null, no new microversion was created.
+   */
+  @JsonProperty("newMicroversion")
+  @NotNull
+  String newMicroversion;
+
+  /**
+   * Get Id of the microversion created from the restore call. If null, no new microversion was created.
+   *
+   * @return Id of the microversion created from the restore call. If null, no new microversion was created.
+   *
+   */
+  public final String getNewMicroversion() {
+    return this.newMicroversion;
+  }
+
   @Override
   public String toString() {
     return Onshape.toString(this);

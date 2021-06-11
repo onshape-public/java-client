@@ -119,8 +119,8 @@ public class BaseClient {
     private final int TIMEOUT = 600000;
 
     public static final String ONSHAPE_JSON_V1 = "application/vnd.onshape.v1+json";
-    public static final String ONSHAPE_JSON_V2 = "application/vnd.onshape.v2+json";
-    private static final String[] JSON_MEDIA_TYPES = new String[]{ONSHAPE_JSON_V2, ONSHAPE_JSON_V1, MediaType.APPLICATION_JSON};
+    // public static final String ONSHAPE_JSON_V2 = "application/vnd.onshape.v2+json";
+    private static final String[] JSON_MEDIA_TYPES = new String[]{ONSHAPE_JSON_V1, MediaType.APPLICATION_JSON};
     private static final Predicate<String> IS_JSON_MEDIA_TYPE = (String type) -> Stream.of(JSON_MEDIA_TYPES).anyMatch(jsonType -> type.startsWith(jsonType));
 
     public static final String ONSHAPE_OCTET_STREAM_V1 = "application/vnd.onshape.v1+octet-stream";
@@ -287,7 +287,15 @@ public class BaseClient {
         }
     }
 
-    void refreshOAuthToken() throws OnshapeException {
+    /**
+     * Refresh the OAuth token previously fetched
+     *
+     * @throws OnshapeException
+     */
+    public void refreshOAuthToken() throws OnshapeException {
+        if (token == null) {
+            throw new OnshapeException("No OAuth token set");
+        }
         WebTarget target = client.target(oauthURL);
         MultivaluedMap<String, String> formData = new MultivaluedHashMap<>();
         formData.add("grant_type", "refresh_token");

@@ -179,7 +179,7 @@ public final class PartsGetMassPropertiesRequest {
      *
      * @param eid Element ID
      *
-     * @param partid Part ID
+     * @param partid Part ID (must be URL encoded)
      */
     public final PartsGetMassPropertiesResponse call(String did, WVM wvmType, String wvm,
         String eid, String partid) throws OnshapeException {
@@ -195,7 +195,7 @@ public final class PartsGetMassPropertiesRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param partid Part ID
+     * @param partid Part ID (must be URL encoded)
      */
     public final PartsGetMassPropertiesResponse call(OnshapeDocument document, String partid) throws
         OnshapeException {

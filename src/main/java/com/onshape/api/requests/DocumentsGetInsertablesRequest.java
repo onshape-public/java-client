@@ -27,6 +27,7 @@ import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.DocumentsGetInsertablesResponse;
 import com.onshape.api.types.OnshapeDocument;
+import com.onshape.api.types.WV;
 import java.lang.Boolean;
 import java.lang.Number;
 import java.lang.Override;
@@ -37,6 +38,18 @@ import java.lang.String;
  * &copy; 2018-Present Onshape Inc.
  */
 public final class DocumentsGetInsertablesRequest {
+  /**
+   * id of element for which to get insertables
+   */
+  @JsonProperty("elementId")
+  String elementId;
+
+  /**
+   * encoded configuration for element for which to get insertables
+   */
+  @JsonProperty("configuration")
+  String configuration;
+
   /**
    * Beta capablities of the document requesting insertables
    */
@@ -56,22 +69,28 @@ public final class DocumentsGetInsertablesRequest {
   Boolean includeSurfaces;
 
   /**
-   * Returns wires
-   */
-  @JsonProperty("includeWires")
-  Boolean includeWires;
-
-  /**
    * Returns sketches
    */
   @JsonProperty("includeSketches")
   Boolean includeSketches;
 
   /**
+   * Returns wires
+   */
+  @JsonProperty("includeWires")
+  Boolean includeWires;
+
+  /**
    * Returns reference features
    */
   @JsonProperty("includeReferenceFeatures")
   Boolean includeReferenceFeatures;
+
+  /**
+   * Returns part studios
+   */
+  @JsonProperty("includePartStudios")
+  Boolean includePartStudios;
 
   /**
    * Returns assemblies
@@ -145,19 +164,29 @@ public final class DocumentsGetInsertablesRequest {
   @JsonProperty("includeFSTables")
   Boolean includeFSTables;
 
-  DocumentsGetInsertablesRequest(String betaCapabilityIds, Boolean includeParts,
-      Boolean includeSurfaces, Boolean includeWires, Boolean includeSketches,
-      Boolean includeReferenceFeatures, Boolean includeAssemblies, Boolean includeFeatureStudios,
-      Boolean includeFeatures, Boolean includeBlobs, Boolean includeMeshes,
-      Boolean includeFlattenedBodies, Boolean includeApplications, String allowedBlobMimeTypes,
-      String allowedApplicationMimeTypes, Boolean includeCompositeParts,
-      Number maxFeatureScriptVersion, Boolean includeFSTables) {
+  /**
+   * Returns FeatureScript computed part property functions
+   */
+  @JsonProperty("includeFSComputedPartProperties")
+  Boolean includeFSComputedPartProperties;
+
+  DocumentsGetInsertablesRequest(String elementId, String configuration, String betaCapabilityIds,
+      Boolean includeParts, Boolean includeSurfaces, Boolean includeSketches, Boolean includeWires,
+      Boolean includeReferenceFeatures, Boolean includePartStudios, Boolean includeAssemblies,
+      Boolean includeFeatureStudios, Boolean includeFeatures, Boolean includeBlobs,
+      Boolean includeMeshes, Boolean includeFlattenedBodies, Boolean includeApplications,
+      String allowedBlobMimeTypes, String allowedApplicationMimeTypes,
+      Boolean includeCompositeParts, Number maxFeatureScriptVersion, Boolean includeFSTables,
+      Boolean includeFSComputedPartProperties) {
+    this.elementId = elementId;
+    this.configuration = configuration;
     this.betaCapabilityIds = betaCapabilityIds;
     this.includeParts = includeParts;
     this.includeSurfaces = includeSurfaces;
-    this.includeWires = includeWires;
     this.includeSketches = includeSketches;
+    this.includeWires = includeWires;
     this.includeReferenceFeatures = includeReferenceFeatures;
+    this.includePartStudios = includePartStudios;
     this.includeAssemblies = includeAssemblies;
     this.includeFeatureStudios = includeFeatureStudios;
     this.includeFeatures = includeFeatures;
@@ -170,6 +199,7 @@ public final class DocumentsGetInsertablesRequest {
     this.includeCompositeParts = includeCompositeParts;
     this.maxFeatureScriptVersion = maxFeatureScriptVersion;
     this.includeFSTables = includeFSTables;
+    this.includeFSComputedPartProperties = includeFSComputedPartProperties;
   }
 
   @Override
@@ -184,6 +214,16 @@ public final class DocumentsGetInsertablesRequest {
   }
 
   public static final class Builder {
+    /**
+     * id of element for which to get insertables
+     */
+    private String elementId;
+
+    /**
+     * encoded configuration for element for which to get insertables
+     */
+    private String configuration;
+
     /**
      * Beta capablities of the document requesting insertables
      */
@@ -200,19 +240,24 @@ public final class DocumentsGetInsertablesRequest {
     private Boolean includeSurfaces;
 
     /**
-     * Returns wires
-     */
-    private Boolean includeWires;
-
-    /**
      * Returns sketches
      */
     private Boolean includeSketches;
 
     /**
+     * Returns wires
+     */
+    private Boolean includeWires;
+
+    /**
      * Returns reference features
      */
     private Boolean includeReferenceFeatures;
+
+    /**
+     * Returns part studios
+     */
+    private Boolean includePartStudios;
 
     /**
      * Returns assemblies
@@ -274,9 +319,58 @@ public final class DocumentsGetInsertablesRequest {
      */
     private Boolean includeFSTables;
 
+    /**
+     * Returns FeatureScript computed part property functions
+     */
+    private Boolean includeFSComputedPartProperties;
+
     Onshape onshape;
 
     Builder() {
+    }
+
+    /**
+     * Get id of element for which to get insertables
+     *
+     * @return id of element for which to get insertables
+     *
+     */
+    public final String elementId() {
+      return this.elementId;
+    }
+
+    /**
+     * Set id of element for which to get insertables
+     *
+     * @param value id of element for which to get insertables
+     *
+     * @return the Builder object.
+     */
+    public final Builder elementId(String value) {
+      this.elementId = value;
+      return this;
+    }
+
+    /**
+     * Get encoded configuration for element for which to get insertables
+     *
+     * @return encoded configuration for element for which to get insertables
+     *
+     */
+    public final String configuration() {
+      return this.configuration;
+    }
+
+    /**
+     * Set encoded configuration for element for which to get insertables
+     *
+     * @param value encoded configuration for element for which to get insertables
+     *
+     * @return the Builder object.
+     */
+    public final Builder configuration(String value) {
+      this.configuration = value;
+      return this;
     }
 
     /**
@@ -346,28 +440,6 @@ public final class DocumentsGetInsertablesRequest {
     }
 
     /**
-     * Get Returns wires
-     *
-     * @return Returns wires
-     *
-     */
-    public final Boolean includeWires() {
-      return this.includeWires;
-    }
-
-    /**
-     * Set Returns wires
-     *
-     * @param value Returns wires
-     *
-     * @return the Builder object.
-     */
-    public final Builder includeWires(Boolean value) {
-      this.includeWires = value;
-      return this;
-    }
-
-    /**
      * Get Returns sketches
      *
      * @return Returns sketches
@@ -390,6 +462,28 @@ public final class DocumentsGetInsertablesRequest {
     }
 
     /**
+     * Get Returns wires
+     *
+     * @return Returns wires
+     *
+     */
+    public final Boolean includeWires() {
+      return this.includeWires;
+    }
+
+    /**
+     * Set Returns wires
+     *
+     * @param value Returns wires
+     *
+     * @return the Builder object.
+     */
+    public final Builder includeWires(Boolean value) {
+      this.includeWires = value;
+      return this;
+    }
+
+    /**
      * Get Returns reference features
      *
      * @return Returns reference features
@@ -408,6 +502,28 @@ public final class DocumentsGetInsertablesRequest {
      */
     public final Builder includeReferenceFeatures(Boolean value) {
       this.includeReferenceFeatures = value;
+      return this;
+    }
+
+    /**
+     * Get Returns part studios
+     *
+     * @return Returns part studios
+     *
+     */
+    public final Boolean includePartStudios() {
+      return this.includePartStudios;
+    }
+
+    /**
+     * Set Returns part studios
+     *
+     * @param value Returns part studios
+     *
+     * @return the Builder object.
+     */
+    public final Builder includePartStudios(Boolean value) {
+      this.includePartStudios = value;
       return this;
     }
 
@@ -675,37 +791,59 @@ public final class DocumentsGetInsertablesRequest {
       return this;
     }
 
-    private DocumentsGetInsertablesRequest build() {
-      return new com.onshape.api.requests.DocumentsGetInsertablesRequest(betaCapabilityIds,includeParts,includeSurfaces,includeWires,includeSketches,includeReferenceFeatures,includeAssemblies,includeFeatureStudios,includeFeatures,includeBlobs,includeMeshes,includeFlattenedBodies,includeApplications,allowedBlobMimeTypes,allowedApplicationMimeTypes,includeCompositeParts,maxFeatureScriptVersion,includeFSTables);
+    /**
+     * Get Returns FeatureScript computed part property functions
+     *
+     * @return Returns FeatureScript computed part property functions
+     *
+     */
+    public final Boolean includeFSComputedPartProperties() {
+      return this.includeFSComputedPartProperties;
     }
 
     /**
-     * Calls getInsertables method, Get a list of insertables in the version of the document.
+     * Set Returns FeatureScript computed part property functions
+     *
+     * @param value Returns FeatureScript computed part property functions
+     *
+     * @return the Builder object.
+     */
+    public final Builder includeFSComputedPartProperties(Boolean value) {
+      this.includeFSComputedPartProperties = value;
+      return this;
+    }
+
+    private DocumentsGetInsertablesRequest build() {
+      return new com.onshape.api.requests.DocumentsGetInsertablesRequest(elementId,configuration,betaCapabilityIds,includeParts,includeSurfaces,includeSketches,includeWires,includeReferenceFeatures,includePartStudios,includeAssemblies,includeFeatureStudios,includeFeatures,includeBlobs,includeMeshes,includeFlattenedBodies,includeApplications,allowedBlobMimeTypes,allowedApplicationMimeTypes,includeCompositeParts,maxFeatureScriptVersion,includeFSTables,includeFSComputedPartProperties);
+    }
+
+    /**
+     * Calls getInsertables method, Get a list of insertables in a version or workspace of the document, optionally for a specific element.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
      * @param did Document ID
      *
-     * @param vid Version ID
+     * @param wvType Type of Workspace or Version
+     *
+     * @param wv Workspace (w) or Version (v) ID
      */
-    public final DocumentsGetInsertablesResponse call(String did, String vid) throws
+    public final DocumentsGetInsertablesResponse call(String did, WV wvType, String wv) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/documents/d/:did/v/:vid/insertables", build(), onshape.buildMap("did", did, "vid", vid), onshape.buildMap("betaCapabilityIds", betaCapabilityIds, "includeParts", includeParts, "includeSurfaces", includeSurfaces, "includeWires", includeWires, "includeSketches", includeSketches, "includeReferenceFeatures", includeReferenceFeatures, "includeAssemblies", includeAssemblies, "includeFeatureStudios", includeFeatureStudios, "includeFeatures", includeFeatures, "includeBlobs", includeBlobs, "includeMeshes", includeMeshes, "includeFlattenedBodies", includeFlattenedBodies, "includeApplications", includeApplications, "allowedBlobMimeTypes", allowedBlobMimeTypes, "allowedApplicationMimeTypes", allowedApplicationMimeTypes, "includeCompositeParts", includeCompositeParts, "maxFeatureScriptVersion", maxFeatureScriptVersion, "includeFSTables", includeFSTables), com.onshape.api.responses.DocumentsGetInsertablesResponse.class);
+      return onshape.call("get", "/documents/d/:did/[wv]/:wv/insertables", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv), onshape.buildMap("elementId", elementId, "configuration", configuration, "betaCapabilityIds", betaCapabilityIds, "includeParts", includeParts, "includeSurfaces", includeSurfaces, "includeSketches", includeSketches, "includeWires", includeWires, "includeReferenceFeatures", includeReferenceFeatures, "includePartStudios", includePartStudios, "includeAssemblies", includeAssemblies, "includeFeatureStudios", includeFeatureStudios, "includeFeatures", includeFeatures, "includeBlobs", includeBlobs, "includeMeshes", includeMeshes, "includeFlattenedBodies", includeFlattenedBodies, "includeApplications", includeApplications, "allowedBlobMimeTypes", allowedBlobMimeTypes, "allowedApplicationMimeTypes", allowedApplicationMimeTypes, "includeCompositeParts", includeCompositeParts, "maxFeatureScriptVersion", maxFeatureScriptVersion, "includeFSTables", includeFSTables, "includeFSComputedPartProperties", includeFSComputedPartProperties), com.onshape.api.responses.DocumentsGetInsertablesResponse.class);
     }
 
     /**
-     * Calls getInsertables method, Get a list of insertables in the version of the document.
+     * Calls getInsertables method, Get a list of insertables in a version or workspace of the document, optionally for a specific element.
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param vid Version ID
      */
-    public final DocumentsGetInsertablesResponse call(OnshapeDocument document, String vid) throws
+    public final DocumentsGetInsertablesResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/documents/d/:did/v/:vid/insertables", build(), onshape.buildMap("did", document.getDocumentId(), "vid", vid), onshape.buildMap("betaCapabilityIds", betaCapabilityIds, "includeParts", includeParts, "includeSurfaces", includeSurfaces, "includeWires", includeWires, "includeSketches", includeSketches, "includeReferenceFeatures", includeReferenceFeatures, "includeAssemblies", includeAssemblies, "includeFeatureStudios", includeFeatureStudios, "includeFeatures", includeFeatures, "includeBlobs", includeBlobs, "includeMeshes", includeMeshes, "includeFlattenedBodies", includeFlattenedBodies, "includeApplications", includeApplications, "allowedBlobMimeTypes", allowedBlobMimeTypes, "allowedApplicationMimeTypes", allowedApplicationMimeTypes, "includeCompositeParts", includeCompositeParts, "maxFeatureScriptVersion", maxFeatureScriptVersion, "includeFSTables", includeFSTables), com.onshape.api.responses.DocumentsGetInsertablesResponse.class);
+      return onshape.call("get", "/documents/d/:did/[wv]/:wv/insertables", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId()), onshape.buildMap("elementId", elementId, "configuration", configuration, "betaCapabilityIds", betaCapabilityIds, "includeParts", includeParts, "includeSurfaces", includeSurfaces, "includeSketches", includeSketches, "includeWires", includeWires, "includeReferenceFeatures", includeReferenceFeatures, "includePartStudios", includePartStudios, "includeAssemblies", includeAssemblies, "includeFeatureStudios", includeFeatureStudios, "includeFeatures", includeFeatures, "includeBlobs", includeBlobs, "includeMeshes", includeMeshes, "includeFlattenedBodies", includeFlattenedBodies, "includeApplications", includeApplications, "allowedBlobMimeTypes", allowedBlobMimeTypes, "allowedApplicationMimeTypes", allowedApplicationMimeTypes, "includeCompositeParts", includeCompositeParts, "maxFeatureScriptVersion", maxFeatureScriptVersion, "includeFSTables", includeFSTables, "includeFSComputedPartProperties", includeFSComputedPartProperties), com.onshape.api.responses.DocumentsGetInsertablesResponse.class);
     }
   }
 }
