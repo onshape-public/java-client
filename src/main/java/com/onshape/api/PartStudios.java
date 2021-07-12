@@ -28,6 +28,7 @@ import com.onshape.api.requests.PartStudiosCreatePartStudioRequest;
 import com.onshape.api.requests.PartStudiosCreateTranslationRequest;
 import com.onshape.api.requests.PartStudiosDeleteFeatureRequest;
 import com.onshape.api.requests.PartStudiosEvalFeatureScriptRequest;
+import com.onshape.api.requests.PartStudiosExportGltfRequest;
 import com.onshape.api.requests.PartStudiosExportParasolidRequest;
 import com.onshape.api.requests.PartStudiosExportStlRequest;
 import com.onshape.api.requests.PartStudiosGetBodyDetailsRequest;
@@ -136,6 +137,14 @@ public final class PartStudios {
    */
   public final PartStudiosExportStlRequest.Builder exportStl() {
     return PartStudiosExportStlRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for exportGltf
+   *  @return Request builder object
+   */
+  public final PartStudiosExportGltfRequest.Builder exportGltf() {
+    return PartStudiosExportGltfRequest.builder(onshape);
   }
 
   /**

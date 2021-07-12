@@ -25,7 +25,7 @@ package com.onshape.api.requests;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
-import com.onshape.api.responses.PartStudiosGetFacesResponse;
+import com.onshape.api.responses.PartStudiosExportGltfResponse;
 import com.onshape.api.types.OnshapeDocument;
 import com.onshape.api.types.WVM;
 import java.lang.Boolean;
@@ -34,45 +34,15 @@ import java.lang.Override;
 import java.lang.String;
 
 /**
- * Request object for getFaces API endpoint.
+ * Request object for exportGltf API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class PartStudiosGetFacesRequest {
+public final class PartStudiosExportGltfRequest {
   /**
    * IDs of the parts to tessellate (repeat query param to add more than one, i.e. partId=JHK&amp;partId=JHD). May not be combined with faceId
    */
   @JsonProperty("partId")
   String partId;
-
-  /**
-   * If true, output vertex normals corresponding to surface normals at facet vertex points.
-   */
-  @JsonProperty("outputVertexNormals")
-  Boolean outputVertexNormals;
-
-  /**
-   * Output facet normals
-   */
-  @JsonProperty("outputFacetNormals")
-  Boolean outputFacetNormals;
-
-  /**
-   * Output texture coordinates
-   */
-  @JsonProperty("outputTextureCoordinates")
-  Boolean outputTextureCoordinates;
-
-  /**
-   * Output index table
-   */
-  @JsonProperty("outputIndexTable")
-  Boolean outputIndexTable;
-
-  /**
-   * Whether or not to output faces that cause an error
-   */
-  @JsonProperty("outputErrorFaces")
-  Boolean outputErrorFaces;
 
   /**
    * Angle tolerance (in radians). This specifies the limit on the sum of the angular deviations of a tessellation chord from the tangent vectors at two chord endpoints. The specified value must be less than PI/2. This parameter currently has a default value chosen based on the complexity of the parts being tessellated.
@@ -128,24 +98,11 @@ public final class PartStudiosGetFacesRequest {
   @JsonProperty("configuration")
   String configuration;
 
-  /**
-   * If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
-   */
-  @JsonProperty("combineCompositePartConstituents")
-  String combineCompositePartConstituents;
-
-  PartStudiosGetFacesRequest(String partId, Boolean outputVertexNormals, Boolean outputFacetNormals,
-      Boolean outputTextureCoordinates, Boolean outputIndexTable, Boolean outputErrorFaces,
-      Number angleTolerance, Number chordTolerance, Number maxFacetWidth, String faceId,
-      String precomputedLevelOfDetail, Boolean outputFaceAppearances,
-      Boolean outputSeparateFaceNodes, String linkDocumentId, String configuration,
-      String combineCompositePartConstituents) {
+  PartStudiosExportGltfRequest(String partId, Number angleTolerance, Number chordTolerance,
+      Number maxFacetWidth, String faceId, String precomputedLevelOfDetail,
+      Boolean outputFaceAppearances, Boolean outputSeparateFaceNodes, String linkDocumentId,
+      String configuration) {
     this.partId = partId;
-    this.outputVertexNormals = outputVertexNormals;
-    this.outputFacetNormals = outputFacetNormals;
-    this.outputTextureCoordinates = outputTextureCoordinates;
-    this.outputIndexTable = outputIndexTable;
-    this.outputErrorFaces = outputErrorFaces;
     this.angleTolerance = angleTolerance;
     this.chordTolerance = chordTolerance;
     this.maxFacetWidth = maxFacetWidth;
@@ -155,7 +112,6 @@ public final class PartStudiosGetFacesRequest {
     this.outputSeparateFaceNodes = outputSeparateFaceNodes;
     this.linkDocumentId = linkDocumentId;
     this.configuration = configuration;
-    this.combineCompositePartConstituents = combineCompositePartConstituents;
   }
 
   @Override
@@ -174,31 +130,6 @@ public final class PartStudiosGetFacesRequest {
      * IDs of the parts to tessellate (repeat query param to add more than one, i.e. partId=JHK&amp;partId=JHD). May not be combined with faceId
      */
     private String partId;
-
-    /**
-     * If true, output vertex normals corresponding to surface normals at facet vertex points.
-     */
-    private Boolean outputVertexNormals;
-
-    /**
-     * Output facet normals
-     */
-    private Boolean outputFacetNormals;
-
-    /**
-     * Output texture coordinates
-     */
-    private Boolean outputTextureCoordinates;
-
-    /**
-     * Output index table
-     */
-    private Boolean outputIndexTable;
-
-    /**
-     * Whether or not to output faces that cause an error
-     */
-    private Boolean outputErrorFaces;
 
     /**
      * Angle tolerance (in radians). This specifies the limit on the sum of the angular deviations of a tessellation chord from the tangent vectors at two chord endpoints. The specified value must be less than PI/2. This parameter currently has a default value chosen based on the complexity of the parts being tessellated.
@@ -245,11 +176,6 @@ public final class PartStudiosGetFacesRequest {
      */
     private String configuration;
 
-    /**
-     * If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
-     */
-    private String combineCompositePartConstituents;
-
     Onshape onshape;
 
     Builder() {
@@ -274,116 +200,6 @@ public final class PartStudiosGetFacesRequest {
      */
     public final Builder partId(String value) {
       this.partId = value;
-      return this;
-    }
-
-    /**
-     * Get If true, output vertex normals corresponding to surface normals at facet vertex points.
-     *
-     * @return If true, output vertex normals corresponding to surface normals at facet vertex points.
-     *
-     */
-    public final Boolean outputVertexNormals() {
-      return this.outputVertexNormals;
-    }
-
-    /**
-     * Set If true, output vertex normals corresponding to surface normals at facet vertex points.
-     *
-     * @param value If true, output vertex normals corresponding to surface normals at facet vertex points.
-     *
-     * @return the Builder object.
-     */
-    public final Builder outputVertexNormals(Boolean value) {
-      this.outputVertexNormals = value;
-      return this;
-    }
-
-    /**
-     * Get Output facet normals
-     *
-     * @return Output facet normals
-     *
-     */
-    public final Boolean outputFacetNormals() {
-      return this.outputFacetNormals;
-    }
-
-    /**
-     * Set Output facet normals
-     *
-     * @param value Output facet normals
-     *
-     * @return the Builder object.
-     */
-    public final Builder outputFacetNormals(Boolean value) {
-      this.outputFacetNormals = value;
-      return this;
-    }
-
-    /**
-     * Get Output texture coordinates
-     *
-     * @return Output texture coordinates
-     *
-     */
-    public final Boolean outputTextureCoordinates() {
-      return this.outputTextureCoordinates;
-    }
-
-    /**
-     * Set Output texture coordinates
-     *
-     * @param value Output texture coordinates
-     *
-     * @return the Builder object.
-     */
-    public final Builder outputTextureCoordinates(Boolean value) {
-      this.outputTextureCoordinates = value;
-      return this;
-    }
-
-    /**
-     * Get Output index table
-     *
-     * @return Output index table
-     *
-     */
-    public final Boolean outputIndexTable() {
-      return this.outputIndexTable;
-    }
-
-    /**
-     * Set Output index table
-     *
-     * @param value Output index table
-     *
-     * @return the Builder object.
-     */
-    public final Builder outputIndexTable(Boolean value) {
-      this.outputIndexTable = value;
-      return this;
-    }
-
-    /**
-     * Get Whether or not to output faces that cause an error
-     *
-     * @return Whether or not to output faces that cause an error
-     *
-     */
-    public final Boolean outputErrorFaces() {
-      return this.outputErrorFaces;
-    }
-
-    /**
-     * Set Whether or not to output faces that cause an error
-     *
-     * @param value Whether or not to output faces that cause an error
-     *
-     * @return the Builder object.
-     */
-    public final Builder outputErrorFaces(Boolean value) {
-      this.outputErrorFaces = value;
       return this;
     }
 
@@ -585,37 +401,17 @@ public final class PartStudiosGetFacesRequest {
       return this;
     }
 
-    /**
-     * Get If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
-     *
-     * @return If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
-     *
-     */
-    public final String combineCompositePartConstituents() {
-      return this.combineCompositePartConstituents;
+    private PartStudiosExportGltfRequest build() {
+      return new com.onshape.api.requests.PartStudiosExportGltfRequest(partId,angleTolerance,chordTolerance,maxFacetWidth,faceId,precomputedLevelOfDetail,outputFaceAppearances,outputSeparateFaceNodes,linkDocumentId,configuration);
     }
 
     /**
-     * Set If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
-     *
-     * @param value If true, the geometry belonging to the constituents of composite parts will be combined within the parent composite part, rather than each constituent having its own node in the result.
-     *
-     * @return the Builder object.
-     */
-    public final Builder combineCompositePartConstituents(String value) {
-      this.combineCompositePartConstituents = value;
-      return this;
-    }
-
-    private PartStudiosGetFacesRequest build() {
-      return new com.onshape.api.requests.PartStudiosGetFacesRequest(partId,outputVertexNormals,outputFacetNormals,outputTextureCoordinates,outputIndexTable,outputErrorFaces,angleTolerance,chordTolerance,maxFacetWidth,faceId,precomputedLevelOfDetail,outputFaceAppearances,outputSeparateFaceNodes,linkDocumentId,configuration,combineCompositePartConstituents);
-    }
-
-    /**
-     * Calls getFaces method, Get the tessellated faces of the parts in a Part Studio. The accuracy of the tessellation
+     * Calls exportGltf method, Export glTF representation of parts in a Part Studio. The accuracy of the tessellation
      *                 approximation to exact geometry is controlled by the angleTolerance, chordTolerance and
      *                 maxFacetWidth parameters. The tessellation points are computed close enough so that none of these
-     *                 parameters are exceeded. All coordinates are in meters.
+     *                 parameters are exceeded. All coordinates are in meters. The glTF output from this endpoint will
+     *                 differ from that exported from the UI. For output that matches that please use the
+     *                 PartStudios-createTranslation API.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
@@ -627,25 +423,27 @@ public final class PartStudiosGetFacesRequest {
      *
      * @param eid Element ID
      */
-    public final PartStudiosGetFacesResponse call(String did, WVM wvmType, String wvm, String eid)
+    public final PartStudiosExportGltfResponse call(String did, WVM wvmType, String wvm, String eid)
         throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("partId", partId, "outputVertexNormals", outputVertexNormals, "outputFacetNormals", outputFacetNormals, "outputTextureCoordinates", outputTextureCoordinates, "outputIndexTable", outputIndexTable, "outputErrorFaces", outputErrorFaces, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "faceId", faceId, "precomputedLevelOfDetail", precomputedLevelOfDetail, "outputFaceAppearances", outputFaceAppearances, "outputSeparateFaceNodes", outputSeparateFaceNodes, "linkDocumentId", linkDocumentId, "configuration", configuration, "combineCompositePartConstituents", combineCompositePartConstituents), com.onshape.api.responses.PartStudiosGetFacesResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/gltf", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("partId", partId, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "faceId", faceId, "precomputedLevelOfDetail", precomputedLevelOfDetail, "outputFaceAppearances", outputFaceAppearances, "outputSeparateFaceNodes", outputSeparateFaceNodes, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosExportGltfResponse.class);
     }
 
     /**
-     * Calls getFaces method, Get the tessellated faces of the parts in a Part Studio. The accuracy of the tessellation
+     * Calls exportGltf method, Export glTF representation of parts in a Part Studio. The accuracy of the tessellation
      *                 approximation to exact geometry is controlled by the angleTolerance, chordTolerance and
      *                 maxFacetWidth parameters. The tessellation points are computed close enough so that none of these
-     *                 parameters are exceeded. All coordinates are in meters.
+     *                 parameters are exceeded. All coordinates are in meters. The glTF output from this endpoint will
+     *                 differ from that exported from the UI. For output that matches that please use the
+     *                 PartStudios-createTranslation API.
      * @param document Document object from Onshape URL.
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      */
-    public final PartStudiosGetFacesResponse call(OnshapeDocument document) throws
+    public final PartStudiosExportGltfResponse call(OnshapeDocument document) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("partId", partId, "outputVertexNormals", outputVertexNormals, "outputFacetNormals", outputFacetNormals, "outputTextureCoordinates", outputTextureCoordinates, "outputIndexTable", outputIndexTable, "outputErrorFaces", outputErrorFaces, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "faceId", faceId, "precomputedLevelOfDetail", precomputedLevelOfDetail, "outputFaceAppearances", outputFaceAppearances, "outputSeparateFaceNodes", outputSeparateFaceNodes, "linkDocumentId", linkDocumentId, "configuration", configuration, "combineCompositePartConstituents", combineCompositePartConstituents), com.onshape.api.responses.PartStudiosGetFacesResponse.class);
+      return onshape.call("get", "/partstudios/d/:did/[wvm]/:wvm/e/:eid/gltf", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("partId", partId, "angleTolerance", angleTolerance, "chordTolerance", chordTolerance, "maxFacetWidth", maxFacetWidth, "faceId", faceId, "precomputedLevelOfDetail", precomputedLevelOfDetail, "outputFaceAppearances", outputFaceAppearances, "outputSeparateFaceNodes", outputSeparateFaceNodes, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.PartStudiosExportGltfResponse.class);
     }
   }
 }

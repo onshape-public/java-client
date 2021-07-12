@@ -67,7 +67,7 @@ public final class MetadataCategorySearchRequest {
   Boolean activeOnly;
 
   /**
-   * Flag whether to include or exclude Onshape categories
+   * Flag whether to include or exclude Onshape default categories
    */
   @JsonProperty("includeOnshape")
   Boolean includeOnshape;
@@ -134,7 +134,7 @@ public final class MetadataCategorySearchRequest {
     private Boolean activeOnly;
 
     /**
-     * Flag whether to include or exclude Onshape categories
+     * Flag whether to include or exclude Onshape default categories
      */
     private Boolean includeOnshape;
 
@@ -264,9 +264,9 @@ public final class MetadataCategorySearchRequest {
     }
 
     /**
-     * Get Flag whether to include or exclude Onshape categories
+     * Get Flag whether to include or exclude Onshape default categories
      *
-     * @return Flag whether to include or exclude Onshape categories
+     * @return Flag whether to include or exclude Onshape default categories
      *
      */
     public final Boolean includeOnshape() {
@@ -274,9 +274,9 @@ public final class MetadataCategorySearchRequest {
     }
 
     /**
-     * Set Flag whether to include or exclude Onshape categories
+     * Set Flag whether to include or exclude Onshape default categories
      *
-     * @param value Flag whether to include or exclude Onshape categories
+     * @param value Flag whether to include or exclude Onshape default categories
      *
      * @return the Builder object.
      */

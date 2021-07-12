@@ -22,6 +22,7 @@
 //
 package com.onshape.api;
 
+import com.onshape.api.requests.PartsExportGltfRequest;
 import com.onshape.api.requests.PartsExportParasolidRequest;
 import com.onshape.api.requests.PartsExportStlRequest;
 import com.onshape.api.requests.PartsGetBendTableRequest;
@@ -75,6 +76,14 @@ public final class Parts {
    */
   public final PartsExportStlRequest.Builder exportStl() {
     return PartsExportStlRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for exportGltf
+   *  @return Request builder object
+   */
+  public final PartsExportGltfRequest.Builder exportGltf() {
+    return PartsExportGltfRequest.builder(onshape);
   }
 
   /**

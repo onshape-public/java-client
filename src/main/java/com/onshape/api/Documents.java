@@ -30,6 +30,7 @@ import com.onshape.api.requests.DocumentsDeleteDocumentRequest;
 import com.onshape.api.requests.DocumentsDeleteWorkspaceRequest;
 import com.onshape.api.requests.DocumentsDownloadExternalDataRequest;
 import com.onshape.api.requests.DocumentsExportElementPostJsonRequest;
+import com.onshape.api.requests.DocumentsFilterDocumentHistoryRequest;
 import com.onshape.api.requests.DocumentsGetAclRequest;
 import com.onshape.api.requests.DocumentsGetCurrentMicroversionRequest;
 import com.onshape.api.requests.DocumentsGetDocumentHistoryRequest;
@@ -284,5 +285,13 @@ public final class Documents {
    */
   public final DocumentsUpdateExternalReferencesToLatestDocumentsRequest.Builder updateExternalReferencesToLatestDocuments() {
     return DocumentsUpdateExternalReferencesToLatestDocumentsRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for filterDocumentHistory
+   *  @return Request builder object
+   */
+  public final DocumentsFilterDocumentHistoryRequest.Builder filterDocumentHistory() {
+    return DocumentsFilterDocumentHistoryRequest.builder(onshape);
   }
 }

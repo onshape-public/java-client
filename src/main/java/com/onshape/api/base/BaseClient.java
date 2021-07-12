@@ -290,7 +290,7 @@ public class BaseClient {
     /**
      * Refresh the OAuth token previously fetched
      *
-     * @throws OnshapeException
+     * @throws OnshapeException if no token previously set or if refresh call fails
      */
     public void refreshOAuthToken() throws OnshapeException {
         if (token == null) {
@@ -380,6 +380,14 @@ public class BaseClient {
             // Special case: Return a String
             if (String.class.equals(type)) {
                 return type.cast(response.readEntity(String.class));
+            }
+            // 204 No Content response, just return an empty object
+            if (response.getStatus() == 204) {
+                try {
+                    return type.newInstance();
+                } catch (IllegalAccessException | InstantiationException ex) {
+                    throw new OnshapeException("Failed to create response object");
+                }
             }
             // Get the Content-Length value
             Optional<Integer> contentLength = Optional.ofNullable(response.getHeaderString("Content-Length"))
