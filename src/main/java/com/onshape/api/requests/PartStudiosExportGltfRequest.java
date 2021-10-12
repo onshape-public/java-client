@@ -69,7 +69,7 @@ public final class PartStudiosExportGltfRequest {
   String faceId;
 
   /**
-   * medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored.
+   * If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored. Accepts the following values: coarse, medium, fine
    */
   @JsonProperty("precomputedLevelOfDetail")
   String precomputedLevelOfDetail;
@@ -152,7 +152,7 @@ public final class PartStudiosExportGltfRequest {
     private String faceId;
 
     /**
-     * medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored.
+     * If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored. Accepts the following values: coarse, medium, fine
      */
     private String precomputedLevelOfDetail;
 
@@ -292,9 +292,9 @@ public final class PartStudiosExportGltfRequest {
     }
 
     /**
-     * Get medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored.
+     * Get If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored. Accepts the following values: coarse, medium, fine
      *
-     * @return medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored.
+     * @return If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored. Accepts the following values: coarse, medium, fine
      *
      */
     public final String precomputedLevelOfDetail() {
@@ -302,9 +302,9 @@ public final class PartStudiosExportGltfRequest {
     }
 
     /**
-     * Set medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored.
+     * Set If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored. Accepts the following values: coarse, medium, fine
      *
-     * @param value medium, fine] If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored.
+     * @param value If this parameter is specified, the provided level of detail will be retrieved from cache (if available) and used to return the tessellation in a more timely manner. The level-of-detail setting entails automatically-set chordal and angular tolerances. Hence any tolerances supplied to this API call will be ignored. Accepts the following values: coarse, medium, fine
      *
      * @return the Builder object.
      */

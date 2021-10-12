@@ -36,6 +36,7 @@ import com.onshape.api.requests.PartStudiosGetBoundingBoxesForSketchRequest;
 import com.onshape.api.requests.PartStudiosGetBoundingBoxesRequest;
 import com.onshape.api.requests.PartStudiosGetEdgesRequest;
 import com.onshape.api.requests.PartStudiosGetFacesRequest;
+import com.onshape.api.requests.PartStudiosGetFeatureScriptTableRequest;
 import com.onshape.api.requests.PartStudiosGetFeatureSpecsRequest;
 import com.onshape.api.requests.PartStudiosGetFeaturesRequest;
 import com.onshape.api.requests.PartStudiosGetMassPropertiesRequest;
@@ -169,6 +170,14 @@ public final class PartStudios {
    */
   public final PartStudiosGetNamedViewsRequest.Builder getNamedViews() {
     return PartStudiosGetNamedViewsRequest.builder(onshape);
+  }
+
+  /**
+   * Create request for getFeatureScriptTable
+   *  @return Request builder object
+   */
+  public final PartStudiosGetFeatureScriptTableRequest.Builder getFeatureScriptTable() {
+    return PartStudiosGetFeatureScriptTableRequest.builder(onshape);
   }
 
   /**

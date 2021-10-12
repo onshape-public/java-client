@@ -66,11 +66,11 @@ public final class PartStudiosGetFeaturesResponse extends AbstractResponseObject
   PartStudiosGetFeaturesResponseImports[] imports;
 
   /**
-   * Map of feature state information
+   * List of feature state information
    */
   @JsonProperty("featureStates")
   @NotNull
-  Map<String, Map> featureStates;
+  Map[] featureStates;
 
   /**
    * The version of the serialization protocol for the response
@@ -127,12 +127,12 @@ public final class PartStudiosGetFeaturesResponse extends AbstractResponseObject
   }
 
   /**
-   * Get Map of feature state information
+   * Get List of feature state information
    *
-   * @return Map of feature state information
+   * @return List of feature state information
    *
    */
-  public final Map<String, Map> getFeatureStates() {
+  public final Map[] getFeatureStates() {
     return this.featureStates;
   }
 

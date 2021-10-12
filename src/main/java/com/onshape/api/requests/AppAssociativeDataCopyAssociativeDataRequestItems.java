@@ -44,9 +44,17 @@ public final class AppAssociativeDataCopyAssociativeDataRequestItems {
   @JsonProperty("destinationViewId")
   public String destinationViewId;
 
-  AppAssociativeDataCopyAssociativeDataRequestItems(String sourceViewId, String destinationViewId) {
+  /**
+   * the ids of the associative data to copy, or all if empty
+   */
+  @JsonProperty("associativeDataIds")
+  public String associativeDataIds;
+
+  AppAssociativeDataCopyAssociativeDataRequestItems(String sourceViewId, String destinationViewId,
+      String associativeDataIds) {
     this.sourceViewId = sourceViewId;
     this.destinationViewId = destinationViewId;
+    this.associativeDataIds = associativeDataIds;
   }
 
   /**
@@ -69,6 +77,16 @@ public final class AppAssociativeDataCopyAssociativeDataRequestItems {
     return this.destinationViewId;
   }
 
+  /**
+   * Get the ids of the associative data to copy, or all if empty
+   *
+   * @return the ids of the associative data to copy, or all if empty
+   *
+   */
+  public final String getAssociativeDataIds() {
+    return this.associativeDataIds;
+  }
+
   public static final Builder builder() {
     Builder builder = new Builder();
     return builder;
@@ -89,6 +107,11 @@ public final class AppAssociativeDataCopyAssociativeDataRequestItems {
      * the viewId associative data should be copied to
      */
     private String destinationViewId;
+
+    /**
+     * the ids of the associative data to copy, or all if empty
+     */
+    private String associativeDataIds;
 
     Builder() {
     }
@@ -137,8 +160,30 @@ public final class AppAssociativeDataCopyAssociativeDataRequestItems {
       return this;
     }
 
+    /**
+     * Get the ids of the associative data to copy, or all if empty
+     *
+     * @return the ids of the associative data to copy, or all if empty
+     *
+     */
+    public final String associativeDataIds() {
+      return this.associativeDataIds;
+    }
+
+    /**
+     * Set the ids of the associative data to copy, or all if empty
+     *
+     * @param value the ids of the associative data to copy, or all if empty
+     *
+     * @return the Builder object.
+     */
+    public final Builder associativeDataIds(String value) {
+      this.associativeDataIds = value;
+      return this;
+    }
+
     public final AppAssociativeDataCopyAssociativeDataRequestItems build() {
-      return new com.onshape.api.requests.AppAssociativeDataCopyAssociativeDataRequestItems(sourceViewId,destinationViewId);
+      return new com.onshape.api.requests.AppAssociativeDataCopyAssociativeDataRequestItems(sourceViewId,destinationViewId,associativeDataIds);
     }
   }
 }

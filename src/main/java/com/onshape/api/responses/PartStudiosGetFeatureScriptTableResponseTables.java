@@ -27,79 +27,90 @@ import com.onshape.api.Onshape;
 import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
-import javax.validation.constraints.NotNull;
 
 /**
- * Response object for commitTransaction API endpoint.
+ * Object used in calls to getFeatureScriptTable API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class AppElementsCommitTransactionResponse extends AbstractResponseObject {
+public final class PartStudiosGetFeatureScriptTableResponseTables extends AbstractResponseObject {
   /**
-   * The elementId of the element
+   * The id of the table
    */
-  @JsonProperty("elementId")
-  @NotNull
-  String elementId;
+  @JsonProperty("id")
+  public String id;
 
   /**
-   * The changeId representing the element state after the commit
+   * The title of the table
    */
-  @JsonProperty("changeId")
-  @NotNull
-  String changeId;
+  @JsonProperty("title")
+  public String title;
 
   /**
-   * The changeId of the operation on which the transaction was based
+   * Topology ids of entities associated with the table
    */
-  @JsonProperty("parentChangeId")
-  @NotNull
-  String parentChangeId;
+  @JsonProperty("entityIds")
+  public String[] entityIds;
 
   /**
-   * The id of the transaction that was committed
+   * Column definitions for the table
    */
-  @JsonProperty("transactionId")
-  @NotNull
-  String transactionId;
+  @JsonProperty("columns")
+  public PartStudiosGetFeatureScriptTableResponseTablesColumns[] columns;
 
   /**
-   * Get The elementId of the element
+   * The rows of the table
+   */
+  @JsonProperty("rows")
+  public PartStudiosGetFeatureScriptTableResponseTablesRows[] rows;
+
+  /**
+   * Get The id of the table
    *
-   * @return The elementId of the element
+   * @return The id of the table
    *
    */
-  public final String getElementId() {
-    return this.elementId;
+  public final String getId() {
+    return this.id;
   }
 
   /**
-   * Get The changeId representing the element state after the commit
+   * Get The title of the table
    *
-   * @return The changeId representing the element state after the commit
+   * @return The title of the table
    *
    */
-  public final String getChangeId() {
-    return this.changeId;
+  public final String getTitle() {
+    return this.title;
   }
 
   /**
-   * Get The changeId of the operation on which the transaction was based
+   * Get Topology ids of entities associated with the table
    *
-   * @return The changeId of the operation on which the transaction was based
+   * @return Topology ids of entities associated with the table
    *
    */
-  public final String getParentChangeId() {
-    return this.parentChangeId;
+  public final String[] getEntityIds() {
+    return this.entityIds;
   }
 
   /**
-   * Get The id of the transaction that was committed
+   * Get Column definitions for the table
    *
-   * @return The id of the transaction that was committed
+   * @return Column definitions for the table
    *
    */
-  public final String getTransactionId() {
-    return this.transactionId;
+  public final PartStudiosGetFeatureScriptTableResponseTablesColumns[] getColumns() {
+    return this.columns;
+  }
+
+  /**
+   * Get The rows of the table
+   *
+   * @return The rows of the table
+   *
+   */
+  public final PartStudiosGetFeatureScriptTableResponseTablesRows[] getRows() {
+    return this.rows;
   }
 
   @Override

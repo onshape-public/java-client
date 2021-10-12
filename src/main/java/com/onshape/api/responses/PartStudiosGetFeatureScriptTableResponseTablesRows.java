@@ -22,16 +22,66 @@
 //
 package com.onshape.api.responses;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
 import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Map;
 
 /**
- * Response object for cancelPurchase API endpoint.
+ * Object used in calls to getFeatureScriptTable API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class AccountsCancelPurchaseResponse extends AbstractResponseObject {
+public final class PartStudiosGetFeatureScriptTableResponseTablesRows extends AbstractResponseObject {
+  /**
+   * A map from column ids to cell values for the row
+   */
+  @JsonProperty("columnIdToValue")
+  public Map columnIdToValue;
+
+  /**
+   * Topology ids of entities associated with the row
+   */
+  @JsonProperty("entityIds")
+  public String[] entityIds;
+
+  /**
+   * A callout that could be attached to the associated entities
+   */
+  @JsonProperty("callout")
+  public String callout;
+
+  /**
+   * Get A map from column ids to cell values for the row
+   *
+   * @return A map from column ids to cell values for the row
+   *
+   */
+  public final Map getColumnIdToValue() {
+    return this.columnIdToValue;
+  }
+
+  /**
+   * Get Topology ids of entities associated with the row
+   *
+   * @return Topology ids of entities associated with the row
+   *
+   */
+  public final String[] getEntityIds() {
+    return this.entityIds;
+  }
+
+  /**
+   * Get A callout that could be attached to the associated entities
+   *
+   * @return A callout that could be attached to the associated entities
+   *
+   */
+  public final String getCallout() {
+    return this.callout;
+  }
+
   @Override
   public String toString() {
     return Onshape.toString(this);

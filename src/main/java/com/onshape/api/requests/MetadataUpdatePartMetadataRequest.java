@@ -146,8 +146,6 @@ public final class MetadataUpdatePartMetadataRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param pid Part ID
-     *
      * @param did Document ID
      *
      * @param wvType Type of Workspace or Version
@@ -155,11 +153,13 @@ public final class MetadataUpdatePartMetadataRequest {
      * @param wv Workspace (w) or Version (v) ID
      *
      * @param eid Element ID
+     *
+     * @param pid URL encoded Part ID (p) or Part identity (pi)
      */
-    public final MetadataUpdatePartMetadataResponse call(String pid, String did, WV wvType,
-        String wv, String eid) throws OnshapeException {
+    public final MetadataUpdatePartMetadataResponse call(String did, WV wvType, String wv,
+        String eid, String pid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p/:pid", build(), onshape.buildMap("pid", pid, "did", did, "wvType", wvType, "wv", wv, "eid", eid), onshape.buildMap("configuration", configuration), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
+      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p|pi/:pid", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv, "eid", eid, "pid", pid), onshape.buildMap("configuration", configuration), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
     }
 
     /**
@@ -168,12 +168,12 @@ public final class MetadataUpdatePartMetadataRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param pid Part ID
+     * @param pid URL encoded Part ID (p) or Part identity (pi)
      */
     public final MetadataUpdatePartMetadataResponse call(OnshapeDocument document, String pid)
         throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p/:pid", build(), onshape.buildMap("pid", pid, "did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId()), onshape.buildMap("configuration", configuration), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
+      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p|pi/:pid", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId(), "pid", pid), onshape.buildMap("configuration", configuration), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
     }
   }
 }

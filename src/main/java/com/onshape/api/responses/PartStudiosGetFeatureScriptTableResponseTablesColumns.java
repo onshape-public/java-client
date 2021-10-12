@@ -27,29 +27,58 @@ import com.onshape.api.Onshape;
 import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Map;
-import javax.validation.constraints.NotNull;
 
 /**
- * Response object for getEndpoints API endpoint.
+ * Object used in calls to getFeatureScriptTable API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class EndpointsGetEndpointsResponse extends AbstractResponseObject {
+public final class PartStudiosGetFeatureScriptTableResponseTablesColumns extends AbstractResponseObject {
   /**
-   * of endpoint objects
+   * The column id
    */
-  @JsonProperty("array")
-  @NotNull
-  Map[] array;
+  @JsonProperty("id")
+  public String id;
 
   /**
-   * Get of endpoint objects
+   * The displayed header for the column
+   */
+  @JsonProperty("header")
+  public String header;
+
+  /**
+   * LEFT, CENTER, or RIGHT
+   */
+  @JsonProperty("textAlignment")
+  public String textAlignment;
+
+  /**
+   * Get The column id
    *
-   * @return of endpoint objects
+   * @return The column id
    *
    */
-  public final Map[] getArray() {
-    return this.array;
+  public final String getId() {
+    return this.id;
+  }
+
+  /**
+   * Get The displayed header for the column
+   *
+   * @return The displayed header for the column
+   *
+   */
+  public final String getHeader() {
+    return this.header;
+  }
+
+  /**
+   * Get LEFT, CENTER, or RIGHT
+   *
+   * @return LEFT, CENTER, or RIGHT
+   *
+   */
+  public final String getTextAlignment() {
+    return this.textAlignment;
   }
 
   @Override

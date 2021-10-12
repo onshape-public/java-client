@@ -272,8 +272,6 @@ public final class MetadataGetPartMetadataRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param pid Part ID (must be URL encoded)
-     *
      * @param did Document ID
      *
      * @param wvmType Type of Workspace, Version or Microversion
@@ -281,11 +279,13 @@ public final class MetadataGetPartMetadataRequest {
      * @param wvm Workspace (w), Version (v) or Microversion (m) ID
      *
      * @param eid Element ID
+     *
+     * @param pid URL encoded Part ID (p) or Part identity (pi)
      */
-    public final MetadataGetPartMetadataResponse call(String pid, String did, WVM wvmType,
-        String wvm, String eid) throws OnshapeException {
+    public final MetadataGetPartMetadataResponse call(String did, WVM wvmType, String wvm,
+        String eid, String pid) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid/p/:pid", build(), onshape.buildMap("pid", pid, "did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.MetadataGetPartMetadataResponse.class);
+      return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid/p|pi/:pid", build(), onshape.buildMap("did", did, "wvmType", wvmType, "wvm", wvm, "eid", eid, "pid", pid), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.MetadataGetPartMetadataResponse.class);
     }
 
     /**
@@ -294,12 +294,12 @@ public final class MetadataGetPartMetadataRequest {
      * @return Response object
      * @throws OnshapeException On HTTP or serialization error
      *
-     * @param pid Part ID (must be URL encoded)
+     * @param pid URL encoded Part ID (p) or Part identity (pi)
      */
     public final MetadataGetPartMetadataResponse call(OnshapeDocument document, String pid) throws
         OnshapeException {
       onshape.validate(build());
-      return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid/p/:pid", build(), onshape.buildMap("pid", pid, "did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId()), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.MetadataGetPartMetadataResponse.class);
+      return onshape.call("get", "/metadata/d/:did/[wvm]/:wvm/e/:eid/p|pi/:pid", build(), onshape.buildMap("did", document.getDocumentId(), "wvmType", document.getWVM(), "wvm", document.getWVMId(), "eid", document.getElementId(), "pid", pid), onshape.buildMap("depth", depth, "detailLevel", detailLevel, "noNull", noNull, "thumbnail", thumbnail, "linkDocumentId", linkDocumentId, "configuration", configuration), com.onshape.api.responses.MetadataGetPartMetadataResponse.class);
     }
   }
 }

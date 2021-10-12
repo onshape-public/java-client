@@ -110,6 +110,7 @@ public class BaseClient {
     private Date tokenReceived;
     private String clientId;
     private String clientSecret;
+    private String redirectURI;
     private File workingDir;
     private PollingHandler pollingHandler;
     private boolean usingValidation;
@@ -235,10 +236,24 @@ public class BaseClient {
      * @param clientSecret Client secret of application
      */
     public void setOAuthTokenResponse(OAuthTokenResponse token, Date tokenReceived, String clientId, String clientSecret) {
+        setOAuthTokenResponse(token, tokenReceived, clientId, clientSecret, null);
+    }
+
+    /**
+     * Set a previously requested OAuth token
+     *
+     * @param token Token object from server
+     * @param tokenReceived Date that token was received
+     * @param clientId Client id of application
+     * @param clientSecret Client secret of application
+     * @param redirectURI Redirect URI used for OAuth
+     */
+    public void setOAuthTokenResponse(OAuthTokenResponse token, Date tokenReceived, String clientId, String clientSecret, String redirectURI) {
         this.token = token;
         this.tokenReceived = tokenReceived;
         this.clientId = clientId;
         this.clientSecret = clientSecret;
+        this.redirectURI = redirectURI;
     }
 
     /**
@@ -270,7 +285,7 @@ public class BaseClient {
      * serialization error.
      */
     public void setOAuthAccessCode(String code, String clientId, String clientSecret, String redirectURI) throws OnshapeException {
-        WebTarget target = client.target("https://oauth.onshape.com/oauth/token");
+        WebTarget target = client.target(oauthURL);
         MultivaluedMap<String, String> formData = new MultivaluedHashMap<>();
         formData.add("grant_type", "authorization_code");
         formData.add("code", code);
@@ -280,7 +295,7 @@ public class BaseClient {
         Response response = target.request().post(Entity.form(formData));
         switch (response.getStatusInfo().getFamily()) {
             case SUCCESSFUL:
-                setOAuthTokenResponse(response.readEntity(OAuthTokenResponse.class), new Date(), clientId, clientSecret);
+                setOAuthTokenResponse(response.readEntity(OAuthTokenResponse.class), new Date(), clientId, clientSecret, redirectURI);
                 return;
             default:
                 throw new OnshapeException(response.getStatusInfo().getReasonPhrase());
@@ -290,7 +305,8 @@ public class BaseClient {
     /**
      * Refresh the OAuth token previously fetched
      *
-     * @throws OnshapeException if no token previously set or if refresh call fails
+     * @throws OnshapeException if no token previously set or if refresh call
+     * fails
      */
     public void refreshOAuthToken() throws OnshapeException {
         if (token == null) {
@@ -302,10 +318,11 @@ public class BaseClient {
         formData.add("refresh_token", token.getRefreshToken());
         formData.add("client_id", clientId);
         formData.add("client_secret", clientSecret);
+        formData.add("redirect_uri", redirectURI);
         Response response = target.request().post(Entity.form(formData));
         switch (response.getStatusInfo().getFamily()) {
             case SUCCESSFUL:
-                setOAuthTokenResponse(response.readEntity(OAuthTokenResponse.class), new Date(), clientId, clientSecret);
+                setOAuthTokenResponse(response.readEntity(OAuthTokenResponse.class), new Date(), clientId, clientSecret, redirectURI);
                 return;
             default:
                 throw new OnshapeException(response.getStatusInfo().getReasonPhrase());
@@ -539,6 +556,11 @@ public class BaseClient {
             case REDIRECTION:
                 return call(method, response.getHeaderString("Location"), payload, buildMap(), buildMap(), acceptCategory);
             default:
+                // Create a description of the call and payload
+                String callDescription = "\n\tMethod: " + method + "\n\tURL: " + url
+                        + (payload == null ? "" : "\n\tPayload: " + payload.toString().replace("\n", "\n\t"))
+                        + (urlParameters == null || urlParameters.isEmpty() ? "" : "\n\tPath parameters:" + urlParameters.entrySet().stream().map(entry -> "\n\t\t" + entry.getKey() + " = " + entry.getValue()).reduce("", (a, b) -> a + b))
+                        + (queryParameters == null || queryParameters.isEmpty() ? "" : "\n\tQuery parameters:" + queryParameters.entrySet().stream().map(entry -> "\n\t\t" + entry.getKey() + " = " + entry.getValue()).reduce("", (a, b) -> a + b));
                 // Attempt to read further details from the response from Onshape
                 ErrorResponse errorResponse = null;
                 try {
@@ -547,10 +569,10 @@ public class BaseClient {
                 }
                 if (errorResponse != null && errorResponse.getMessage() != null
                         && !errorResponse.getMessage().isEmpty()) {
-                    throw new OnshapeException(response.getStatusInfo().getStatusCode(), errorResponse.getMessage());
+                    throw new OnshapeException(response.getStatusInfo().getStatusCode(), errorResponse.getMessage() + callDescription);
                 }
                 // Failed to deserialize an error message so just repond with the status code
-                throw new OnshapeException(response.getStatusInfo().getStatusCode(), response.getStatusInfo().getReasonPhrase());
+                throw new OnshapeException(response.getStatusInfo().getStatusCode(), response.getStatusInfo().getReasonPhrase() + callDescription);
         }
     }
 

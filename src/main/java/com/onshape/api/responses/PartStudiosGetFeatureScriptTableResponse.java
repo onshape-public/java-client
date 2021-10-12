@@ -20,54 +20,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-package com.onshape.api.requests;
+package com.onshape.api.responses;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onshape.api.Onshape;
-import com.onshape.api.exceptions.OnshapeException;
-import com.onshape.api.responses.AccountsCancelPurchaseResponse;
+import com.onshape.api.types.AbstractResponseObject;
 import java.lang.Override;
 import java.lang.String;
+import javax.validation.constraints.NotNull;
 
 /**
- * Request object for cancelPurchase API endpoint.
+ * Response object for getFeatureScriptTable API endpoint.
  * &copy; 2018-Present Onshape Inc.
  */
-public final class AccountsCancelPurchaseRequest {
-  AccountsCancelPurchaseRequest() {
+public final class PartStudiosGetFeatureScriptTableResponse extends AbstractResponseObject {
+  /**
+   * A list of the resulting tables
+   */
+  @JsonProperty("tables")
+  @NotNull
+  PartStudiosGetFeatureScriptTableResponseTables[] tables;
+
+  /**
+   * Get A list of the resulting tables
+   *
+   * @return A list of the resulting tables
+   *
+   */
+  public final PartStudiosGetFeatureScriptTableResponseTables[] getTables() {
+    return this.tables;
   }
 
   @Override
   public String toString() {
     return Onshape.toString(this);
-  }
-
-  public static final Builder builder(Onshape onshape) {
-    Builder builder = new Builder();
-    builder.onshape = onshape;
-    return builder;
-  }
-
-  public static final class Builder {
-    Onshape onshape;
-
-    Builder() {
-    }
-
-    private AccountsCancelPurchaseRequest build() {
-      return new com.onshape.api.requests.AccountsCancelPurchaseRequest();
-    }
-
-    /**
-     * Calls cancelPurchase method, Cancel a recurring subscription. This API is expected to be used in a context of OAuth-enabled
-     *                 application.
-     * @return Response object
-     * @throws OnshapeException On HTTP or serialization error
-     *
-     * @param pid Purchase id
-     */
-    public final AccountsCancelPurchaseResponse call(String pid) throws OnshapeException {
-      onshape.validate(build());
-      return onshape.call("delete", "/accounts/purchases/:pid", build(), onshape.buildMap("pid", pid), onshape.buildMap(), com.onshape.api.responses.AccountsCancelPurchaseResponse.class);
-    }
   }
 }
