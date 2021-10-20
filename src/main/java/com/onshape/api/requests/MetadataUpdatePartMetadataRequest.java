@@ -27,6 +27,7 @@ import com.onshape.api.Onshape;
 import com.onshape.api.exceptions.OnshapeException;
 import com.onshape.api.responses.MetadataUpdatePartMetadataResponse;
 import com.onshape.api.types.OnshapeDocument;
+import com.onshape.api.types.PPI;
 import com.onshape.api.types.WV;
 import java.lang.Override;
 import java.lang.String;
@@ -155,11 +156,13 @@ public final class MetadataUpdatePartMetadataRequest {
      * @param eid Element ID
      *
      * @param pid URL encoded Part ID (p) or Part identity (pi)
+     *
+     * @param ppi PPI.P (Part) or PPI.PI (Part identity)
      */
     public final MetadataUpdatePartMetadataResponse call(String did, WV wvType, String wv,
-        String eid, String pid) throws OnshapeException {
+        String eid, String pid, PPI ppi) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p|pi/:pid", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv, "eid", eid, "pid", pid), onshape.buildMap("configuration", configuration), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
+      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p|pi/:pid", build(), onshape.buildMap("did", did, "wvType", wvType, "wv", wv, "eid", eid, "pid", pid, "ppi", ppi), onshape.buildMap("configuration", configuration), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
     }
 
     /**
@@ -169,11 +172,13 @@ public final class MetadataUpdatePartMetadataRequest {
      * @throws OnshapeException On HTTP or serialization error
      *
      * @param pid URL encoded Part ID (p) or Part identity (pi)
+     *
+     * @param ppi PPI.P (Part) or PPI.PI (Part identity)
      */
-    public final MetadataUpdatePartMetadataResponse call(OnshapeDocument document, String pid)
-        throws OnshapeException {
+    public final MetadataUpdatePartMetadataResponse call(OnshapeDocument document, String pid,
+        PPI ppi) throws OnshapeException {
       onshape.validate(build());
-      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p|pi/:pid", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId(), "pid", pid), onshape.buildMap("configuration", configuration), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
+      return onshape.call("post", "/metadata/d/:did/[wv]/:wv/e/:eid/p|pi/:pid", build(), onshape.buildMap("did", document.getDocumentId(), "wvType", document.getWV(), "wv", document.getWVId(), "eid", document.getElementId(), "pid", pid, "ppi", ppi), onshape.buildMap("configuration", configuration), com.onshape.api.responses.MetadataUpdatePartMetadataResponse.class);
     }
   }
 }
