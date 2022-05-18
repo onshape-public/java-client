@@ -1,0 +1,708 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: api-support@onshape.zendesk.com
+  description: |-
+    The Onshape REST API consumed by all client.
+    # Authorization
+    The simplest way to authorize and enable the **Try it out** functionality is to sign in to Onshape and use the current session. The **Authorize** button enables other authorization techniques. To ensure the current session isn't used when trying other authentication techniques, make sure to remove the Onshape cookie as per the instructions for your particular browser. Alternatively, a private or incognito window may be used. Here's [how to remove a specific cookie on Chrome](https://support.google.com/chrome/answer/95647#zippy=%2Cdelete-cookies-from-a-site).
+    - **Current Session** authorization is enabled by default if the browser is already signed in to [Onshape](/).
+    - **OAuth2** authorization uses an Onshape OAuth2 app created on the [Onshape Developer Portal](https://dev-portal.onshape.com/oauthApps). The redirect URL field should include `https://cad.onshape.com/glassworks/explorer/oauth2-redirect.html`.
+    - **API Key** authorization using basic authentication is also available. The keys can be generated in the [Onshape Developer Portal](https://dev-portal.onshape.com/keys). In the authentication dialog, enter the access key in the `Username` field, and enter the secret key in the `Password` field. Basic authentication should only be used during the development process since sharing API Keys provides the same level of access as a username and password.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.onshape.com/legal/terms-of-use
+  title: Onshape REST API
+  version: 1.147.4893-d7846311aebf
+  x-logo:
+    backgroundColor: '#ffffff'
+    altText: Onshape
+    href: images/logo-onshape-gray-green.svg
+    url: images/logo-onshape-gray-green.svg
+  x-filter-info: ?restUserRole=PUBLIC&operationIds=[createDocument]
+servers:
+- description: Current
+  url: https://cad.onshape.com/api
+security:
+- BasicAuth: []
+tags:
+- description: Manage documents.
+  name: Document
+paths:
+  /documents:
+    post:
+      deprecated: false
+      operationId: createDocument
+      requestBody:
+        content:
+          application/vnd.onshape.v2+json;charset=UTF-8;qs=0.2:
+            schema:
+              $ref: '#/components/schemas/BTDocumentParams'
+        required: true
+      responses:
+        default:
+          content:
+            application/vnd.onshape.v2+json;charset=UTF-8;qs=0.2:
+              schema:
+                $ref: '#/components/schemas/BTDocumentInfo'
+          description: default response
+      security:
+      - OAuth2:
+        - OAuth2Write
+        BasicAuth:
+        - OAuth2Write
+      summary: Create and upload a document.
+      tags:
+      - Document
+      x-BTVisibility: PRODUCTION
+      x-contentType: application/vnd.onshape.v2+json;charset=UTF-8;qs=0.2
+      x-accepts: application/vnd.onshape.v2+json;charset=UTF-8;qs=0.2
+components:
+  schemas:
+    BTAppElementChangeParams:
+      properties:
+        baseContent:
+          description: This base64-encoded data is treated as a full representation
+            of the sub-element's data and all deltas previously added will no longer
+            be returned.
+          format: byte
+          type: string
+        delta:
+          description: This base64-encoded data is a delta which the application can
+            apply to the last added baseContent data.
+          format: byte
+          type: string
+        subelementId:
+          description: The id of the subelement to edit. The value is determined by
+            the application.
+          type: string
+      required:
+      - subelementId
+      type: object
+    BTAppElementParams:
+      properties:
+        description:
+          description: The label that will appear in the document's edit history for
+            this operation. If blank, a value will be auto-generated.
+          type: string
+        formatId:
+          description: The data type of the application. This string allows an application
+            to distinguish their elements from elements of another application.
+          type: string
+        jsonTree:
+          description: Initialization data for the new element's json tree.
+          example: '{ ''stringKey'': ''bar'', ''arrayKey'': [ 1, 2, 3 ], ''objectKey'':
+            { ''subKey'': false } }'
+          type: object
+        location:
+          $ref: '#/components/schemas/BTElementLocationParams'
+        name:
+          description: The name of the element being created. If blank, a name will
+            be auto-generated.
+          type: string
+        subelements:
+          description: Initialization data for the new element's subelements.
+          items:
+            $ref: '#/components/schemas/BTAppElementChangeParams'
+          type: array
+      required:
+      - formatId
+      type: object
+    BTBaseInfo:
+      properties:
+        href:
+          format: uri
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        viewRef:
+          format: uri
+          type: string
+      type: object
+    BTCompanySummaryInfo:
+      properties:
+        admin:
+          type: boolean
+        description:
+          type: string
+        domainPrefix:
+          type: string
+        enterpriseBaseUrl:
+          type: string
+        href:
+          format: uri
+          type: string
+        id:
+          type: string
+        image:
+          type: string
+        name:
+          type: string
+        noPublicDocuments:
+          type: boolean
+        ownerId:
+          type: string
+        secondaryDomainPrefixes:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        state:
+          format: int32
+          type: integer
+        type:
+          format: int32
+          type: integer
+        viewRef:
+          format: uri
+          type: string
+      type: object
+    BTDocumentElementCreationDescriptor:
+      properties:
+        elementParams:
+          $ref: '#/components/schemas/BTAppElementParams'
+        elementType:
+          format: int32
+          type: integer
+      type: object
+    BTDocumentInfo:
+      discriminator:
+        mapping:
+          document-processing: '#/components/schemas/BTDocumentProcessingInfo'
+        propertyName: jsonType
+      properties:
+        anonymousAccessAllowed:
+          type: boolean
+        anonymousAllowsExport:
+          type: boolean
+        betaCapabilityIds:
+          items:
+            type: string
+          type: array
+        canMove:
+          type: boolean
+        canUnshare:
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+        createdBy:
+          $ref: '#/components/schemas/BTUserBasicSummaryInfo'
+        createdWithEducationPlan:
+          type: boolean
+        defaultElementId:
+          type: string
+        defaultWorkspace:
+          $ref: '#/components/schemas/BTWorkspaceInfo'
+        description:
+          type: string
+        documentLabels:
+          items:
+            $ref: '#/components/schemas/BTDocumentLabelInfo'
+          type: array
+        documentThumbnailElementId:
+          type: string
+        documentType:
+          format: int32
+          type: integer
+        duplicateNameViolationError:
+          type: string
+        hasReleaseRevisionableObjects:
+          type: boolean
+        hasRelevantInsertables:
+          type: boolean
+        href:
+          format: uri
+          type: string
+        id:
+          type: string
+        isContainer:
+          type: boolean
+        isEnterpriseOwned:
+          type: boolean
+        isMutable:
+          type: boolean
+        isOrphaned:
+          type: boolean
+        isUpgradedToLatestVersion:
+          type: boolean
+        isUsingManagedWorkflow:
+          type: boolean
+        likedByCurrentUser:
+          type: boolean
+        likes:
+          format: int64
+          type: integer
+        modifiedAt:
+          format: date-time
+          type: string
+        modifiedBy:
+          $ref: '#/components/schemas/BTUserBasicSummaryInfo'
+        name:
+          type: string
+        notRevisionManaged:
+          type: boolean
+        numberOfTimesCopied:
+          format: int64
+          type: integer
+        numberOfTimesReferenced:
+          format: int64
+          type: integer
+        owner:
+          $ref: '#/components/schemas/BTOwnerInfo'
+        parentId:
+          type: string
+        permission:
+          enum:
+          - NOACCESS
+          - ANONYMOUS_ACCESS
+          - READ
+          - READ_COPY_EXPORT
+          - COMMENT
+          - WRITE
+          - RESHARE
+          - FULL
+          - OWNER
+          type: string
+        permissionSet:
+          items:
+            type: string
+          type: array
+        projectId:
+          type: string
+        public:
+          type: boolean
+        recentVersion:
+          $ref: '#/components/schemas/BTBaseInfo'
+        resourceType:
+          type: string
+        supportTeamUserAndShared:
+          type: boolean
+        tags:
+          items:
+            type: string
+          type: array
+        thumbnail:
+          $ref: '#/components/schemas/BTThumbnailInfo'
+        totalWorkspacesScheduledForUpdate:
+          format: int32
+          type: integer
+        totalWorkspacesUpdating:
+          format: int32
+          type: integer
+        trash:
+          type: boolean
+        trashedAt:
+          format: date-time
+          type: string
+        treeHref:
+          type: string
+        userAccountLimitsBreached:
+          type: boolean
+        viewRef:
+          format: uri
+          type: string
+      type: object
+    BTDocumentLabelInfo:
+      properties:
+        canMove:
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+        createdBy:
+          $ref: '#/components/schemas/BTUserBasicSummaryInfo'
+        description:
+          type: string
+        href:
+          format: uri
+          type: string
+        id:
+          type: string
+        isContainer:
+          type: boolean
+        isEnterpriseOwned:
+          type: boolean
+        isMutable:
+          type: boolean
+        modifiedAt:
+          format: date-time
+          type: string
+        modifiedBy:
+          $ref: '#/components/schemas/BTUserBasicSummaryInfo'
+        name:
+          type: string
+        owner:
+          $ref: '#/components/schemas/BTOwnerInfo'
+        parentLabelId:
+          type: string
+        path:
+          type: string
+        projectId:
+          type: string
+        resourceType:
+          type: string
+        treeHref:
+          type: string
+        viewRef:
+          format: uri
+          type: string
+      type: object
+    BTDocumentParams:
+      properties:
+        betaCapabilityIds:
+          items:
+            type: string
+          type: array
+        description:
+          type: string
+        elements:
+          items:
+            $ref: '#/components/schemas/BTDocumentElementCreationDescriptor'
+          type: array
+        generateUnknownMessages:
+          type: boolean
+        isEmptyContent:
+          type: boolean
+        isPublic:
+          type: boolean
+        name:
+          type: string
+        notRevisionManaged:
+          type: boolean
+        ownerEmail:
+          type: string
+        ownerId:
+          type: string
+        ownerType:
+          format: int32
+          type: integer
+        parentId:
+          type: string
+        projectId:
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+      type: object
+    BTDocumentProcessingInfo:
+      allOf:
+      - $ref: '#/components/schemas/BTDocumentInfo'
+      - $ref: '#/components/schemas/BTDocumentProcessingInfo_allOf'
+      type: object
+    BTElementLocationParams:
+      description: The location at which the new element should be inserted.
+      properties:
+        elementId:
+          description: The id of an element which provides context for the position
+            value specified.
+          type: string
+        position:
+          description: An indicator for the relative placement of the new element.
+            If elementId is specified, a negative number indicates insertion prior
+            to the element and a non-negative number indicates insertion following
+            the element. If no elementId is specified, a negative value indicates
+            insertion at the end of the element list and a non-negative number indicates
+            insertion at the start of the element list.
+          format: int32
+          type: integer
+      type: object
+    BTOwnerInfo:
+      properties:
+        href:
+          format: uri
+          type: string
+        id:
+          type: string
+        image:
+          type: string
+        isEnterpriseOwnedResource:
+          type: boolean
+        name:
+          type: string
+        type:
+          format: int32
+          type: integer
+        viewRef:
+          format: uri
+          type: string
+      type: object
+    BTThumbnailInfo:
+      properties:
+        href:
+          format: uri
+          type: string
+        id:
+          type: string
+        secondarySizes:
+          items:
+            items:
+              $ref: '#/components/schemas/BTThumbnailSizeInfo'
+            type: array
+          type: array
+        sizes:
+          items:
+            $ref: '#/components/schemas/BTThumbnailSizeInfo'
+          type: array
+      type: object
+    BTThumbnailSizeInfo:
+      properties:
+        href:
+          format: uri
+          type: string
+        mediaType:
+          type: string
+        renderMode:
+          type: string
+        sheetName:
+          type: string
+        size:
+          type: string
+        uniqueId:
+          type: string
+        viewOrientation:
+          type: string
+      type: object
+    BTUserBasicSummaryInfo:
+      discriminator:
+        mapping:
+          user-summary: '#/components/schemas/BTUserSummaryInfo'
+        propertyName: jsonType
+      properties:
+        href:
+          format: uri
+          type: string
+        id:
+          type: string
+        image:
+          type: string
+        name:
+          type: string
+        state:
+          format: int32
+          type: integer
+        viewRef:
+          format: uri
+          type: string
+      type: object
+    BTUserSummaryInfo:
+      allOf:
+      - $ref: '#/components/schemas/BTUserBasicSummaryInfo'
+      - $ref: '#/components/schemas/BTUserSummaryInfo_allOf'
+      type: object
+    BTVersionInfo:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        creator:
+          $ref: '#/components/schemas/BTUserBasicSummaryInfo'
+        description:
+          type: string
+        documentId:
+          type: string
+        href:
+          format: uri
+          type: string
+        id:
+          type: string
+        lastModifier:
+          $ref: '#/components/schemas/BTUserBasicSummaryInfo'
+        microversion:
+          type: string
+        modifiedAt:
+          format: date-time
+          type: string
+        name:
+          type: string
+        overrideDate:
+          format: date-time
+          type: string
+        parent:
+          type: string
+        purpose:
+          format: int32
+          type: integer
+        thumbnail:
+          $ref: '#/components/schemas/BTThumbnailInfo'
+        type:
+          type: string
+        viewRef:
+          format: uri
+          type: string
+      type: object
+    BTWorkspaceInfo:
+      properties:
+        canDelete:
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+        creator:
+          $ref: '#/components/schemas/BTUserBasicSummaryInfo'
+        description:
+          type: string
+        documentId:
+          type: string
+        href:
+          format: uri
+          type: string
+        id:
+          type: string
+        isReadOnly:
+          type: boolean
+        lastModifier:
+          $ref: '#/components/schemas/BTUserBasicSummaryInfo'
+        microversion:
+          type: string
+        modifiedAt:
+          format: date-time
+          type: string
+        name:
+          type: string
+        overrideDate:
+          format: date-time
+          type: string
+        parent:
+          type: string
+        parents:
+          items:
+            $ref: '#/components/schemas/BTVersionInfo'
+          type: array
+        thumbnail:
+          $ref: '#/components/schemas/BTThumbnailInfo'
+        type:
+          type: string
+        viewRef:
+          format: uri
+          type: string
+      type: object
+    GlobalPermissionInfo:
+      properties:
+        accessReports:
+          type: boolean
+        adminEnterprise:
+          type: boolean
+        allowAppStoreAccess:
+          type: boolean
+        allowPublicDocumentsAccess:
+          type: boolean
+        approveReleases:
+          type: boolean
+        createChangeOrders:
+          type: boolean
+        createChangeRequests:
+          type: boolean
+        createDocumentsInRoot:
+          type: boolean
+        createProject:
+          type: boolean
+        createReleases:
+          type: boolean
+        deletePermanently:
+          type: boolean
+        manageGuestUsers:
+          type: boolean
+        manageNonGeometricItems:
+          type: boolean
+        manageRbac:
+          type: boolean
+        manageUsers:
+          type: boolean
+        manageWorkflows:
+          type: boolean
+        shareForAnonymousAccess:
+          type: boolean
+        transferDocumentsFromEnterprise:
+          type: boolean
+        viewChangeOrders:
+          type: boolean
+        viewChangeRequests:
+          type: boolean
+      type: object
+    BTDocumentProcessingInfo_allOf:
+      properties:
+        translationEventKey:
+          type: string
+        translationId:
+          type: string
+      type: object
+    BTUserSummaryInfo_allOf:
+      properties:
+        company:
+          $ref: '#/components/schemas/BTCompanySummaryInfo'
+        documentationName:
+          type: string
+        documentationNameOverride:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        globalPermissions:
+          $ref: '#/components/schemas/GlobalPermissionInfo'
+        isGuest:
+          type: boolean
+        isLight:
+          type: boolean
+        lastLoginTime:
+          format: date-time
+          type: string
+        lastName:
+          type: string
+        personalMessageAllowed:
+          type: boolean
+        source:
+          format: int32
+          type: integer
+      type: object
+  securitySchemes:
+    OAuth2:
+      description: Use OAuth 2.0 to authenticate requests.
+      flows:
+        authorizationCode:
+          authorizationUrl: /oauth/authorize
+          refreshUrl: /oauth/token
+          scopes:
+            OAuth2Internal: Application is Onshape Internal
+            OAuth2ReadPII: Application can read your profile information
+            OAuth2Read: Application can read your documents
+            OAuth2Write: Application can write to your documents
+            OAuth2Delete: Application can delete your documents and workspaces
+            OAuth2Purchase: Application can request purchases on your behalf
+            OAuth2Share: Application can share and unshare documents on your behalf
+            document.create: Atlas Application can create a document
+            document.edit: Atlas Application can edit a document
+            document.delete: Atlas Application can delete a document
+            document.read: Atlas Application can read a document
+            enterprise.create: Atlas Application can create an enterprise
+            enterprise.read: Atlas Application can read from an enterprise
+            enterprise.edit: Atlas Application can edit an enterprise
+            enterprise.delete: Atlas Application can delete an enterprise
+            enterprise.member.create: Atlas Application can create an enterprise member
+            enterprise.member.read: Atlas Application can read the details of an enterprise
+              member
+            enterprise.member.edit: Atlas Application can edit the details of an enterprise
+              member
+            enterprise.member.delete: Atlas Application can delete a member from an
+              enterprise
+            webhook.create: Atlas Application can create a webhook on behalf of the
+              logged-in user
+            webhook.edit: Atlas Application can edit a webhook on behalf of the logged-in
+              user
+            webhook.read: Atlas Application can read a webhook on behalf of the logged-in
+              user
+            webhook.delete: Atlas Application can delete a webhook on behalf of the
+              logged-in user
+          tokenUrl: /oauth/token
+      type: oauth2
+    BasicAuth:
+      description: Use Basic Authentication with API Keys (key as username and secret
+        as password) to authenticate requests.
+      scheme: basic
+      type: http
+
